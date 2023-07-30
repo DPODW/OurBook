@@ -6,20 +6,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Slf4j
 @Controller
-public class TestController {
+public class FormController {
 
-    @GetMapping("/main")
-    public String testPage1(){
+    @GetMapping("/OurBook")
+    public String mainPage(){
         return "main/Main";
     }
 
-    @GetMapping("/login")
-    public String testPage2(){
+    @GetMapping("/OurBook/1")
+    public String loginPage(){
         return "member/Login";
     }
 
-    @GetMapping("/join")
-    public String testPage3(){
+    @GetMapping("/OurBook/2")
+    public String joinPage(){
         return "member/Join";
     }
 }
