@@ -8,9 +8,19 @@
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/css/join.css">
-    <script type="text/javascript" src="/static/js/validation.js"></script>
+  <link rel="stylesheet" type="text/css" href="/css/join.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="/js/duplicateCheck.js"></script>
+  <script type="text/javascript" src="/js/validation.js"></script>
 </head>
+
+<style>
+  .field-error{
+    border-color: red;
+    color: red;
+    font-size: 14px;
+  }
+</style>
 
 <body>
   <div class="container">
@@ -18,18 +28,22 @@
       <div class="input-form col-md-12 mx-auto">
         <h4 class="mb-3">Our Book!</h4>
         <h4 class="mb-3">회원가입</h4>
-        <form class="validation-form" novalidate>
+
+        <form class="validation-form" th:action="@{/2}" method="post" th:object="${member}" novalidate>
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="name">이름</label>
-              <input type="text" class="form-control" id="name" placeholder="" value="" required>
+              <input type="text" class="form-control" id="name" name="name" th:field="*{name}" placeholder="이름" maxlength="20"  required>
+              <h4 th:errorclass="field-error" th:errors="*{name}"></h4>
               <div class="invalid-feedback">
                 이름을 입력해주세요.
               </div>
             </div>
+
             <div class="col-md-6 mb-3">
-              <label for="nickname">아이디</label>
-              <input type="text" class="form-control" id="nickname" placeholder="" value="" required>
+              <label for="ID">아이디</label>
+              <input type="text" class="form-control" id="ID"  name="id"th:field="*{id}" placeholder="아이디" maxlength="20" required>
+              <h4 th:errorclass="field-error" th:errors="*{id}"></h4>
               <div class="invalid-feedback">
                 아이디를 입력해주세요.
               </div>
@@ -37,16 +51,18 @@
           </div>
 
           <div class="mb-3">
-            <label for="email">비밀번호</label>
-            <input type="email" class="form-control" id="pwd" required>
+            <label for="pwd">비밀번호</label>
+            <input type="pwd" class="form-control" id="pwd" name="pwd" th:field="*{pwd}" maxlength="20" required>
+            <h4 th:errorclass="field-error" th:errors="*{pwd}"></h4>
             <div class="invalid-feedback">
               비밀번호를 입력해주세요
             </div>
           </div>
 
           <div class="mb-3">
-            <label for="address">이메일</label>
-            <input type="text" class="form-control" id="address" placeholder="you@example.com" required>
+            <label for="EMAIL">이메일</label>
+            <input type="text" class="form-control" id="EMAIL" name="email" th:field="*{email}" placeholder="you@example.com" maxlength="20" required>
+            <h4 th:errorclass="field-error" th:errors="*{email}"></h4>
             <div class="invalid-feedback">
               이메일을 입력해주세요.
             </div>
@@ -55,10 +71,11 @@
          
           <div class="container mt-5">
             <h5>가입 목적</h5>
-              <input type="radio" id="option1" name="option" value="구매자" required>
+              <input type="radio" id="option1" name="role"th:field="*{role}" value="구매자" required>
               <label class="form-check-label" for="option1">구매자</label>
-              <input type="radio" id="option2" name="option" value="판매자" required>
+              <input type="radio" id="option2" name="role"th:field="*{role}" value="판매자" required>
               <label class="form-check-label" for="option2">판매자</label>
+            <h4 th:errorclass="field-error" th:errors="*{role}"></h4>
           </div>
         
           <hr class="mb-4">
@@ -67,7 +84,7 @@
             <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
           </div>
           <div class="mb-4"></div>
-          <button class="btn btn-primary btn-lg btn-block" type="submit">가입 완료</button>
+          <button class="btn btn-primary btn-lg btn-block" id="check" type="submit">가입 완료</button>
           <p class="mt-5 mb-3 text-muted" style="text-align: center;">&copy; Our Book : 2023</p>
         </form>
       </div>

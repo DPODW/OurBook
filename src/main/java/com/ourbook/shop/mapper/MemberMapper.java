@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Mapper
-public interface TestMapper {
+public interface MemberMapper {
 
-     void save(Member member);
+     void insert(Member member);
 }
