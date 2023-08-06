@@ -1,7 +1,8 @@
 package com.ourbook.shop.mapper;
 
 
-import com.ourbook.shop.vo.Member;
+import com.ourbook.shop.dto.Buyer;
+import com.ourbook.shop.dto.Seller;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -9,5 +10,7 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface MemberMapper {
 
-     void insert(Member member);
+     void sellerInsert(Seller seller);
+
+     void buyerInsert(Buyer buyer);
 }

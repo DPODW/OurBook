@@ -1,11 +1,10 @@
 package com.ourbook.shop.controller;
 
-import com.ourbook.shop.exception.DuplicateCheckApi;
+import com.ourbook.shop.dto.Seller;
 import com.ourbook.shop.service.MemberService;
-import com.ourbook.shop.vo.Member;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,22 +14,37 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Slf4j
 @Controller
-@RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
 
-    private final DuplicateCheckApi duplicateCheckApi;
+
+    @Autowired
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
+    }
+
+    @PostMapping("/1")
+    public String memberLogin(@ModelAttribute Seller seller, BindingResult bindingResult){
+        try{
+            memberService.login(seller.getSellerId(), seller.getSellerPwd());
+        }catch(UsernameNotFoundException ex){
+            bindingResult.reject("loginFail");
+            return "member/Login";
+        }
+        return "redirect:/OurBook";
+    }
 
 
     @PostMapping("/2")
-    public String memberJoin(@Validated @ModelAttribute Member member, BindingResult bindingResult, Model model) {
+    public String memberJoin(@Validated @ModelAttribute Seller seller, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("member", member);
+            model.addAttribute("member", seller);
+
             return "member/Join";
         }
-        memberService.save(member);
-        return "main/Main";
+        memberService.save(seller);
+        return "redirect:/OurBook";
     }
 }
 

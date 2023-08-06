@@ -12,21 +12,30 @@
   <link rel="stylesheet" type="text/css" href="/css/login.css">
 </head>
 
+
 <body class="text-center">
   <main class="form-signin">
-    <form>
+    <form th:action="@{/1}" method="post" th:object="${seller}">
       <h1 class="h3 mb-3 fw-normal">Our Book!</h1>
       <h1 class="h3 mb-3 fw-normal">로그인</h1>
 
       <div class="form-floating">
-        <input type="email" class="form-control" id="floatingInput" placeholder="아이디">
+        <input type="text" class="form-control" id="ID" name="sellerId" maxlength="20" placeholder="아이디">
 
       </div>
       <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="비밀번호">
-
+        <input type="password" class="form-control" id="PWD" name="sellerPwd" maxlength="20" placeholder="비밀번호">
       </div>
+
+      <div th:if="${#fields.hasGlobalErrors()}">
+        <h3 style="border-color: red; color: red; font-size: 14px;" th:text="#{loginFail}"></h3>
+      </div>
+
       <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
+      <a href="/naver/login">
+        <img style="margin-top: 20px;" src="/img/NAVERLogin.png">
+      </a>
+      <img style="margin-top: 20px;" src="/img/KAKAOLogin.png">
       <p class="mt-5 mb-3 text-muted">&copy; Our Book : 2023</p>
     </form>
   </main>

@@ -2,12 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ourbook.shop.mapper.FindInfoMapper">
 
+    <select id="searchMember">
+        select * from seller_tb where sellerId= #{id};
+    </select >
+
     <select id="searchId">
-        select id from member where id= #{id};
+        select id from seller_tb where sellerId= #{id};
     </select >
 
     <select id="searchEmail">
-        select email from member where email= #{email};
+        select email from seller_tb where sellerEmail= #{email};
     </select >
+
+    <select id="searchMemberToEmail" resultType="com.ourbook.shop.dto.Buyer">
+        select * from buyer_tb where email= #{email};
+    </select >
+
+
 
 </mapper>
