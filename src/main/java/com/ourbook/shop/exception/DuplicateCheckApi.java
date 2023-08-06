@@ -1,10 +1,12 @@
 package com.ourbook.shop.exception;
 
+import com.ourbook.shop.dto.Seller;
 import com.ourbook.shop.mapper.FindInfoMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +26,7 @@ public class DuplicateCheckApi {
 
     @PostMapping("/checkId")
     public ResponseEntity<String> checkId(@RequestBody Map<String,String> requestBody){
-        String id = requestBody.get("id");
+        String id = requestBody.get("sellerId");
         String searchId = findInfoMapper.searchId(id);
         if(searchId==null) {
             return ResponseEntity.ok().body("사용 가능 아이디");
@@ -34,7 +36,7 @@ public class DuplicateCheckApi {
 
     @PostMapping("/checkEmail")
     public ResponseEntity<String> checkEmail(@RequestBody Map<String,String> requestBody){
-        String email = requestBody.get("email");
+        String email = requestBody.get("sellerEmail");
         String searchEmail = findInfoMapper.searchEmail(email);
         if(searchEmail==null) {
             return ResponseEntity.ok().body("사용 가능 이메일");

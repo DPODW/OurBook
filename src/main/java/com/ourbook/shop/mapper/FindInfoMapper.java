@@ -7,13 +7,11 @@ import com.ourbook.shop.dto.Seller;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
 @Mapper
 public interface FindInfoMapper {
 
-    Optional<Seller> searchMember(String id);
+    Seller searchMember(String sellerId);
 
     String searchId(String id);
 

@@ -1,6 +1,7 @@
 package com.ourbook.shop.config.security;
 
 import com.ourbook.shop.config.auth.UserService;
+import com.ourbook.shop.config.auth.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -16,11 +17,11 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 @Slf4j
 @Configuration
-@EnableMethodSecurity
+
 @RequiredArgsConstructor
 @PropertySource(value = "classpath:application.properties")
 public class SecurityConfig {
-    String[] publicForm = {"/OurBook", "/OurBook/1", "/OurBook/2", "/checkId", "/checkEmail", "/2", "/css/**", "/js/**", "/img/**", "/1", "/13", "/test"};
+    String[] publicForm = {"/OurBook", "/OurBook/1", "/OurBook/2", "/checkId", "/checkEmail", "/2", "/css/**", "/js/**", "/img/**", "/1", "/test1"};
     private final UserService userService;
 
 

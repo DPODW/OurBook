@@ -3,11 +3,11 @@ $(document).ready(function() {
         event.preventDefault();
 
         const idData = {
-            id: $("#ID").val()
+            sellerId: $("#ID").val()
         };
 
         const EmailData = {
-            email: $("#EMAIL").val()
+            sellerEmail: $("#EMAIL").val()
         };
 
         $.ajax({

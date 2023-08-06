@@ -6,6 +6,7 @@ import com.ourbook.shop.dto.Buyer;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 
-@RequiredArgsConstructor
+
 @Service
 @Slf4j
 public class UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
@@ -28,18 +29,18 @@ public class UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2U
 
     private final MemberMapper memberMapper;
 
+    @Autowired
+    public UserService(HttpSession httpSession, FindInfoMapper findInfoMapper, MemberMapper memberMapper) {
+        this.httpSession = httpSession;
+        this.findInfoMapper = findInfoMapper;
+        this.memberMapper = memberMapper;
+    }
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
-
-        String registrationId = userRequest.getClientRegistration().getRegistrationId();
-        String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails()
-                .getUserInfoEndpoint().getUserNameAttributeName();
-        // naver, kakao 로그인 구분
-
-        OAuthAttributes attributes = OAuthAttributes.of(registrationId,userNameAttributeName, oAuth2User.getAttributes());
+        OAuthAttributes attributes = OAuthAttributes.of(oAuth2User.getAttributes());
 
         Buyer buyer = saveOrUpdate(attributes);
         httpSession.setAttribute("buyer", new SessionUser(buyer));
@@ -48,7 +49,7 @@ public class UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2U
                 Collections.singleton(new SimpleGrantedAuthority(buyer.getRoleKey())),
                 attributes.getAttributes(),
                 attributes.getNameAttributeKey());
-        
+
     }
     private Buyer saveOrUpdate(OAuthAttributes attributes) {
         Buyer buyer;

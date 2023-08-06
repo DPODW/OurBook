@@ -11,7 +11,6 @@ public class SessionUser implements Serializable {
     public SessionUser(Buyer buyer) {
         this.name = buyer.getName();
         this.email = buyer.getEmail();
-
     }
 
     private String name;

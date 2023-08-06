@@ -27,7 +27,8 @@ public class MemberController {
     @PostMapping("/1")
     public String memberLogin(@ModelAttribute Seller seller, BindingResult bindingResult){
         try{
-            memberService.login(seller.getSellerId(), seller.getSellerPwd());
+            log.info("컨트롤러에서 받아오는 값 -> {},{}",seller.getSellerId(),seller.getSellerPwd());
+          memberService.login(seller);
         }catch(UsernameNotFoundException ex){
             bindingResult.reject("loginFail");
             return "member/Login";
@@ -39,8 +40,7 @@ public class MemberController {
     @PostMapping("/2")
     public String memberJoin(@Validated @ModelAttribute Seller seller, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("member", seller);
-
+            model.addAttribute("seller", seller);
             return "member/Join";
         }
         memberService.save(seller);

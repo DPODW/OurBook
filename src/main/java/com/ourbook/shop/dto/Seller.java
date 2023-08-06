@@ -5,10 +5,8 @@ package com.ourbook.shop.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
-
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 
 
 @Builder
@@ -16,7 +14,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Getter
 public class Seller {
 
-
+    /**
+ * TODO: 1. 가입 시, 이메일 형식을 확인 할 필요가 있음
+ * TODO: 2. ROLE -> ROLE.ENUM 에서 불러와서 사용해야 함.
+ * **/
 
     @NotBlank
     @Pattern(regexp = "[a-zA-Z0-9\uAC00-\uD7AF]*")//한글 영어 숫자 허용
@@ -38,6 +39,7 @@ public class Seller {
 
     @NotBlank
     private String sellerRole;
+
 
     public Seller(String sellerName, String sellerId, String sellerPwd, String sellerEmail, String sellerRole) {
         this.sellerName = sellerName;

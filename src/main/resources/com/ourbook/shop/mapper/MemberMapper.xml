@@ -3,7 +3,7 @@
 <mapper namespace="com.ourbook.shop.mapper.MemberMapper">
 
     <insert id="sellerInsert">
-        insert into seller_tb(sellerName,sellerId,sellerPwd,sellerEmail,sellerRole)values(#{name},#{id},#{pwd},#{email},#{role});
+        insert into seller_tb(name,id,pwd,email,role)values(#{sellerName},#{sellerId},#{sellerPwd},#{sellerEmail},#{sellerRole});
     </insert>
 
     <insert id="buyerInsert">
