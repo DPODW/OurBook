@@ -1,6 +1,6 @@
 package com.ourbook.shop.controller;
 
-import com.ourbook.shop.dto.Seller;
+import com.ourbook.shop.dto.CommonMember;
 import com.ourbook.shop.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +25,9 @@ public class MemberController {
     }
 
     @PostMapping("/1")
-    public String memberLogin(@ModelAttribute Seller seller, BindingResult bindingResult){
+    public String memberLogin(@ModelAttribute CommonMember commonMember, BindingResult bindingResult){
         try{
-            log.info("컨트롤러에서 받아오는 값 -> {},{}",seller.getSellerId(),seller.getSellerPwd());
-          memberService.login(seller);
+          memberService.login(commonMember);
         }catch(UsernameNotFoundException ex){
             bindingResult.reject("loginFail");
             return "member/Login";
@@ -38,12 +37,12 @@ public class MemberController {
 
 
     @PostMapping("/2")
-    public String memberJoin(@Validated @ModelAttribute Seller seller, BindingResult bindingResult, Model model) {
+    public String memberJoin(@Validated @ModelAttribute CommonMember commonMember, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("seller", seller);
+            model.addAttribute("commonMember", commonMember);
             return "member/Join";
         }
-        memberService.save(seller);
+        memberService.save(commonMember);
         return "redirect:/OurBook";
     }
 }

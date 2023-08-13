@@ -4,7 +4,7 @@ import lombok.*;
 
 @NoArgsConstructor
 @Getter
-public class Buyer {
+public class NaverMember {
 
     private String name;
 
@@ -12,9 +12,15 @@ public class Buyer {
 
     private Role role;
 
+    private String pwd;
+
+    private String id;
+
     @Builder
-    public Buyer(String name, String email, Role role) {
+    public NaverMember(String name, String id, String pwd, String email, Role role) {
         this.name = name;
+        this.id = id;
+        this.pwd = pwd;
         this.email = email;
         this.role = role;
     }

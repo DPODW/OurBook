@@ -1,6 +1,7 @@
 package com.ourbook.shop.controller;
 
-import com.ourbook.shop.dto.Seller;
+import com.ourbook.shop.dto.CommonMember;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,19 +14,22 @@ public class FormController {
 
 
     @GetMapping("/OurBook")
-    public String mainPage(){
+    public String mainPage(HttpServletRequest request){
+//        HttpSession session =request.getSession(false);
+//        SessionUser sessionUser = (SessionUser) session.getAttribute("buyer");
+//        log.info("{},{},{}",sessionUser.getName(),sessionUser.getEmail(),sessionUser.getRole());
         return "main/Main";
     }
 
     @GetMapping("/OurBook/1")
-    public String loginPage(Seller seller, Model model){
-        model.addAttribute("seller", seller);
+    public String loginPage(CommonMember commonMember, Model model){
+        model.addAttribute("commonMember", commonMember);
         return "member/Login";
     }
 
     @GetMapping("/OurBook/2")
-    public String joinPage(Seller seller, Model model){
-        model.addAttribute("seller", seller);
+    public String joinPage(CommonMember commonMember, Model model){
+        model.addAttribute("commonMember", commonMember);
         return "member/Join";
     }
 

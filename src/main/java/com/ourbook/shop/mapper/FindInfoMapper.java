@@ -2,8 +2,8 @@ package com.ourbook.shop.mapper;
 
 
 
-import com.ourbook.shop.dto.Buyer;
-import com.ourbook.shop.dto.Seller;
+import com.ourbook.shop.dto.CommonMember;
+import com.ourbook.shop.dto.NaverMember;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -11,13 +11,13 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface FindInfoMapper {
 
-    Seller searchMember(String sellerId);
+    CommonMember searchMember(String commonId);
 
     String searchId(String id);
 
     String searchEmail(String email);
 
-    Buyer searchMemberToEmail (String email);
+    NaverMember searchMemberToEmail (String email);
 
 
 

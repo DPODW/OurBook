@@ -3,11 +3,15 @@
 <mapper namespace="com.ourbook.shop.mapper.MemberMapper">
 
     <insert id="sellerInsert">
-        insert into seller_tb(name,id,pwd,email,role)values(#{sellerName},#{sellerId},#{sellerPwd},#{sellerEmail},#{sellerRole});
+        insert into seller_tb(name,id,pwd,email,role)values(#{commonName},#{commonId},#{commonPwd},#{commonEmail},#{commonRole});
     </insert>
 
     <insert id="buyerInsert">
-        insert into buyer_tb(name,email,role)values(#{name},#{email},#{role});
+        insert into buyer_tb(name,id,pwd,email,role)values(#{commonName},#{commonId},#{commonPwd},#{commonEmail},#{commonRole});
+    </insert>
+
+    <insert id="naverInsert">
+        insert into buyer_tb(name,id,pwd,email,role)values(#{name},#{id},#{pwd},#{email},#{role});
     </insert>
 
 </mapper>

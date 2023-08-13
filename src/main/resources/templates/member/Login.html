@@ -15,16 +15,16 @@
 
 <body class="text-center">
   <main class="form-signin">
-    <form th:action="@{/1}" method="post" th:object="${seller}">
+    <form th:action="@{/1}" method="post" th:object="${commonMember}">
       <h1 class="h3 mb-3 fw-normal">Our Book!</h1>
       <h1 class="h3 mb-3 fw-normal">로그인</h1>
 
       <div class="form-floating">
-        <input type="text" class="form-control" id="ID" name="sellerId" maxlength="20" placeholder="아이디">
+        <input type="text" class="form-control" id="ID" name="commonId" maxlength="20" placeholder="아이디">
 
       </div>
       <div class="form-floating">
-        <input type="password" class="form-control" id="PWD" name="sellerPwd" maxlength="20" placeholder="비밀번호">
+        <input type="password" class="form-control" id="PWD" name="commonPwd" maxlength="20" placeholder="비밀번호">
       </div>
 
       <div th:if="${#fields.hasGlobalErrors()}">

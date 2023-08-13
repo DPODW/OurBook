@@ -29,12 +29,12 @@
         <h4 class="mb-3">Our Book!</h4>
         <h4 class="mb-3">회원가입</h4>
 
-        <form class="validation-form" th:action="@{/2}" method="post" th:object="${seller}" novalidate>
+        <form class="validation-form" th:action="@{/2}" method="post" th:object="${commonMember}" novalidate>
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="name">이름</label>
-              <input type="text" class="form-control" id="name" name="sellerName" th:field="*{sellerName}" placeholder="이름" maxlength="20"  required>
-              <h4 th:errorclass="field-error" th:errors="*{sellerName}"></h4>
+              <input type="text" class="form-control" id="name" name="sellerName" th:field="*{commonName}" placeholder="이름" maxlength="20"  required>
+              <h4 th:errorclass="field-error" th:errors="*{commonName}"></h4>
               <div class="invalid-feedback">
                 이름을 입력해주세요.
               </div>
@@ -42,8 +42,8 @@
 
             <div class="col-md-6 mb-3">
               <label for="ID">아이디</label>
-              <input type="text" class="form-control" id="ID"  name="sellerId"th:field="*{sellerId}" placeholder="아이디" maxlength="20" required>
-              <h4 th:errorclass="field-error" th:errors="*{sellerId}"></h4>
+              <input type="text" class="form-control" id="ID"  name="sellerId"th:field="*{commonId}" placeholder="아이디" maxlength="20" required>
+              <h4 th:errorclass="field-error" th:errors="*{commonId}"></h4>
               <div class="invalid-feedback">
                 아이디를 입력해주세요.
               </div>
@@ -52,8 +52,8 @@
 
           <div class="mb-3">
             <label for="pwd">비밀번호</label>
-            <input type="password" class="form-control" id="pwd" name="sellerPwd" th:field="*{sellerPwd}" maxlength="20" required>
-            <h4 th:errorclass="field-error" th:errors="*{sellerPwd}"></h4>
+            <input type="password" class="form-control" id="pwd" name="sellerPwd" th:field="*{commonPwd}" maxlength="20" required>
+            <h4 th:errorclass="field-error" th:errors="*{commonPwd}"></h4>
             <div class="invalid-feedback">
               비밀번호를 입력해주세요
             </div>
@@ -61,8 +61,8 @@
 
           <div class="mb-3">
             <label for="EMAIL">이메일</label>
-            <input type="text" class="form-control" id="EMAIL" name="sellerEmail" th:field="*{sellerEmail}" placeholder="you@example.com" maxlength="20" required>
-            <h4 th:errorclass="field-error" th:errors="*{sellerEmail}"></h4>
+            <input type="text" class="form-control" id="EMAIL" name="sellerEmail" th:field="*{commonEmail}" placeholder="you@example.com" maxlength="20" required>
+            <h4 th:errorclass="field-error" th:errors="*{commonEmail}"></h4>
             <div class="invalid-feedback">
               이메일을 입력해주세요.
             </div>
@@ -71,11 +71,11 @@
          
           <div class="container mt-5">
             <h5>가입 목적</h5>
-              <input type="radio" id="option1" name="sellerRole"th:field="*{sellerRole}" value="구매자" required>
+              <input type="radio" id="option1" name="sellerRole"th:field="*{commonRole}" value="구매자" required>
               <label class="form-check-label" for="option1">구매자</label>
-              <input type="radio" id="option2" name="sellerRole"th:field="*{sellerRole}" value="판매자" required>
+              <input type="radio" id="option2" name="sellerRole"th:field="*{commonRole}" value="판매자" required>
               <label class="form-check-label" for="option2">판매자</label>
-            <h4 th:errorclass="field-error" th:errors="*{sellerRole}"></h4>
+            <h4 th:errorclass="field-error" th:errors="*{commonRole}"></h4>
           </div>
         
           <hr class="mb-4">
