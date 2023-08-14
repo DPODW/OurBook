@@ -18,10 +18,10 @@ public class FormController {
     @GetMapping("/OurBook")
     public String mainPage(HttpServletRequest request){
 //        HttpSession session =request.getSession(false);
-//        if((SessionUser) session.getAttribute("BUYER") == null){
+//        if((SessionUser) session.getAttribute("SELLER") == null){
 //            return "main/Main";
 //        }
-//        SessionUser sessionUser = (SessionUser) session.getAttribute("BUYER");
+//        SessionUser sessionUser = (SessionUser) session.getAttribute("SELLER");
 //        log.info("{},{},{}",sessionUser.getName(),sessionUser.getEmail(),sessionUser.getCommonRole());
         return "main/Main";
     }

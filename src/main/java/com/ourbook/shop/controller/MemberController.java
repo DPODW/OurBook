@@ -28,14 +28,15 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @PostMapping("/1")
-    public String memberLogin(@ModelAttribute CommonMember commonMember, BindingResult bindingResult){
+    @PostMapping("/OurBook/1")
+    public String memberLogin(@ModelAttribute CommonMember commonMember, BindingResult bindingResult,HttpSession session){
         try{
           memberService.login(commonMember);
         }catch(UsernameNotFoundException ex){
             bindingResult.reject("loginFail");
             return "member/Login";
         }
+//        loginSessionUser(commonMember,session);
         return "redirect:/OurBook";
     }
 
@@ -46,11 +47,13 @@ public class MemberController {
             model.addAttribute("commonMember", commonMember);
             return "member/Join";
         }
-        sessionUser(commonMember,session);
+        saveSessionUser(commonMember,session);
         return "redirect:/OurBook";
     }
 
-    private void sessionUser(CommonMember commonMember, HttpSession session) {
+
+    /** 외부 클래스에서 따로 정의하고, 참조해서 사용하는 방법도 나쁘지 않을듯 **/
+    private void saveSessionUser(CommonMember commonMember, HttpSession session) {
         if(commonMember.getCommonRole().equals(Role.BUYER)) {
             memberService.save(commonMember);
             session.setAttribute("BUYER", new SessionUser(commonMember));
@@ -58,6 +61,14 @@ public class MemberController {
         memberService.save(commonMember);
         session.setAttribute("SELLER", new SessionUser(commonMember));
     }
+
+    private void loginSessionUser(CommonMember commonMember, HttpSession session) {
+        if(commonMember.getCommonRole().equals(Role.BUYER)) {
+            session.setAttribute("BUYER", new SessionUser(commonMember));
+        }else
+        session.setAttribute("SELLER", new SessionUser(commonMember));
+    }
+
 }
 
 
