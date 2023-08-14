@@ -1,6 +1,7 @@
 package com.ourbook.shop.service.impl;
 
 import com.ourbook.shop.dto.CommonMember;
+import com.ourbook.shop.dto.Role;
 import com.ourbook.shop.mapper.FindInfoMapper;
 import com.ourbook.shop.mapper.MemberMapper;
 import com.ourbook.shop.service.MemberService;
@@ -33,10 +34,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void save(CommonMember commonMember) {
         if(commonMember.getCommonRole().equals("구매자")){
-            commonMember.setCommonRole("BUYER");
+            commonMember.setCommonRole(String.valueOf(Role.BUYER));
             memberMapper.buyerInsert(CommonMember.saveBuilder(commonMember,encoder));
+
         }else if(commonMember.getCommonRole().equals("판매자")){
-            commonMember.setCommonRole("SELLER");
+            commonMember.setCommonRole(String.valueOf(Role.SELLER));
             memberMapper.sellerInsert(CommonMember.saveBuilder(commonMember,encoder));
         }
     }

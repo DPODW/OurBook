@@ -1,7 +1,11 @@
 package com.ourbook.shop.controller;
 
+import com.ourbook.shop.config.auth.SessionUser;
 import com.ourbook.shop.dto.CommonMember;
+import com.ourbook.shop.dto.Role;
 import com.ourbook.shop.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -37,13 +41,22 @@ public class MemberController {
 
 
     @PostMapping("/2")
-    public String memberJoin(@Validated @ModelAttribute CommonMember commonMember, BindingResult bindingResult, Model model) {
+    public String memberJoin(@Validated @ModelAttribute CommonMember commonMember, BindingResult bindingResult, Model model, HttpSession session) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("commonMember", commonMember);
             return "member/Join";
         }
-        memberService.save(commonMember);
+        sessionUser(commonMember,session);
         return "redirect:/OurBook";
+    }
+
+    private void sessionUser(CommonMember commonMember, HttpSession session) {
+        if(commonMember.getCommonRole().equals(Role.BUYER)) {
+            memberService.save(commonMember);
+            session.setAttribute("BUYER", new SessionUser(commonMember));
+        }else
+        memberService.save(commonMember);
+        session.setAttribute("SELLER", new SessionUser(commonMember));
     }
 }
 

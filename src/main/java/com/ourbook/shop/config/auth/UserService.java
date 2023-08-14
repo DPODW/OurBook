@@ -38,20 +38,15 @@ public class UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2U
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService();
-        //DefaultOAuth2UserService 라는 기본 OAuth2.0 사용자 서비스를 생성. 이 서비스를 통해 OAuth2.0으로부터 사용자 정보를 가져올수 있음
 
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
-        //앞에서 생성한 서비스를 사용하여 실제 사용자 정보를 얻어옴 (delegate == DefaultOAuth2UserService)
 
         OAuthAttributes attributes = OAuthAttributes.of(oAuth2User.getAttributes());
-        //얻어온 사용자 정보를 of(어느 OAuth2 요청인지) 에 넣어서 확인하고, attribute 에 넣는다.
 
         NaverMember naverMember = saveOrFind(attributes);
-        //attributes 를 DB 작업을 시킨다. (저장 OR 검색)
 
-        log.info("{}",naverMember);
-        httpSession.setAttribute("buyer", new SessionUser(naverMember));
-        //모든 작업이 끝나면 인증된 세션 객체인 SessionUser 에 buyer 을 넣고, 인증 세션을 제공한다.
+
+        httpSession.setAttribute("BUYER", new SessionUser(naverMember));
 
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(naverMember.getRoleKey())),
@@ -59,8 +54,7 @@ public class UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2U
                 attributes.getNameAttributeKey());
     }
 
-    //DB에 동일한 정보가 없으면 저장, 있으면 저장하지 않고 반환한다.
-    /* TODO: 동일한 이메일이면 비밀번호를 업데이트 하는 방식으로 구현해도 좋다 */
+    /** TODO: 동일한 이메일이면 다른 정보가 있을시 해당 정보를 업데이트 하는 방식으로 구현해도 좋다. **/
     private NaverMember saveOrFind(OAuthAttributes attributes) {
         NaverMember naverMember;
         if (findInfoMapper.searchMemberToEmail(attributes.getEmail()) == null) {

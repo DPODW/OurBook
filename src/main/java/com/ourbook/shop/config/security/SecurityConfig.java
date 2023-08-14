@@ -17,7 +17,6 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 @Slf4j
 @Configuration
-
 @RequiredArgsConstructor
 @PropertySource(value = "classpath:application.properties")
 public class SecurityConfig {
