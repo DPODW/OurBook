@@ -20,7 +20,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @RequiredArgsConstructor
 @PropertySource(value = "classpath:application.properties")
 public class SecurityConfig {
-    String[] publicForm = {"/OurBook", "/OurBook/1", "/OurBook/2", "/checkId", "/checkEmail", "/2", "/css/**", "/js/**", "/img/**", "/1"};
+    String[] publicForm = {"/OurBook", "/OurBook/1", "/OurBook/2", "/checkId", "/checkEmail","/css/**", "/js/**", "/img/**"};
     private final UserService userService;
 
 

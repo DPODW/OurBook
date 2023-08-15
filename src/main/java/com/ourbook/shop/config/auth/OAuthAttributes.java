@@ -20,7 +20,7 @@ public class OAuthAttributes {
     private final String name;
     private final String email;
 
-    @Autowired
+
     public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey, String name, String email) {
         this.attributes = attributes;
         this.nameAttributeKey = nameAttributeKey;

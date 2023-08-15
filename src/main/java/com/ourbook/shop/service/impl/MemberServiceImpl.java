@@ -44,10 +44,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void login(CommonMember loginValue) {
+    public CommonMember login(CommonMember loginValue) {
         CommonMember loginResult = findInfoMapper.searchMember(loginValue.getCommonId());
         if(loginResult !=null){
             encoder.matches(loginValue.getCommonPwd(), loginResult.getCommonPwd());
+            return loginResult;
         }else
             throw new UsernameNotFoundException("존재 x 회원");
     }

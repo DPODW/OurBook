@@ -9,6 +9,6 @@ public interface MemberService {
 
     void save(CommonMember commonMember);
 
-    void login(CommonMember commonMember);
+    CommonMember login(CommonMember commonMember);
 
 }

@@ -25,7 +25,7 @@ $(document).ready(function() {
                     data: JSON.stringify(EmailData),
                     contentType: 'application/json',
                     success: function() {
-                        $("form.validation-form").attr("action", "/2");
+                        $("form.validation-form").attr("action", "/OurBook/2");
                         $("form.validation-form").submit();
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
