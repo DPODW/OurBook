@@ -16,13 +16,13 @@ public class FormController {
 
 
     @GetMapping("/OurBook")
-    public String mainPage(HttpServletRequest request){
-//        HttpSession session =request.getSession(false);
-//        if((SessionUser) session.getAttribute("SELLER") == null){
-//            return "main/Main";
-//        }
-//        SessionUser sessionUser = (SessionUser) session.getAttribute("SELLER");
-//        log.info("{},{},{}",sessionUser.getName(),sessionUser.getEmail(),sessionUser.getCommonRole());
+    public String mainPage(HttpSession session,Model model){
+        SessionUser seller = (SessionUser) session.getAttribute("SELLER");
+        SessionUser buyer = (SessionUser) session.getAttribute("BUYER");
+
+        model.addAttribute("SELLER",seller);
+        model.addAttribute("BUYER",buyer);
+
         return "main/Main";
     }
 
@@ -36,6 +36,16 @@ public class FormController {
     public String joinPage(CommonMember commonMember, Model model){
         model.addAttribute("commonMember", commonMember);
         return "member/Join";
+    }
+
+    @GetMapping("/OurBook/myInfo")
+    public String memberPage(){
+        return "member/MyPage";
+    }
+
+    @GetMapping("/OurBook/joinInfo")
+    public String memberInfo(){
+        return "member/JoinInfo";
     }
 
 }

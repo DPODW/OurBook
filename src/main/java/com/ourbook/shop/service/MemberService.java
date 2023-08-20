@@ -1,6 +1,7 @@
 package com.ourbook.shop.service;
 
 import com.ourbook.shop.dto.CommonMember;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 
@@ -9,6 +10,5 @@ public interface MemberService {
 
     void save(CommonMember commonMember);
 
-    CommonMember login(CommonMember commonMember);
 
 }

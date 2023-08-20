@@ -25,9 +25,20 @@
 <header class="site-header sticky-top py-1">
   <nav class="container d-flex flex-column flex-md-row justify-content-between">
     <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
+    <a class="py-2 d-none d-md-inline-block"  th:unless="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/1}" style="color: black; text-decoration: none;">로그인</a>
 
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/1}" style="color: black; text-decoration: none;">로그인</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/2}" style="color: black; text-decoration: none;">회원가입</a>
+    <form th:action="@{/OurBook/3}" method="post">
+      <button class="py-2 d-none d-md-inline-block" th:if="${#authorization.expression('isAuthenticated()')}"  style="color: black; background-color: white; border:none;  text-decoration: none;">로그아웃</button>
+    </form>
+
+    <a class="py-2 d-none d-md-inline-block" th:unless="${#authorization.expression('isAuthenticated()')}"  style="color: black; text-decoration: none;">회원가입</a>
+    <a class="py-2 d-none d-md-inline-block" th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">마이페이지</a>
+    <th:block th:with="isAuthenticated=${#authorization.expression('isAuthenticated()')}">
+      <div>
+        isAuthenticated() 표현식 결과: [[${isAuthenticated}]]
+      </div>
+    </th:block>
+
     <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책 둘러보기</a>
     <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책 판매하기</a>
     <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책에 관하여</a>

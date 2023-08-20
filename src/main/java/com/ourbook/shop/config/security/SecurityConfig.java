@@ -7,6 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,8 +24,12 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @RequiredArgsConstructor
 @PropertySource(value = "classpath:application.properties")
 public class SecurityConfig {
-    String[] publicForm = {"/OurBook", "/OurBook/1", "/OurBook/2", "/checkId", "/checkEmail","/css/**", "/js/**", "/img/**"};
+    String[] publicForm = {"/OurBook", "/OurBook/1", "/OurBook/2","/OurBook/3",
+
+            "/checkId", "/checkEmail","/css/**", "/js/**", "/img/**"};
     private final UserService userService;
+
+    private final UserDetailServiceImpl userDetailsService;
 
 
     @Bean
@@ -46,4 +54,16 @@ public class SecurityConfig {
             response.sendRedirect("/OurBook");
         };
     }
+
+    @Bean
+    AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)throws Exception{
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
+
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        return new CustomAuthenticationProvider(userDetailsService, passwordEncoder());
+    }
+
 }
