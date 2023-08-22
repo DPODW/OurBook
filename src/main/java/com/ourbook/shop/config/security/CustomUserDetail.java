@@ -1,5 +1,6 @@
 package com.ourbook.shop.config.security;
 
+import com.ourbook.shop.dto.CommonMember;
 import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +15,8 @@ public class CustomUserDetail implements UserDetails,Serializable {
     private String id;
     private String password;
     private Collection<GrantedAuthority> authorities;
+
+
 
     @Builder
     public CustomUserDetail(String id, String password, Collection<GrantedAuthority> authorities) {

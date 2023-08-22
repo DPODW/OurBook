@@ -1,7 +1,5 @@
 package com.ourbook.shop.controller;
 
-import com.ourbook.shop.config.security.SessionMaker;
-import com.ourbook.shop.config.security.UserDetailServiceImpl;
 import com.ourbook.shop.dto.CommonMember;
 import com.ourbook.shop.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,32 +25,32 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    private final SessionMaker sessionMaker;
-
     private final AuthenticationManager authenticationManager;
 
 
     @Autowired
-    public MemberController(MemberService memberService, SessionMaker sessionMaker, AuthenticationManager authenticationManager) {
+    public MemberController(MemberService memberService, AuthenticationManager authenticationManager) {
         this.memberService = memberService;
-        this.sessionMaker = sessionMaker;
         this.authenticationManager = authenticationManager;
     }
 
     @PostMapping("/OurBook/1")
-    public String memberLogin(@ModelAttribute CommonMember commonMember, BindingResult bindingResult){
+    public String memberLogin(@ModelAttribute CommonMember commonMember, BindingResult bindingResult,HttpSession session){
         Authentication authentication = new UsernamePasswordAuthenticationToken(commonMember.getCommonId(), commonMember.getCommonPwd());
         try{
             Authentication authenticated = authenticationManager.authenticate(authentication);
             SecurityContextHolder.getContext().setAuthentication(authenticated);
+            SecurityContext securityContext = SecurityContextHolder.getContext();
+            session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,securityContext);
 
-            //여기도 세션 주는게 좋을듯 인증/세션 별개 . . . 리다이렉트는 sucess handler 따로 구현
-            return "main/Main";
+            /** TODO: sessionMaker 를 사용하게 되면, role 값 바인딩 되지 않아서 예외 발생함. 고로 role 바인딩 html 구성 요소가 필요함 **/
+            return "redirect:/OurBook";
         }catch (Exception ex) {
             bindingResult.reject("loginFail");
             return "member/Login";
         }
     }
+
 
 
     @PostMapping("/OurBook/2")
@@ -61,7 +59,6 @@ public class MemberController {
             model.addAttribute("commonMember", commonMember);
             return "member/Join";
         }
-        sessionMaker.saveSessionUser(commonMember,session);
         return "redirect:/OurBook";
     }
 

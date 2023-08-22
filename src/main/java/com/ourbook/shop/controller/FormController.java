@@ -16,13 +16,7 @@ public class FormController {
 
 
     @GetMapping("/OurBook")
-    public String mainPage(HttpSession session,Model model){
-        SessionUser seller = (SessionUser) session.getAttribute("SELLER");
-        SessionUser buyer = (SessionUser) session.getAttribute("BUYER");
-
-        model.addAttribute("SELLER",seller);
-        model.addAttribute("BUYER",buyer);
-
+    public String mainPage(){
         return "main/Main";
     }
 
