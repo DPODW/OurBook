@@ -29,50 +29,50 @@
         <h4 class="mb-3">Our Book!</h4>
         <h4 class="mb-3">회원 수정</h4>
 
-        <form class="validation-form" th:action="@{}" method="post" th:object="${}" novalidate>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="name">이름</label>
-              <input type="text" class="form-control" id="name" name="sellerName" th:field="*{}" placeholder="이름" maxlength="20"  required>
-              <h4 th:errorclass="field-error" th:errors="*{}"></h4>
-              <div class="invalid-feedback">
-                이름을 입력해주세요.
-              </div>
-            </div>
+<!--        <form class="validation-form" th:action="@{}" method="post" th:object="${}" novalidate>-->
+<!--          <div class="row">-->
+<!--            <div class="col-md-6 mb-3">-->
+<!--              <label for="name">이름</label>-->
+<!--              <input type="text" class="form-control" id="name" name="sellerName" th:field="*{}" placeholder="이름" maxlength="20"  required>-->
+<!--              <h4 th:errorclass="field-error" th:errors="*{}"></h4>-->
+<!--              <div class="invalid-feedback">-->
+<!--                이름을 입력해주세요.-->
+<!--              </div>-->
+<!--            </div>-->
 
-            <div class="col-md-6 mb-3">
-              <label for="ID">아이디 수정 불가</label>
-              <input type="text" class="form-control" id="ID"  name="sellerId"th:field="*{}"  maxlength="20" readonly>
-            </div>
-          </div>
+<!--            <div class="col-md-6 mb-3">-->
+<!--              <label for="ID">아이디 수정 불가</label>-->
+<!--              <input type="text" class="form-control" id="ID"  name="sellerId"th:field="*{}"  maxlength="20" readonly>-->
+<!--            </div>-->
+<!--          </div>-->
 
-          <div class="mb-3">
-            <label for="pwd">비밀번호</label>
-            <input type="password" class="form-control" id="pwd" name="sellerPwd" th:field="*{}" maxlength="20" required>
-            <h4 th:errorclass="field-error" th:errors="*{}"></h4>
-            <div class="invalid-feedback">
-              비밀번호를 입력해주세요
-            </div>`
-          </div>
+<!--          <div class="mb-3">-->
+<!--            <label for="pwd">비밀번호</label>-->
+<!--            <input type="password" class="form-control" id="pwd" name="sellerPwd" th:field="*{}" maxlength="20" required>-->
+<!--            <h4 th:errorclass="field-error" th:errors="*{}"></h4>-->
+<!--            <div class="invalid-feedback">-->
+<!--              비밀번호를 입력해주세요-->
+<!--            </div>`-->
+<!--          </div>-->
 
-          <div class="mb-3">
-            <label for="EMAIL">이메일</label>
-            <input type="text" class="form-control" id="EMAIL" name="sellerEmail" th:field="*{}" placeholder="you@example.com" maxlength="20" required>
-            <div class="invalid-feedback">
-              이메일을 입력해주세요.
-            </div>
-          </div>
+<!--          <div class="mb-3">-->
+<!--            <label for="EMAIL">이메일</label>-->
+<!--            <input type="text" class="form-control" id="EMAIL" name="sellerEmail" th:field="*{}" placeholder="you@example.com" maxlength="20" required>-->
+<!--            <div class="invalid-feedback">-->
+<!--              이메일을 입력해주세요.-->
+<!--            </div>-->
+<!--          </div>-->
 
-         
-          <div class="container mt-5">
-            <h5>가입 목적</h5>
-              <input type="radio" id="option1" name="sellerRole"  th:field="*{}" value="구매자" required>
-              <label class="form-check-label" for="option1">구매자</label>
-              <input type="radio" id="option2" name="sellerRole"  th:field="*{}" value="판매자" required>
-              <label class="form-check-label" for="option2">판매자</label>
-            <h4 th:errorclass="field-error" th:errors="*{}"></h4>
-          </div>
-        
+<!--         -->
+<!--          <div class="container mt-5">-->
+<!--            <h5>가입 목적</h5>-->
+<!--              <input type="radio" id="option1" name="sellerRole"  th:field="*{}" value="구매자" required>-->
+<!--              <label class="form-check-label" for="option1">구매자</label>-->
+<!--              <input type="radio" id="option2" name="sellerRole"  th:field="*{}" value="판매자" required>-->
+<!--              <label class="form-check-label" for="option2">판매자</label>-->
+<!--            <h4 th:errorclass="field-error" th:errors="*{}"></h4>-->
+<!--          </div>-->
+<!--        -->
           <hr class="mb-4">
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="aggrement" required>

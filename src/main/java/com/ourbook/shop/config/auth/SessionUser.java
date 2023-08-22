@@ -14,6 +14,7 @@ public class SessionUser implements Serializable {
         this.name = naverMember.getName();
         this.email = naverMember.getEmail();
         this.role = naverMember.getRole();
+        this.id = naverMember.getId();
     } /** 네이버 회원 전용 세션 생성자 **/
 
 
@@ -24,6 +25,8 @@ public class SessionUser implements Serializable {
     } /** 일반 회원 전용 세션 생성자 **/
 
     private String name;
+
+    private String id;
 
     private String email;
 

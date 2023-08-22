@@ -46,7 +46,10 @@ public class UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2U
         NaverMember naverMember = saveOrFind(attributes);
 
 
-        httpSession.setAttribute("BUYER", new SessionUser(naverMember));
+
+        httpSession.setAttribute("NAVER", new SessionUser(naverMember));
+
+
 
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(naverMember.getRoleKey())),

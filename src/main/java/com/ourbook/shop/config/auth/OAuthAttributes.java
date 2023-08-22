@@ -48,8 +48,8 @@ public class OAuthAttributes {
     public NaverMember toSave() {
         return NaverMember.builder()
                 .name(name)
-                .id("네이버 로그인 회원")
-                .pwd("네이버 로그인 회원")
+                .id("NaverMember")
+                .pwd("NaverMember")
                 .email(email)
                 .role(Role.BUYER)
                 .build();

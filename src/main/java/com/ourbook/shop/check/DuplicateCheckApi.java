@@ -1,4 +1,4 @@
-package com.ourbook.shop.exception;
+package com.ourbook.shop.check;
 
 import com.ourbook.shop.mapper.FindInfoMapper;
 import lombok.extern.slf4j.Slf4j;

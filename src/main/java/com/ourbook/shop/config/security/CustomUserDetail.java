@@ -14,15 +14,22 @@ public class CustomUserDetail implements UserDetails,Serializable {
 
     private String id;
     private String password;
+
     private Collection<GrantedAuthority> authorities;
+
+    private String email;
+
+    private String name;
 
 
 
     @Builder
-    public CustomUserDetail(String id, String password, Collection<GrantedAuthority> authorities) {
+    public CustomUserDetail(String id, String password, Collection<GrantedAuthority> authorities,String email,String name) {
         this.id = id;
         this.password = password;
         this.authorities = authorities;
+        this.email = email;
+        this.name = name;
     }
 
     @Override
@@ -38,6 +45,14 @@ public class CustomUserDetail implements UserDetails,Serializable {
     @Override
     public String getUsername() {
         return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getName(){
+        return name;
     }
 
     @Override

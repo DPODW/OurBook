@@ -41,6 +41,8 @@ public class UserDetailServiceImpl implements UserDetailsService {
                 .id(commonMember.getCommonId())
                 .password(commonMember.getCommonPwd())
                 .authorities(authorities)
+                .email(commonMember.getCommonEmail())
+                .name(commonMember.getCommonName())
                 .build();
     }
 }
