@@ -47,9 +47,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void edit(CommonMember commonMember) {
         if (commonMember.getCommonRole().equals(Role.BUYER.getValue())) {
+            commonMember.setCommonRole(String.valueOf(Role.BUYER));
             memberMapper.buyerUpdate(CommonMember.saveBuilder(commonMember, encoder));
 
         } else if (commonMember.getCommonRole().equals(Role.SELLER.getValue())) {
+            commonMember.setCommonRole(String.valueOf(Role.SELLER));
             memberMapper.sellerUpdate(CommonMember.saveBuilder(commonMember, encoder));
         }
     }

@@ -1,5 +1,6 @@
 package com.ourbook.shop.controller;
 
+import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.CommonMember;
 import com.ourbook.shop.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,6 +29,8 @@ public class MemberController {
     private final MemberService memberService;
 
     private final AuthenticationManager authenticationManager;
+
+    private ViewModelHelper viewModelHelper;
 
 
     @Autowired
@@ -78,9 +81,11 @@ public class MemberController {
 
 
     @PutMapping("/OurBook/4")
-    public String memberEdit(@Validated @ModelAttribute CommonMember commonMember, BindingResult bindingResult,Model model,HttpServletRequest request){
+    public String memberEdit(@Validated @ModelAttribute CommonMember commonMember, BindingResult bindingResult, Model model, HttpServletRequest request, CustomUserDetail userDetail){
         if(bindingResult.hasErrors()){
             model.addAttribute("commonMember",commonMember);
+            model.addAttribute("commonRole",commonMember.getCommonRole());
+            return "member/Edit";
         }
         memberService.edit(commonMember);
         memberLogout(request);
