@@ -10,5 +10,7 @@ public interface MemberService {
 
     void save(CommonMember commonMember);
 
+    void edit(CommonMember commonMember);
+
 
 }

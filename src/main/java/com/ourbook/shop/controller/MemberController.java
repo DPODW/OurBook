@@ -19,6 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @Slf4j
 @Controller
@@ -55,7 +56,7 @@ public class MemberController {
 
 
     @PostMapping("/OurBook/2")
-    public String memberJoin(@Validated @ModelAttribute CommonMember commonMember, BindingResult bindingResult, Model model, HttpSession session) {
+    public String memberJoin(@Validated @ModelAttribute CommonMember commonMember, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("commonMember", commonMember);
             return "member/Join";
@@ -76,6 +77,15 @@ public class MemberController {
     }
 
 
+    @PutMapping("/OurBook/4")
+    public String memberEdit(@Validated @ModelAttribute CommonMember commonMember, BindingResult bindingResult,Model model,HttpServletRequest request){
+        if(bindingResult.hasErrors()){
+            model.addAttribute("commonMember",commonMember);
+        }
+        memberService.edit(commonMember);
+        memberLogout(request);
+        return "redirect:/OurBook";
+    }
 
 
 }

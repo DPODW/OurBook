@@ -15,7 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class FormController {
 
+    private final ViewModelHelper viewModelHelper;
 
+    public FormController(ViewModelHelper viewModelHelper) {
+        this.viewModelHelper = viewModelHelper;
+    }
 
     @GetMapping("/OurBook")
     public String mainPage(){
@@ -44,34 +48,20 @@ public class FormController {
                              @AuthenticationPrincipal DefaultOAuth2User defaultOAuth2User,HttpServletRequest request){
         HttpSession session = request.getSession(false);
        if(session.getAttribute("NAVER")!=null){
-           naverMemberInfo(model, defaultOAuth2User);
+           viewModelHelper.naverMemberInfo(model,defaultOAuth2User);
        }else {
-           commonMemberInfo(model, userDetail);
+           viewModelHelper.commonMemberInfo(model,userDetail);
        }
         return "member/JoinInfo";
     }
 
 
     @GetMapping("/OurBook/myInfo/Member")
-    public String memberUpdate(){
+    public String memberUpdate(Model model,@AuthenticationPrincipal CustomUserDetail userDetail,CommonMember commonMember){
+        viewModelHelper.editMemberInfo(userDetail,commonMember);
+        viewModelHelper.translateRole(model,userDetail);
+        model.addAttribute("commonMember",commonMember);
         return "member/Edit";
     }
-
-
-    private static void naverMemberInfo(Model model, DefaultOAuth2User defaultOAuth2User) {
-        model.addAttribute("naverName",defaultOAuth2User.getAttributes().get("name"));
-        model.addAttribute("naverEmail",defaultOAuth2User.getAttributes().get("email"));
-        model.addAttribute("naverRole",defaultOAuth2User.getAuthorities().toString());
-    }
-
-    private static void commonMemberInfo(Model model, CustomUserDetail userDetail) {
-        model.addAttribute("commonName",userDetail.getName());
-        model.addAttribute("commonId", userDetail.getUsername());
-        model.addAttribute("commonPwd",userDetail.getPassword());
-        model.addAttribute("commonEmail",userDetail.getEmail());
-        model.addAttribute("commonRole",userDetail.getAuthorities().toString());
-    }
-
-
 
 }

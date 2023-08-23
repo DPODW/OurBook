@@ -22,28 +22,35 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberMapper memberMapper;
 
-    private final FindInfoMapper findInfoMapper;
-
     private final PasswordEncoder encoder;
 
 
     @Autowired
-    public MemberServiceImpl(MemberMapper memberMapper, FindInfoMapper findInfoMapper, PasswordEncoder encoder) {
+    public MemberServiceImpl(MemberMapper memberMapper, PasswordEncoder encoder) {
         this.memberMapper = memberMapper;
-        this.findInfoMapper = findInfoMapper;
         this.encoder = encoder;
 
     }
 
     @Override
     public void save(CommonMember commonMember) {
-        if (commonMember.getCommonRole().equals("구매자")) {
+        if (commonMember.getCommonRole().equals(Role.BUYER.getValue())) {
             commonMember.setCommonRole(String.valueOf(Role.BUYER));
             memberMapper.buyerInsert(CommonMember.saveBuilder(commonMember, encoder));
 
-        } else if (commonMember.getCommonRole().equals("판매자")) {
+        } else if (commonMember.getCommonRole().equals(Role.SELLER.getValue())) {
             commonMember.setCommonRole(String.valueOf(Role.SELLER));
             memberMapper.sellerInsert(CommonMember.saveBuilder(commonMember, encoder));
+        }
+    }
+
+    @Override
+    public void edit(CommonMember commonMember) {
+        if (commonMember.getCommonRole().equals(Role.BUYER.getValue())) {
+            memberMapper.buyerUpdate(CommonMember.saveBuilder(commonMember, encoder));
+
+        } else if (commonMember.getCommonRole().equals(Role.SELLER.getValue())) {
+            memberMapper.sellerUpdate(CommonMember.saveBuilder(commonMember, encoder));
         }
     }
 }

@@ -15,4 +15,8 @@ public interface MemberMapper {
      void buyerInsert(CommonMember commonMember);
 
      void naverInsert(NaverMember naverMember);
+
+     void buyerUpdate(CommonMember commonMember);
+
+     void sellerUpdate(CommonMember commonMember);
 }

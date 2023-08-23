@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our book : 회원가입</title>
+  <title>Our book : 가입정보</title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -34,24 +34,24 @@
 
             <div class="col-md-6 mb-3">
               <label for="ID">아이디</label>
-              <input type="text" class="form-control" id="ID"  name="sellerId" maxlength="20" th:value="*{commonId}" readonly>
+              <input type="text" class="form-control" id="ID"  name="sellerId" maxlength="20" th:value="*{commonId}" placeholder="네이버 회원" readonly>
             </div>
           </div>
 
           <div class="mb-3">
             <label for="pwd">비밀번호</label>
-            <input type="password" class="form-control" id="pwd" name="sellerPwd"  maxlength="20" th:value="*{commonPwd}" readonly>
+            <input type="password" class="form-control" id="pwd" name="sellerPwd"  maxlength="20" th:value="*{commonPwd}" placeholder="네이버 회원" readonly>
           </div>
 
           <div class="mb-3">
             <label for="EMAIL">이메일</label>
-
-          </div><input type="text" class="form-control" id="EMAIL" name="sellerEmail" th:unless="${session.NAVER}"  th:value="*{commonEmail}" maxlength="20" readonly>
+          <input type="text" class="form-control" id="EMAIL" name="sellerEmail" th:unless="${session.NAVER}"  th:value="*{commonEmail}" maxlength="20" readonly>
           <input type="text" class="form-control" id="naverEmail" name="sellerEmail" th:if="${session.NAVER}" th:value="*{naverEmail}"  maxlength="20" readonly>
+          </div>
 
 
-          <div class="container mt-5">
-            <h5>가입 목적</h5>
+          <div class="mb-3">
+            <label>가입 목적</label>
             <input type="text" class="form-control" name="sellerRole"  maxlength="5" th:unless="${session.NAVER}"  th:value="*{commonRole}" readonly>
             <input type="text" class="form-control" name="sellerRole1"  maxlength="5" th:if="${session.NAVER}" th:value="*{naverRole}" readonly>
           </div>

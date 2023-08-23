@@ -16,7 +16,7 @@ public class CommonMember {
     /** TODO: 1. 가입 시, 이메일 형식을 확인 할 필요가 있음 **/
 
     @NotBlank
-    @Pattern(regexp = "[a-zA-Z0-9\uAC00-\uD7AF]*")
+    @Pattern(regexp = "^[a-zA-Z0-9\uAC00-\uD7AF]*$")
     @Length(min=2, max= 20)
     private String commonName;
 
@@ -29,6 +29,7 @@ public class CommonMember {
     private String commonPwd;
 
     @NotBlank
+    @Pattern(regexp = "^(?=.*[@])(?=.*[.]).{5,30}$")
     @Length(min=5, max= 30)
     private String commonEmail;
 

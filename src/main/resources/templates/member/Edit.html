@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our book : 회원가입</title>
+  <title>Our book : 회원 수정</title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="/css/join.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script type="text/javascript" src="/js/duplicateCheck.js"></script>
+<!--  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<!--  <script type="text/javascript" src="/js/duplicateCheck.js"></script>-->
   <script type="text/javascript" src="/js/validation.js"></script>
 </head>
 
@@ -29,57 +29,54 @@
         <h4 class="mb-3">Our Book!</h4>
         <h4 class="mb-3">회원 수정</h4>
 
-<!--        <form class="validation-form" th:action="@{}" method="post" th:object="${}" novalidate>-->
-<!--          <div class="row">-->
-<!--            <div class="col-md-6 mb-3">-->
-<!--              <label for="name">이름</label>-->
-<!--              <input type="text" class="form-control" id="name" name="sellerName" th:field="*{}" placeholder="이름" maxlength="20"  required>-->
-<!--              <h4 th:errorclass="field-error" th:errors="*{}"></h4>-->
-<!--              <div class="invalid-feedback">-->
-<!--                이름을 입력해주세요.-->
-<!--              </div>-->
-<!--            </div>-->
+        <form class="validation-form" th:action="@{/OurBook/4}"  th:method="PUT"  novalidate>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="name">이름</label>
+              <input type="text" class="form-control" id="name" name="commonName" th:field="*{commonMember.commonName}" placeholder="이름" maxlength="20"  required>
+              <h4 th:errorclass="field-error" th:errors="*{commonMember.commonName}"></h4>
+              <div class="invalid-feedback">
+                이름을 입력해주세요.
+              </div>
+            </div>
 
-<!--            <div class="col-md-6 mb-3">-->
-<!--              <label for="ID">아이디 수정 불가</label>-->
-<!--              <input type="text" class="form-control" id="ID"  name="sellerId"th:field="*{}"  maxlength="20" readonly>-->
-<!--            </div>-->
-<!--          </div>-->
+            <div class="col-md-6 mb-3">
+              <label for="ID">아이디 (수정 불가)</label>
+              <input type="text" class="form-control" id="ID"  name="commonId"th:field="*{commonMember.commonId}"  maxlength="20" readonly>
+            </div>
+          </div>
 
-<!--          <div class="mb-3">-->
-<!--            <label for="pwd">비밀번호</label>-->
-<!--            <input type="password" class="form-control" id="pwd" name="sellerPwd" th:field="*{}" maxlength="20" required>-->
-<!--            <h4 th:errorclass="field-error" th:errors="*{}"></h4>-->
-<!--            <div class="invalid-feedback">-->
-<!--              비밀번호를 입력해주세요-->
-<!--            </div>`-->
-<!--          </div>-->
+          <div class="mb-3">
+            <label for="pwd">비밀번호</label>
+            <input type="password" class="form-control" id="pwd" name="commonPwd" th:field="*{commonMember.commonPwd}" maxlength="20" required>
+            <h4 th:errorclass="field-error" th:errors="*{commonMember.commonPwd}"></h4>
+            <div class="invalid-feedback">
+              비밀번호를 입력해주세요
+            </div>
+          </div>
 
-<!--          <div class="mb-3">-->
-<!--            <label for="EMAIL">이메일</label>-->
-<!--            <input type="text" class="form-control" id="EMAIL" name="sellerEmail" th:field="*{}" placeholder="you@example.com" maxlength="20" required>-->
-<!--            <div class="invalid-feedback">-->
-<!--              이메일을 입력해주세요.-->
-<!--            </div>-->
-<!--          </div>-->
+          <div class="mb-3">
+            <label for="EMAIL">이메일</label>
+            <input type="text" class="form-control" id="EMAIL" name="commonEmail" th:field="*{commonMember.commonEmail}" placeholder="you@example.com" maxlength="20" required>
+            <h4 th:errorclass="field-error" th:errors="*{commonMember.commonEmail}"></h4>
+            <div class="invalid-feedback">
+              이메일을 입력해주세요.
+            </div>
+          </div>
 
-<!--         -->
-<!--          <div class="container mt-5">-->
-<!--            <h5>가입 목적</h5>-->
-<!--              <input type="radio" id="option1" name="sellerRole"  th:field="*{}" value="구매자" required>-->
-<!--              <label class="form-check-label" for="option1">구매자</label>-->
-<!--              <input type="radio" id="option2" name="sellerRole"  th:field="*{}" value="판매자" required>-->
-<!--              <label class="form-check-label" for="option2">판매자</label>-->
-<!--            <h4 th:errorclass="field-error" th:errors="*{}"></h4>-->
-<!--          </div>-->
-<!--        -->
+
+          <div class="mb-3">
+            <label>가입 목적 (수정 불가)</label>
+              <input type="text" class="form-control" id="ROLE" name="commonRole" th:value="*{commonRole}" readonly>
+          </div>
+
           <hr class="mb-4">
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="aggrement" required>
             <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
           </div>
           <div class="mb-4"></div>
-          <button class="btn btn-primary btn-lg btn-block" id="check" type="submit">수정 완료</button>
+          <button class="btn btn-primary btn-lg btn-block" type="submit">수정 완료</button>
           <p class="mt-5 mb-3 text-muted" style="text-align: center;">&copy; Our Book : 2023</p>
         </form>
       </div>

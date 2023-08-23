@@ -3,15 +3,30 @@
 <mapper namespace="com.ourbook.shop.mapper.MemberMapper">
 
     <insert id="sellerInsert">
-        insert into seller_tb(name,id,pwd,email,role)values(#{commonName},#{commonId},#{commonPwd},#{commonEmail},#{commonRole});
+        insert into seller_tb(name,id,pwd,email,role)
+        values(#{commonName},#{commonId},#{commonPwd},#{commonEmail},#{commonRole});
     </insert>
 
     <insert id="buyerInsert">
-        insert into buyer_tb(name,id,pwd,email,role)values(#{commonName},#{commonId},#{commonPwd},#{commonEmail},#{commonRole});
+        insert into buyer_tb(name,id,pwd,email,role)
+        values(#{commonName},#{commonId},#{commonPwd},#{commonEmail},#{commonRole});
     </insert>
 
     <insert id="naverInsert">
-        insert into buyer_tb(name,id,pwd,email,role)values(#{name},#{id},#{pwd},#{email},#{role});
+        insert into buyer_tb(name,id,pwd,email,role)
+        values(#{name},#{id},#{pwd},#{email},#{role});
     </insert>
+
+    <update id="buyerUpdate" parameterType="com.ourbook.shop.dto.CommonMember">
+        update buyer_tb
+        set name = #{commonName} , pwd = #{commonPwd} , email = #{commonEmail} , role = #{commonRole}
+        where id = #{commonId};
+    </update>
+
+    <update id="sellerUpdate" parameterType="com.ourbook.shop.dto.CommonMember">
+        update seller_tb
+        set name = #{commonName} , pwd = #{commonPwd} , email = #{commonEmail} , role = #{commonRole}
+        where id = #{commonId};
+    </update>
 
 </mapper>
