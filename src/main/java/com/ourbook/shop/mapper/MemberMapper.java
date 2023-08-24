@@ -10,17 +10,15 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface MemberMapper {
 
-     void sellerInsert(CommonMember commonMember);
-
-     void buyerInsert(CommonMember commonMember);
-
+     void commonInsert(CommonMember commonMember);
      void naverInsert(NaverMember naverMember);
 
-     void buyerUpdate(CommonMember commonMember);
-
-     void sellerUpdate(CommonMember commonMember);
-
-     void naverDelete(String email);
+     void commonUpdate(CommonMember commonMember);
 
      void commonDelete(String deleteValue,String role);
+     void naverDelete(String email);
+
+
+
+
 }

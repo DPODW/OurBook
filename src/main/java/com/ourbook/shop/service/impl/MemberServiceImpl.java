@@ -36,11 +36,11 @@ public class MemberServiceImpl implements MemberService {
     public void save(CommonMember commonMember) {
         if (commonMember.getCommonRole().equals(Role.BUYER.getValue())) {
             restoreBuyerRole(commonMember);
-            memberMapper.buyerInsert(CommonMember.saveBuilder(commonMember, encoder));
+            memberMapper.commonInsert(CommonMember.saveBuilder(commonMember, encoder));
 
         } else if (commonMember.getCommonRole().equals(Role.SELLER.getValue())) {
             restoreSellerRole(commonMember);
-            memberMapper.sellerInsert(CommonMember.saveBuilder(commonMember, encoder));
+            memberMapper.commonInsert(CommonMember.saveBuilder(commonMember, encoder));
         }
     }
 
@@ -48,11 +48,11 @@ public class MemberServiceImpl implements MemberService {
     public void edit(CommonMember commonMember) {
         if (commonMember.getCommonRole().equals(Role.BUYER.getValue())) {
             restoreBuyerRole(commonMember);
-            memberMapper.buyerUpdate(CommonMember.saveBuilder(commonMember, encoder));
+            memberMapper.commonUpdate(CommonMember.saveBuilder(commonMember, encoder));
 
         } else if (commonMember.getCommonRole().equals(Role.SELLER.getValue())) {
             restoreSellerRole(commonMember);
-            memberMapper.sellerUpdate(CommonMember.saveBuilder(commonMember, encoder));
+            memberMapper.commonUpdate(CommonMember.saveBuilder(commonMember, encoder));
         }
     }
 
@@ -61,7 +61,6 @@ public class MemberServiceImpl implements MemberService {
             if (deleteValue.contains("@")) {
                 memberMapper.naverDelete(deleteValue);
             } else
-                log.info("{}",role);
                 memberMapper.commonDelete(deleteValue,role);
         }
 

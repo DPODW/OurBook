@@ -29,7 +29,6 @@ public class MemberController {
 
     private final AuthenticationManager authenticationManager;
 
-    private ViewModelHelper viewModelHelper;
 
 
     @Autowired
@@ -97,7 +96,6 @@ public class MemberController {
         HttpSession session = request.getSession(false);
         if(session.getAttribute("NAVER")!=null){
             SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-            log.info("{}",naverMember.getRole().getValue());
             memberService.delete(naverMember.getEmail(),naverMember.getRole().getValue());
         }else
             memberService.delete(userDetail.getUsername(),userDetail.getAuthorities().toString());
