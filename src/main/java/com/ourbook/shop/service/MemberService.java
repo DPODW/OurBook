@@ -12,5 +12,7 @@ public interface MemberService {
 
     void edit(CommonMember commonMember);
 
+    void delete(String deleteValue,String role);
+
 
 }

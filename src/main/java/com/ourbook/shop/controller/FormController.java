@@ -64,4 +64,9 @@ public class FormController {
         return "member/Edit";
     }
 
+    @GetMapping("/OurBook/myInfo/Member1")
+    public String memberDelete(){
+        return "member/Delete";
+    }
+
 }

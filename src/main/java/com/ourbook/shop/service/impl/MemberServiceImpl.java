@@ -35,11 +35,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void save(CommonMember commonMember) {
         if (commonMember.getCommonRole().equals(Role.BUYER.getValue())) {
-            commonMember.setCommonRole(String.valueOf(Role.BUYER));
+            restoreBuyerRole(commonMember);
             memberMapper.buyerInsert(CommonMember.saveBuilder(commonMember, encoder));
 
         } else if (commonMember.getCommonRole().equals(Role.SELLER.getValue())) {
-            commonMember.setCommonRole(String.valueOf(Role.SELLER));
+            restoreSellerRole(commonMember);
             memberMapper.sellerInsert(CommonMember.saveBuilder(commonMember, encoder));
         }
     }
@@ -47,12 +47,30 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void edit(CommonMember commonMember) {
         if (commonMember.getCommonRole().equals(Role.BUYER.getValue())) {
-            commonMember.setCommonRole(String.valueOf(Role.BUYER));
+            restoreBuyerRole(commonMember);
             memberMapper.buyerUpdate(CommonMember.saveBuilder(commonMember, encoder));
 
         } else if (commonMember.getCommonRole().equals(Role.SELLER.getValue())) {
-            commonMember.setCommonRole(String.valueOf(Role.SELLER));
+            restoreSellerRole(commonMember);
             memberMapper.sellerUpdate(CommonMember.saveBuilder(commonMember, encoder));
         }
+    }
+
+    @Override
+    public void delete(String deleteValue, String role) {
+            if (deleteValue.contains("@")) {
+                memberMapper.naverDelete(deleteValue);
+            } else
+                log.info("{}",role);
+                memberMapper.commonDelete(deleteValue,role);
+        }
+
+
+    private static void restoreSellerRole(CommonMember commonMember) {
+        commonMember.setCommonRole(String.valueOf(Role.SELLER));
+    }
+
+    private static void restoreBuyerRole(CommonMember commonMember) {
+        commonMember.setCommonRole(String.valueOf(Role.BUYER));
     }
 }

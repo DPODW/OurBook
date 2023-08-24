@@ -29,4 +29,27 @@
         where id = #{commonId};
     </update>
 
+    <delete id="naverDelete" parameterType="String">
+        DELETE FROM buyer_tb WHERE email = #{email}
+    </delete>
+
+    <delete id="buyerDelete" parameterType="String">
+        DELETE FROM buyer_tb WHERE id = #{id}
+    </delete>
+
+    <delete id="sellerDelete" parameterType="String">
+        DELETE FROM seller_tb WHERE id = #{id}
+    </delete>
+
+
+    <delete id="commonDelete" parameterType="String">
+        <choose>
+            <when test="role == '[BUYER]'">
+                DELETE FROM buyer_tb WHERE id = #{deleteValue}
+            </when>
+            <otherwise>
+                DELETE FROM seller_tb WHERE id = #{deleteValue}
+            </otherwise>
+        </choose>
+    </delete>
 </mapper>
