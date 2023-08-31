@@ -30,7 +30,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
         CommonMember commonMember = findInfoMapper.searchMember(userId);
         if (commonMember==null){
-            throw new UsernameNotFoundException("User not found");
+            throw new UsernameNotFoundException("UserDetailService loadByUsername Exception");
         }
 
         List<GrantedAuthority> authorities = new ArrayList<>();

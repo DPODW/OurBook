@@ -23,14 +23,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 @PropertySource(value = "classpath:application.properties")
 public class SecurityConfig {
-    String[] publicForm = {"/OurBook", "/OurBook/1", "/OurBook/2","/OurBook/3",
+    String[] publicForm = {"/OurBook", "/OurBook/1", "/OurBook/2","/OurBook/3","/oauth2/authorization/naver", "/OurBook/shop",
 
             "/checkId", "/checkEmail","/css/**", "/js/**", "/img/**","/error"};
 
     private final UserDetailServiceImpl userDetailsService;
 
     private final UserService userService;
-
+    private final CustomAuthenticationEntryPoint authenticationEntryPoint;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -41,8 +41,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
+                .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer.disable())
                 .authorizeHttpRequests(request -> request.requestMatchers(publicForm).permitAll()
                         .anyRequest().authenticated())
+                .exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint(authenticationEntryPoint))
                 .oauth2Login(httpSecurityOAuth2LoginConfigurer -> httpSecurityOAuth2LoginConfigurer
                         .successHandler(successHandler())
                         .userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig.userService(userService)));

@@ -1,4 +1,4 @@
-package com.ourbook.shop.controller;
+package com.ourbook.shop.controller.memberController;
 
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.CommonMember;

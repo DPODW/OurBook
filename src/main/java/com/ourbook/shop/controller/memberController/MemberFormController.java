@@ -1,4 +1,4 @@
-package com.ourbook.shop.controller;
+package com.ourbook.shop.controller.memberController;
 
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.CommonMember;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Slf4j
 @Controller
-public class FormController {
+public class MemberFormController {
 
     private final ViewModelHelper viewModelHelper;
 
-    public FormController(ViewModelHelper viewModelHelper) {
+    public MemberFormController(ViewModelHelper viewModelHelper) {
         this.viewModelHelper = viewModelHelper;
     }
 

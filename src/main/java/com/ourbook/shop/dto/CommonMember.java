@@ -13,7 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Setter
 @Getter
 public class CommonMember {
-    /** TODO: 1. 가입 시, 이메일 형식을 확인 할 필요가 있음 **/
 
     @NotBlank
     @Pattern(regexp = "^[a-zA-Z0-9\uAC00-\uD7AF]*$")
@@ -21,6 +20,7 @@ public class CommonMember {
     private String commonName;
 
     @NotBlank
+    @Pattern(regexp = "^[^.@]+$")
     @Length(min=7, max= 20)
     private String commonId;
 

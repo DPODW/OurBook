@@ -34,7 +34,7 @@
 
     <a class="py-2 d-none d-md-inline-block" th:unless="${#authorization.expression('isAuthenticated()')}"  th:href="@{/OurBook/2}" style="color: black; text-decoration: none;">회원가입</a>
     <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">마이페이지</a>
-    <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책 둘러보기</a>
+    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/shop}" style="color: black; text-decoration: none;">책 둘러보기</a>
     <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책 판매하기</a>
     <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책에 관하여</a>
     <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">문의</a>
@@ -57,7 +57,7 @@
       <div class="my-3 p-3">
         <h2 class="display-5" style="font-size: 30px; white-space: nowrap; overflow: hidden; font-weight:bold;">무라카미 하루키</h2>
         <p class="lead">"너가 날 기억한다면, 다른 모든 사람이 날 잊어도 상관없어. <br>-해변의 카프카-"
-          <img src="/img/haruki.png" alt="My Image">
+          <img src="/img/home/haruki.png" alt="My Image">
           <a class="btn btn-outline-secondary" href="#">해변의 카프카</a>
       </div>
     </div>
@@ -68,7 +68,7 @@
       <div class="my-3 p-3">
         <h2 class="display-5" style="font-size: 23px; white-space: nowrap; overflow: hidden; font-weight:bold; ">이상</h2>
         <p class="lead">"박제가 되어버린 천재를 아시오? <br> -날개-"</p>
-        <img src="/img/이상.png" alt="My Image">
+        <img src="/img/home/이상.png" alt="My Image">
         <a class="btn btn-outline-secondary" href="#">날개</a>
       </div>
       
@@ -77,7 +77,7 @@
       <div class="my-3 py-3">
         <h2 class="display-5" style="font-size: 23px;  overflow: hidden; font-weight:bold; ">조지 오웰</h2>
         <p class="lead">"빅 브라더가 우리를 지켜보고 있어 <br>-1984-"</p>
-        <img src="/img/조지 오웰.png" alt="My Image">
+        <img src="/img/home/조지 오웰.png" alt="My Image">
         <a class="btn btn-outline-secondary" href="#">1984</a>
       </div>
     </div>
@@ -89,7 +89,7 @@
         <h2 class="display-5" style="font-size: 30px; white-space: nowrap; overflow: hidden; font-weight:bold;">밀란 쿤데라</h2>
         <p class="lead">"한 번은 중요치 않다. 한 번 뿐인 것은 전혀 없었던 것과 같다. <br> -참을수 없는 존재의 가벼움-"</p>
           </p>
-          <img src="/img/쿤데라.png" alt="My Image">
+          <img src="/img/home/쿤데라.png" alt="My Image">
            <a class="btn btn-outline-secondary" href="#">참을수 없는 존재의 가벼움</a>
       </div>
     </div>

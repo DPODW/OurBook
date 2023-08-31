@@ -16,6 +16,7 @@ public interface MemberMapper {
      void commonUpdate(CommonMember commonMember);
 
      void commonDelete(String deleteValue,String role);
+     
      void naverDelete(String email);
 
 

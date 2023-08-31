@@ -35,7 +35,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         CustomUserDetail user = (CustomUserDetail) userDetailsService.loadUserByUsername(username);
 
         if(!encoder.matches(password,user.getPassword())){
-            throw new UsernameNotFoundException("프로피더에서 잡힘");
+            throw new UsernameNotFoundException("Provider Authentication Exception");
         }
 
         return new UsernamePasswordAuthenticationToken(username,password,user.getAuthorities());

@@ -37,7 +37,7 @@
 
 
 
-
+<!--DELETE 에서의 role 은 userDetail 에서 가져온거라서, "[권한]" 형식으로 받음.userDetail-->
     <delete id="commonDelete" parameterType="String">
         <choose>
             <when test="role == '[BUYER]'">

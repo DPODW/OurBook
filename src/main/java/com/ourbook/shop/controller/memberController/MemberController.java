@@ -1,4 +1,4 @@
-package com.ourbook.shop.controller;
+package com.ourbook.shop.controller.memberController;
 
 import com.ourbook.shop.config.auth.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
@@ -71,9 +71,9 @@ public class MemberController {
         HttpSession session = request.getSession(false);
         if (session != null){
             session.invalidate();
-            log.info("세션 정상 삭제");
+            log.info("session delete");
         }else
-            log.info("세션 존재 x");
+            log.info("session is already empty");
         return "redirect:/OurBook";
     }
 
