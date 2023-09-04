@@ -1,8 +1,8 @@
 package com.ourbook.shop.config.auth;
 
-import com.ourbook.shop.dto.CommonMember;
-import com.ourbook.shop.dto.NaverMember;
-import com.ourbook.shop.dto.Role;
+import com.ourbook.shop.dto.member.CommonMember;
+import com.ourbook.shop.dto.member.NaverMember;
+import com.ourbook.shop.dto.member.Role;
 import lombok.Getter;
 
 import java.io.Serializable;

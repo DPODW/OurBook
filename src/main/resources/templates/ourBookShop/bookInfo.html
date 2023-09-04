@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our book : 도서 상세</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/css/smailView.css">
+</head>
+
+<body class="text-center">
+<main class="form-signin">
+  <div class="product-details">
+    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: #007bff; font-size: 20px; text-decoration: none;"><strong>Our Book!</strong></a>
+    <img th:src="${bookInfo.getBookImgUrl()}" class="product-image">
+    <h5>상품명: <span th:text="${bookInfo.getBookName()}"></span></h5>
+    <p>
+      <label>가격:</label>
+      <span th:text="${bookInfo.getBookPrice()} + '원'"></span>
+    </p>
+    <button class="btn btn-primary">구매하기</button>
+    <button class="btn btn-primary">장바구니에 추가</button>
+  </div>
+</main>
+</body>
+</html>

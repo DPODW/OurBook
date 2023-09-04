@@ -1,8 +1,8 @@
 package com.ourbook.shop.config.auth;
 
-import com.ourbook.shop.mapper.FindInfoMapper;
-import com.ourbook.shop.mapper.MemberMapper;
-import com.ourbook.shop.dto.NaverMember;
+import com.ourbook.shop.mapper.memberMapper.FindInfoMapper;
+import com.ourbook.shop.mapper.memberMapper.MemberMapper;
+import com.ourbook.shop.dto.member.NaverMember;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

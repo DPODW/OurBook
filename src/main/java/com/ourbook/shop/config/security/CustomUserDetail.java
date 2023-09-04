@@ -1,6 +1,5 @@
 package com.ourbook.shop.config.security;
 
-import com.ourbook.shop.dto.CommonMember;
 import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

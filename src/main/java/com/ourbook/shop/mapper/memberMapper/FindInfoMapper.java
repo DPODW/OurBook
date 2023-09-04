@@ -1,9 +1,9 @@
-package com.ourbook.shop.mapper;
+package com.ourbook.shop.mapper.memberMapper;
 
 
 
-import com.ourbook.shop.dto.CommonMember;
-import com.ourbook.shop.dto.NaverMember;
+import com.ourbook.shop.dto.member.CommonMember;
+import com.ourbook.shop.dto.member.NaverMember;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

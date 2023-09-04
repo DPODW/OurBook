@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, 그리고 Bootstrap 기여자들">
+    <meta name="author" content="">
     <meta name="generator" content="Hugo 0.104.2">
     <title>Our book : 우리의 책!</title>
     <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/product/">
@@ -24,13 +24,17 @@
 
 <header class="site-header sticky-top py-1" style="background-color: #f8f9fa;">
   <nav class="container d-flex flex-column flex-md-row justify-content-between">
-    <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
+    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
+    <a class="py-2 d-none d-md-inline-block"  th:unless="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/1}" style="color: black; text-decoration: none;">로그인</a>
 
-    <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">로그인</a>
-    <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">회원가입</a>
-    <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책 둘러보기</a>
+    <form th:action="@{/OurBook/3}" method="post">
+      <button class="py-2 d-none d-md-inline-block" th:if="${#authorization.expression('isAuthenticated()')}"  style="color: black; background-color: white; border:none;  text-decoration: none;">로그아웃</button>
+    </form>
+
+    <a class="py-2 d-none d-md-inline-block" th:unless="${#authorization.expression('isAuthenticated()')}"  th:href="@{/OurBook/2}" style="color: black; text-decoration: none;">회원가입</a>
+    <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">마이페이지</a>
+    <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">장바구니</a>
     <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책 판매하기</a>
-    <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책에 관하여</a>
     <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">문의</a>
     <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">Cart</a>
   </nav>
@@ -39,16 +43,16 @@
 <main>
   <div class="container">
     <div class="row">
-
       <div class="col-md-4 mb-4">
         <div class="card" style="width: 18rem;">
-          <img src="/img/ourBookShopList/참을 수 없는 존재의 가벼움.jpg" class="card-img-top" alt="...">
+          <img src="/img/ourBookShopList/죄와 벌.jpg" class="card-img-top" alt="...">
+
           <div class="card-body">
-            <h5 class="card-title">참을 수 없는 존재의 가벼움</h5>
-            <p class="card-text">우리의 인생은 가벼울까 무거울까? 세계적인 작가 밀란 쿤데라의 작품 '참을 수 없는 존재의 가벼움'</p>
+            <h5 class="card-title">죄와 벌</h5>
+            <p class="card-text">러시아의 대문호 표도르 도스토옙스키의 대표작, '죄와 벌'</p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">상품 보기</li>
+            <li class="list-group-item"> <a th:href="@{/OurBook/book/info/{bookId}(bookId=${'A1'})}">상품 보기</a></li>
             <li class="list-group-item">바로 구매하기</li>
             <li class="list-group-item">장바구니에 넣기</li>
           </ul>
@@ -69,7 +73,7 @@
             <p class="card-text">대한민국의 선구적인 모더니즘,초현실주의 작가 이상의 '오감도'를 전집에서 만나보세요!</p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">상품 보기</li>
+            <li class="list-group-item"> <a th:href="@{/OurBook/book/info/{bookId}(bookId=${'A2'})}">상품 보기</a></li>
             <li class="list-group-item">바로 구매하기</li>
             <li class="list-group-item">장바구니에 넣기</li>
           </ul>
@@ -89,7 +93,7 @@
             <p class="card-text"> 21세기 들어 가장 인지도 높은 일본 작가 가운데 한 명인 무라카미 하루키의 작품, '해변의 카프카'</p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">상품 보기</li>
+            <li class="list-group-item"> <a th:href="@{/OurBook/book/info/{bookId}(bookId=${'A3'})}">상품 보기</a></li>
             <li class="list-group-item">바로 구매하기</li>
             <li class="list-group-item">장바구니에 넣기</li>
           </ul>
@@ -109,7 +113,7 @@
             <p class="card-text">20세기 3대 SF 디스토피아 소설인 조지 오웰의 '1984'</p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">상품 보기</li>
+            <li class="list-group-item"> <a th:href="@{/OurBook/book/info/{bookId}(bookId=${'A4'})}">상품 보기</a></li>
             <li class="list-group-item">바로 구매하기</li>
             <li class="list-group-item">장바구니에 넣기</li>
           </ul>
@@ -121,44 +125,44 @@
       </div>
 
 <!-- 블록 구별 주석 -->
-<div class="col-md-4 mb-4">
-  <div class="card" style="width: 18rem;">
-    <img src="/img/ourBookShopList/죄와 벌.jpg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">죄와 벌</h5>
-      <p class="card-text">러시아의 대문호 표도르 도스토옙스키의 대표작, '죄와 벌'</p>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">상품 보기</li>
-      <li class="list-group-item">바로 구매하기</li>
-      <li class="list-group-item">장바구니에 넣기</li>
-    </ul>
-    <div class="card-body">
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
-</div>
+      <div class="col-md-4 mb-4">
+        <div class="card" style="width: 18rem;">
+          <img src="/img/ourBookShopList/참을 수 없는 존재의 가벼움.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">참을 수 없는 존재의 가벼움</h5>
+            <p class="card-text">우리의 인생은 가벼울까 무거울까? 세계적인 작가 밀란 쿤데라의 작품 '참을 수 없는 존재의 가벼움'</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"> <a th:href="@{/OurBook/book/info/{bookId}(bookId=${'A5'})}">상품 보기</a></li>
+            <li class="list-group-item">바로 구매하기</li>
+            <li class="list-group-item">장바구니에 넣기</li>
+          </ul>
+          <div class="card-body">
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+      </div>
 
-<!-- 블록 구별 주석 -->
-<div class="col-md-4 mb-4">
-  <div class="card" style="width: 18rem;">
-    <img src="/img/ourBookShopList/변신.jpg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">변신</h5>
-      <p class="card-text">20세기 초반 이후 문학 판도의 대격변을 야기한 작품, 카프카의 '변신'</p>
+    <!-- 블록 구별 주석 -->
+    <div class="col-md-4 mb-4">
+      <div class="card" style="width: 18rem;">
+        <img src="/img/ourBookShopList/변신.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">변신</h5>
+          <p class="card-text">20세기 초반 이후 문학 판도의 대격변을 야기한 작품, 카프카의 '변신'</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"> <a th:href="@{/OurBook/book/info/{bookId}(bookId=${'A6'})}">상품 보기</a></li>
+          <li class="list-group-item">바로 구매하기</li>
+          <li class="list-group-item">장바구니에 넣기</li>
+        </ul>
+        <div class="card-body">
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
     </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">상품 보기</li>
-      <li class="list-group-item">바로 구매하기</li>
-      <li class="list-group-item">장바구니에 넣기</li>
-    </ul>
-    <div class="card-body">
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
-</div>
 
 <!-- 블록 구별 주석 -->
       <div class="col-md-4 mb-4">
@@ -169,7 +173,7 @@
             <p class="card-text">러시아의 대문호 레프 톨스토이의 최고의 작품인 '안나 카레니나'</p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">상품 보기</li>
+            <li class="list-group-item"> <a th:href="@{/OurBook/book/info/{bookId}(bookId=${'A7'})}">상품 보기</a></li>
             <li class="list-group-item">바로 구매하기</li>
             <li class="list-group-item">장바구니에 넣기</li>
           </ul>
@@ -189,7 +193,7 @@
             <p class="card-text">'죽느냐 사느냐 그것이 문제다' 셰익스 피어의 '햄릿'</p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">상품 보기</li>
+            <li class="list-group-item"> <a th:href="@{/OurBook/book/info/{bookId}(bookId=${'A8'})}">상품 보기</a></li>
             <li class="list-group-item">바로 구매하기</li>
             <li class="list-group-item">장바구니에 넣기</li>
           </ul>
@@ -209,7 +213,7 @@
             <p class="card-text">노벨문학상 수상자인 알베르 카뮈의 대표작, '이방인'</p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">상품 보기</li>
+            <li class="list-group-item"> <a th:href="@{/OurBook/book/info/{bookId}(bookId=${'A9'})}">상품 보기</a></li>
             <li class="list-group-item">바로 구매하기</li>
             <li class="list-group-item">장바구니에 넣기</li>
           </ul>
@@ -221,56 +225,56 @@
       </div>
       <!-- 추가 블록 끝 -->
       
+      </div>
     </div>
-  </div>
-</main>
-<hr>
-<footer class="container py-5">
-  <div class="row">
-    <div class="col-12 col-md">
-      <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
-      <small class="d-block mb-3 text-muted">&copy; Our Book : 2023</small>
+  </main>
+  <hr>
+  <footer class="container py-5">
+    <div class="row">
+      <div class="col-12 col-md">
+        <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
+        <small class="d-block mb-3 text-muted">&copy; Our Book : 2023</small>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Features</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">Cool stuff</a></li>
+          <li><a class="link-secondary" href="#">Random feature</a></li>
+          <li><a class="link-secondary" href="#">Team feature</a></li>
+          <li><a class="link-secondary" href="#">Stuff for developers</a></li>
+          <li><a class="link-secondary" href="#">Another one</a></li>
+          <li><a class="link-secondary" href="#">Last time</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Resources</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">Resource name</a></li>
+          <li><a class="link-secondary" href="#">Resource</a></li>
+          <li><a class="link-secondary" href="#">Another resource</a></li>
+          <li><a class="link-secondary" href="#">Final resource</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Resources</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">Business</a></li>
+          <li><a class="link-secondary" href="#">Education</a></li>
+          <li><a class="link-secondary" href="#">Government</a></li>
+          <li><a class="link-secondary" href="#">Gaming</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>About</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">Team</a></li>
+          <li><a class="link-secondary" href="#">Locations</a></li>
+          <li><a class="link-secondary" href="#">Privacy</a></li>
+          <li><a class="link-secondary" href="#">Terms</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="col-6 col-md">
-      <h5>Features</h5>
-      <ul class="list-unstyled text-small">
-        <li><a class="link-secondary" href="#">Cool stuff</a></li>
-        <li><a class="link-secondary" href="#">Random feature</a></li>
-        <li><a class="link-secondary" href="#">Team feature</a></li>
-        <li><a class="link-secondary" href="#">Stuff for developers</a></li>
-        <li><a class="link-secondary" href="#">Another one</a></li>
-        <li><a class="link-secondary" href="#">Last time</a></li>
-      </ul>
-    </div>
-    <div class="col-6 col-md">
-      <h5>Resources</h5>
-      <ul class="list-unstyled text-small">
-        <li><a class="link-secondary" href="#">Resource name</a></li>
-        <li><a class="link-secondary" href="#">Resource</a></li>
-        <li><a class="link-secondary" href="#">Another resource</a></li>
-        <li><a class="link-secondary" href="#">Final resource</a></li>
-      </ul>
-    </div>
-    <div class="col-6 col-md">
-      <h5>Resources</h5>
-      <ul class="list-unstyled text-small">
-        <li><a class="link-secondary" href="#">Business</a></li>
-        <li><a class="link-secondary" href="#">Education</a></li>
-        <li><a class="link-secondary" href="#">Government</a></li>
-        <li><a class="link-secondary" href="#">Gaming</a></li>
-      </ul>
-    </div>
-    <div class="col-6 col-md">
-      <h5>About</h5>
-      <ul class="list-unstyled text-small">
-        <li><a class="link-secondary" href="#">Team</a></li>
-        <li><a class="link-secondary" href="#">Locations</a></li>
-        <li><a class="link-secondary" href="#">Privacy</a></li>
-        <li><a class="link-secondary" href="#">Terms</a></li>
-      </ul>
-    </div>
-  </div>
-</footer>
-    <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-  </body>
-</html>
+  </footer>
+      <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    </body>
+  </html>

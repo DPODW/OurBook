@@ -23,7 +23,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 @PropertySource(value = "classpath:application.properties")
 public class SecurityConfig {
-    String[] publicForm = {"/OurBook", "/OurBook/1", "/OurBook/2","/OurBook/3","/oauth2/authorization/naver", "/OurBook/shop",
+    String[] publicForm = {"/OurBook", "/OurBook/1", "/OurBook/2","/OurBook/3", "/oauth2/authorization/naver", "/OurBook/book",
+
+            "/OurBook/book/info/**",
 
             "/checkId", "/checkEmail","/css/**", "/js/**", "/img/**","/error"};
 

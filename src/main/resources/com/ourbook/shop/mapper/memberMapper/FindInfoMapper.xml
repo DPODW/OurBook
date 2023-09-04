@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ourbook.shop.mapper.FindInfoMapper">
+<mapper namespace="com.ourbook.shop.mapper.memberMapper.FindInfoMapper">
 
-    <select id="searchMember" resultType="com.ourbook.shop.dto.CommonMember">
+    <select id="searchMember" resultType="com.ourbook.shop.dto.member.CommonMember">
         select * from seller_tb where id= #{id}
                                 UNION
                                 select * from buyer_tb where id= #{id};
@@ -20,7 +20,7 @@
                                     select email from buyer_tb where email= #{email}
     </select >
 
-    <select id="searchMemberToEmail" resultType="com.ourbook.shop.dto.NaverMember">
+    <select id="searchMemberToEmail" resultType="com.ourbook.shop.dto.member.NaverMember">
         select * from buyer_tb where email= #{email};
     </select >
     <!-- OAuth2 로그인 전용 쿼리 (resultType 참고)

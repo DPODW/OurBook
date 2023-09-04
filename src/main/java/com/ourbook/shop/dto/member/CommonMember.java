@@ -1,4 +1,4 @@
-package com.ourbook.shop.dto;
+package com.ourbook.shop.dto.member;
 
 
 

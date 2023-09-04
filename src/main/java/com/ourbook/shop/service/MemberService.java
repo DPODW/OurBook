@@ -1,7 +1,6 @@
 package com.ourbook.shop.service;
 
-import com.ourbook.shop.dto.CommonMember;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.ourbook.shop.dto.member.CommonMember;
 import org.springframework.stereotype.Service;
 
 

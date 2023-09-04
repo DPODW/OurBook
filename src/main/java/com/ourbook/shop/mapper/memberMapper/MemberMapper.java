@@ -1,8 +1,8 @@
-package com.ourbook.shop.mapper;
+package com.ourbook.shop.mapper.memberMapper;
 
 
-import com.ourbook.shop.dto.NaverMember;
-import com.ourbook.shop.dto.CommonMember;
+import com.ourbook.shop.dto.member.NaverMember;
+import com.ourbook.shop.dto.member.CommonMember;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface MemberMapper {
 
      void commonInsert(CommonMember commonMember);
+
      void naverInsert(NaverMember naverMember);
 
      void commonUpdate(CommonMember commonMember);

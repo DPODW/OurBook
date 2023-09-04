@@ -1,11 +1,10 @@
 package com.ourbook.shop.config.auth;
 
-import com.ourbook.shop.dto.Role;
-import com.ourbook.shop.dto.NaverMember;
+import com.ourbook.shop.dto.member.Role;
+import com.ourbook.shop.dto.member.NaverMember;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
 

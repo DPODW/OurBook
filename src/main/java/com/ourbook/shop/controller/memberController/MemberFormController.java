@@ -1,7 +1,7 @@
 package com.ourbook.shop.controller.memberController;
 
 import com.ourbook.shop.config.security.CustomUserDetail;
-import com.ourbook.shop.dto.CommonMember;
+import com.ourbook.shop.dto.member.CommonMember;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;

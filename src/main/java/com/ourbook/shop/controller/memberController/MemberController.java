@@ -2,7 +2,7 @@ package com.ourbook.shop.controller.memberController;
 
 import com.ourbook.shop.config.auth.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
-import com.ourbook.shop.dto.CommonMember;
+import com.ourbook.shop.dto.member.CommonMember;
 import com.ourbook.shop.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -45,8 +45,6 @@ public class MemberController {
             SecurityContextHolder.getContext().setAuthentication(authenticated);
             SecurityContext securityContext = SecurityContextHolder.getContext();
             session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,securityContext);
-
-            /** TODO: sessionMaker 를 사용하게 되면, role 값 바인딩 되지 않아서 예외 발생함. 고로 role 바인딩 html 구성 요소가 필요함 **/
             return "redirect:/OurBook";
         }catch (Exception ex) {
             bindingResult.reject("loginFail");

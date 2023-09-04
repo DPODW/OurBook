@@ -72,3 +72,59 @@ body {
     line-height: 1.33;
     border-radius: 6px;
   }
+
+.product-details img {
+  max-width: 100%;
+  height: auto;
+}
+
+.product-details h4 {
+  font-size: 28px;
+  margin-top: 10px;
+  color: #333;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.product-details p {
+  margin: 10px 0;
+}
+
+.product-details p label {
+  font-weight: bold;
+  color: #555;
+  text-transform: uppercase;
+  display: inline-block;
+  width: 80px; /* 라벨의 고정 너비를 설정 */
+}
+
+.product-details span {
+  font-size: 20px;
+  color: #007bff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.product-details button {
+  margin-top: 20px;
+  width: 200px;
+  height: 40px;
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.product-details button:hover {
+  background-color: #0056b3;
+}
+
+ .product-image {
+   border: 2px solid #ccc;
+   padding: 5px;
+   max-width: 100%;
+   height: auto;
+ }

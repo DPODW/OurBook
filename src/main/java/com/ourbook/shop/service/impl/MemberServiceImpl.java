@@ -1,15 +1,11 @@
 package com.ourbook.shop.service.impl;
 
-import com.ourbook.shop.config.security.UserDetailServiceImpl;
-import com.ourbook.shop.dto.CommonMember;
-import com.ourbook.shop.dto.Role;
-import com.ourbook.shop.mapper.FindInfoMapper;
-import com.ourbook.shop.mapper.MemberMapper;
+import com.ourbook.shop.dto.member.CommonMember;
+import com.ourbook.shop.dto.member.Role;
+import com.ourbook.shop.mapper.memberMapper.MemberMapper;
 import com.ourbook.shop.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

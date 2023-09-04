@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ourbook.shop.mapper.MemberMapper">
+<mapper namespace="com.ourbook.shop.mapper.memberMapper.MemberMapper">
     <insert id="commonInsert">
         <choose>
             <when test="commonRole == 'BUYER'">
@@ -20,7 +20,7 @@
 
 
 
-    <update id="commonUpdate" parameterType="com.ourbook.shop.dto.CommonMember">
+    <update id="commonUpdate" parameterType="com.ourbook.shop.dto.member.CommonMember">
         <choose>
             <when test="commonRole == 'BUYER'">
                 update buyer_tb

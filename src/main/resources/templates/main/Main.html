@@ -25,7 +25,7 @@
 
 <header class="site-header sticky-top py-1">
   <nav class="container d-flex flex-column flex-md-row justify-content-between">
-    <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
+    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
     <a class="py-2 d-none d-md-inline-block"  th:unless="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/1}" style="color: black; text-decoration: none;">로그인</a>
 
     <form th:action="@{/OurBook/3}" method="post">
@@ -34,9 +34,9 @@
 
     <a class="py-2 d-none d-md-inline-block" th:unless="${#authorization.expression('isAuthenticated()')}"  th:href="@{/OurBook/2}" style="color: black; text-decoration: none;">회원가입</a>
     <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">마이페이지</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/shop}" style="color: black; text-decoration: none;">책 둘러보기</a>
+    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
+    <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">장바구니</a>
     <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책 판매하기</a>
-    <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책에 관하여</a>
     <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">문의</a>
     <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">Cart</a>
   </nav>
@@ -47,7 +47,7 @@
     <div class="col-md-5 p-lg-5 mx-auto my-5">
       <h1 class="display-4 fw-normal">내 곁에 한 권의 책</h1>
       <p class="lead fw-normal">2023년 동안 단 한 권의 책 만을 읽을 수 있다면, 당신은 무슨 책을 고르 실 건가요?</p>
-      <a class="btn btn-outline-secondary" href="#">책 둘러보기</a>
+      <a class="btn btn-outline-secondary" th:href="@{/OurBook/book}">책 둘러보기</a>
     </div>
   </div>
 
@@ -58,7 +58,7 @@
         <h2 class="display-5" style="font-size: 30px; white-space: nowrap; overflow: hidden; font-weight:bold;">무라카미 하루키</h2>
         <p class="lead">"너가 날 기억한다면, 다른 모든 사람이 날 잊어도 상관없어. <br>-해변의 카프카-"
           <img src="/img/home/haruki.png" alt="My Image">
-          <a class="btn btn-outline-secondary" href="#">해변의 카프카</a>
+          <a class="btn btn-outline-secondary" th:href="@{/OurBook/book/info/{bookId}(bookId=${'A3'})}">해변의 카프카</a>
       </div>
     </div>
   </div>
@@ -69,7 +69,7 @@
         <h2 class="display-5" style="font-size: 23px; white-space: nowrap; overflow: hidden; font-weight:bold; ">이상</h2>
         <p class="lead">"박제가 되어버린 천재를 아시오? <br> -날개-"</p>
         <img src="/img/home/이상.png" alt="My Image">
-        <a class="btn btn-outline-secondary" href="#">날개</a>
+        <a class="btn btn-outline-secondary" th:href="@{/OurBook/book/info/{bookId}(bookId=${'A2'})}">날개</a>
       </div>
       
     </div>
@@ -78,7 +78,7 @@
         <h2 class="display-5" style="font-size: 23px;  overflow: hidden; font-weight:bold; ">조지 오웰</h2>
         <p class="lead">"빅 브라더가 우리를 지켜보고 있어 <br>-1984-"</p>
         <img src="/img/home/조지 오웰.png" alt="My Image">
-        <a class="btn btn-outline-secondary" href="#">1984</a>
+        <a class="btn btn-outline-secondary" th:href="@{/OurBook/book/info/{bookId}(bookId=${'A4'})}">1984</a>
       </div>
     </div>
   </div>
@@ -90,7 +90,7 @@
         <p class="lead">"한 번은 중요치 않다. 한 번 뿐인 것은 전혀 없었던 것과 같다. <br> -참을수 없는 존재의 가벼움-"</p>
           </p>
           <img src="/img/home/쿤데라.png" alt="My Image">
-           <a class="btn btn-outline-secondary" href="#">참을수 없는 존재의 가벼움</a>
+           <a class="btn btn-outline-secondary" th:href="@{/OurBook/book/info/{bookId}(bookId=${'A5'})}">참을수 없는 존재의 가벼움</a>
       </div>
     </div>
   </div>

@@ -1,8 +1,8 @@
 package com.ourbook.shop.controller.memberController;
 
 import com.ourbook.shop.config.security.CustomUserDetail;
-import com.ourbook.shop.dto.CommonMember;
-import com.ourbook.shop.dto.Role;
+import com.ourbook.shop.dto.member.CommonMember;
+import com.ourbook.shop.dto.member.Role;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
