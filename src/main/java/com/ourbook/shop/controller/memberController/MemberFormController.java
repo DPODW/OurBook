@@ -50,6 +50,7 @@ public class MemberFormController {
        if(session.getAttribute("NAVER")!=null){
            viewModelHelper.naverMemberInfo(model,defaultOAuth2User);
        }else {
+
            viewModelHelper.commonMemberInfo(model,userDetail);
        }
         return "member/JoinInfo";

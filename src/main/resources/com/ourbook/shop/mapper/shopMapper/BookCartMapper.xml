@@ -16,4 +16,8 @@
     <select id="findBookCart" resultType="com.ourbook.shop.dto.book.BookCart">
         select * from book_cart where bookId= #{bookId} AND email = #{email};
     </select >
+
+    <select id="findCartToEmail" resultType="com.ourbook.shop.dto.book.BookCart">
+        select * from book_cart where email= #{email};
+    </select>
 </mapper>

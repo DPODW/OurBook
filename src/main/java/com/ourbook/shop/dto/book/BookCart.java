@@ -2,10 +2,12 @@ package com.ourbook.shop.dto.book;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 
 @Setter
 @Getter
+@ToString
 public class BookCart {
 
     private String email;

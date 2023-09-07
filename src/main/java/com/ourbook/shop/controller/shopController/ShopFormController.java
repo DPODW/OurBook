@@ -1,5 +1,4 @@
 package com.ourbook.shop.controller.shopController;
-
 import com.ourbook.shop.config.auth.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.book.Book;
@@ -14,6 +13,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -44,18 +45,20 @@ public class ShopFormController {
         return "ourBookShop/bookInfo";
     }
 
-    @PostMapping("/OurBook/book/info/cart")
-    public String bookCart(@ModelAttribute BookCart bookCart, HttpServletRequest request,CustomUserDetail userDetail){
+    @GetMapping("/OurBook/book/info/cart")
+    public String bookCart(HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail){
         HttpSession session = request.getSession(false);
         if(session.getAttribute("NAVER")!=null){
             SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-            bookCart.setEmail(naverMember.getEmail());
-            bookCartService.insertBookCart(bookCart);
+            List<BookCart> cartToEmail = bookCartService.findCartToEmail(naverMember.getEmail());
+            log.info("{}",cartToEmail);
+            log.info("{}",cartToEmail.get(0));
         }else{
-            bookCart.setEmail(userDetail.getEmail());
-            bookCartService.insertBookCart(bookCart);
+            List<BookCart> cart = bookCartService.findCartToEmail(userDetail.getEmail());
+            log.info("{}",cart);
+            log.info("{}",cart.get(0));
         }
-        return "ourBookShop/bookCart";
+            return "ourBookShop/bookCart";
     }
 
 }

@@ -100,8 +100,6 @@ public class MemberController {
         memberLogout(request);
         return "redirect:/OurBook";
     }
-
-
 }
 
 

@@ -4,6 +4,8 @@ import com.ourbook.shop.dto.book.BookCart;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @Mapper
 public interface BookCartMapper {
@@ -13,4 +15,6 @@ public interface BookCartMapper {
     void updateBookCount(BookCart bookCart);
 
     BookCart findBookCart(String email,String bookId);
+
+    List<BookCart> findCartToEmail(String email);
 }

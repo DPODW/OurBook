@@ -5,6 +5,8 @@ import com.ourbook.shop.mapper.shopMapper.BookCartMapper;
 import com.ourbook.shop.service.BookCartService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BookCartServiceImpl implements BookCartService {
 
@@ -23,5 +25,10 @@ public class BookCartServiceImpl implements BookCartService {
         }else{
             bookCartMapper.insertBookCart(bookCart);
         }
+    }
+
+    @Override
+    public List<BookCart> findCartToEmail(String email) {
+        return bookCartMapper.findCartToEmail(email);
     }
 }
