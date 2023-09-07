@@ -99,7 +99,6 @@ public class MemberController {
             memberService.delete(userDetail.getUsername(),userDetail.getAuthorities().toString());
         memberLogout(request);
         return "redirect:/OurBook";
-
     }
 
 

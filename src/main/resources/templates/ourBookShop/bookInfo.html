@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our book : 도서 상세</title>
-
+  <title>Our Book : 도서 상세</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="/css/smailView.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="/js/loginCheck.js"></script>
 </head>
-
 <body class="text-center">
 <main class="form-signin">
   <div class="product-details">
@@ -21,8 +21,28 @@
       <label>가격:</label>
       <span th:text="${bookInfo.getBookPrice()} + '원'"></span>
     </p>
-    <button class="btn btn-primary">구매하기</button>
-    <button class="btn btn-primary">장바구니에 추가</button>
+
+    <!-- 그리드 시스템을 사용하여 수량 태그와 버튼 배치 -->
+    <div class="row">
+      <div class="col-md-6">
+        <button class="btn btn-primary">구매하기</button>
+      </div>
+      <div class="col-md-6 quantity-input">
+        구매 수량<input type="number" class="quantity-input" id="quantity" name="buyCount" value="1" min="1" max="100">
+      </div>
+    </div>
+    <div class="pretty-blue-line"></div>
+    <form ID="addToCartForm" th:action="@{/OurBook/book/info/cart}" th:method="POST">
+      <input type="hidden" name="bookId" th:value="*{bookInfo.getBookId()}">
+      <div class="row">
+        <div class="col-md-6 button-input-margin">
+          <button class="btn btn-primary" id="loginCheck">장바구니에 추가</button>
+        </div>
+        <div class="col-md-6 quantity-input">
+          담을 수량<input type="number" class="quantity-input" id="quantity2" name="bookCount" value="1" min="1" max="100">
+        </div>
+      </div>
+    </form>
   </div>
 </main>
 </body>

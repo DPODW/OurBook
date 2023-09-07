@@ -25,9 +25,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
     String[] publicForm = {"/OurBook", "/OurBook/1", "/OurBook/2","/OurBook/3", "/oauth2/authorization/naver", "/OurBook/book",
 
-            "/OurBook/book/info/**",
+            "/OurBook/book/info/**", "/checkLogin",
 
-            "/checkId", "/checkEmail","/css/**", "/js/**", "/img/**","/error"};
+            "/checkId", "/checkEmail","/css/**", "/js/**", "/img/**"};
 
     private final UserDetailServiceImpl userDetailsService;
 

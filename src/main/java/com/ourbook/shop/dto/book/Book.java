@@ -17,6 +17,7 @@ public class Book {
 
     private String bookImgUrl;
 
+
     public Book(String bookId, String bookName, BigDecimal bookPrice,String bookImgUrl) {
         this.bookId = bookId;
         this.bookName = bookName;

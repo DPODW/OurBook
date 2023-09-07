@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ourbook.shop.mapper.shopMapper.BookCartMapper">
+
+    <insert id="insertBookCart">
+        insert into book_cart(email,bookId,bookCount)
+        values(#{email},#{bookId},#{bookCount});
+    </insert>
+
+    <update id="updateBookCount"  parameterType="com.ourbook.shop.dto.book.BookCart">
+        update book_cart
+        set bookCount = #{bookCount}
+        where bookId = #{bookId} AND email = #{email}
+    </update>
+
+    <select id="findBookCart" resultType="com.ourbook.shop.dto.book.BookCart">
+        select * from book_cart where bookId= #{bookId} AND email = #{email};
+    </select >
+</mapper>
