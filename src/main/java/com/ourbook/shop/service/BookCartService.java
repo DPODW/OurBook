@@ -5,11 +5,14 @@ import com.ourbook.shop.dto.book.BookCart;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public interface BookCartService {
 
     void insertBookCart(BookCart bookCart);
 
-    List<BookCart> findCartToEmail(String email);
+    Map<String, Object> findCartToEmail(String email);
+
+
 }

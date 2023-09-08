@@ -10,15 +10,19 @@ import lombok.ToString;
 @ToString
 public class BookCart {
 
+
+
     private String email;
 
     private String bookId;
 
-    private String bookCount;
+    private int bookCount;
 
-    public BookCart(String email, String bookId, String bookCount) {
+
+    public BookCart(String email, String bookId, int bookCount) {
         this.email = email;
         this.bookId = bookId;
         this.bookCount = bookCount;
+
     }
 }

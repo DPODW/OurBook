@@ -17,7 +17,17 @@
         select * from book_cart where bookId= #{bookId} AND email = #{email};
     </select >
 
-    <select id="findCartToEmail" resultType="com.ourbook.shop.dto.book.BookCart">
-        select * from book_cart where email= #{email};
+    <resultMap id="bookCartResultMap" type="com.ourbook.shop.dto.book.BookCart">
+        <result property="bookId" column="bookId"/>
+        <result property="bookCount" column="bookCount"/>
+    </resultMap>
+
+
+    <select id="findCartToEmail" resultType="map">
+        select bookId , bookCount from book_cart where email= #{email};
     </select>
+
+<!--    <select id="findBookIdToEmail" resultType="list">-->
+<!--        select bookId from book_cart where email= #{email};-->
+<!--    </select>-->
 </mapper>

@@ -20,7 +20,7 @@ public class loginCheckApi {
     public ResponseEntity<String> checkLogin(HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail){
       HttpSession session = request.getSession(false);
       SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-      if(naverMember==null && userDetail==null){ //빈 껍데기 userDetail 이 생성되기 때문에, email 을 가져올수 있느냐 라는 조건으로 판별
+      if(naverMember==null && userDetail==null){
           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("로그인 하지 않은 이용자");
       }else{
           return ResponseEntity.ok().body("로그인 된 이용자");

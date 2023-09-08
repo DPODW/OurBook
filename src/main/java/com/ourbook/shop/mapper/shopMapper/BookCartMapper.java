@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 @Mapper
@@ -16,5 +17,7 @@ public interface BookCartMapper {
 
     BookCart findBookCart(String email,String bookId);
 
-    List<BookCart> findCartToEmail(String email);
+    List<Map<String, Object>> findCartToEmail(String email);
+
+
 }

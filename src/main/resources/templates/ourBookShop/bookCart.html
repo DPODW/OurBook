@@ -39,14 +39,20 @@
   </nav>
 </header>
 
-<div class="card mb-3">
-<!--  <img src="..." class="card-img-top" alt="...">-->
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+<h1 style="text-align: center; font-size: 36px; color: #333; margin-top: 20px;">장바구니</h1>
+
+<div class="card mb-3" th:each="bookCart : ${bookCartList}">
+  <div class="card-body" style="display: flex; align-items: center;">
+    <img src="변신1.jpg" class="card-img-top" alt="변신" style="max-width: 170px; height: auto;">
+    <div style="flex: 1; padding-left: 20px;">
+      <h5 class="card-title">변신</h5>
+      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+    </div>
   </div>
 </div>
+
+
   <hr>
   <footer class="container py-5">
     <div class="row">

@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -45,20 +46,19 @@ public class ShopFormController {
         return "ourBookShop/bookInfo";
     }
 
+    /** map 형태로 책 수량(count) , 이메일을 기준으로 검색한 책 정보 (info) 반환 완료 **/
     @GetMapping("/OurBook/book/info/cart")
     public String bookCart(HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail){
         HttpSession session = request.getSession(false);
         if(session.getAttribute("NAVER")!=null){
             SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-            List<BookCart> cartToEmail = bookCartService.findCartToEmail(naverMember.getEmail());
-            log.info("{}",cartToEmail);
-            log.info("{}",cartToEmail.get(0));
+            Map<String, Object> cartToEmail = bookCartService.findCartToEmail(naverMember.getEmail());
+           log.info("{}",cartToEmail);
         }else{
-            List<BookCart> cart = bookCartService.findCartToEmail(userDetail.getEmail());
-            log.info("{}",cart);
-            log.info("{}",cart.get(0));
+            Map<String, Object> cartToEmail1 = bookCartService.findCartToEmail(userDetail.getEmail());
+            log.info("{}",cartToEmail1);
         }
-            return "ourBookShop/bookCart";
+            return "ourBookShop/bookList";
     }
 
 }
