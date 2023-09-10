@@ -1,18 +1,17 @@
 package com.ourbook.shop.service;
 
-import com.ourbook.shop.dto.book.Book;
-import com.ourbook.shop.dto.book.BookCart;
+import com.ourbook.shop.dto.book.BookCartSave;
+import com.ourbook.shop.dto.book.BookCartView;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public interface BookCartService {
 
-    void insertBookCart(BookCart bookCart);
+    void insertBookCart(BookCartSave bookCartSave);
 
-    Map<String, Object> findCartToEmail(String email);
+    List<BookCartView> findCartToEmail(String email);
 
 
 }

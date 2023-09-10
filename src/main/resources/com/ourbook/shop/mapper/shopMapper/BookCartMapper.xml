@@ -7,27 +7,19 @@
         values(#{email},#{bookId},#{bookCount});
     </insert>
 
-    <update id="updateBookCount"  parameterType="com.ourbook.shop.dto.book.BookCart">
+    <update id="updateBookCount"  parameterType="com.ourbook.shop.dto.book.BookCartSave">
         update book_cart
         set bookCount = #{bookCount}
         where bookId = #{bookId} AND email = #{email}
     </update>
 
-    <select id="findBookCart" resultType="com.ourbook.shop.dto.book.BookCart">
+    <select id="findBookCart" resultType="com.ourbook.shop.dto.book.BookCartSave">
         select * from book_cart where bookId= #{bookId} AND email = #{email};
     </select >
-
-    <resultMap id="bookCartResultMap" type="com.ourbook.shop.dto.book.BookCart">
-        <result property="bookId" column="bookId"/>
-        <result property="bookCount" column="bookCount"/>
-    </resultMap>
 
 
     <select id="findCartToEmail" resultType="map">
         select bookId , bookCount from book_cart where email= #{email};
     </select>
 
-<!--    <select id="findBookIdToEmail" resultType="list">-->
-<!--        select bookId from book_cart where email= #{email};-->
-<!--    </select>-->
 </mapper>

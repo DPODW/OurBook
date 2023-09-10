@@ -2,7 +2,7 @@ package com.ourbook.shop.controller.shopController;
 import com.ourbook.shop.config.auth.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.book.Book;
-import com.ourbook.shop.dto.book.BookCart;
+import com.ourbook.shop.dto.book.BookCartView;
 import com.ourbook.shop.service.BookCartService;
 import com.ourbook.shop.service.FindBookService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @Controller
@@ -46,19 +45,19 @@ public class ShopFormController {
         return "ourBookShop/bookInfo";
     }
 
-    /** map 형태로 책 수량(count) , 이메일을 기준으로 검색한 책 정보 (info) 반환 완료 **/
+
     @GetMapping("/OurBook/book/info/cart")
-    public String bookCart(HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail){
+    public String bookCart(HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail,Model model){
         HttpSession session = request.getSession(false);
         if(session.getAttribute("NAVER")!=null){
             SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-            Map<String, Object> cartToEmail = bookCartService.findCartToEmail(naverMember.getEmail());
-           log.info("{}",cartToEmail);
+            List<BookCartView> cartToNaverEmail = bookCartService.findCartToEmail(naverMember.getEmail());
+            model.addAttribute("MyCartBooks",cartToNaverEmail);
         }else{
-            Map<String, Object> cartToEmail1 = bookCartService.findCartToEmail(userDetail.getEmail());
-            log.info("{}",cartToEmail1);
+            List<BookCartView> cartToCommonEmail = bookCartService.findCartToEmail(userDetail.getEmail());
+            model.addAttribute("MyCartBooks",cartToCommonEmail);
         }
-            return "ourBookShop/bookList";
+            return "ourBookShop/bookCart";
     }
 
 }

@@ -27,7 +27,7 @@
     <a class="py-2 d-none d-md-inline-block"  th:unless="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/1}" style="color: black; text-decoration: none;">로그인</a>
 
     <form th:action="@{/OurBook/3}" method="post">
-      <button class="py-2 d-none d-md-inline-block" th:if="${#authorization.expression('isAuthenticated()')}"  style="color: black; background-color: white; border:none;  text-decoration: none;">로그아웃</button>
+      <button class="py-2 d-none d-md-inline-block" th:if="${#authorization.expression('isAuthenticated()')}"  style="color: black;  border:none;  text-decoration: none;">로그아웃</button>
     </form>
 
     <a class="py-2 d-none d-md-inline-block" th:unless="${#authorization.expression('isAuthenticated()')}"  th:href="@{/OurBook/2}" style="color: black; text-decoration: none;">회원가입</a>

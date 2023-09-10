@@ -6,12 +6,11 @@ import lombok.ToString;
 
 import java.math.BigDecimal;
 
-/** 기본적인 책 정보 조회 DTO **/
+/** 사용자 장바구니 결과 출력을 위한 DTO [DB와 교류하지 않음] **/
 @ToString
-@Getter
 @Setter
-public class Book {
-
+@Getter
+public class BookCartView {
     private String bookId;
 
     private String bookName;
@@ -22,12 +21,16 @@ public class Book {
 
     private String bookExplan;
 
+    private Integer bookCount;
 
-    public Book(String bookId, String bookName, BigDecimal bookPrice,String bookImgUrl, String bookExplan) {
+
+    public BookCartView(String bookId, String bookName, BigDecimal bookPrice,String bookImgUrl, String bookExplan,Integer bookCount) {
         this.bookId = bookId;
         this.bookName = bookName;
         this.bookPrice = bookPrice;
         this.bookImgUrl=bookImgUrl;
         this.bookExplan=bookExplan;
+        this.bookCount=bookCount;
     }
+
 }
