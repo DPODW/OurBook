@@ -33,7 +33,9 @@ public class ShopFormController {
 
 
     @GetMapping("/OurBook/book")
-    public String bookList(){
+    public String bookList(Model model){
+        List<Book> allBook = findBookService.findAllBook();
+        model.addAttribute("allBook",allBook);
         return "ourBookShop/bookList";
     }
 

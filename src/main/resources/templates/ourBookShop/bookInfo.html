@@ -9,7 +9,7 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="/css/smailView.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script type="text/javascript" src="/js/loginCheck.js"></script>
+  <script type="text/javascript" src="/js/CartCheck.js"></script>
 </head>
 <body class="text-center">
 <main class="form-signin">
@@ -35,7 +35,7 @@
       <input type="hidden" name="bookId" th:value="*{bookInfo.getBookId()}">
       <div class="row">
         <div class="col-md-6 button-input-margin">
-          <button class="btn btn-primary" id="loginCheck">장바구니에 추가</button>
+          <button class="btn btn-primary" id="CartCheck">장바구니에 추가</button>
         </div>
         <div class="col-md-6 quantity-input">
           담을 수량<input type="number" class="quantity-input" id="quantity2" name="bookCount" value="1" min="1" max="100">

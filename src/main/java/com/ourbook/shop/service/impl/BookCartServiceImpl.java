@@ -38,20 +38,22 @@ public class BookCartServiceImpl implements BookCartService {
         }
     }
 
+    /** 장바구니 검색 및 출력 기능 (findCartToEmail , getMyCartInfo) 의 분석 메모는 노션 9/12 참고 **/
     @Override
     public List<BookCartView> findCartToEmail(String email) {
         List<Map<String, Object>> cartToEmail = bookCartMapper.findCartToEmail(email);
-        List<BookCartView> result = getMyCartInfo(cartToEmail);
-        return result;
+        List<BookCartView> cartView = getMyCartInfo(cartToEmail);
+        return cartView;
     }
 
 
     private List<BookCartView> getMyCartInfo(List<Map<String, Object>> cartToEmail) {
         return cartToEmail.stream()
                 .map(item -> {
-                    int bookCount = (int) item.get("bookCount");
                     String bookId = (String) item.get("bookId");
+                    int bookCount = (int) item.get("bookCount");
                     Book book = findBookMapper.findBook(bookId);
+                    book.setBookPrice(book.getBookPrice().setScale(0));
                     return new BookCartView(
                             book.getBookId(),
                             book.getBookName(),

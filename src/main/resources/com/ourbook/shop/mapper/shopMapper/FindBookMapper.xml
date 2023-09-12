@@ -6,5 +6,8 @@
         SELECT * FROM book_info WHERE bookId = #{bookId};
     </select >
 
+    <select id="findAllBook" resultType="com.ourbook.shop.dto.book.Book">
+        SELECT * FROM book_info;
+    </select >
 
 </mapper>

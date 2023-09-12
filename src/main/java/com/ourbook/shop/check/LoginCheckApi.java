@@ -8,22 +8,21 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-public class loginCheckApi {
+public class LoginCheckApi {
 
-    @PostMapping("/checkLogin")
+    @PostMapping("/loginCheck")
     public ResponseEntity<String> checkLogin(HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail){
       HttpSession session = request.getSession(false);
       SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-      if(naverMember==null && userDetail==null){
-          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("로그인 하지 않은 이용자");
+      if(naverMember!=null || userDetail!=null){
+          return ResponseEntity.ok().body("인증된 사용자");
       }else{
-          return ResponseEntity.ok().body("로그인 된 이용자");
+          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("인증되지 않은 사용자");
       }
     }
 }
