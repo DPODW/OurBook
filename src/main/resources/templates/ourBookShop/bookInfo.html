@@ -1,48 +1,135 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Book : 도서 상세</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="/css/smailView.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script type="text/javascript" src="/js/CartCheck.js"></script>
-</head>
-<body class="text-center">
-<main class="form-signin">
-  <div class="product-details">
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: #007bff; font-size: 20px; text-decoration: none;"><strong>Our Book!</strong></a>
-    <img th:src="${bookInfo.getBookImgUrl()}" class="product-image">
-    <h5>상품명: <span th:text="${bookInfo.getBookName()}"></span></h5>
-    <p>
-      <label>가격:</label>
-      <span th:text="${bookInfo.getBookPrice()} + '원'"></span>
-    </p>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="generator" content="Hugo 0.104.2">
+  <title>Our book : 도서 상세</title>
+  <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/product/">
 
-    <div class="row">
-      <div class="col-md-6">
-        <button class="btn btn-primary">구매하기</button>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link rel="apple-touch-icon" href="/docs/5.2/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+  <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="manifest" href="/docs/5.2/assets/img/favicons/manifest.json">
+  <link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
+  <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="/js/LoginCheck.js"></script>
+  <script type="text/javascript" src="/js/CartCheck.js"></script>
+  <script type="text/javascript" src="/js/BookTotalCheck.js"></script>
+  <meta name="theme-color" content="#712cf9">
+</head>
+
+<body>
+<header class="site-header sticky-top py-1" style="background-color: #f8f9fa;">
+  <nav class="container d-flex flex-column flex-md-row justify-content-between">
+    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
+    <a class="py-2 d-none d-md-inline-block"  th:unless="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/1}" style="color: black; text-decoration: none;">로그인</a>
+
+    <form th:action="@{/OurBook/3}" method="post">
+      <button class="py-2 d-none d-md-inline-block" th:if="${#authorization.expression('isAuthenticated()')}"  style="color: black; background-color:#f8f9fa;  border:none;  text-decoration: none;">로그아웃</button>
+    </form>
+
+    <a class="py-2 d-none d-md-inline-block" th:unless="${#authorization.expression('isAuthenticated()')}"  th:href="@{/OurBook/2}" style="color: black; text-decoration: none;">회원가입</a>
+    <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">마이페이지</a>
+    <a class="py-2 d-none d-md-inline-block" id="LoginCheck" th:href="@{/OurBook/book/info/cart}" style="color: black; text-decoration: none;">장바구니</a>
+    <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책 판매하기</a>
+    <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">문의</a>
+  </nav>
+</header>
+
+<main class="container py-5">
+  <div class="row">
+    <div class="col-md-6">
+      <img th:src="${bookInfo.bookImgUrl}" class="img-fluid">
+    </div>
+    <div class="col-md-5 mt-5">
+      <h3 class="display-6" style="font-size: 1.25rem; margin-bottom: 10px;"><span style="color: gray;">상품명:</span>[[${bookInfo.bookName}]]</h3>
+      <p class="lead" style="font-size: 0.875rem; margin-bottom: 10px;"><span style="color: gray;">상품 설명:</span>[[${bookInfo.bookExplan}]]</p>
+      <p class="lead" style="font-size: 0.875rem;"><span style="color: gray;">배송비:</span> 전 상품 무료배송 (이벤트 기간 입니다)</p>
+      <p class="lead" style="font-size: 0.875rem;"><span style="color: gray;">배송 예정일:</span> 1~2일 이내</p>
+      <p class="lead" style="font-size: 0.875rem;"><span style="color: gray;">반품/교환:</span> 수령 후 반품/교환 가능</p>
+      <p class="lead" style="font-size: 1rem;">가격:<span id="unitPrice" th:text="${bookInfo.bookPrice}+'원'"></span></p>
+<!--      JS 에서 가격 text 값을 가져와야 하는데, 타임리프 외부 태그 선언 방식으로 하면 가져와지지 않음. 내부에서 선언해야 정상적으로 값을 가져올수 있음-->
+      <div class="mb-3">
+        <label for="quantity" class="form-label">수량</label>
+        <input type="number" class="form-control" id="quantity" name="buyCount" value="1" min="1" max="50">
       </div>
-      <div class="col-md-6 quantity-input">
-        구매 수량<input type="number" class="quantity-input" id="quantity" name="buyCount" value="1" min="1" max="100">
+      <label style="margin-top: 10px;">수량 합계:</label>
+      <span id="totalPriceSpan" style="margin-bottom: 10px;"></span>
+      <div class="row">
+        <div class="col-md-6">
+          <button class="btn btn-success btn-lg" id="buyButton" style="margin-top: 10px;">구매</button>
+        </div>
+        <div class="col-md-6">
+          <form ID="addToCartForm" th:action="@{/OurBook/book/info/cart}" th:method="POST">
+            <input type="hidden" name="bookId" th:value="*{bookInfo.getBookId()}">
+            <div class="row">
+              <div class="col-md-6">
+                <button class="btn btn-primary" id="CartCheck">장바구니에 추가</button>
+              </div>
+              <div class="col-md-6 quantity-input">
+                담을 수량<input type="number" class="quantity-input" id="quantity2" name="bookCount" value="1" min="1" max="50">
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-    <div class="pretty-blue-line"></div>
-    <form ID="addToCartForm" th:action="@{/OurBook/book/info/cart}" th:method="POST">
-      <input type="hidden" name="bookId" th:value="*{bookInfo.getBookId()}">
-      <div class="row">
-        <div class="col-md-6 button-input-margin">
-          <button class="btn btn-primary" id="CartCheck">장바구니에 추가</button>
-        </div>
-        <div class="col-md-6 quantity-input">
-          담을 수량<input type="number" class="quantity-input" id="quantity2" name="bookCount" value="1" min="1" max="100">
-        </div>
-      </div>
-    </form>
   </div>
 </main>
+<hr>
+
+<footer class="container py-5">
+  <div class="row">
+    <div class="col-12 col-md">
+      <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
+      <small class="d-block mb-3 text-muted">&copy; Our Book : 2023</small>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Features</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="link-secondary" href="#">Cool stuff</a></li>
+        <li><a class="link-secondary" href="#">Random feature</a></li>
+        <li><a class="link-secondary" href="#">Team feature</a></li>
+        <li><a class="link-secondary" href="#">Stuff for developers</a></li>
+        <li><a class="link-secondary" href="#">Another one</a></li>
+        <li><a class="link-secondary" href="#">Last time</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Resources</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="link-secondary" href="#">Resource name</a></li>
+        <li><a class="link-secondary" href="#">Resource</a></li>
+        <li><a class="link-secondary" href="#">Another resource</a></li>
+        <li><a class="link-secondary" href="#">Final resource</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Resources</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="link-secondary" href="#">Business</a></li>
+        <li><a class="link-secondary" href="#">Education</a></li>
+        <li><a class="link-secondary" href="#">Government</a></li>
+        <li><a class="link-secondary" href="#">Gaming</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>About</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="link-secondary" href="#">Team</a></li>
+        <li><a class="link-secondary" href="#">Locations</a></li>
+        <li><a class="link-secondary" href="#">Privacy</a></li>
+        <li><a class="link-secondary" href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+<script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
 </html>
