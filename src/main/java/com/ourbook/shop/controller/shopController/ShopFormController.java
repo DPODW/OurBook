@@ -3,8 +3,8 @@ import com.ourbook.shop.config.auth.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.book.Book;
 import com.ourbook.shop.dto.book.BookCartView;
-import com.ourbook.shop.service.BookCartService;
-import com.ourbook.shop.service.FindBookService;
+import com.ourbook.shop.service.shopService.BookCartService;
+import com.ourbook.shop.service.shopService.FindBookService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -58,6 +58,7 @@ public class ShopFormController {
         }else{
             List<BookCartView> cartToCommonEmail = bookCartService.findCartToEmail(userDetail.getEmail());
             model.addAttribute("MyCartBooks",cartToCommonEmail);
+
         }
             return "ourBookShop/bookCart";
     }

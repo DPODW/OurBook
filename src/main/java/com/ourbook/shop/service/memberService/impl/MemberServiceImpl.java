@@ -1,9 +1,9 @@
-package com.ourbook.shop.service.impl;
+package com.ourbook.shop.service.memberService.impl;
 
 import com.ourbook.shop.dto.member.CommonMember;
 import com.ourbook.shop.dto.member.Role;
 import com.ourbook.shop.mapper.memberMapper.MemberMapper;
-import com.ourbook.shop.service.MemberService;
+import com.ourbook.shop.service.memberService.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

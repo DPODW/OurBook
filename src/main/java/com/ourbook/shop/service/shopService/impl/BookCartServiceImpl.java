@@ -1,11 +1,11 @@
-package com.ourbook.shop.service.impl;
+package com.ourbook.shop.service.shopService.impl;
 
 import com.ourbook.shop.dto.book.Book;
 import com.ourbook.shop.dto.book.BookCartSave;
 import com.ourbook.shop.dto.book.BookCartView;
 import com.ourbook.shop.mapper.shopMapper.BookCartMapper;
 import com.ourbook.shop.mapper.shopMapper.FindBookMapper;
-import com.ourbook.shop.service.BookCartService;
+import com.ourbook.shop.service.shopService.BookCartService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +36,11 @@ public class BookCartServiceImpl implements BookCartService {
         }else{
             bookCartMapper.insertBookCart(bookCartSave);
         }
+    }
+
+    @Override
+    public void deleteBookCart(String bookId, String email) {
+        bookCartMapper.deleteBookCart(bookId,email);
     }
 
     /** 장바구니 검색 및 출력 기능 (findCartToEmail , getMyCartInfo) 의 분석 메모는 노션 9/12 참고 **/

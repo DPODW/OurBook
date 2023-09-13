@@ -1,4 +1,4 @@
-package com.ourbook.shop.service;
+package com.ourbook.shop.service.shopService;
 
 import com.ourbook.shop.dto.book.BookCartSave;
 import com.ourbook.shop.dto.book.BookCartView;
@@ -10,6 +10,8 @@ import java.util.List;
 public interface BookCartService {
 
     void insertBookCart(BookCartSave bookCartSave);
+
+    void deleteBookCart(String bookId, String email);
 
     List<BookCartView> findCartToEmail(String email);
 

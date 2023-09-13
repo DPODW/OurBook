@@ -17,3 +17,4 @@ $(document).ready(function() {
         $("#totalPriceSpan").text(newTotalPrice + '원');
     });
 });
+

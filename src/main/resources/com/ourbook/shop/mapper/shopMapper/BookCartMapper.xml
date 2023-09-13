@@ -13,6 +13,11 @@
         where bookId = #{bookId} AND email = #{email}
     </update>
 
+    <delete id="deleteBookCart" parameterType="String">
+        delete from book_cart
+        where bookId = #{bookId} AND email = #{email}
+    </delete>
+
     <select id="findBookCart" resultType="com.ourbook.shop.dto.book.BookCartSave">
         select * from book_cart where bookId= #{bookId} AND email = #{email};
     </select >

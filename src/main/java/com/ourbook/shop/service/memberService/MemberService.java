@@ -1,4 +1,4 @@
-package com.ourbook.shop.service;
+package com.ourbook.shop.service.memberService;
 
 import com.ourbook.shop.dto.member.CommonMember;
 import org.springframework.stereotype.Service;

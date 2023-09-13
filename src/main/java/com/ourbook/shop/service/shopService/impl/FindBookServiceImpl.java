@@ -1,8 +1,8 @@
-package com.ourbook.shop.service.impl;
+package com.ourbook.shop.service.shopService.impl;
 
 import com.ourbook.shop.dto.book.Book;
 import com.ourbook.shop.mapper.shopMapper.FindBookMapper;
-import com.ourbook.shop.service.FindBookService;
+import com.ourbook.shop.service.shopService.FindBookService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

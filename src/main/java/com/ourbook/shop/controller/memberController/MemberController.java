@@ -3,7 +3,7 @@ package com.ourbook.shop.controller.memberController;
 import com.ourbook.shop.config.auth.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.member.CommonMember;
-import com.ourbook.shop.service.MemberService;
+import com.ourbook.shop.service.memberService.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;

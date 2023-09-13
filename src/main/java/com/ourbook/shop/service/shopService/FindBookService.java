@@ -1,4 +1,4 @@
-package com.ourbook.shop.service;
+package com.ourbook.shop.service.shopService;
 
 import com.ourbook.shop.dto.book.Book;
 import org.springframework.stereotype.Service;

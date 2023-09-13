@@ -15,6 +15,9 @@ public interface BookCartMapper {
 
     void updateBookCount(BookCartSave bookCartSave);
 
+
+    void deleteBookCart(String bookId, String email);
+
     BookCartSave findBookCart(String email, String bookId);
 
     List<Map<String, Object>> findCartToEmail(String email);
