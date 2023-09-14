@@ -32,7 +32,7 @@ public class BookCartServiceImpl implements BookCartService {
     @Override
     public void insertBookCart(BookCartSave bookCartSave) {
         if(bookCartMapper.findBookCart(bookCartSave.getEmail(), bookCartSave.getBookId())!=null){
-            bookCartMapper.updateBookCount(bookCartSave);
+            bookCartMapper.updateBookCount(bookCartSave.getBookCount(),bookCartSave.getBookId(),bookCartSave.getEmail());
         }else{
             bookCartMapper.insertBookCart(bookCartSave);
         }
@@ -41,6 +41,11 @@ public class BookCartServiceImpl implements BookCartService {
     @Override
     public void deleteBookCart(String bookId, String email) {
         bookCartMapper.deleteBookCart(bookId,email);
+    }
+
+    @Override
+    public void updateBookCart(Integer bookCount, String bookId, String email) {
+        bookCartMapper.updateBookCount(bookCount,bookId,email);
     }
 
     /** 장바구니 검색 및 출력 기능 (findCartToEmail , getMyCartInfo) 의 분석 메모는 노션 9/12 참고 **/

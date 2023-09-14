@@ -7,7 +7,7 @@
         values(#{email},#{bookId},#{bookCount});
     </insert>
 
-    <update id="updateBookCount"  parameterType="com.ourbook.shop.dto.book.BookCartSave">
+    <update id="updateBookCount">
         update book_cart
         set bookCount = #{bookCount}
         where bookId = #{bookId} AND email = #{email}

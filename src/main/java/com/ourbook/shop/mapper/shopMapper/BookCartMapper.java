@@ -13,7 +13,7 @@ public interface BookCartMapper {
 
     void insertBookCart(BookCartSave bookCartSave);
 
-    void updateBookCount(BookCartSave bookCartSave);
+    void updateBookCount(Integer bookCount, String bookId, String email);
 
 
     void deleteBookCart(String bookId, String email);

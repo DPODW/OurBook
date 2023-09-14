@@ -1,3 +1,4 @@
+//책 합계 계산 기능 js
 $(document).ready(function() {
     // 초기 값 설정
     var unitPrice = parseFloat($("#unitPrice").text());
@@ -18,3 +19,10 @@ $(document).ready(function() {
     });
 });
 
+//수량 태그 강제 편집 제한 기능 JS
+function restrictInput(input) {
+    // 입력값이 유효한지 확인
+    if (isNaN(input.value) || input.value < 1 || input.value > 50) {
+        input.value = 1; // 유효하지 않은 값이면 1로 설정
+    }
+}

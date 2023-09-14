@@ -18,6 +18,7 @@
 <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
 <link rel="stylesheet" type="text/css" href="/css/main.css">
 <script type="text/javascript" src="/js/BookTotalRepeatCheck.js"></script>
+<script type="text/javascript" src="/js/BookTotalCheck.js"></script>
 <meta name="theme-color" content="#712cf9">
 </head>
 
@@ -47,11 +48,17 @@
   <div class="card-body" style="display: flex; align-items: center;">
     <img th:src="${MyCartBook.bookImgUrl}" class="card-img-top" style="max-width: 170px; height: auto;">
     <div style="flex: 1; padding-left: 20px;">
-      <h5 class="card-title" th:text="${MyCartBook.bookName}"></h5>
-      <p class="card-text" th:id="'book-price-' + ${cartItemStatus.index}" th:text="${MyCartBook.bookPrice}+'원 (1권 당 가격)'"></p>
-      <p class="card-text"><small class="text-body-secondary" th:text="${MyCartBook.bookExplan}"></small></p>
-      구매 수량 &nbsp;<input type="number" class="quantity-input" name="buyCount"
-                         th:value="${MyCartBook.bookCount}" min="1" max="50" th:data-index="${cartItemStatus.index}">
+      <h5 class="lead" th:text="${MyCartBook.bookName}" style="color: #007bff"></h5>
+      <p class="lead" th:id="'book-price-' + ${cartItemStatus.index}" th:text="${MyCartBook.bookPrice}+'원 (1권 당 가격)'" style="font-size: 1rem;"></p>
+      <p class="card-text"><small class="lead" th:text="${MyCartBook.bookExplan}" style="font-size: 0.9rem;"></small></p>
+      <div style="display: flex; align-items: center;"> <!-- 변경된 부분 -->
+        <p class="lead" style="font-size: 1rem;">담은 수량 &nbsp;</p>
+        <form th:action="@{/OurBook/book/info/cart/{bookId}(bookId=${MyCartBook.bookId})}" th:method="PUT">
+          <input type="number" class="quantity-input" name="buyCount"
+                 th:value="${MyCartBook.bookCount}" min="1" max="50" th:data-index="${cartItemStatus.index}" oninput="restrictInput(this)">
+          <button class="lead" type="submit" style="border-color: gray; margin-bottom: 16px; font-size: 0.9rem;">수량 저장</button>
+        </form>
+      </div> <!-- 변경된 부분 -->
       <div style="flex: 1; margin-right: 20px;">
         <label th:for="'total-price-' + ${cartItemStatus.index}" style="margin-top: 20px; font-weight: bold; font-size: 16px;">최종 구매 가격:</label>
         <span  th:id="'total-price-' + ${cartItemStatus.index}" style="font-weight: bold; font-size: 16px;"></span>

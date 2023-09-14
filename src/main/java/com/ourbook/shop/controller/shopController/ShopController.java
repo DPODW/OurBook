@@ -22,7 +22,7 @@ public class ShopController {
     }
 
     @PostMapping("/OurBook/book/info/cart")
-    public String bookCart(@ModelAttribute BookCartSave bookCartSave, HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail){
+    public String bookCartInsert(@ModelAttribute BookCartSave bookCartSave, HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail){
         HttpSession session = request.getSession(false);
         if(session.getAttribute("NAVER")!=null){
             SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
@@ -44,6 +44,19 @@ public class ShopController {
             bookCartService.deleteBookCart(bookId,naverMember.getEmail());
         }else{
             bookCartService.deleteBookCart(bookId, userDetail.getEmail());
+        }
+        return "redirect:/OurBook/book/info/cart";
+    }
+
+    @PutMapping("/OurBook/book/info/cart/{bookId}")
+    public String bookCartUpdate(@PathVariable("bookId")String bookId,@RequestParam("buyCount")Integer bookCount,  HttpServletRequest request,
+                                 @AuthenticationPrincipal CustomUserDetail userDetail){
+        HttpSession session = request.getSession(false);
+        if(session.getAttribute("NAVER")!=null){
+            SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
+            bookCartService.updateBookCart(bookCount,bookId,naverMember.getEmail());
+        }else{
+            bookCartService.updateBookCart(bookCount,bookId,userDetail.getEmail());
         }
         return "redirect:/OurBook/book/info/cart";
     }
