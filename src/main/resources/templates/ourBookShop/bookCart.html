@@ -58,17 +58,23 @@
                  th:value="${MyCartBook.bookCount}" min="1" max="50" th:data-index="${cartItemStatus.index}" oninput="restrictInput(this)">
           <button class="lead" type="submit" style="border-color: gray; margin-bottom: 16px; font-size: 0.9rem;">수량 저장</button>
         </form>
-      </div> <!-- 변경된 부분 -->
+      </div>
       <div style="flex: 1; margin-right: 20px;">
         <label th:for="'total-price-' + ${cartItemStatus.index}" style="margin-top: 20px; font-weight: bold; font-size: 16px;">최종 구매 가격:</label>
         <span  th:id="'total-price-' + ${cartItemStatus.index}" style="font-weight: bold; font-size: 16px;"></span>
       </div>
     </div>
     <div class="button-container">
+
+      <form th:action="@{/OurBook/book/info/cart/{bookId}(bookId=${MyCartBook.bookId})}" th:method="GET">
+      <input type="hidden" name="bookCount" th:value="*{MyCartBook.bookCount}">
       <button class="btn btn-success purchase-button">구매</button>
+      </form>
+
       <form th:action="@{/OurBook/book/info/cart/{bookId}(bookId=${MyCartBook.bookId})}" th:method="DELETE">
         <button class="btn btn-danger delete-button">삭제</button>
       </form>
+
     </div>
   </div>
 </div>

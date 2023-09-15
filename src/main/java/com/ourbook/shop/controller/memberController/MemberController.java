@@ -89,6 +89,7 @@ public class MemberController {
         return "redirect:/OurBook";
     }
 
+
     @DeleteMapping("/OurBook/5")
     public String memberDelete(HttpServletRequest request,@AuthenticationPrincipal CustomUserDetail userDetail){
         HttpSession session = request.getSession(false);

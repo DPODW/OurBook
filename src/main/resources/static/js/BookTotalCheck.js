@@ -19,10 +19,24 @@ $(document).ready(function() {
     });
 });
 
-//수량 태그 강제 편집 제한 기능 JS
+//수량 input 태그 강제 편집 제한 기능 JS
 function restrictInput(input) {
     // 입력값이 유효한지 확인
     if (isNaN(input.value) || input.value < 1 || input.value > 50) {
         input.value = 1; // 유효하지 않은 값이면 1로 설정
     }
 }
+
+
+//초기 수량을 바로 계산 합계에 출력시켜주는 기능
+    function updateTotalPrice() {
+    var unitPrice = parseFloat($("#unitPrice").text());
+    var newQuantity = parseInt($("#quantity").val());
+    var newTotalPrice = unitPrice * newQuantity;
+    $("#totalPriceSpan").text(newTotalPrice + '원');
+}
+
+    // 페이지 로딩 시 초기화
+    $(document).ready(function() {
+    updateTotalPrice(); // 초기 가격 계산
+});

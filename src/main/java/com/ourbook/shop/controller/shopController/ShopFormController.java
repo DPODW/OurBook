@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Slf4j
@@ -58,9 +59,30 @@ public class ShopFormController {
         }else{
             List<BookCartView> cartToCommonEmail = bookCartService.findCartToEmail(userDetail.getEmail());
             model.addAttribute("MyCartBooks",cartToCommonEmail);
-
         }
             return "ourBookShop/bookCart";
     }
+
+    @GetMapping("/OurBook/book/info/cart/{bookId}")
+    public String paymentInfo(@PathVariable("bookId")String bookId, @RequestParam("bookCount") BigDecimal bookCount, HttpServletRequest request,
+                              @AuthenticationPrincipal CustomUserDetail userDetail, Model model){
+        HttpSession session = request.getSession(false);
+        if(session.getAttribute("NAVER")!=null){
+            SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
+            purchaseBookInfo(bookId, bookCount,model);
+            model.addAttribute("name",naverMember.getEmail());
+        }else{
+            purchaseBookInfo(bookId, bookCount,model);
+            model.addAttribute("name",userDetail.getName());
+        }
+        return "ourBookShop/paymentInfo";
+    }
+
+    private void purchaseBookInfo(String bookId,BigDecimal bookCount, Model model) {
+        Book book = findBookService.findBook(bookId);
+        model.addAttribute("bookCount",bookCount);
+        model.addAttribute("paymentInfo",book);
+    }
+
 
 }
