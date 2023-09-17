@@ -15,29 +15,31 @@ public class PaymentInfo {
 
     String bookId;
 
-    String bookCount;
-
-    BigDecimal bookPrice;
+    String paymentBookCount;
 
     BigDecimal paymentPrice;
 
-    String email;
+    String buyerEmail;
 
-    String name;
+    String buyerName;
 
-    String address;
+    String receiverName;
 
-    String phoneNumber;
+    String receiverAddress;
 
-    public PaymentInfo(String bookName, String bookId, String bookCount,BigDecimal bookPrice, BigDecimal paymentPrice, String email, String name, String address, String phoneNumber) {
+    String receiverPhoneNumber;
+
+    public PaymentInfo(String bookName, String bookId, String paymentBookCount, BigDecimal paymentPrice, String buyerEmail, String buyerName, String receiverName, String receiverAddress, String receiverPhoneNumber) {
         this.bookName = bookName;
         this.bookId = bookId;
-        this.bookCount = bookCount;
-        this.bookPrice = bookPrice;
+        this.paymentBookCount = paymentBookCount;
         this.paymentPrice = paymentPrice;
-        this.email = email;
-        this.name = name;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
+        this.buyerEmail = buyerEmail;
+        this.buyerName = buyerName;
+        this.receiverName = receiverName;
+        this.receiverAddress = receiverAddress;
+        this.receiverPhoneNumber = receiverPhoneNumber;
     }
+
+
 }

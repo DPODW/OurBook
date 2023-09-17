@@ -18,6 +18,7 @@ bin/
 
 ### IntelliJ IDEA ###
 application.properties
+static/js/payment
 .idea
 *.iws
 *.iml
