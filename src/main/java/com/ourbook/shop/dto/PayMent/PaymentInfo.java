@@ -11,6 +11,8 @@ import java.math.BigDecimal;
 @Setter
 public class PaymentInfo {
 
+    String orderNumber;
+
     String bookName;
 
     String bookId;
@@ -29,7 +31,8 @@ public class PaymentInfo {
 
     String receiverPhoneNumber;
 
-    public PaymentInfo(String bookName, String bookId, String paymentBookCount, BigDecimal paymentPrice, String buyerEmail, String buyerName, String receiverName, String receiverAddress, String receiverPhoneNumber) {
+    public PaymentInfo(String orderNumber, String bookName, String bookId, String paymentBookCount, BigDecimal paymentPrice, String buyerEmail, String buyerName, String receiverName, String receiverAddress, String receiverPhoneNumber) {
+        this.orderNumber = orderNumber;
         this.bookName = bookName;
         this.bookId = bookId;
         this.paymentBookCount = paymentBookCount;

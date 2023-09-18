@@ -56,15 +56,16 @@
     <div class="col-md-6">
       <h4 style="margin-top: 20px;">도서 정보</h4>
       <p>도서 이름: <span id="bookNameSpan" th:text="${paymentInfo.bookName}"></span></p>
+      <input id="bookId" type="hidden" th:value="${paymentInfo.bookId}">
       <p>가격: <span id="unitPrice" th:text="${paymentInfo.bookPrice}"></span>원</p>
       <p>수량: <input type="number" id="quantity" th:value="${bookCount}" min="1" max="50" class="form-control" oninput="restrictInput(this)"></p>
       <p>결제 가격: <span id="totalPriceSpan" style="color: #007bff"></span></p>
       <hr>
       <h4>배송 정보</h4>
       <p>주문자 이름 (네이버 간편 회원은 이메일) :  <span id="buyerName" th:text="${name}"></span></p>
-      <p>수령자 이름 <input type="text" size="30" class="form-control"></p>
-      <p>수령자 전화번호 (- 기호 없이 입력해주세요)<input type="text" maxlength="11" class="form-control"></p>
-      <p>배송 주소 <input type="text" class="form-control"></p>
+      <p>수령자 이름 <input id="receiverName" type="text" size="30" class="form-control"></p>
+      <p>수령자 전화번호 (- 기호 없이 입력해주세요)<input id="receiverPhoneNumber" type="text" maxlength="11" class="form-control"></p>
+      <p>배송 주소 <input id="receiverAddress" type="text" class="form-control"></p>
 
         <button class="btn btn-success purchase-button" onclick="requestPayKGincis()" style="background-color: blue; border: none;">구매하기</button>
         <button type="button" onclick="requestPayToss()" style="background-color: white; border-color: #007bff; border-radius: 10%;"><img  src="/img/payment/toss.png" width="63px"></button>
