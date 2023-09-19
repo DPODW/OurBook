@@ -16,7 +16,7 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 PortOnePayment.js
-PaymentController
+PaymentController.java
 
 ### IntelliJ IDEA ###
 application.properties
