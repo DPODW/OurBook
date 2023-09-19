@@ -5,6 +5,7 @@ import com.ourbook.shop.dto.member.CommonMember;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ public class MemberFormController {
 
     private final ViewModelHelper viewModelHelper;
 
+    @Autowired
     public MemberFormController(ViewModelHelper viewModelHelper) {
         this.viewModelHelper = viewModelHelper;
     }

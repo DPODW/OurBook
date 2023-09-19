@@ -7,4 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface PaymentMapper {
 
     void paymentInfoSave(PaymentInfo paymentInfo);
+
+    PaymentInfo findOrderNumber(String orderNumber);
 }

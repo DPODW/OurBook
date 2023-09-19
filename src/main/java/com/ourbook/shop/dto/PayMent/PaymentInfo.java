@@ -17,7 +17,7 @@ public class PaymentInfo {
 
     String bookId;
 
-    String paymentBookCount;
+    int paymentBookCount;
 
     BigDecimal paymentPrice;
 
@@ -31,7 +31,7 @@ public class PaymentInfo {
 
     String receiverPhoneNumber;
 
-    public PaymentInfo(String orderNumber, String bookName, String bookId, String paymentBookCount, BigDecimal paymentPrice, String buyerEmail, String buyerName, String receiverName, String receiverAddress, String receiverPhoneNumber) {
+    public PaymentInfo(String orderNumber, String bookName, String bookId, int paymentBookCount, BigDecimal paymentPrice, String buyerEmail, String buyerName, String receiverName, String receiverAddress, String receiverPhoneNumber) {
         this.orderNumber = orderNumber;
         this.bookName = bookName;
         this.bookId = bookId;

@@ -62,7 +62,8 @@
       <p>결제 가격: <span id="totalPriceSpan" style="color: #007bff"></span></p>
       <hr>
       <h4>배송 정보</h4>
-      <p>주문자 이름 (네이버 간편 회원은 이메일) :  <span id="buyerName" th:text="${name}"></span></p>
+      <p>주문자 이름 :  <span id="buyerName" th:text="${name}"></span></p>
+      <input id="buyerEmail" type="hidden" th:value="${email}">
       <p>수령자 이름 <input id="receiverName" type="text" size="30" class="form-control"></p>
       <p>수령자 전화번호 (- 기호 없이 입력해주세요)<input id="receiverPhoneNumber" type="text" maxlength="11" class="form-control"></p>
       <p>배송 주소 <input id="receiverAddress" type="text" class="form-control"></p>

@@ -69,19 +69,22 @@ public class ShopFormController {
         HttpSession session = request.getSession(false);
         if(session.getAttribute("NAVER")!=null){
             SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-            purchaseBookInfo(bookId, bookCount,model);
-            model.addAttribute("name",naverMember.getEmail());
+            purchaseBookInfo(bookId,bookCount,model);
+            model.addAttribute("name",naverMember.getName());
+            model.addAttribute("email",naverMember.getEmail());
         }else{
             purchaseBookInfo(bookId, bookCount,model);
             model.addAttribute("name",userDetail.getName());
+            model.addAttribute("email",userDetail.getEmail());
         }
         return "ourBookShop/paymentInfo";
     }
 
     private void purchaseBookInfo(String bookId,BigDecimal bookCount, Model model) {
         Book book = findBookService.findBook(bookId);
-        model.addAttribute("bookCount",bookCount);
         model.addAttribute("paymentInfo",book);
+        model.addAttribute("bookCount",bookCount);
+
     }
 
 

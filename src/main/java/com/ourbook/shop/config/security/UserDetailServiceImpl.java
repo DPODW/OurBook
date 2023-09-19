@@ -3,6 +3,7 @@ package com.ourbook.shop.config.security;
 import com.ourbook.shop.dto.member.CommonMember;
 import com.ourbook.shop.mapper.memberMapper.FindInfoMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,10 +20,9 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     private final FindInfoMapper findInfoMapper;
 
-
+    @Autowired
     public UserDetailServiceImpl(FindInfoMapper findInfoMapper) {
         this.findInfoMapper = findInfoMapper;
-
     }
 
     @Override

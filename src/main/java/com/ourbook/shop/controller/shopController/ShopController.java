@@ -7,6 +7,7 @@ import com.ourbook.shop.service.shopService.BookCartService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ public class ShopController {
 
     private final BookCartService bookCartService;
 
+    @Autowired
     public ShopController(BookCartService bookCartService) {
         this.bookCartService = bookCartService;
     }

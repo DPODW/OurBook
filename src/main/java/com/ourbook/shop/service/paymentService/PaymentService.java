@@ -6,4 +6,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface PaymentService {
     void paymentInfoSave(PaymentInfo paymentInfo);
+
+    void paymentValidate(String orderNumber);
 }
