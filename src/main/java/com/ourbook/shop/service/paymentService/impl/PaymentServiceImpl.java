@@ -12,10 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -35,6 +31,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public void paymentInfoSave(PaymentInfo paymentInfo) {
        try {
+
            paymentMapper.paymentInfoSave(paymentInfo);
        }catch (Exception ex){
            throw new PaymentFailException();
@@ -64,7 +61,7 @@ public class PaymentServiceImpl implements PaymentService {
         LinkedHashMap responseBody = (LinkedHashMap) responseData.getBody();
         LinkedHashMap responseBodyProps = (LinkedHashMap) responseBody.get("response");
         String accessToken = (String) responseBodyProps.get("access_token");
-        log.info("토큰{}",accessToken);
+        log.info("아임포트 토큰 : {}",accessToken);
         return accessToken;
     }
 
@@ -72,23 +69,17 @@ public class PaymentServiceImpl implements PaymentService {
     public void paymentCancel(PaymentCancel paymentCancel){
         String apiUrl = "https://api.iamport.kr/payments/cancel";
 
-        // Request 헤더 설정
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("Accept", "application/json");
         headers.set("Authorization", paymentCancel.getAccessToken());
 
-        // Request 바디 설정
+
         String requestBody = "{\"reason\":\"" + paymentCancel.getReason() + "\",\"imp_uid\":\"" + paymentCancel.getImp_uid() +
                 "\",\"amount\":" + paymentCancel.getPaymentPrice() + ",\"checksum\":" + paymentCancel.getPaymentPrice() + "}";
 
-        // RestTemplate 객체 생성
         RestTemplate restTemplate = new RestTemplate();
-
-        // HTTP 요청 엔티티 생성
         HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
-
-        // HTTP POST 요청 보내기
         ResponseEntity<String> responseEntity = restTemplate.exchange(apiUrl, HttpMethod.POST, requestEntity, String.class);
     }
 

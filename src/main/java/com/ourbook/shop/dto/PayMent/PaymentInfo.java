@@ -13,6 +13,8 @@ public class PaymentInfo {
 
     String orderNumber;
 
+    String imp_uid;
+
     String bookName;
 
     String bookId;

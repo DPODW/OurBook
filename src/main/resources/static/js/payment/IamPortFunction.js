@@ -63,7 +63,7 @@ function paymentCancel(paymentInfo,imp_uid) {
 
 /** 결제 정보 DB 저장 함수 **/
 function paymentInfoSave(paymentInfo,imp_uid){
-
+    paymentInfo.imp_uid = imp_uid;
     $.ajax({
         type: 'POST',
         url: '/OurBook/payment/1',
