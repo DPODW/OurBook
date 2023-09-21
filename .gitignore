@@ -15,7 +15,7 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
-PortOnePayment.js
+
 PaymentController.java
 
 ### IntelliJ IDEA ###

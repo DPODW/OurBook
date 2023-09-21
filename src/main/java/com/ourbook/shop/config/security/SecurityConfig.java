@@ -25,7 +25,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
     String[] publicForm = {"/OurBook", "/OurBook/1", "/OurBook/2","/OurBook/3", "/oauth2/authorization/naver", "/OurBook/book",
 
-            "/OurBook/book/info/**", "/loginCheck", "/OurBook/payment/check",
+            "/OurBook/book/info/**", "/loginCheck", "/iamports/accessToken",
 
             "/checkId", "/checkEmail","/css/**", "/js/**", "/img/**"};
 
@@ -42,6 +42,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+
                 .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
                 .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer.disable())
                 .authorizeHttpRequests(request -> request.requestMatchers(publicForm).permitAll()
