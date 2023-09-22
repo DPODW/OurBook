@@ -80,7 +80,7 @@ public class PaymentServiceImpl implements PaymentService {
 
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
-        ResponseEntity<String> responseEntity = restTemplate.exchange(apiUrl, HttpMethod.POST, requestEntity, String.class);
+        restTemplate.exchange(apiUrl, HttpMethod.POST, requestEntity, String.class);
     }
 
 }

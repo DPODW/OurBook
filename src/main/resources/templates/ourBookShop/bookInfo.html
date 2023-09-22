@@ -58,7 +58,7 @@
       <hr>
       <div class="row" style="margin-top: 60px;">
         <div class="col-md-6">
-          <form ID="paymentInfo" th:action="@{/OurBook/book/info/cart/{bookId}(bookId=${bookInfo.bookId})}" th:method="GET">
+          <form ID="paymentInfo" th:action="@{/OurBook/book/info/payment/{bookId}(bookId=${bookInfo.bookId})}" th:method="GET">
           <div class="row">
             <div class="col-md-6">
               <button class="btn btn-success btn-lg login-check" id="buyButton" data-th-data="${bookInfo.bookId}">구매</button>

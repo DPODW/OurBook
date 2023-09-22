@@ -70,7 +70,10 @@ function paymentInfoSave(paymentInfo,imp_uid){
         data: JSON.stringify(paymentInfo),
         contentType: 'application/json',
         success: function (response) {
-            console.log("결제 정보 저장 완료")
+            console.log("결제 정보 저장 완료");
+            console.log('주문번호' + paymentInfo.orderNumber);
+            const orderNumber = paymentInfo.orderNumber;
+            paymentResult(paymentInfo,imp_uid,orderNumber);
         },
         error: function (error) {
             paymentCancel(paymentInfo,imp_uid);
@@ -78,6 +81,27 @@ function paymentInfoSave(paymentInfo,imp_uid){
         }
     });
 }
+
+/** 최종 주문 내역 반환 함수 (영수증 출력 개념과 동일) **/
+function paymentResult(paymentInfo,imp_uid,orderNumber){
+    $.ajax({
+        type: 'POST',
+        url: '/OurBook/book/info/payment/result/' + orderNumber,
+        data: JSON.stringify(paymentInfo),
+        contentType: 'application/json',
+        success: function (response) {
+            // window.location.href = '/OurBook/book/info/payment/result/'+orderNumber;
+        },
+        error: function (error) {
+            paymentCancel(paymentInfo,imp_uid);
+            console.log('실패4 부분'+orderNumber);
+            console.log('실패4 부분1'+paymentInfo.orderNumber);
+            alert("결제 실패. 관리자에게 문의하세요(4)");
+        }
+    });
+}
+
+
 
 /** 서버측 주문번호 생성 함수 **/
 function randomOrderNumber() {

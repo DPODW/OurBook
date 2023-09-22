@@ -66,7 +66,7 @@
     </div>
     <div class="button-container">
 
-      <form th:action="@{/OurBook/book/info/cart/{bookId}(bookId=${MyCartBook.bookId})}" th:method="GET">
+      <form th:action="@{/OurBook/book/info/payment/{bookId}(bookId=${MyCartBook.bookId})}" th:method="GET">
       <input type="hidden" name="bookCount" th:value="*{MyCartBook.bookCount}">
       <button class="btn btn-success purchase-button">구매</button>
       </form>

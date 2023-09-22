@@ -1,6 +1,7 @@
 package com.ourbook.shop.controller.shopController;
 import com.ourbook.shop.config.auth.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
+import com.ourbook.shop.dto.PayMent.PaymentInfo;
 import com.ourbook.shop.dto.book.Book;
 import com.ourbook.shop.dto.book.BookCartView;
 import com.ourbook.shop.service.shopService.BookCartService;
@@ -63,7 +64,7 @@ public class ShopFormController {
             return "ourBookShop/bookCart";
     }
 
-    @GetMapping("/OurBook/book/info/cart/{bookId}")
+    @GetMapping("/OurBook/book/info/payment/{bookId}")
     public String paymentInfo(@PathVariable("bookId")String bookId, @RequestParam("bookCount") BigDecimal bookCount, HttpServletRequest request,
                               @AuthenticationPrincipal CustomUserDetail userDetail, Model model){
         HttpSession session = request.getSession(false);
