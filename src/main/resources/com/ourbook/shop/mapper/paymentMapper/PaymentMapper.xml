@@ -3,9 +3,10 @@
 <mapper namespace="com.ourbook.shop.mapper.paymentMapper.PaymentMapper">
 
     <insert id="paymentInfoSave" parameterType="com.ourbook.shop.dto.PayMent.PaymentInfo">
-        insert into payment_info(ORDER_NUMBER,IMP_UID,BOOK_NAME,BOOK_ID,PAYMENT_BOOK_COUNT,PAYMENT_PRICE,BUYER_EMAIL,BUYER_NAME,RECEIVER_NAME,RECEIVER_ADDRESS,RECEIVER_PHONE_NUBMER)
+        insert into payment_info(ORDER_NUMBER,IMP_UID,BOOK_NAME,BOOK_ID,PAYMENT_BOOK_COUNT,PAYMENT_PRICE,BUYER_EMAIL,BUYER_NAME,RECEIVER_NAME,RECEIVER_ADDRESS,RECEIVER_PHONE_NUBMER
+        ,PAYMENT_TIME)
         values(#{orderNumber},#{imp_uid},#{bookName},#{bookId},#{paymentBookCount},#{paymentPrice},#{buyerEmail},#{buyerName},#{receiverName},
-               #{receiverAddress},#{receiverPhoneNumber});
+               #{receiverAddress},#{receiverPhoneNumber},#{paymentTime});
     </insert>
 
     <select id="findOrderNumber" resultType="com.ourbook.shop.dto.PayMent.PaymentInfo">

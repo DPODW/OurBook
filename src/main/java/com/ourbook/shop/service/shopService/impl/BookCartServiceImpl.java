@@ -62,8 +62,8 @@ public class BookCartServiceImpl implements BookCartService {
     private List<BookCartView> getMyCartInfo(List<Map<String, Object>> cartToEmail) {
         return cartToEmail.stream()
                 .map(item -> {
-                    String bookId = (String) item.get("bookId");
-                    int bookCount = (int) item.get("bookCount");
+                    String bookId = (String) item.get("BOOK_ID");
+                    int bookCount = (int) item.get("USER_BOOK_COUNT");
                     Book book = findBookMapper.findBook(bookId);
                     book.setBookPrice(book.getBookPrice().setScale(0));
                     return new BookCartView(

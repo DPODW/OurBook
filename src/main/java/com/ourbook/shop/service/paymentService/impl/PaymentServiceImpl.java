@@ -31,7 +31,6 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public void paymentInfoSave(PaymentInfo paymentInfo) {
        try {
-
            paymentMapper.paymentInfoSave(paymentInfo);
        }catch (Exception ex){
            throw new PaymentFailException();

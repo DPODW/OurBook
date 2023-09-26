@@ -2,7 +2,7 @@ document.write('<script src="/js/payment/IamPortFunction.js"></script>');
 
 const userCode = "imp42463350";
 IMP.init(userCode);
-randomOrderNumber()
+randomOrderNumber();
 
 function requestPayKGincis() {
     const paymentInfo = {
@@ -15,9 +15,9 @@ function requestPayKGincis() {
      bookId : $("#bookId").val(),
      paymentBookCount : $("#quantity").val(),
      buyerEmail : $("#buyerEmail").val(),
-     orderNumber : 'o' + new Date().getTime() + randomOrderNumber()
+     orderNumber : 'o' + new Date().getTime() + randomOrderNumber(),
+     paymentTime : paymentSuccessTime(),
     }
-
     IMP.request_pay({
         pg: "html5_inicis",
         pay_method: "card",
@@ -25,8 +25,7 @@ function requestPayKGincis() {
         name: paymentInfo.bookName,
         amount: paymentInfo.paymentPrice,
         buyer_name: paymentInfo.buyerName,
-        buyer_email: paymentInfo.buyerEmail,
-        m_redirect_url: "",
+        buyer_email: paymentInfo.buyerEmail
     }, function (rsp) {
         const imp_uid = rsp.imp_uid;
         $.ajax({
@@ -55,7 +54,8 @@ function requestPayKGincis() {
             bookId : $("#bookId").val(),
             paymentBookCount : $("#quantity").val(),
             buyerEmail : $("#buyerEmail").val(),
-            orderNumber : 'o' + new Date().getTime() + randomOrderNumber()
+            orderNumber : 'o' + new Date().getTime() + randomOrderNumber(),
+            paymentTime : paymentSuccessTime()
         }
         IMP.request_pay({
             pg: "tosspayments.iamporttest_3",
@@ -64,7 +64,6 @@ function requestPayKGincis() {
             name: paymentInfo.bookName,
             amount: paymentInfo.paymentPrice,
             buyer_name: paymentInfo.buyerName,
-            m_redirect_url: "",
         }, function (rsp) {
             const imp_uid = rsp.imp_uid;
             $.ajax({

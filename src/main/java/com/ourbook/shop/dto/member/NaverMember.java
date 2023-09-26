@@ -2,32 +2,40 @@ package com.ourbook.shop.dto.member;
 
 import lombok.*;
 
-@NoArgsConstructor
+@ToString
+
 @Getter
 public class NaverMember {
 
-    private String name;
+    private String buyerName;
 
-    private String email;
+    private String buyerEmail;
 
-    private Role role;
+    private Role buyerRole;
 
-    private String pwd;
+    private String buyerPwd;
 
-    private String id;
+    private String buyerId;
 
     @Builder
-    public NaverMember(String name, String id, String pwd, String email, Role role) {
-        this.name = name;
-        this.id = id;
-        this.pwd = pwd;
-        this.email = email;
-        this.role = role;
+    public NaverMember(String buyerName, String buyerId, String buyerPwd, String buyerEmail, Role buyerRole) {
+        this.buyerName = buyerName;
+        this.buyerId = buyerId;
+        this.buyerPwd = buyerPwd;
+        this.buyerEmail = buyerEmail;
+        this.buyerRole = buyerRole;
     }
 
+    public NaverMember(String buyerName, String buyerEmail, Role buyerRole, String buyerPwd, String buyerId) {
+        this.buyerName = buyerName;
+        this.buyerEmail = buyerEmail;
+        this.buyerRole = buyerRole;
+        this.buyerPwd = buyerPwd;
+        this.buyerId = buyerId;
+    }
 
     public String getRoleKey() {
-        return this.role.getKey();
+        return this.buyerRole.getKey();
     }
 
 }

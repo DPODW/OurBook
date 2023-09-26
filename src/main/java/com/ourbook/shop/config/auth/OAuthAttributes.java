@@ -46,11 +46,11 @@ public class OAuthAttributes {
 
     public NaverMember toSave() {
         return NaverMember.builder()
-                .name(name)
-                .id("NaverMember")
-                .pwd("NaverMember")
-                .email(email)
-                .role(Role.BUYER)
+                .buyerName(name)
+                .buyerId("NaverMember")
+                .buyerPwd("NaverMember")
+                .buyerEmail(email)
+                .buyerRole(Role.BUYER)
                 .build();
     }
 }

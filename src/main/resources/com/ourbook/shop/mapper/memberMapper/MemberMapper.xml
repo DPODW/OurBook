@@ -4,18 +4,18 @@
     <insert id="commonInsert">
         <choose>
             <when test="commonRole == 'BUYER'">
-                insert into buyer_tb(name,id,pwd,email,role)
+                insert into buyer_tb(BUYER_NAME,BUYER_ID,BUYER_PWD,BUYER_EMAIL,BUYER_ROLE)
                 values(#{commonName},#{commonId},#{commonPwd},#{commonEmail},#{commonRole});
             </when>
             <otherwise>
-                insert into seller_tb(name,id,pwd,email,role)
+                insert into seller_tb(SELLER_NAME,SELLER_ID,SELLER_PWD,SELLER_EMAIL,SELLER_ROLE)
                 values(#{commonName},#{commonId},#{commonPwd},#{commonEmail},#{commonRole});
             </otherwise>
         </choose>
     </insert>
     <insert id="naverInsert">
-        insert into buyer_tb(name,id,pwd,email,role)
-        values(#{name},#{id},#{pwd},#{email},#{role});
+        insert into buyer_tb(BUYER_NAME,BUYER_ID,BUYER_PWD,BUYER_EMAIL,BUYER_ROLE)
+        values(#{buyerName},#{buyerId},#{buyerPwd},#{buyerEmail},#{buyerRole});
     </insert>
 
 
@@ -24,13 +24,13 @@
         <choose>
             <when test="commonRole == 'BUYER'">
                 update buyer_tb
-                set name = #{commonName} , pwd = #{commonPwd} , email = #{commonEmail} , role = #{commonRole}
-                where id = #{commonId};
+                set BUYER_NAME = #{commonName} , BUYER_PWD = #{commonPwd} , BUYER_EMAIL = #{commonEmail} , BUYER_ROLE = #{commonRole}
+                where BUYER_ID = #{commonId};
             </when>
             <otherwise>
                 update seller_tb
-                set name = #{commonName} , pwd = #{commonPwd} , email = #{commonEmail} , role = #{commonRole}
-                where id = #{commonId};
+                set SELLER_NAME = #{commonName} , SELLER_PWD = #{commonPwd} , SELLER_EMAIL = #{commonEmail} , SELLER_ROLE = #{commonRole}
+                where SELLER_ID = #{commonId};
             </otherwise>
         </choose>
     </update>
@@ -41,14 +41,14 @@
     <delete id="commonDelete" parameterType="String">
         <choose>
             <when test="role == '[BUYER]'">
-                DELETE FROM buyer_tb WHERE id = #{deleteValue}
+                DELETE FROM buyer_tb WHERE BUYER_ID = #{deleteValue}
             </when>
             <otherwise>
-                DELETE FROM seller_tb WHERE id = #{deleteValue}
+                DELETE FROM seller_tb WHERE SELLER_ID = #{deleteValue}
             </otherwise>
         </choose>
     </delete>
     <delete id="naverDelete" parameterType="String">
-        DELETE FROM buyer_tb WHERE email = #{email}
+        DELETE FROM buyer_tb WHERE BUYER_EMAIL = #{email}
     </delete>
 </mapper>

@@ -35,23 +35,23 @@ public class ShopFormController {
 
 
     @GetMapping("/OurBook/book")
-    public String bookList(Model model){
+    public String bookListView(Model model){
         List<Book> allBook = findBookService.findAllBook();
         model.addAttribute("allBook",allBook);
-        return "ourBookShop/bookList";
+        return "books/bookList";
     }
 
 
     @GetMapping("/OurBook/book/info/{bookId}")
-    public String bookInfo(@PathVariable String bookId, Model model){
+    public String bookInfoView(@PathVariable String bookId, Model model){
         Book book = findBookService.findBook(bookId);
         model.addAttribute("bookInfo",book);
-        return "ourBookShop/bookInfo";
+        return "books/bookInfo";
     }
 
 
     @GetMapping("/OurBook/book/info/cart")
-    public String bookCart(HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail,Model model){
+    public String bookCartView(HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail,Model model){
         HttpSession session = request.getSession(false);
         if(session.getAttribute("NAVER")!=null){
             SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
@@ -61,11 +61,11 @@ public class ShopFormController {
             List<BookCartView> cartToCommonEmail = bookCartService.findCartToEmail(userDetail.getEmail());
             model.addAttribute("MyCartBooks",cartToCommonEmail);
         }
-            return "ourBookShop/bookCart";
+            return "books/bookCart";
     }
 
     @GetMapping("/OurBook/book/info/payment/{bookId}")
-    public String paymentInfo(@PathVariable("bookId")String bookId, @RequestParam("bookCount") BigDecimal bookCount, HttpServletRequest request,
+    public String paymentInfoView(@PathVariable("bookId")String bookId, @RequestParam("bookCount") BigDecimal bookCount, HttpServletRequest request,
                               @AuthenticationPrincipal CustomUserDetail userDetail, Model model){
         HttpSession session = request.getSession(false);
         if(session.getAttribute("NAVER")!=null){
@@ -78,7 +78,16 @@ public class ShopFormController {
             model.addAttribute("name",userDetail.getName());
             model.addAttribute("email",userDetail.getEmail());
         }
-        return "ourBookShop/paymentInfo";
+        return "payment/paymentInfo";
+    }
+
+    @RequestMapping("/OurBook/book/info/payment/result/{orderNumber}")
+    public String paymentSuccessView(@PathVariable String orderNumber, Model model){
+        PaymentInfo paymentInfo = findBookService.orderNumberToBook(orderNumber);
+        model.addAttribute("paymentInfo",paymentInfo);
+        BigDecimal paymentPrice = paymentInfo.getPaymentPrice().setScale(0);
+        model.addAttribute("paymentPrice",paymentPrice);
+        return "payment/paymentResult";
     }
 
     private void purchaseBookInfo(String bookId,BigDecimal bookCount, Model model) {

@@ -10,6 +10,7 @@ function handlePaymentSuccess(paymentInfo,imp_uid) {
         data: JSON.stringify(paymentInfoCheck),
         contentType: 'application/json',
         success: function (response) {
+            console.log("1");
             paymentInfoSave(paymentInfo,imp_uid);
         },
         error: function (error) {
@@ -25,6 +26,7 @@ function getAccessTokens(callback) {
         type: "GET",
         url: "/iamports/accessToken",
         success: function (accessToken) {
+            console.log("1");
             console.log("토큰 발급 성공")
             callback(accessToken);
         },
@@ -90,7 +92,7 @@ function paymentResult(paymentInfo,imp_uid,orderNumber){
         data: JSON.stringify(paymentInfo),
         contentType: 'application/json',
         success: function (response) {
-            // window.location.href = '/OurBook/book/info/payment/result/'+orderNumber;
+            window.location.href = this.url;
         },
         error: function (error) {
             paymentCancel(paymentInfo,imp_uid);
@@ -113,4 +115,23 @@ function randomOrderNumber() {
         randomOrderNumber += characters.charAt(randomIndex);
     }
     return randomOrderNumber;
+}
+
+
+/** 결제 완료 시간 생성 함수 **/
+function paymentSuccessTime(){
+    const currentDate = new Date();
+
+    // 날짜 및 시간 정보 얻기
+    const year = currentDate.getFullYear(); // 년도
+    const month = currentDate.getMonth() + 1; // 월 (0부터 시작하므로 1을 더함)
+    const day = currentDate.getDate(); // 일
+    const hours = currentDate.getHours(); // 시간
+    const minutes = currentDate.getMinutes(); // 분
+    const seconds = currentDate.getSeconds(); // 초
+
+    // 날짜와 시간을 YYYY-MM-DD HH:mm:ss 형식으로 포맷팅
+    const formattedDate = year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+
+    return formattedDate;
 }

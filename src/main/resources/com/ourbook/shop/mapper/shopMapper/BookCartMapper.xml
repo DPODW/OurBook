@@ -3,28 +3,28 @@
 <mapper namespace="com.ourbook.shop.mapper.shopMapper.BookCartMapper">
 
     <insert id="insertBookCart">
-        insert into book_cart(email,bookId,bookCount)
+        insert into book_cart(USER_EMAIL,BOOK_ID,USER_BOOK_COUNT)
         values(#{email},#{bookId},#{bookCount});
     </insert>
 
     <update id="updateBookCount">
         update book_cart
-        set bookCount = #{bookCount}
-        where bookId = #{bookId} AND email = #{email}
+        set USER_BOOK_COUNT = #{bookCount}
+        where BOOK_ID = #{bookId} AND USER_EMAIL = #{email}
     </update>
 
     <delete id="deleteBookCart" parameterType="String">
         delete from book_cart
-        where bookId = #{bookId} AND email = #{email}
+        where BOOK_ID = #{bookId} AND USER_EMAIL = #{email}
     </delete>
 
     <select id="findBookCart" resultType="com.ourbook.shop.dto.book.BookCartSave">
-        select * from book_cart where bookId= #{bookId} AND email = #{email};
+        select * from book_cart where BOOK_ID= #{bookId} AND USER_EMAIL = #{email};
     </select >
 
 
     <select id="findCartToEmail" resultType="map">
-        select bookId , bookCount from book_cart where email= #{email};
+        select BOOK_ID , USER_BOOK_COUNT from book_cart where USER_EMAIL= #{email};
     </select>
 
 </mapper>

@@ -3,26 +3,26 @@
 <mapper namespace="com.ourbook.shop.mapper.memberMapper.FindInfoMapper">
 
     <select id="searchMember" resultType="com.ourbook.shop.dto.member.CommonMember">
-        select * from seller_tb where id= #{id}
-                                UNION
-                                select * from buyer_tb where id= #{id};
+        select * from seller_tb where SELLER_ID= #{id}
+        UNION
+        select * from buyer_tb where BUYER_ID= #{id};
     </select >
 
     <select id="searchId">
-        select id from seller_tb where id= #{id}
+        select SELLER_ID from seller_tb where SELLER_ID= #{id}
                                  UNION
-                                 select id from buyer_tb where id= #{id};
+                                 select BUYER_ID from buyer_tb where BUYER_ID= #{id};
     </select >
 
     <select id="searchEmail">
-        select email from seller_tb where email= #{email}
+        select SELLER_EMAIL from seller_tb where SELLER_EMAIL= #{email}
                                     UNION
-                                    select email from buyer_tb where email= #{email}
+                                    select BUYER_EMAIL from buyer_tb where BUYER_EMAIL= #{email}
     </select >
 
     <select id="searchMemberToEmail" resultType="com.ourbook.shop.dto.member.NaverMember">
-        select * from buyer_tb where email= #{email};
-    </select >
+        select * from buyer_tb where BUYER_EMAIL= #{email};
+    </select>
     <!-- OAuth2 로그인 전용 쿼리 (resultType 참고)
     OAuth2 로그인은 무조건 구매자 권한이기 때문에 판매자 테이블 검색 불 필요-->
 

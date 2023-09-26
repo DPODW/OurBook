@@ -41,12 +41,12 @@ public class MemberFormController {
     }
 
     @GetMapping("/OurBook/myInfo")
-    public String memberPage(){
+    public String memberPageView(){
         return "member/MyPage";
     }
 
     @GetMapping("/OurBook/joinInfo")
-    public String memberInfo(Model model,@AuthenticationPrincipal CustomUserDetail userDetail,
+    public String memberInfoView(Model model,@AuthenticationPrincipal CustomUserDetail userDetail,
                              @AuthenticationPrincipal DefaultOAuth2User defaultOAuth2User,HttpServletRequest request){
         HttpSession session = request.getSession(false);
        if(session.getAttribute("NAVER")!=null){
@@ -60,7 +60,7 @@ public class MemberFormController {
 
 
     @GetMapping("/OurBook/myInfo/Member")
-    public String memberUpdate(Model model,@AuthenticationPrincipal CustomUserDetail userDetail,CommonMember commonMember){
+    public String memberUpdateView(Model model,@AuthenticationPrincipal CustomUserDetail userDetail,CommonMember commonMember){
         viewModelHelper.editMemberInfo(userDetail,commonMember);
         viewModelHelper.translateRole(model,userDetail);
         model.addAttribute("commonMember",commonMember);

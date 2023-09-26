@@ -17,7 +17,7 @@ public interface FindInfoMapper {
 
     String searchEmail(String email);
 
-    NaverMember searchMemberToEmail (String email);
+    NaverMember searchMemberToEmail (String buyerEmail);
 
 
 

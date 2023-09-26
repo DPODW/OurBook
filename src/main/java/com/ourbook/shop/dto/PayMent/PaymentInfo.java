@@ -10,10 +10,8 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class PaymentInfo {
-
     String orderNumber;
 
-    String imp_uid;
 
     String bookName;
 
@@ -33,7 +31,12 @@ public class PaymentInfo {
 
     String receiverPhoneNumber;
 
-    public PaymentInfo(String orderNumber, String bookName, String bookId, int paymentBookCount, BigDecimal paymentPrice, String buyerEmail, String buyerName, String receiverName, String receiverAddress, String receiverPhoneNumber) {
+    String imp_uid;
+    String paymentTime;
+
+
+    public PaymentInfo(String orderNumber, String bookName, String bookId, int paymentBookCount, BigDecimal paymentPrice, String buyerEmail,
+                       String buyerName, String receiverName, String receiverAddress, String receiverPhoneNumber, String imp_uid, String paymentTime) {
         this.orderNumber = orderNumber;
         this.bookName = bookName;
         this.bookId = bookId;
@@ -44,7 +47,8 @@ public class PaymentInfo {
         this.receiverName = receiverName;
         this.receiverAddress = receiverAddress;
         this.receiverPhoneNumber = receiverPhoneNumber;
+        this.imp_uid = imp_uid;
+        this.paymentTime = paymentTime;
     }
-
 
 }

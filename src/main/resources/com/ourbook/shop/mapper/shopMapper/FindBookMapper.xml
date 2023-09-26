@@ -3,7 +3,7 @@
 <mapper namespace="com.ourbook.shop.mapper.shopMapper.FindBookMapper">
 
     <select id="findBook" resultType="com.ourbook.shop.dto.book.Book">
-        SELECT * FROM book_info WHERE bookId = #{bookId};
+        SELECT * FROM book_info WHERE BOOK_ID = #{bookId};
     </select >
 
     <select id="findAllBook" resultType="com.ourbook.shop.dto.book.Book">
