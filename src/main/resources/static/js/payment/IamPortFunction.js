@@ -26,7 +26,6 @@ function getAccessTokens(callback) {
         type: "GET",
         url: "/iamports/accessToken",
         success: function (accessToken) {
-            console.log("1");
             console.log("토큰 발급 성공")
             callback(accessToken);
         },
@@ -96,8 +95,6 @@ function paymentResult(paymentInfo,imp_uid,orderNumber){
         },
         error: function (error) {
             paymentCancel(paymentInfo,imp_uid);
-            console.log('실패4 부분'+orderNumber);
-            console.log('실패4 부분1'+paymentInfo.orderNumber);
             alert("결제 실패. 관리자에게 문의하세요(4)");
         }
     });
@@ -135,3 +132,4 @@ function paymentSuccessTime(){
 
     return formattedDate;
 }
+

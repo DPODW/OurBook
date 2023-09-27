@@ -3,8 +3,10 @@ package com.ourbook.shop.dto.PayMent;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.context.annotation.Bean;
 
 import java.math.BigDecimal;
+
 
 @ToString
 @Getter

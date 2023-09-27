@@ -17,6 +17,7 @@ bin/
 !**/src/test/**/bin/
 
 PaymentController.java
+TossPaymentServiceImpl.java
 
 ### IntelliJ IDEA ###
 application.properties
