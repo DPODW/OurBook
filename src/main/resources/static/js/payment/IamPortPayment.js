@@ -56,14 +56,6 @@ function requestPayKGincis() {
             orderNumber : 'o' + new Date().getTime() + randomOrderNumber(),
             paymentTime : paymentSuccessTime()
         }
-        tossPayments.requestPayment('카드', {
-            amount: paymentInfo.paymentPrice,
-            orderId: paymentInfo.orderNumber,
-            orderName:paymentInfo.bookName,
-            customerName: 'ourBook(아워북)',
-            successUrl: 'http://localhost:8080/TossPay/validate',
-            failUrl: 'http://localhost:8080/OurBook/1',
-        });
         $.ajax({
             type: 'POST',
             url: '/TossPay/payment/1',
@@ -75,5 +67,13 @@ function requestPayKGincis() {
             error: function (error) {
                 console.error('Ajax request failed:', error);
             }
+        });
+        tossPayments.requestPayment('카드', {
+            amount: paymentInfo.paymentPrice,
+            orderId: paymentInfo.orderNumber,
+            orderName:paymentInfo.bookName,
+            customerName: 'ourBook(아워북)',
+            successUrl: 'http://localhost:8080/TossPay/validate',
+            failUrl: 'http://localhost:8080/OurBook/1'
         });
     }
