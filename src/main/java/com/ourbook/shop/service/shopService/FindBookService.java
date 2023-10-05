@@ -1,6 +1,6 @@
 package com.ourbook.shop.service.shopService;
 
-import com.ourbook.shop.dto.PayMent.PaymentInfo;
+import com.ourbook.shop.dto.payment.PaymentInfo;
 import com.ourbook.shop.dto.book.Book;
 import org.springframework.stereotype.Service;
 

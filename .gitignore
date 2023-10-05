@@ -16,7 +16,7 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 
-PaymentController.java
+KGPaymentController.java
 TossPaymentServiceImpl.java
 
 ### IntelliJ IDEA ###

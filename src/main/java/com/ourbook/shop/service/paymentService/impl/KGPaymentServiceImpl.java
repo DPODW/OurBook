@@ -1,14 +1,11 @@
 package com.ourbook.shop.service.paymentService.impl;
 
-import com.google.gson.JsonObject;
 import com.ourbook.shop.config.exception.PaymentFailException;
-import com.ourbook.shop.dto.PayMent.PaymentCancel;
-import com.ourbook.shop.dto.PayMent.PaymentInfo;
+import com.ourbook.shop.dto.payment.KGPaymentCancel;
+import com.ourbook.shop.dto.payment.PaymentInfo;
 import com.ourbook.shop.mapper.paymentMapper.PaymentMapper;
-import com.ourbook.shop.mapper.shopMapper.FindBookMapper;
-import com.ourbook.shop.service.paymentService.PaymentService;
+import com.ourbook.shop.service.paymentService.KGPaymentService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -18,13 +15,13 @@ import java.util.Map;
 
 @Slf4j
 @Service
-public class PaymentServiceImpl implements PaymentService {
+public class KGPaymentServiceImpl implements KGPaymentService {
 
     private final PaymentMapper paymentMapper;
 
 
 
-    public PaymentServiceImpl(PaymentMapper paymentMapper) {
+    public KGPaymentServiceImpl(PaymentMapper paymentMapper) {
         this.paymentMapper = paymentMapper;
     }
 
@@ -33,7 +30,7 @@ public class PaymentServiceImpl implements PaymentService {
        try {
            paymentMapper.paymentInfoSave(paymentInfo);
        }catch (Exception ex){
-           throw new PaymentFailException();
+           throw new PaymentFailException("KG 이니시스 결제 정보 저장 실패",ex);
        }
     }
 
@@ -41,7 +38,7 @@ public class PaymentServiceImpl implements PaymentService {
     public void paymentValidate(String orderNumber) {
         PaymentInfo paymentHistory = paymentMapper.findOrderNumber(orderNumber);
         if(paymentHistory != null){
-            throw new PaymentFailException();
+            throw new PaymentFailException("중복된 주문 번호가 존재합니다.");
         }else{
             log.info("결제 검증 완료");
         }
@@ -65,17 +62,17 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public void paymentCancel(PaymentCancel paymentCancel){
+    public void paymentCancel(KGPaymentCancel KGPaymentCancel){
         String apiUrl = "https://api.iamport.kr/payments/cancel";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("Accept", "application/json");
-        headers.set("Authorization", paymentCancel.getAccessToken());
+        headers.set("Authorization", KGPaymentCancel.getAccessToken());
 
 
-        String requestBody = "{\"reason\":\"" + paymentCancel.getReason() + "\",\"imp_uid\":\"" + paymentCancel.getImp_uid() +
-                "\",\"amount\":" + paymentCancel.getPaymentPrice() + ",\"checksum\":" + paymentCancel.getPaymentPrice() + "}";
+        String requestBody = "{\"reason\":\"" + KGPaymentCancel.getReason() + "\",\"imp_uid\":\"" + KGPaymentCancel.getImp_uid() +
+                "\",\"amount\":" + KGPaymentCancel.getPaymentPrice() + ",\"checksum\":" + KGPaymentCancel.getPaymentPrice() + "}";
 
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);

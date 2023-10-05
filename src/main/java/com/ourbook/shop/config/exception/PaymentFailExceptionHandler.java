@@ -7,12 +7,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @Slf4j
-@ControllerAdvice("com/ourbook/shop/controller/shopController")
+@ControllerAdvice
 public class PaymentFailExceptionHandler {
 
     @ExceptionHandler(PaymentFailException.class)
     public ResponseEntity<String> handlePaymentFailException(PaymentFailException ex) {
-        log.info("sd");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("결제 실패");
     }
 }

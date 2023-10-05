@@ -1,9 +1,8 @@
-package com.ourbook.shop.dto.PayMent;
+package com.ourbook.shop.dto.payment;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.context.annotation.Bean;
 
 import java.math.BigDecimal;
 
@@ -33,12 +32,12 @@ public class PaymentInfo {
 
     String receiverPhoneNumber;
 
-    String imp_uid;
+    String paymentNumber;
     String paymentTime;
 
 
     public PaymentInfo(String orderNumber, String bookName, String bookId, int paymentBookCount, BigDecimal paymentPrice, String buyerEmail,
-                       String buyerName, String receiverName, String receiverAddress, String receiverPhoneNumber, String imp_uid, String paymentTime) {
+                       String buyerName, String receiverName, String receiverAddress, String receiverPhoneNumber, String paymentNumber, String paymentTime) {
         this.orderNumber = orderNumber;
         this.bookName = bookName;
         this.bookId = bookId;
@@ -49,7 +48,7 @@ public class PaymentInfo {
         this.receiverName = receiverName;
         this.receiverAddress = receiverAddress;
         this.receiverPhoneNumber = receiverPhoneNumber;
-        this.imp_uid = imp_uid;
+        this.paymentNumber = paymentNumber;
         this.paymentTime = paymentTime;
     }
 

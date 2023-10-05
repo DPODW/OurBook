@@ -1,6 +1,6 @@
 package com.ourbook.shop.mapper.paymentMapper;
 
-import com.ourbook.shop.dto.PayMent.PaymentInfo;
+import com.ourbook.shop.dto.payment.PaymentInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

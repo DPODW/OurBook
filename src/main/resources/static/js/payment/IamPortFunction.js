@@ -10,7 +10,6 @@ function handlePaymentSuccess(paymentInfo,imp_uid) {
         data: JSON.stringify(paymentInfoCheck),
         contentType: 'application/json',
         success: function (response) {
-            console.log("1");
             paymentInfoSave(paymentInfo,imp_uid);
         },
         error: function (error) {
@@ -26,7 +25,6 @@ function getAccessTokens(callback) {
         type: "GET",
         url: "/iamports/accessToken",
         success: function (accessToken) {
-            console.log("토큰 발급 성공")
             callback(accessToken);
         },
         error: function (error) {
@@ -51,10 +49,9 @@ function paymentCancel(paymentInfo,imp_uid) {
             data: JSON.stringify(cancelData),
             contentType: 'application/json',
             success: function (res) {
-                console.log("결제 취소 완료");
             },
             error: function (res) {
-                console.log("결제 취소 실패");
+                alert("결제 취소 실패. 관리자에게 문의하세요(5)");
             }
         });
     });
@@ -64,15 +61,13 @@ function paymentCancel(paymentInfo,imp_uid) {
 
 /** 결제 정보 DB 저장 함수 **/
 function paymentInfoSave(paymentInfo,imp_uid){
-    paymentInfo.imp_uid = imp_uid;
+    paymentInfo.paymentNumber = imp_uid;
     $.ajax({
         type: 'POST',
         url: '/OurBook/payment/1',
         data: JSON.stringify(paymentInfo),
         contentType: 'application/json',
         success: function (response) {
-            console.log("결제 정보 저장 완료");
-            console.log('주문번호' + paymentInfo.orderNumber);
             const orderNumber = paymentInfo.orderNumber;
             paymentResult(paymentInfo,imp_uid,orderNumber);
         },
