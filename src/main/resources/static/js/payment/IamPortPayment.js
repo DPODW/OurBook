@@ -33,7 +33,7 @@ function requestPayKGincis() {
             url: '/verifyIamport/' + imp_uid
         }).done(function (data) {
             if (rsp.paid_amount == data.response.amount) {
-                handlePaymentSuccess(paymentInfo,imp_uid);
+                paymentInfoSave(paymentInfo,imp_uid);
             }
         });
     });

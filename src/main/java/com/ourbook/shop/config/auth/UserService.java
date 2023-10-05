@@ -54,11 +54,8 @@ public class UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2U
     /** TODO: 동일한 이메일이면 다른 정보가 있을시 해당 정보를 업데이트 하는 방식으로 구현해도 좋다. **/
     private NaverMember saveOrFind(OAuthAttributes attributes) {
         NaverMember naverMember;
-        log.info("{}",findInfoMapper.searchMemberToEmail(attributes.getEmail()));
-        log.info("{}",attributes.getEmail());
         if (findInfoMapper.searchMemberToEmail(attributes.getEmail()) == null) {
             naverMember = attributes.toSave();
-            log.info("{}",naverMember);
             memberMapper.naverInsert(naverMember);
 
         }else{

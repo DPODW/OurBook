@@ -6,7 +6,4 @@ public class PaymentFailException extends RuntimeException{
         super(message);
     }
 
-    public PaymentFailException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }

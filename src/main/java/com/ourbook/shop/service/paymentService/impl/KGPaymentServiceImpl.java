@@ -6,6 +6,7 @@ import com.ourbook.shop.dto.payment.PaymentInfo;
 import com.ourbook.shop.mapper.paymentMapper.PaymentMapper;
 import com.ourbook.shop.service.paymentService.KGPaymentService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -21,26 +22,33 @@ public class KGPaymentServiceImpl implements KGPaymentService {
 
 
 
+
+
     public KGPaymentServiceImpl(PaymentMapper paymentMapper) {
         this.paymentMapper = paymentMapper;
     }
 
     @Override
-    public void paymentInfoSave(PaymentInfo paymentInfo) {
+    public PaymentInfo paymentInfoSave(PaymentInfo paymentInfo,String imp_key,String imp_secret) {
        try {
+           orderNumberValidate(paymentInfo.getOrderNumber());
            paymentMapper.paymentInfoSave(paymentInfo);
        }catch (Exception ex){
-           throw new PaymentFailException("KG 이니시스 결제 정보 저장 실패",ex);
+           String accessToken = getIamportAccessToken(imp_key, imp_secret);
+           int paymentPrice = paymentInfo.getPaymentPrice().intValue();
+           KGPaymentCancel kgPaymentCancel = new KGPaymentCancel(accessToken,paymentInfo.getPaymentNumber(),"결제 오류 취소",paymentPrice);
+           paymentCancel(kgPaymentCancel);
+           throw new PaymentFailException("KG 이니시스 결제 정보 저장 실패");
        }
+       return paymentInfo;
     }
 
+
     @Override
-    public void paymentValidate(String orderNumber) {
+    public void orderNumberValidate(String orderNumber) {
         PaymentInfo paymentHistory = paymentMapper.findOrderNumber(orderNumber);
         if(paymentHistory != null){
-            throw new PaymentFailException("중복된 주문 번호가 존재합니다.");
-        }else{
-            log.info("결제 검증 완료");
+            throw new DuplicateKeyException("중복된 주문 번호가 존재합니다.");
         }
     }
 
@@ -62,7 +70,7 @@ public class KGPaymentServiceImpl implements KGPaymentService {
     }
 
     @Override
-    public void paymentCancel(KGPaymentCancel KGPaymentCancel){
+    public ResponseEntity<String> paymentCancel(KGPaymentCancel KGPaymentCancel){
         String apiUrl = "https://api.iamport.kr/payments/cancel";
 
         HttpHeaders headers = new HttpHeaders();
@@ -76,7 +84,9 @@ public class KGPaymentServiceImpl implements KGPaymentService {
 
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
-        restTemplate.exchange(apiUrl, HttpMethod.POST, requestEntity, String.class);
+        ResponseEntity<String> exchange = restTemplate.exchange(apiUrl, HttpMethod.POST, requestEntity, String.class);
+        log.info("{}",exchange);
+        return exchange;
     }
 
 }

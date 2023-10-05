@@ -2,15 +2,16 @@ package com.ourbook.shop.service.paymentService;
 
 import com.ourbook.shop.dto.payment.KGPaymentCancel;
 import com.ourbook.shop.dto.payment.PaymentInfo;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface KGPaymentService {
-    void paymentInfoSave(PaymentInfo paymentInfo);
+    PaymentInfo paymentInfoSave(PaymentInfo paymentInfo, String imp_key, String imp_secret);
 
-    void paymentValidate(String orderNumber);
+    void orderNumberValidate(String orderNumber);
 
-    void paymentCancel(KGPaymentCancel KGPaymentCancel);
+    ResponseEntity<String> paymentCancel(KGPaymentCancel KGPaymentCancel);
 
     String getIamportAccessToken(String imp_key,String imp_secret);
 

@@ -1,5 +1,6 @@
 package com.ourbook.shop.controller.memberController;
 
+import com.ourbook.shop.config.exception.PaymentFailException;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.member.CommonMember;
 import jakarta.servlet.http.HttpServletRequest;
@@ -49,10 +50,10 @@ public class MemberFormController {
     public String memberInfoView(Model model,@AuthenticationPrincipal CustomUserDetail userDetail,
                              @AuthenticationPrincipal DefaultOAuth2User defaultOAuth2User,HttpServletRequest request){
         HttpSession session = request.getSession(false);
+
        if(session.getAttribute("NAVER")!=null){
            viewModelHelper.naverMemberInfo(model,defaultOAuth2User);
        }else {
-
            viewModelHelper.commonMemberInfo(model,userDetail);
        }
         return "member/JoinInfo";

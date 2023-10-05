@@ -29,12 +29,13 @@ public class TossPaymentController {
         HttpSession session = request.getSession(false);
         if(session.getAttribute("TossPaymentInfo")==null){
             throw new PaymentFailException("토스페이먼츠 결제 내역을 저장하는 세션이 존재하지 않음");
-        }else
+        }else{
             tossPaymentService.TossPaymentValidate(orderId, paymentKey, amount);
             PaymentInfo TossPaymentInfo = (PaymentInfo) session.getAttribute("TossPaymentInfo");
             tossPaymentService.TossPaymentInfoSave(TossPaymentInfo,paymentKey);
             session.removeAttribute("TossPaymentInfo");
             return "redirect:/OurBook/book/info/payment/result/"+orderId;
+        }
     }
 
 
