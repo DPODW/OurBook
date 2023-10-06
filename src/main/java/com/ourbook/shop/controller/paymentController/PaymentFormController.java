@@ -47,7 +47,7 @@ public class PaymentFormController {
     }
 
 
-    @RequestMapping("/OurBook/book/info/payment/result/{orderNumber}")
+    @GetMapping("/OurBook/book/info/payment/result/{orderNumber}")
     public String paymentSuccessView(@PathVariable String orderNumber, Model model){
         PaymentInfo paymentInfo = findBookService.orderNumberToBook(orderNumber);
         model.addAttribute("paymentInfo",paymentInfo);

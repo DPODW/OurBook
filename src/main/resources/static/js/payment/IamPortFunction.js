@@ -1,13 +1,16 @@
 /** 결제 정보 DB 저장 함수 **/
 function paymentInfoSave(paymentInfo,imp_uid){
+    var KGorderNumber;
     paymentInfo.paymentNumber = imp_uid;
     $.ajax({
         type: 'POST',
         url: '/OurBook/payment/1',
         data: JSON.stringify(paymentInfo),
         contentType: 'application/json',
+        async: false,
         success: function (response) {
-            window.location.href = "/OurBook/book/info/payment/result/"+paymentInfo.orderNumber
+            KGorderNumber = response;
+            window.location.href = "/OurBook/book/info/payment/result/"+KGorderNumber
         },
         error: function (error) {
             window.location.href = "/OurBook/book/info/payment/fail"

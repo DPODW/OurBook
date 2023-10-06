@@ -1,6 +1,6 @@
 package com.ourbook.shop.service.paymentService.impl;
 
-import com.ourbook.shop.config.exception.PaymentFailException;
+import com.ourbook.shop.config.exception.AjaxResponseException;
 import com.ourbook.shop.dto.payment.KGPaymentCancel;
 import com.ourbook.shop.dto.payment.PaymentInfo;
 import com.ourbook.shop.mapper.paymentMapper.PaymentMapper;
@@ -30,16 +30,17 @@ public class KGPaymentServiceImpl implements KGPaymentService {
        try {
            orderNumberValidate(paymentInfo.getOrderNumber());
            log.info("{}",paymentInfo);
-           paymentInfo.setReceiverPhoneNumber("41244");
            paymentMapper.paymentInfoSave(paymentInfo);
+           return paymentInfo;
        }catch (Exception ex){
            String accessToken = getIamportAccessToken(imp_key, imp_secret);
            int paymentPrice = paymentInfo.getPaymentPrice().intValue();
            KGPaymentCancel kgPaymentCancel = new KGPaymentCancel(accessToken,paymentInfo.getPaymentNumber(),"결제 오류 취소",paymentPrice);
            paymentCancel(kgPaymentCancel);
            log.error("결제 내역 저장 실패. 결제 금액은 즉시 환불 됩니다. 예외 발생 위치=> {}",ex.getStackTrace()[0]);
+           throw new AjaxResponseException("결제 실패");
        }
-       return paymentInfo;
+
     }
 
 
