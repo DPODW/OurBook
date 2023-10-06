@@ -21,9 +21,6 @@ public class KGPaymentServiceImpl implements KGPaymentService {
     private final PaymentMapper paymentMapper;
 
 
-
-
-
     public KGPaymentServiceImpl(PaymentMapper paymentMapper) {
         this.paymentMapper = paymentMapper;
     }
@@ -32,13 +29,15 @@ public class KGPaymentServiceImpl implements KGPaymentService {
     public PaymentInfo paymentInfoSave(PaymentInfo paymentInfo,String imp_key,String imp_secret) {
        try {
            orderNumberValidate(paymentInfo.getOrderNumber());
+           log.info("{}",paymentInfo);
+           paymentInfo.setReceiverPhoneNumber("41244");
            paymentMapper.paymentInfoSave(paymentInfo);
        }catch (Exception ex){
            String accessToken = getIamportAccessToken(imp_key, imp_secret);
            int paymentPrice = paymentInfo.getPaymentPrice().intValue();
            KGPaymentCancel kgPaymentCancel = new KGPaymentCancel(accessToken,paymentInfo.getPaymentNumber(),"결제 오류 취소",paymentPrice);
            paymentCancel(kgPaymentCancel);
-           throw new PaymentFailException("KG 이니시스 결제 정보 저장 실패");
+           log.error("결제 내역 저장 실패. 결제 금액은 즉시 환불 됩니다. 예외 발생 위치=> {}",ex.getStackTrace()[0]);
        }
        return paymentInfo;
     }
@@ -48,7 +47,8 @@ public class KGPaymentServiceImpl implements KGPaymentService {
     public void orderNumberValidate(String orderNumber) {
         PaymentInfo paymentHistory = paymentMapper.findOrderNumber(orderNumber);
         if(paymentHistory != null){
-            throw new DuplicateKeyException("중복된 주문 번호가 존재합니다.");
+            log.error("중복된 주문 번호가 존재합니다. [KGPaymentServiceImpl]");
+            throw new DuplicateKeyException("중복된 주문 번호.");
         }
     }
 
@@ -65,7 +65,6 @@ public class KGPaymentServiceImpl implements KGPaymentService {
         LinkedHashMap responseBody = (LinkedHashMap) responseData.getBody();
         LinkedHashMap responseBodyProps = (LinkedHashMap) responseBody.get("response");
         String accessToken = (String) responseBodyProps.get("access_token");
-        log.info("아임포트 토큰 : {}",accessToken);
         return accessToken;
     }
 
@@ -85,7 +84,6 @@ public class KGPaymentServiceImpl implements KGPaymentService {
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
         ResponseEntity<String> exchange = restTemplate.exchange(apiUrl, HttpMethod.POST, requestEntity, String.class);
-        log.info("{}",exchange);
         return exchange;
     }
 

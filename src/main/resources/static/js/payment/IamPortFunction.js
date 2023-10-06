@@ -10,7 +10,7 @@ function paymentInfoSave(paymentInfo,imp_uid){
             window.location.href = "/OurBook/book/info/payment/result/"+paymentInfo.orderNumber
         },
         error: function (error) {
-            window.location.href = "/OurBook/1"
+            window.location.href = "/OurBook/book/info/payment/fail"
         }
     });
 }

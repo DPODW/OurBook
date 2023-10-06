@@ -74,6 +74,6 @@ function requestPayKGincis() {
             orderName:paymentInfo.bookName,
             customerName: 'ourBook(아워북)',
             successUrl: 'http://localhost:8080/TossPay/validate',
-            failUrl: 'http://localhost:8080/OurBook/1'
+            failUrl: 'http://localhost:8080/OurBook/book/info/payment/fail'
         });
     }

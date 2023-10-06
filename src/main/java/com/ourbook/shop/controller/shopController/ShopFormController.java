@@ -64,38 +64,5 @@ public class ShopFormController {
             return "books/bookCart";
     }
 
-    @GetMapping("/OurBook/book/info/payment/{bookId}")
-    public String paymentInfoView(@PathVariable("bookId")String bookId, @RequestParam("bookCount") BigDecimal bookCount, HttpServletRequest request,
-                              @AuthenticationPrincipal CustomUserDetail userDetail, Model model){
-        HttpSession session = request.getSession(false);
-        if(session.getAttribute("NAVER")!=null){
-            SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-            purchaseBookInfo(bookId,bookCount,model);
-            model.addAttribute("name",naverMember.getName());
-            model.addAttribute("email",naverMember.getEmail());
-        }else{
-            purchaseBookInfo(bookId, bookCount,model);
-            model.addAttribute("name",userDetail.getName());
-            model.addAttribute("email",userDetail.getEmail());
-        }
-        return "payment/paymentInfo";
-    }
-
-    @RequestMapping("/OurBook/book/info/payment/result/{orderNumber}")
-    public String paymentSuccessView(@PathVariable String orderNumber, Model model){
-        PaymentInfo paymentInfo = findBookService.orderNumberToBook(orderNumber);
-        model.addAttribute("paymentInfo",paymentInfo);
-        BigDecimal paymentPrice = paymentInfo.getPaymentPrice().setScale(0);
-        model.addAttribute("paymentPrice",paymentPrice);
-        return "payment/paymentResult";
-    }
-
-    private void purchaseBookInfo(String bookId,BigDecimal bookCount, Model model) {
-        Book book = findBookService.findBook(bookId);
-        model.addAttribute("paymentInfo",book);
-        model.addAttribute("bookCount",bookCount);
-
-    }
-
 
 }

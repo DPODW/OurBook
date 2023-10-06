@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.HttpSessionRequiredException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,7 +29,8 @@ public class TossPaymentController {
     public String TossPaymentValidate(@RequestParam String orderId, @RequestParam String paymentKey, @RequestParam String amount, HttpServletRequest request){
         HttpSession session = request.getSession(false);
         if(session.getAttribute("TossPaymentInfo")==null){
-            throw new PaymentFailException("토스페이먼츠 결제 내역을 저장하는 세션이 존재하지 않음");
+            log.error("토스페이 결제 정보 저장 세션이 생성되지 않았습니다.");
+            return "redirect:/OurBook/book/info/payment/fail";
         }else{
             tossPaymentService.TossPaymentValidate(orderId, paymentKey, amount);
             PaymentInfo TossPaymentInfo = (PaymentInfo) session.getAttribute("TossPaymentInfo");

@@ -11,9 +11,6 @@ public class PaymentFailExceptionHandler {
 
     @ExceptionHandler(PaymentFailException.class)
     public ModelAndView handlePaymentFailException(PaymentFailException ex) {
-       log.info("{}",ex.getStackTrace());
-       ModelAndView mav = new ModelAndView();
-       mav.setViewName("TEST9");
-       return mav;
+       return new ModelAndView("redirect:/OurBook/book/info/payment/fail");
     }
 }
