@@ -15,7 +15,6 @@ public class AjaxResponseExceptionHandler {
     @ExceptionHandler(AjaxResponseException.class)
     @ResponseBody
     public ResponseEntity<String> handleException(Exception ex) {
-
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("error");
     }
 }

@@ -6,6 +6,7 @@ import com.ourbook.shop.service.paymentService.TossPaymentService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.HttpSessionRequiredException;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,18 +35,18 @@ public class TossPaymentController {
         }else{
             tossPaymentService.TossPaymentValidate(orderId, paymentKey, amount);
             PaymentInfo TossPaymentInfo = (PaymentInfo) session.getAttribute("TossPaymentInfo");
-            tossPaymentService.TossPaymentInfoSave(TossPaymentInfo,paymentKey);
+            PaymentInfo TossResultPaymentInfo = tossPaymentService.TossPaymentInfoSave(TossPaymentInfo, paymentKey);
             session.removeAttribute("TossPaymentInfo");
-            return "redirect:/OurBook/book/info/payment/result/"+orderId;
+            return "redirect:/OurBook/book/info/payment/result/"+TossResultPaymentInfo.getOrderNumber();
         }
     }
 
 
     @PostMapping("/TossPay/payment/1")
-    public String TossPaymentInfo(@RequestBody PaymentInfo paymentInfo, HttpServletRequest request){
+    public ResponseEntity<Void> TossPaymentInfo(@RequestBody PaymentInfo paymentInfo, HttpServletRequest request){
         HttpSession TossPaymentInfo = request.getSession();
         TossPaymentInfo.setAttribute("TossPaymentInfo",paymentInfo);
-        return "main/Main";
+        return ResponseEntity.ok().build();
     }
 
 }
