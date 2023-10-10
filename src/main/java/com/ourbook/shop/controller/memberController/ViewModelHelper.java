@@ -1,5 +1,6 @@
 package com.ourbook.shop.controller.memberController;
 
+import com.ourbook.shop.config.auth.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.member.CommonMember;
 import com.ourbook.shop.dto.member.Role;
@@ -26,9 +27,9 @@ public class ViewModelHelper {
     }
 
 
-    protected void naverMemberInfo(Model model, DefaultOAuth2User defaultOAuth2User) {
-        model.addAttribute("naverName",defaultOAuth2User.getAttributes().get("name"));
-        model.addAttribute("naverEmail",defaultOAuth2User.getAttributes().get("email"));
+    protected void naverMemberInfo(Model model, SessionUser naverMember) {
+        model.addAttribute("naverName",naverMember.getName());
+        model.addAttribute("naverEmail",naverMember.getEmail());
         model.addAttribute("naverRole",Role.BUYER.getValue());
         /** 네이버(OAuth2) 회원은 권한 "구매자" 고정 임 **/
     }

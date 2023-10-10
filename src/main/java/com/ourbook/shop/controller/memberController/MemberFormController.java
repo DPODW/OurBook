@@ -1,8 +1,10 @@
 package com.ourbook.shop.controller.memberController;
 
+import com.ourbook.shop.config.auth.SessionUser;
 import com.ourbook.shop.config.exception.PaymentFailException;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.member.CommonMember;
+import com.ourbook.shop.dto.member.NaverMember;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +27,18 @@ public class MemberFormController {
     }
 
     @GetMapping("/OurBook")
-    public String mainPage(){
+    public String mainPage(Model model,@AuthenticationPrincipal CustomUserDetail userDetail, HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        if(session!=null && session.getAttribute("NAVER")!=null){
+            SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
+            model.addAttribute("naverMemberName",naverMember.getName());
+            model.addAttribute("naverMemberEmail",naverMember.getEmail());
+        }else if (userDetail != null){
+            model.addAttribute("commonName",userDetail.getName());
+            model.addAttribute("commonEmail",userDetail.getEmail());
+        }else {
+            return "main/Main";
+        }
         return "main/Main";
     }
 
@@ -47,12 +60,11 @@ public class MemberFormController {
     }
 
     @GetMapping("/OurBook/joinInfo")
-    public String memberInfoView(Model model,@AuthenticationPrincipal CustomUserDetail userDetail,
-                             @AuthenticationPrincipal DefaultOAuth2User defaultOAuth2User,HttpServletRequest request){
+    public String memberInfoView(Model model,@AuthenticationPrincipal CustomUserDetail userDetail, HttpServletRequest request){
         HttpSession session = request.getSession(false);
-
-       if(session.getAttribute("NAVER")!=null){
-           viewModelHelper.naverMemberInfo(model,defaultOAuth2User);
+       if(session!=null && session.getAttribute("NAVER")!=null){
+           SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
+           viewModelHelper.naverMemberInfo(model,naverMember);
        }else {
            viewModelHelper.commonMemberInfo(model,userDetail);
        }

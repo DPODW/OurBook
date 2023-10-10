@@ -40,7 +40,6 @@ public class KGPaymentServiceImpl implements KGPaymentService {
            log.error("결제 내역 저장 실패. 결제 금액은 즉시 환불 됩니다. 예외 발생 위치=> {}",ex.getStackTrace()[0]);
            throw new AjaxResponseException("결제 실패");
        }
-
     }
 
 
