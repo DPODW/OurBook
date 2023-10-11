@@ -14,4 +14,5 @@ public interface FindBookMapper {
 
     List<Book> findAllBook();
 
+    String findBookImg(String bookId);
 }

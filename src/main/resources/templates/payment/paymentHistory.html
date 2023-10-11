@@ -6,7 +6,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="generator" content="Hugo 0.104.2">
-  <title>Our book : 도서 상세</title>
+  <title>Our book : 구매 내역</title>
   <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/product/">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -17,79 +17,47 @@
   <link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
   <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
   <link rel="stylesheet" type="text/css" href="/css/main.css">
-  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script type="text/javascript" src="/js/accessCheck/LoginCheck.js"></script>
-  <script type="text/javascript" src="/js/accessCheck/CartCheck.js"></script>
-  <script type="text/javascript" src="/js/bookQuantity/BookTotalCheck.js"></script>
   <meta name="theme-color" content="#712cf9">
 </head>
+
 <body>
+
 <header class="site-header sticky-top py-1" style="background-color: #f8f9fa;">
   <nav class="container d-flex flex-column flex-md-row justify-content-between">
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
     <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">내 정보</a>
     <a class="py-2 d-none d-md-inline-block"  th:unless="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">로그인</a>
-    <a class="py-2 d-none d-md-inline-block login-check"  th:href="@{/OurBook/book/info/cart}" style="color: black; text-decoration: none;">장바구니</a>
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
     <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책 판매하기</a>
     <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">문의</a>
   </nav>
 </header>
+<h1 style="text-align: center; font-size: 36px; color: #333; margin-top: 20px;">구매 내역</h1>
 
-<main class="container py-5">
-  <div class="row">
-    <div class="col-md-6">
-      <img th:src="${bookInfo.bookImgUrl}" class="img-fluid">
+<div class="card mb-3" th:each="paymentHistory, i : ${paymentHistorys}">
+  <div class="card-body" style="display: flex; align-items: center;">
+    <div th:each="bookImage : ${bookImages[i.index]}">
+      <img th:src="${bookImage}" class="card-img-top" style="max-width: 170px; height: auto;">
     </div>
-    <div class="col-md-5 mt-5">
-      <h3 class="display-6" style="font-size: 1.25rem; margin-bottom: 10px;"><span style="color: gray;">상품명:</span>[[${bookInfo.bookName}]]</h3>
-      <p class="lead" style="font-size: 0.875rem; margin-bottom: 10px;"><span style="color: gray;">상품 설명:&nbsp</span>[[${bookInfo.bookExplan}]]</p>
-      <p class="lead" style="font-size: 0.875rem;"><span style="color: gray;">배송비:</span> 전 상품 무료배송 (이벤트 기간 입니다)</p>
-      <p class="lead" style="font-size: 0.875rem;"><span style="color: gray;">배송 예정일:</span> 1~2일 이내</p>
-      <p class="lead" style="font-size: 0.875rem;"><span style="color: gray;">반품/교환:</span> 수령 후 반품/교환 가능</p>
-      <p class="lead" style="font-size: 1rem;">가격:<span id="unitPrice" th:text="${bookInfo.bookPrice}+'원'"></span></p>
-      <!--      JS 에서 가격 text 값을 가져와야 하는데, 타임리프 외부 태그 선언 방식으로 하면 가져와지지 않음. 내부에서 선언해야 정상적으로 값을 가져올수 있음-->
-      <hr>
-      <div class="row" style="margin-top: 60px;">
-        <div class="col-md-6">
-          <form ID="paymentInfo" th:action="@{/OurBook/book/info/payment/{bookId}(bookId=${bookInfo.bookId})}" th:method="GET">
-          <div class="row">
-            <div class="col-md-6">
-              <button class="btn btn-success btn-lg login-check" id="buyButton" data-th-data="${bookInfo.bookId}">구매</button>
-            </div>
-            <div class="col-md-6 quantity-input" style="margin-top: -15px;">
-              <label for="quantity2" class="lead" style="font-size: 0.8rem;">구매 수량</label>
-              <input type="number" class="form-control" id="quantity" name="bookCount" value="1" min="1" max="50" oninput="restrictInput(this)">
-            </div>
-          </div>
-          </form>
-        </div>
+    <div style="flex: 1; padding-left: 20px;">
+      <h5 class="lead" th:text="${paymentHistory.paymentTime}" style="color: #007bff"></h5>
+      <p class="lead" th:text="${paymentHistory.bookName}" style="font-size: 1rem;"></p>
+      <p class="lead" th:text="${paymentHistory.orderNumber}" style="font-size: 1rem;"></p>
+      <p class="lead" th:text="${paymentHistory.buyerName}" style="font-size: 1rem;"></p>
+      <a>영수증 보기</a>
+      <div style="flex: 1; margin-right: 20px;">
+        <label style="margin-top: 20px; font-weight: bold; font-size: 16px;">최종 구매 가격:</label>
+        <span th:text="${paymentHistory.paymentPrice}" style="font-weight: bold; font-size: 16px;"></span>
       </div>
-
-
-      <div class="row">
-        <div class="col-md-6" style="margin-top: 40px;">
-          <form ID="addToCartForm" th:action="@{/OurBook/book/info/cart}" th:method="POST">
-            <input type="hidden" name="bookId" th:value="*{bookInfo.getBookId()}">
-            <div class="row">
-              <hr style="margin-top: -15px;">
-              <div class="col-md-6">
-                <button class="btn btn-primary" id="CartCheck">장바구니에 추가</button>
-              </div>
-              <div class="col-md-6 quantity-input">
-                <label for="quantity2" class="lead" style="font-size: 0.8rem;">담을 수량</label>
-                <input type="number" class="form-control" id="quantity2" name="bookCount" value="1" min="1" max="50" oninput="restrictInput(this)">
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
+    </div>
+    <div class="button-container" style="display: flex; flex-direction: column; align-items: center;">
+      <button class="btn btn-success purchase-button" style="width: 150px; margin-bottom: 10px;">재 구매</button>
+      <button class="btn btn-danger delete-button" style="width: 150px;">환불 요청</button>
     </div>
   </div>
-</main>
-<hr>
+</div>
 
+<hr>
 <footer class="container py-5">
   <div class="row">
     <div class="col-12 col-md">

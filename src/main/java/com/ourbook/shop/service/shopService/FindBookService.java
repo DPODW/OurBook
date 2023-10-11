@@ -15,4 +15,6 @@ public interface FindBookService {
 
     PaymentInfo orderNumberToBook(String orderNumber);
 
+    String findBookImg(String bookId);
+
 }

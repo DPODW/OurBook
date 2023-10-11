@@ -27,20 +27,13 @@
 <header class="site-header sticky-top py-1" style="background-color: #f8f9fa;">
   <nav class="container d-flex flex-column flex-md-row justify-content-between">
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
-    <a class="py-2 d-none d-md-inline-block"  th:unless="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/1}" style="color: black; text-decoration: none;">로그인</a>
-
-    <form th:action="@{/OurBook/3}" method="post">
-      <button class="py-2 d-none d-md-inline-block" th:if="${#authorization.expression('isAuthenticated()')}"  style="color: black; background-color:#f8f9fa;  border:none;  text-decoration: none;">로그아웃</button>
-    </form>
-
-    <a class="py-2 d-none d-md-inline-block" th:unless="${#authorization.expression('isAuthenticated()')}"  th:href="@{/OurBook/2}" style="color: black; text-decoration: none;">회원가입</a>
-    <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">마이페이지</a>
+    <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">내 정보</a>
+    <a class="py-2 d-none d-md-inline-block"  th:unless="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">로그인</a>
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
     <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책 판매하기</a>
     <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">문의</a>
   </nav>
 </header>
-
 <h1 style="text-align: center; font-size: 36px; color: #333; margin-top: 20px;">장바구니</h1>
 
 
@@ -68,11 +61,11 @@
 
       <form th:action="@{/OurBook/book/info/payment/{bookId}(bookId=${MyCartBook.bookId})}" th:method="GET">
       <input type="hidden" name="bookCount" th:value="*{MyCartBook.bookCount}">
-      <button class="btn btn-success purchase-button">구매</button>
+      <button class="btn btn-success purchase-button" style="width: 150px; margin-bottom: 10px;">구매</button>
       </form>
 
       <form th:action="@{/OurBook/book/info/cart/{bookId}(bookId=${MyCartBook.bookId})}" th:method="DELETE">
-        <button class="btn btn-danger delete-button">삭제</button>
+        <button class="btn btn-danger delete-button" style="width: 150px;">삭제</button>
       </form>
 
     </div>

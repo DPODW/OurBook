@@ -13,4 +13,8 @@
         select * from payment_info where ORDER_NUMBER = #{orderNumber};
     </select>
 
+    <select id="findPaymentHistory" resultType="com.ourbook.shop.dto.payment.PaymentInfo">
+        select * from payment_info where BUYER_EMAIL = #{email};
+    </select>
+
 </mapper>

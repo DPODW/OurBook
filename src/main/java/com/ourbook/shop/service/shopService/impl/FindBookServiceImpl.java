@@ -40,6 +40,11 @@ public class FindBookServiceImpl implements FindBookService {
     public PaymentInfo orderNumberToBook(String orderNumber) {
         return paymentMapper.findOrderNumber(orderNumber);
     }
+
+    @Override
+    public String findBookImg(String bookId) {
+        return findBookMapper.findBookImg(bookId);
+    }
 }
 
 

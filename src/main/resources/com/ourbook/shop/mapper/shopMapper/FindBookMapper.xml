@@ -10,4 +10,8 @@
         SELECT * FROM book_info;
     </select >
 
+    <select id="findBookImg" resultType="string">
+        SELECT BOOK_IMG_URL FROM book_info WHERE BOOK_ID = #{bookId}
+    </select >
+
 </mapper>
