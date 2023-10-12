@@ -26,7 +26,6 @@
   <nav class="container d-flex flex-column flex-md-row justify-content-between">
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
     <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">내 정보</a>
-    <a class="py-2 d-none d-md-inline-block"  th:unless="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">로그인</a>
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
     <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책 판매하기</a>
     <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">문의</a>
@@ -40,14 +39,19 @@
       <img th:src="${bookImage}" class="card-img-top" style="max-width: 170px; height: auto;">
     </div>
     <div style="flex: 1; padding-left: 20px;">
-      <h5 class="lead" th:text="${paymentHistory.paymentTime}" style="color: #007bff"></h5>
-      <p class="lead" th:text="${paymentHistory.bookName}" style="font-size: 1rem;"></p>
-      <p class="lead" th:text="${paymentHistory.orderNumber}" style="font-size: 1rem;"></p>
-      <p class="lead" th:text="${paymentHistory.buyerName}" style="font-size: 1rem;"></p>
-      <a>영수증 보기</a>
+      <h5 class="lead" style="color:gray;">구매 도서:  <span th:text="${paymentHistory.bookName}" style="color: black;"></span></h5>
+      <p class="lead" style="color:gray; font-size: 1rem; ">주문 번호:  <span th:text="${paymentHistory.orderNumber}" style="font-size: 1rem; color: black;"></span></p>
+      <p class="lead" style="color:gray; font-size: 1rem; ">구매 일시:  <span th:text="${paymentHistory.paymentTime}" style="font-size: 1rem; color: black;"></span></p>
+      <p class="lead" style="color:gray; font-size: 1rem; ">구매자 성함:  <span th:text="${paymentHistory.buyerName}" style="font-size: 1rem; color: black;"></span></p>
+      <p class="lead" style="color:gray; font-size: 1rem; ">구매 수량:  <span th:text="${paymentHistory.paymentBookCount}" style="font-size: 1rem; color: black;"></span></p>
+      <hr>
+      <a class="lead" style="color:blue; font-size: 1rem;" th:href="@{/OurBook/book/info/payment/result/{orderNumber}(orderNumber=${paymentHistory.orderNumber})}">
+        상세 구매내역 확인하기
+      </a>
+
       <div style="flex: 1; margin-right: 20px;">
         <label style="margin-top: 20px; font-weight: bold; font-size: 16px;">최종 구매 가격:</label>
-        <span th:text="${paymentHistory.paymentPrice}" style="font-weight: bold; font-size: 16px;"></span>
+        <span th:text="${paymentHistory.paymentPrice} + '원'" style="font-weight: bold; font-size: 16px;"></span>
       </div>
     </div>
     <div class="button-container" style="display: flex; flex-direction: column; align-items: center;">

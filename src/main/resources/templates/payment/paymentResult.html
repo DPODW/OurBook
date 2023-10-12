@@ -29,7 +29,6 @@
     <nav class="container d-flex flex-column flex-md-row justify-content-between">
         <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
         <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">내 정보</a>
-        <a class="py-2 d-none d-md-inline-block"  th:unless="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">로그인</a>
         <a class="py-2 d-none d-md-inline-block login-check"  th:href="@{/OurBook/book/info/cart}" style="color: black; text-decoration: none;">장바구니</a>
         <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
         <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책 판매하기</a>
@@ -48,21 +47,25 @@
     <div class="order-details" style="width: 700px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
         <h2>주문 상세 정보</h2>
         <hr>
-        <p>주문 일자:&nbsp;<strong th:text="${paymentInfo.paymentTime}"></strong></p>
-        <p>주문 번호:&nbsp;<strong th:text="${paymentInfo.orderNumber}"></strong></p>
-        <p>주문자 성함:&nbsp;<strong th:text="${paymentInfo.buyerName}"></strong></p>
+       <div class="image-and-info" style="  display: flex; justify-content: space-between; align-items: center;">
+        <img th:src="${paymentResultImg}" style="width: 250px; margin-right: 100px;">
+        <div class="order-info">
+        <p class="lead" style="margin-top: 20px;">주문 일자:&nbsp; <strong th:text="${paymentInfo.paymentTime}"></strong></p>
+        <p class="lead" style="margin-top: 50px;">주문 번호:&nbsp; <strong th:text="${paymentInfo.orderNumber}"></strong></p>
+        <p class="lead" style="margin-top: 50px;">도서 이름:&nbsp; <strong th:text="${paymentInfo.bookName}"></strong></p>
+        <p class="lead" style="margin-top: 50px;">구매 수량:&nbsp; <strong th:text="${paymentInfo.paymentBookCount} + '권'"></strong></p>
+        </div>
+       </div>
+
         <hr>
         <p>수령자 성함:&nbsp;<strong th:text="${paymentInfo.receiverName}"></strong></p>
         <p>수령자 연락처:&nbsp;<strong th:text="${paymentInfo.receiverPhoneNumber}"></strong></p>
         <p>배송 주소:&nbsp;<strong th:text="${paymentInfo.receiverAddress}"></strong></p>
         <hr>
-        <p>도서 이름:&nbsp;<strong th:text="${paymentInfo.bookName}"></strong></p>
-        <p>구매 수량:&nbsp;<strong th:text="${paymentInfo.paymentBookCount} + '권'"></strong></p>
-        <hr>
+
+        <p th:text="${bookPrice}+ '원 (권당 가격) x ' + ${paymentInfo.paymentBookCount} + '개 (구매 수량)'"></p>
         <p style="font-size: 20px;"><strong style="color: blue; font-size: 20px;">최종 결제 가격:&nbsp;</strong><strong th:text="${paymentPrice} + '원'"></strong></p>
-        <form>
-            <button class="btn btn-primary">홈으로</button>
-        </form>
+        <a th:href="@{/OurBook}" class="btn btn-primary" >홈 으로</a>
     </div>
 </div>
 

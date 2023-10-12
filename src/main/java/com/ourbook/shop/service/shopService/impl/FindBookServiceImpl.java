@@ -8,6 +8,7 @@ import com.ourbook.shop.service.shopService.FindBookService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -44,6 +45,11 @@ public class FindBookServiceImpl implements FindBookService {
     @Override
     public String findBookImg(String bookId) {
         return findBookMapper.findBookImg(bookId);
+    }
+
+    @Override
+    public BigDecimal findBookPrice(String bookId) {
+       return findBookMapper.findBookPrice(bookId);
     }
 }
 

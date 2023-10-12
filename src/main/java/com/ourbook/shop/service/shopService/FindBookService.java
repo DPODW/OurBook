@@ -4,6 +4,7 @@ import com.ourbook.shop.dto.payment.PaymentInfo;
 import com.ourbook.shop.dto.book.Book;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -16,5 +17,7 @@ public interface FindBookService {
     PaymentInfo orderNumberToBook(String orderNumber);
 
     String findBookImg(String bookId);
+
+    BigDecimal findBookPrice(String bookId);
 
 }

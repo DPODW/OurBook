@@ -10,5 +10,7 @@ public interface PaymentService {
 
     List<PaymentInfo> findPaymentHistory(String email);
 
-    List<String> findPaymentImg(List<PaymentInfo> paymentHistory);
+    String findPaymentResultImg(String bookId);
+
+    List<String> findPaymentHistoryImg(List<PaymentInfo> paymentHistory);
 }

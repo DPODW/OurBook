@@ -6,6 +6,7 @@ import com.ourbook.shop.service.paymentService.PaymentService;
 import com.ourbook.shop.service.shopService.FindBookService;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,11 +25,24 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public List<PaymentInfo> findPaymentHistory(String email) {
-       return paymentMapper.findPaymentHistory(email);
+        List<PaymentInfo> paymentHistory = paymentMapper.findPaymentHistory(email);
+        for (PaymentInfo payment : paymentHistory) {
+            BigDecimal price = payment.getPaymentPrice();
+            if (price != null) {
+                payment.setPaymentPrice(price.setScale(0));
+            }
+        }
+        return paymentHistory;
     }
 
     @Override
-    public List<String> findPaymentImg(List<PaymentInfo> paymentHistory) {
+    public String findPaymentResultImg(String bookId) {
+        return findBookService.findBookImg(bookId);
+    }
+
+
+    @Override
+    public List<String> findPaymentHistoryImg(List<PaymentInfo> paymentHistory) {
         List<String> bookImgIds = paymentHistory.stream()
                 .map(PaymentInfo::getBookId)
                 .collect(Collectors.toList());

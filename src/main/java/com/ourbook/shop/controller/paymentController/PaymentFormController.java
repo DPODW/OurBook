@@ -57,7 +57,13 @@ public class PaymentFormController {
     @GetMapping("/OurBook/book/info/payment/result/{orderNumber}")
     public String paymentSuccessView(@PathVariable String orderNumber, Model model){
         PaymentInfo paymentInfo = findBookService.orderNumberToBook(orderNumber);
+        String paymentResultImg = paymentService.findPaymentResultImg(paymentInfo.getBookId());
+        BigDecimal bookPrice = findBookService.findBookPrice(paymentInfo.getBookId());
+
         model.addAttribute("paymentInfo",paymentInfo);
+        model.addAttribute("paymentResultImg",paymentResultImg);
+        model.addAttribute("bookPrice",bookPrice);
+
         BigDecimal paymentPrice = paymentInfo.getPaymentPrice().setScale(0);
         model.addAttribute("paymentPrice",paymentPrice);
         return "payment/paymentResult";
@@ -78,12 +84,12 @@ public class PaymentFormController {
 
             //구매 내역과, 구매한 책의 사진을 가져오기 위한 요청
             List<PaymentInfo> paymentHistory = paymentService.findPaymentHistory(naverMember.getEmail());
-            List<String> paymentImg = paymentService.findPaymentImg(paymentHistory);
+            List<String> paymentImg = paymentService.findPaymentHistoryImg(paymentHistory);
 
             paymentHistoryModel(model, paymentHistory, paymentImg);
         }else{
             List<PaymentInfo>  paymentHistory =paymentService.findPaymentHistory(userDetail.getEmail());
-            List<String> paymentImg = paymentService.findPaymentImg(paymentHistory);
+            List<String> paymentImg = paymentService.findPaymentHistoryImg(paymentHistory);
 
             paymentHistoryModel(model, paymentHistory, paymentImg);
         }

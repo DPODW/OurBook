@@ -4,6 +4,7 @@ import com.ourbook.shop.dto.book.Book;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
@@ -15,4 +16,6 @@ public interface FindBookMapper {
     List<Book> findAllBook();
 
     String findBookImg(String bookId);
+
+    BigDecimal findBookPrice(String bookId);
 }

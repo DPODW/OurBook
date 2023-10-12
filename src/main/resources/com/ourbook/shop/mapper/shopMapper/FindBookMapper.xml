@@ -14,4 +14,8 @@
         SELECT BOOK_IMG_URL FROM book_info WHERE BOOK_ID = #{bookId}
     </select >
 
+    <select id="findBookPrice" resultType="BigDecimal">
+        SELECT BOOK_PRICE FROM book_info WHERE BOOK_ID = #{bookId}
+    </select >
+
 </mapper>
