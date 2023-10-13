@@ -58,7 +58,7 @@ public class PaymentFormController {
     public String paymentSuccessView(@PathVariable String orderNumber, Model model){
         PaymentInfo paymentInfo = findBookService.orderNumberToBook(orderNumber);
         String paymentResultImg = paymentService.findPaymentResultImg(paymentInfo.getBookId());
-        BigDecimal bookPrice = findBookService.findBookPrice(paymentInfo.getBookId());
+        BigDecimal bookPrice = findBookService.findBookPrice(paymentInfo.getBookId()).setScale(0);
 
         model.addAttribute("paymentInfo",paymentInfo);
         model.addAttribute("paymentResultImg",paymentResultImg);

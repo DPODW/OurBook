@@ -51,7 +51,7 @@
         <img th:src="${paymentResultImg}" style="width: 250px; margin-right: 100px;">
         <div class="order-info">
         <p class="lead" style="margin-top: 20px;">주문 일자:&nbsp; <strong th:text="${paymentInfo.paymentTime}"></strong></p>
-        <p class="lead" style="margin-top: 50px;">주문 번호:&nbsp; <strong th:text="${paymentInfo.orderNumber}"></strong></p>
+        <p class="lead" style="margin-top: 50px;">주문 번호:&nbsp;<strong th:text="${paymentInfo.orderNumber}"></strong></p>
         <p class="lead" style="margin-top: 50px;">도서 이름:&nbsp; <strong th:text="${paymentInfo.bookName}"></strong></p>
         <p class="lead" style="margin-top: 50px;">구매 수량:&nbsp; <strong th:text="${paymentInfo.paymentBookCount} + '권'"></strong></p>
         </div>

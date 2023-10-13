@@ -5,12 +5,14 @@ IMP.init(userCode);
 randomOrderNumber();
 
 function requestPayKGincis() {
+    const detailAddress = document.getElementById("detailAddress").value;
     const paymentInfo = {
      paymentPrice : parseInt(document.getElementById("totalPriceSpan").textContent, 10),
      bookName : document.getElementById("bookNameSpan").textContent,
      buyerName : document.getElementById("buyerName").textContent,
      receiverName : document.getElementById("receiverName").value,
-     receiverAddress : document.getElementById("receiverAddress").value,
+     receiverPostCode : document.getElementById("receiverPostCode").value,
+     receiverAddress : document.getElementById("receiverAddress").value + ' ' +detailAddress,
      receiverPhoneNumber : document.getElementById("receiverPhoneNumber").value,
      bookId : $("#bookId").val(),
      paymentBookCount : $("#quantity").val(),
@@ -18,6 +20,7 @@ function requestPayKGincis() {
      orderNumber : 'o' + new Date().getTime() + randomOrderNumber(),
      paymentTime : paymentSuccessTime(),
     }
+
     IMP.request_pay({
         pg: "html5_inicis",
         pay_method: "card",
@@ -43,12 +46,14 @@ function requestPayKGincis() {
     function requestPayToss() {
         const clientKey = 'test_ck_DpexMgkW36mbZ2Y5wD48GbR5ozO0'
         const tossPayments = TossPayments(clientKey)
+        const detailAddress = document.getElementById("detailAddress").value;
         const paymentInfo = {
             paymentPrice : parseInt(document.getElementById("totalPriceSpan").textContent, 10),
             bookName : document.getElementById("bookNameSpan").textContent,
             buyerName : document.getElementById("buyerName").textContent,
             receiverName : document.getElementById("receiverName").value,
-            receiverAddress : document.getElementById("receiverAddress").value,
+            receiverPostCode : document.getElementById("receiverPostCode").value,
+            receiverAddress : document.getElementById("receiverAddress").value + ' ' +detailAddress,
             receiverPhoneNumber : document.getElementById("receiverPhoneNumber").value,
             bookId : $("#bookId").val(),
             paymentBookCount : $("#quantity").val(),

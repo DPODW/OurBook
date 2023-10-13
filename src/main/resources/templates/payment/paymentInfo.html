@@ -20,9 +20,11 @@
   <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
   <script src="https://js.tosspayments.com/v1/payment"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script type="text/javascript" src="/js/accessCheck/LoginCheck.js"></script>
   <script type="text/javascript" src="/js/bookQuantity/BookTotalCheck.js"></script>
   <script type="text/javascript" src="/js/payment/IamPortPayment.js"></script>
+  <script type="text/javascript" src="/js/payment/PaymentAddress.js"></script>
   <meta name="theme-color" content="#712cf9">
 </head>
 
@@ -58,12 +60,20 @@
       <h4>배송 정보</h4>
       <p>주문자 이름 :  <span id="buyerName" th:text="${name}"></span></p>
       <input id="buyerEmail" type="hidden" th:value="${email}">
-      <p>수령자 이름 <input id="receiverName" type="text" size="30" class="form-control"></p>
-      <p>수령자 전화번호 (- 기호 없이 입력해주세요)<input id="receiverPhoneNumber" type="text" maxlength="11" class="form-control"></p>
-      <p>배송 주소 <input id="receiverAddress" type="text" class="form-control"></p>
+      <p>수령자 이름 <input id="receiverName" type="text" size="30" class="form-control" required></p>
+      <p>수령자 전화번호 (- 기호 없이 입력해주세요)<input id="receiverPhoneNumber" type="text" maxlength="11" class="form-control" required></p>
+      <hr>
 
-        <button class="btn btn-success purchase-button" onclick="requestPayKGincis()" style="background-color: blue; border: none;">구매하기</button>
-        <button type="button" onclick="requestPayToss()" style="background-color: white; border-color: #007bff; border-radius: 10%;"><img src="/img/payment/toss.png" width="63px"></button>
+      <p style="margin-bottom: 4px; font-weight: bold;">주소 작성</p>
+      <input class="form-control" type="text" id="receiverPostCode" style="width: 150px; display: inline;"  placeholder="우편번호" readonly>
+      <input type="button" onclick="addressAndPostCode()" style="border-color: lightgray; border-width: 1px; background-color: white; " value="우편번호 찾기"><br>
+
+      <input  class="form-control" type="text" id="receiverAddress" style="margin-top: 20px;" placeholder="주소" readonly><br>
+      <input type="text" id="detailAddress" class="form-control" style="margin-bottom: 20px;" placeholder="상세주소" required>
+
+
+      <button class="btn btn-success purchase-button" onclick="requestPayKGincis()" style="background-color: blue; border: none;">구매하기</button>
+      <button type="button" onclick="requestPayToss()" style="background-color: white; border-color: #007bff; border-radius: 10%;"><img src="/img/payment/toss.png" width="63px"></button>
 
     </div>
   </div>
