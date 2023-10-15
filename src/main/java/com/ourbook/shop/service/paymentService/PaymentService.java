@@ -13,4 +13,8 @@ public interface PaymentService {
     String findPaymentResultImg(String bookId);
 
     List<String> findPaymentHistoryImg(List<PaymentInfo> paymentHistory);
+
+    PaymentInfo checkPaymentNull(PaymentInfo paymentInfo);
+
+    void orderNumberValidate(String orderNumber);
 }

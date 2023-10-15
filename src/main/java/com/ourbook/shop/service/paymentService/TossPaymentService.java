@@ -12,5 +12,4 @@ public interface TossPaymentService {
 
     PaymentInfo TossPaymentInfoSave(PaymentInfo paymentInfo,String paymentKey);
 
-    void TossOrderNumberValidate(String orderNumber);
 }

@@ -5,6 +5,7 @@ import com.ourbook.shop.dto.payment.KGPaymentCancel;
 import com.ourbook.shop.dto.payment.PaymentInfo;
 import com.ourbook.shop.mapper.paymentMapper.PaymentMapper;
 import com.ourbook.shop.service.paymentService.KGPaymentService;
+import com.ourbook.shop.service.paymentService.PaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.*;
@@ -20,16 +21,19 @@ public class KGPaymentServiceImpl implements KGPaymentService {
 
     private final PaymentMapper paymentMapper;
 
+    private final PaymentService paymentService;
 
-    public KGPaymentServiceImpl(PaymentMapper paymentMapper) {
+
+    public KGPaymentServiceImpl(PaymentMapper paymentMapper, PaymentService paymentService) {
         this.paymentMapper = paymentMapper;
+        this.paymentService = paymentService;
     }
 
     @Override
     public PaymentInfo paymentInfoSave(PaymentInfo paymentInfo,String imp_key,String imp_secret) {
        try {
-           orderNumberValidate(paymentInfo.getOrderNumber());
-           log.info("{}",paymentInfo);
+           paymentService.orderNumberValidate(paymentInfo.getOrderNumber());
+           paymentService.checkPaymentNull(paymentInfo);
            paymentMapper.paymentInfoSave(paymentInfo);
            return paymentInfo;
        }catch (Exception ex){
@@ -42,15 +46,6 @@ public class KGPaymentServiceImpl implements KGPaymentService {
        }
     }
 
-
-    @Override
-    public void orderNumberValidate(String orderNumber) {
-        PaymentInfo paymentHistory = paymentMapper.findOrderNumber(orderNumber);
-        if(paymentHistory != null){
-            log.error("중복된 주문 번호가 존재합니다. [KGPaymentServiceImpl]");
-            throw new DuplicateKeyException("중복된 주문 번호.");
-        }
-    }
 
     @Override
     public String getIamportAccessToken (String imp_key,String imp_secret) {
