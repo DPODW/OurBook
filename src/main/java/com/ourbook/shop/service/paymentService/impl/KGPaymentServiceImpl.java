@@ -4,10 +4,10 @@ import com.ourbook.shop.config.exception.AjaxResponseException;
 import com.ourbook.shop.dto.payment.KGPaymentCancel;
 import com.ourbook.shop.dto.payment.PaymentInfo;
 import com.ourbook.shop.mapper.paymentMapper.PaymentMapper;
+import com.ourbook.shop.mapper.shopMapper.BookCartMapper;
 import com.ourbook.shop.service.paymentService.KGPaymentService;
 import com.ourbook.shop.service.paymentService.PaymentService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -23,18 +23,19 @@ public class KGPaymentServiceImpl implements KGPaymentService {
 
     private final PaymentService paymentService;
 
+    private final BookCartMapper bookCartMapper;
 
-    public KGPaymentServiceImpl(PaymentMapper paymentMapper, PaymentService paymentService) {
+
+    public KGPaymentServiceImpl(PaymentMapper paymentMapper, PaymentService paymentService, BookCartMapper bookCartMapper) {
         this.paymentMapper = paymentMapper;
         this.paymentService = paymentService;
+        this.bookCartMapper = bookCartMapper;
     }
 
     @Override
     public PaymentInfo paymentInfoSave(PaymentInfo paymentInfo,String imp_key,String imp_secret) {
        try {
-           paymentService.orderNumberValidate(paymentInfo.getOrderNumber());
-           paymentService.checkPaymentNull(paymentInfo);
-           paymentMapper.paymentInfoSave(paymentInfo);
+           validateAndSave(paymentInfo);
            return paymentInfo;
        }catch (Exception ex){
            String accessToken = getIamportAccessToken(imp_key, imp_secret);
@@ -44,6 +45,14 @@ public class KGPaymentServiceImpl implements KGPaymentService {
            log.error("결제 내역 저장 실패. 결제 금액은 즉시 환불 됩니다. 예외 발생 위치=> {}",ex.getStackTrace()[0]);
            throw new AjaxResponseException("결제 실패");
        }
+    }
+
+    private void validateAndSave(PaymentInfo paymentInfo) {
+        //결제 검증 -> 저장 -> 구매한 책 장바구니에서 제거
+        paymentService.orderNumberValidate(paymentInfo.getOrderNumber());
+        paymentService.checkPaymentNull(paymentInfo);
+        paymentMapper.paymentInfoSave(paymentInfo);
+        bookCartMapper.deleteBookCart(paymentInfo.getBookId(), paymentInfo.getBuyerEmail());
     }
 
 

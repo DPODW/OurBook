@@ -1,5 +1,5 @@
-/** 결제 정보 DB 저장 함수 **/
-function paymentInfoSave(paymentInfo,imp_uid){
+/** 결제 정보 DB 저장 함수 (KG 이니시스 전용) **/
+function KGpaymentInfoSave(paymentInfo,imp_uid){
     var KGorderNumber;
     paymentInfo.paymentNumber = imp_uid;
     $.ajax({
@@ -18,6 +18,16 @@ function paymentInfoSave(paymentInfo,imp_uid){
     });
 }
 
+/** 결제 정보 DB 저장 함수 (TOSS 전용) **/
+function TossPaymentInfoSave(paymentInfo){
+    $.ajax({
+        type: 'POST',
+        url: '/TossPay/payment/1',
+        data: JSON.stringify(paymentInfo),
+        contentType: 'application/json',
+    });
+}
+
 
 /** 서버측 주문번호 생성 함수 **/
 function randomOrderNumber() {
@@ -29,6 +39,25 @@ function randomOrderNumber() {
         randomOrderNumber += characters.charAt(randomIndex);
     }
     return randomOrderNumber;
+}
+
+
+/** 구매시 입력해야할 정보가 공백일시 검증하는 함수 **/
+function checkInput() {
+    const receiverName = document.getElementById('receiverName');
+    const receiverPhoneNumber = document.getElementById('receiverPhoneNumber');
+    const receiverPostCode = document.getElementById('receiverPostCode');
+    const receiverAddress = document.getElementById('receiverAddress');
+    const detailAddress = document.getElementById("detailAddress");
+
+    if (receiverName.value === "" || receiverPhoneNumber.value === "" ||
+        receiverPostCode.value === "" || receiverAddress.value === "" ||
+        detailAddress.value === "") {
+        alert("구매 정보를 전부 입력해주세요!");
+        return false;
+    } else {
+        return true;
+    }
 }
 
 

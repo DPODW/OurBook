@@ -24,7 +24,9 @@
   <script type="text/javascript" src="/js/accessCheck/LoginCheck.js"></script>
   <script type="text/javascript" src="/js/bookQuantity/BookTotalCheck.js"></script>
   <script type="text/javascript" src="/js/payment/IamPortPayment.js"></script>
+  <script type="text/javascript" src="/js/payment/PaymentHandler.js"></script>
   <script type="text/javascript" src="/js/payment/PaymentAddress.js"></script>
+  <script type="text/javascript" src="/js/payment/TossPayment.js"></script>
   <meta name="theme-color" content="#712cf9">
 </head>
 
@@ -72,8 +74,8 @@
       <input type="text" id="detailAddress" class="form-control" style="margin-bottom: 20px;" placeholder="상세주소" required>
 
 
-      <button class="btn btn-success purchase-button" onclick="requestPayKGincis()" style="background-color: blue; border: none;">구매하기</button>
-      <button type="button" onclick="requestPayToss()" style="background-color: white; border-color: #007bff; border-radius: 10%;"><img src="/img/payment/toss.png" width="63px"></button>
+      <button class="btn btn-success purchase-button" onclick="PayKGincis()" style="background-color: blue; border: none;">구매하기</button>
+      <button type="button" onclick="PayToss()" style="background-color: white; border-color: #007bff; border-radius: 10%;"><img src="/img/payment/toss.png" width="63px"></button>
 
     </div>
   </div>

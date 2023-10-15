@@ -61,9 +61,10 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public PaymentInfo checkPaymentNull(PaymentInfo paymentInfo){
-            if(paymentInfo.getReceiverName().isEmpty() || paymentInfo.getReceiverPhoneNumber().isEmpty()){
-                log.error("수령자 이름, 혹은 수령자 전화번호가 공백 입니다.");
-                throw new NullPointerException("수령자 이름, 혹은 수령자 전화번호가 공백 입니다.");
+            if(paymentInfo.getReceiverName().isEmpty() || paymentInfo.getReceiverPhoneNumber().isEmpty()
+               || paymentInfo.getReceiverPostCode().isEmpty() || paymentInfo.getReceiverAddress().isEmpty()){
+                log.error("주문 정보가 전달되지 않았습니다.");
+                throw new NullPointerException("주문 정보가 전달되지 않았습니다.");
             }else
                 return paymentInfo;
         }
