@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.math.BigDecimal;
+
 @ToString
 @Setter
 @Getter
@@ -15,9 +17,9 @@ public class KGPaymentCancel {
 
     private String reason;
 
-    private int paymentPrice;
+    private BigDecimal paymentPrice;
 
-    public KGPaymentCancel(String accessToken, String imp_uid, String reason, int paymentPrice) {
+    public KGPaymentCancel(String accessToken, String imp_uid, String reason, BigDecimal paymentPrice) {
         this.accessToken = accessToken;
         this.imp_uid = imp_uid;
         this.reason = reason;

@@ -9,6 +9,12 @@
                #{receiverAddress},#{receiverPhoneNumber},#{paymentTime});
     </insert>
 
+    <delete id="paymentInfoDelete" parameterType="String">
+        delete from payment_info
+        where ORDER_NUMBER = #{orderNumber};
+    </delete>
+
+
     <select id="findOrderNumber" resultType="com.ourbook.shop.dto.payment.PaymentInfo">
         select * from payment_info where ORDER_NUMBER = #{orderNumber};
     </select>

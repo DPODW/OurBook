@@ -10,8 +10,9 @@ public interface PaymentMapper {
 
     void paymentInfoSave(PaymentInfo paymentInfo);
 
-    PaymentInfo findOrderNumber(String orderNumber);
+    void paymentInfoDelete(String orderNumber);
 
+    PaymentInfo findOrderNumber(String orderNumber);
 
     List<PaymentInfo> findPaymentHistory(String email);
 }

@@ -1,14 +1,13 @@
 package com.ourbook.shop.controller.paymentController;
 
-import com.ourbook.shop.config.exception.PaymentFailException;
 import com.ourbook.shop.dto.payment.PaymentInfo;
+import com.ourbook.shop.service.emailService.EmailService;
 import com.ourbook.shop.service.paymentService.TossPaymentService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.HttpSessionRequiredException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,9 +20,12 @@ public class TossPaymentController {
 
     private final TossPaymentService tossPaymentService;
 
-    public TossPaymentController(TossPaymentService tossPaymentService) {
+    private final EmailService emailService;
+
+    public TossPaymentController(TossPaymentService tossPaymentService, EmailService emailService) {
         this.tossPaymentService = tossPaymentService;
 
+        this.emailService = emailService;
     }
 
     @GetMapping("/TossPay/validate")

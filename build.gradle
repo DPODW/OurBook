@@ -33,6 +33,8 @@ dependencies {
     implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client'
     implementation 'org.jetbrains:annotations:20.1.0'
 	implementation 'com.github.iamport:iamport-rest-client-java:0.2.23'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
     compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	annotationProcessor 'org.projectlombok:lombok'
