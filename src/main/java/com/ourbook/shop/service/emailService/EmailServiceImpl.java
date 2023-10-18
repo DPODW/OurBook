@@ -39,7 +39,7 @@ public class EmailServiceImpl implements EmailService {
 
     private String setContext(PaymentInfo paymentInfo) { // 타임리프 설정하는 코드
         Context context = new Context();
-        context.setVariable("paymentInfo", paymentInfo); // Template에 전달할 데이터 설정
+        context.setVariable("paymentInfoMail", paymentInfo); // Template에 전달할 데이터 설정
         return templateEngine.process("mail/paymentSuccessMail", context); // mail.html
     }
 

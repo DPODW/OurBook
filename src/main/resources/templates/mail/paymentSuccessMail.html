@@ -6,10 +6,10 @@
 <body>
 <div class="container">
   <h1 style="margin-top:50px;">구매 감사드립니다 :)</h1>
-  <p>OurBook 에서 <strong th:text="${paymentInfo.buyerName} + '님 에게'"></strong> 구매 확정 메일을 보내드립니다.</p>
-  <strong th:text="'구매 도서: ' + ${paymentInfo.bookName}"></strong><br>
-  <strong  th:text="'가격: ' + ${paymentInfo.paymentPrice} + '원'"></strong><br>
-  <strong th:text="'주문번호: ' + ${paymentInfo.orderNumber}"></strong><br>
+  <p>OurBook 에서 <strong th:text="${paymentInfoMail.buyerName} + '님 에게'"></strong> 구매 확정 메일을 보내드립니다.</p>
+  <strong th:text="'구매 도서: ' + ${paymentInfoMail.bookName}"></strong><br>
+  <strong  th:text="'가격: ' + ${paymentInfoMail.paymentPrice} + '원'"></strong><br>
+  <strong th:text="'주문번호: ' + ${paymentInfoMail.orderNumber}"></strong><br>
   <hr>
   <p>앞으로 더 발전하는 OurBook 이 되도록 하겠습니다. 감사합니다!</p>
   <a href="http://localhost:8080/OurBook" style="text-decoration: none; color: blue;">OurBook 바로가기</a>

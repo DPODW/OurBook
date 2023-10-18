@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Slf4j
 @Controller
 public class InquiryController {
-
-
-
+    
 
     @GetMapping("/OurBook/inquiry/publishproposal")
     public String SendPublishProposalView(){

@@ -6,7 +6,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="generator" content="Hugo 0.104.2">
-  <title>Our book : 주문</title>
+  <title>Our book : 도서 판매</title>
   <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/product/">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -17,17 +17,16 @@
   <link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
   <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
   <link rel="stylesheet" type="text/css" href="/css/main.css">
-  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-  <script src="https://js.tosspayments.com/v1/payment"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script type="text/javascript" src="/js/accessCheck/LoginCheck.js"></script>
-  <script type="text/javascript" src="/js/bookQuantity/BookTotalCheck.js"></script>
-  <script type="text/javascript" src="/js/payment/IamPortPayment.js"></script>
-  <script type="text/javascript" src="/js/payment/PaymentHandler.js"></script>
-  <script type="text/javascript" src="/js/payment/PaymentAddress.js"></script>
-  <script type="text/javascript" src="/js/payment/TossPayment.js"></script>
   <meta name="theme-color" content="#712cf9">
+  <style>
+    .field-error{
+      border-color: red;
+      color: red;
+      font-size: 14px;
+    }
+  </style>
 </head>
 
 <body>
@@ -44,44 +43,78 @@
   </nav>
 </header>
 
-<div class="container mt-5">
-  <h4 class="lead" style="text-align: center; color: #007bff; font-size: 24px; font-weight: bold;">
-    주문 상세 정보
-  </h4>
-  <div class="row">
-    <div class="col-md-6">
-      <img th:src="${paymentInfo.bookImgUrl}">
-    </div>
-    <div class="col-md-6">
-      <h4 style="margin-top: 20px;">도서 정보</h4>
-      <p>도서 이름: <span id="bookNameSpan" th:text="${paymentInfo.bookName}"></span></p>
-      <input id="bookId" type="hidden" th:value="${paymentInfo.bookId}">
-      <p>가격: <span id="unitPrice" th:text="${paymentInfo.bookPrice}"></span>원</p>
-      <p>수량: <input type="number" id="quantity" th:value="${bookCount}" min="1" max="50" class="form-control" oninput="restrictInput(this)"></p>
-      <p>결제 가격: <span id="totalPriceSpan" style="color: #007bff"></span></p>
-      <hr>
-      <h4>배송 정보</h4>
-      <p>주문자 이름 :  <span id="buyerName" th:text="${name}"></span></p>
-      <input id="buyerEmail" type="hidden" th:value="${email}">
-      <p>수령자 이름 <input id="receiverName" type="text" size="30" class="form-control" required></p>
-      <p>수령자 전화번호 (- 기호 없이 입력해주세요)<input id="receiverPhoneNumber" type="text" maxlength="11" class="form-control" required></p>
-      <hr>
+<div class="container" style="margin-top: 40px">
+  <div class="input-form-backgroud row">
+    <div class="input-form col-md-12 mx-auto" >
 
-      <p style="margin-bottom: 4px; font-weight: bold;">주소 작성</p>
-      <input class="form-control" type="text" id="receiverPostCode" style="width: 150px; display: inline;"  placeholder="우편번호" readonly>
-      <input type="button" onclick="addressAndPostCode()" style="border-color: lightgray; border-width: 1px; background-color: white; " value="우편번호 찾기"><br>
+      <h4 class="mb-3">도서 판매</h4>
+      <form th:action="@{/OurBook/market/sale}" th:method="POST" th:object="${saleBookInfo}">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>도서 제목</label>
+            <input type="text" maxlength="20" name="saleBookName" th:field="*{saleBookName}" class="form-control" style="width: 540px;" >
+            <h4 th:errorclass="field-error" th:errors="*{saleBookName}"></h4>
+          </div>
 
-      <input  class="form-control" type="text" id="receiverAddress" style="margin-top: 20px;" placeholder="주소" readonly><br>
-      <input type="text" id="detailAddress" class="form-control" style="margin-bottom: 20px;" placeholder="상세주소" required>
+          <div class="col-md-6 mb-3">
+            <label>이름 (도서 시장에 보여질 이름)</label>
+            <input type="text" maxlength="12" name="uploaderName" th:field="*{uploaderName}" class="form-control" style="width: 540px;">
+            <h4 th:errorclass="field-error" th:errors="*{uploaderName}"></h4>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label>저자 (판매할 도서의 저자 , 다수 가능)</label>
+            <input type="text" maxlength="25" name="saleBookWriter" th:field="*{saleBookWriter}" class="form-control" style="width: 540px;">
+            <h4 th:errorclass="field-error" th:errors="*{saleBookWriter}"></h4>
+          </div>
+
+        </div>
+        <hr>
+        <div class="mb-3" style="margin-top: 30px;">
+          <label style="font-weight: bold;">줄거리 <a style="font-size: small; font-weight: normal;">(대략적 , 500자 제한)</a></label>
+          <textarea  class="form-control" name="saleBookStory" th:field="*{saleBookStory}" maxlength="500" style="width: 1200px; height: 200px;"></textarea>
+          <h4 th:errorclass="field-error" th:errors="*{saleBookStory}"></h4>
+        </div>
+
+        <div class="mb-3" >
+          <label style="font-weight: bold;">기타 <a style="font-size: small; font-weight: normal;">(하시고 싶은 말씀을 편하게 적으시면 됩니다. 100자 제한)</a></label>
+          <textarea  class="form-control"name="saleEtc" th:field="*{saleEtc}"  maxlength="100" style="width: 1200px; height: 200px;"></textarea>
+          <h4 th:errorclass="field-error" th:errors="*{saleEtc}"></h4>
+        </div>
+
+        <label style="font-weight: bold;">도서 사진 업로드</label><br>
+<!--        <input type="file" id="File" name="saleBookImg" multiple="multiple"/>-->
+        <hr style="margin-top: 30px; margin-bottom: 30px;">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label >페이지 분량</label>
+            <input type="number" name="saleBookPage" th:field="*{saleBookPage}" maxlength="50" class="form-control" style="width: 300px;"  >
+            <h4 th:errorclass="field-error" th:errors="*{saleBookPage}"></h4>
+          </div>
+          <div class="mb-3">
+            <label >책 권수</label>
+            <input type="number" name="saleBookCount" th:field="*{saleBookCount}" class="form-control" style="width: 300px;" >
+            <h4 th:errorclass="field-error" th:errors="*{saleBookCount}">ddd</h4>
+          </div>
+          <div class="mb-3">
+            <label >희망 가격</label>
+            <input type="number" name="saleBookPrice" th:field="*{saleBookPrice}" class="form-control" style="width: 300px;" required>
+            <h4 th:errorclass="field-error" th:errors="*{saleBookPrice}"></h4>
+          </div>
+        </div>
 
 
-      <button class="btn btn-success purchase-button" onclick="PayKGincis()" style="background-color: blue; border: none;">구매하기</button>
-      <button type="button" onclick="PayToss()" style="background-color: white; border-color: #007bff; border-radius: 10%;"><img src="/img/payment/toss.png" width="63px"></button>
-
+<!--        <div class="custom-control custom-checkbox">-->
+<!--          <input type="checkbox" class="custom-control-input" id="aggrement" required>-->
+<!--          <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>-->
+<!--        </div>-->
+        <div class="mb-4"></div>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">판매 글 올리기</button>
+        <p class="mt-5 mb-3 text-muted" style="text-align: center;">&copy; Our Book : 2023</p>
+      </form>
     </div>
   </div>
 </div>
-<hr>
 
 <footer class="container py-5">
   <div class="row">

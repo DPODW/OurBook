@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ourbook.shop.mapper.marketMapper.MarketMapper">
+
+    <insert id="saleBookInsert">
+        insert into market_books(UPLOADER_EMAIL,UPLOADER_NAME,SALE_BOOK_NAME,SALE_BOOK_WRITER,SALE_BOOK_STORY,SALE_ETC,SALE_BOOK_PAGE,SALE_BOOK_COUNT,SALE_BOOK_PRICE)
+        values(#{uploaderEmail},#{uploaderName},#{saleBookName},#{saleBookWriter},#{saleBookStory},#{saleEtc},#{saleBookPage},#{saleBookCount},#{saleBookPrice});
+    </insert>
+
+
+    <select id="findMarketList" resultType="com.ourbook.shop.dto.market.SaleBookInfo">
+        SELECT * FROM market_books;
+    </select >
+
+
+</mapper>
