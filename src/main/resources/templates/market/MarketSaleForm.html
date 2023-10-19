@@ -52,18 +52,18 @@
         <div class="row">
           <div class="col-md-6 mb-3">
             <label>도서 제목</label>
-            <input type="text" maxlength="20" name="saleBookName" th:field="*{saleBookName}" class="form-control" style="width: 540px;" >
+            <input type="text" maxlength="50" name="saleBookName" th:field="*{saleBookName}" class="form-control" style="width: 540px;" >
             <h4 th:errorclass="field-error" th:errors="*{saleBookName}"></h4>
           </div>
 
           <div class="col-md-6 mb-3">
-            <label>이름 (도서 시장에 보여질 이름)</label>
+            <label>이름 <a style="font-size: small; font-weight: normal; color: gray;">(도서 시장에 보여질 이름)</a></label>
             <input type="text" maxlength="12" name="uploaderName" th:field="*{uploaderName}" class="form-control" style="width: 540px;">
             <h4 th:errorclass="field-error" th:errors="*{uploaderName}"></h4>
           </div>
 
           <div class="col-md-6 mb-3">
-            <label>저자 (판매할 도서의 저자 , 다수 가능)</label>
+            <label>저자 <a style="font-size: small; font-weight: normal; color: gray;">(판매할 도서의 저자, 다수 가능)</a></label>
             <input type="text" maxlength="25" name="saleBookWriter" th:field="*{saleBookWriter}" class="form-control" style="width: 540px;">
             <h4 th:errorclass="field-error" th:errors="*{saleBookWriter}"></h4>
           </div>
@@ -71,13 +71,13 @@
         </div>
         <hr>
         <div class="mb-3" style="margin-top: 30px;">
-          <label style="font-weight: bold;">줄거리 <a style="font-size: small; font-weight: normal;">(대략적 , 500자 제한)</a></label>
+          <label style="font-weight: bold;">줄거리 <a style="font-size: small; font-weight: normal; color: gray;">(대략적 , 500자 제한)</a></label>
           <textarea  class="form-control" name="saleBookStory" th:field="*{saleBookStory}" maxlength="500" style="width: 1200px; height: 200px;"></textarea>
           <h4 th:errorclass="field-error" th:errors="*{saleBookStory}"></h4>
         </div>
 
         <div class="mb-3" >
-          <label style="font-weight: bold;">기타 <a style="font-size: small; font-weight: normal;">(하시고 싶은 말씀을 편하게 적으시면 됩니다. 100자 제한)</a></label>
+          <label style="font-weight: bold;">기타 <a style="font-size: small; font-weight: normal; color: gray;">(하시고 싶은 말씀을 편하게 적으시면 됩니다. 100자 제한)</a></label>
           <textarea  class="form-control"name="saleEtc" th:field="*{saleEtc}"  maxlength="100" style="width: 1200px; height: 200px;"></textarea>
           <h4 th:errorclass="field-error" th:errors="*{saleEtc}"></h4>
         </div>
@@ -88,7 +88,7 @@
         <div class="row">
           <div class="col-md-6 mb-3">
             <label >페이지 분량</label>
-            <input type="number" name="saleBookPage" th:field="*{saleBookPage}" maxlength="50" class="form-control" style="width: 300px;"  >
+            <input type="text" name="saleBookPage" th:field="*{saleBookPage}" maxlength="5" class="form-control" style="width: 300px;"  >
             <h4 th:errorclass="field-error" th:errors="*{saleBookPage}"></h4>
           </div>
           <div class="mb-3">
@@ -98,7 +98,7 @@
           </div>
           <div class="mb-3">
             <label >희망 가격</label>
-            <input type="number" name="saleBookPrice" th:field="*{saleBookPrice}" class="form-control" style="width: 300px;" required>
+            <input type="number" name="saleBookPrice" th:field="*{saleBookPrice}" class="form-control" style="width: 300px;">
             <h4 th:errorclass="field-error" th:errors="*{saleBookPrice}"></h4>
           </div>
         </div>

@@ -39,34 +39,34 @@
   <form th:action="@{/OurBook/market/sale}" th:method="GET">
   <button class="btn btn-primary btn-block" style=" display: block; margin: 0 auto; margin-bottom: 20px; margin-top: 20px;">판매글 올리기</button>
   </form>
-  <div class="card mb-4">
+  <div >
     <div class="card-body">
-      <table class="table table-hover">
+      <table class="table table-hover table-bordered">
         <thead>
         <tr>
-          <th>글번호</th>
-          <th>제목</th>
-          <th>작성자</th>
-          <th>작성일</th>
-          <th>찜!</th>
+          <th class="text-center" style="white-space: nowrap; width: 5%;">글번호</th>
+          <th class="text-center" style="width: 30%;">제목</th>
+          <th class="text-center" style="width: 10%;">작성자</th>
+          <th class="text-center" style="white-space: nowrap; width: 5%;">작성일</th>
+          <th class="text-center" style="width: 5%;">찜!</th>
         </tr>
         </thead>
         <tbody>
-
-          <tr th:each="marketOne : ${marketList}">
-            <td style="padding-right: 250px;" th:text="${marketOne.getSequence()}"></td>
-            <td><a style="text-decoration:none ; color: black;" th:text="${marketOne.getSaleBookName()}"></a></td>
-            <td style=" white-space: nowrap;" th:text="${marketOne.getSaleBookWriter()}"></td>
-            <td style=" white-space: nowrap;" >AJAX 에서 받아올 예정</td>
-            <td style=" white-space: nowrap;">찜 기능 구현 예정</td>
-          </tr>
-
+        <tr th:each="marketOne : ${marketList}">
+          <td class="text-center" th:text="${marketOne.getSequence()}"></td>
+          <td>
+            <a style="text-decoration: none; color: black;" th:text="${marketOne.getSaleBookName()}"></a>
+          </td>
+          <td class="text-center" th:text="${marketOne.getSaleBookWriter()}"></td>
+          <td class="text-center" th:text="${marketOne.getSaveTime()}"></td>
+          <td class="text-center">1</td>
+        </tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
-
+<hr>
 <footer class="container py-5">
   <div class="row">
     <div class="col-12 col-md">

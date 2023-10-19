@@ -3,8 +3,8 @@
 <mapper namespace="com.ourbook.shop.mapper.marketMapper.MarketMapper">
 
     <insert id="saleBookInsert">
-        insert into market_books(UPLOADER_EMAIL,UPLOADER_NAME,SALE_BOOK_NAME,SALE_BOOK_WRITER,SALE_BOOK_STORY,SALE_ETC,SALE_BOOK_PAGE,SALE_BOOK_COUNT,SALE_BOOK_PRICE)
-        values(#{uploaderEmail},#{uploaderName},#{saleBookName},#{saleBookWriter},#{saleBookStory},#{saleEtc},#{saleBookPage},#{saleBookCount},#{saleBookPrice});
+        insert into market_books(UPLOADER_EMAIL,UPLOADER_NAME,SALE_BOOK_NAME,SALE_BOOK_WRITER,SALE_BOOK_STORY,SALE_ETC,SALE_BOOK_PAGE,SALE_BOOK_COUNT,SALE_BOOK_PRICE,SAVE_TIME)
+        values(#{uploaderEmail},#{uploaderName},#{saleBookName},#{saleBookWriter},#{saleBookStory},#{saleEtc},#{saleBookPage},#{saleBookCount},#{saleBookPrice},NOW());
     </insert>
 
 

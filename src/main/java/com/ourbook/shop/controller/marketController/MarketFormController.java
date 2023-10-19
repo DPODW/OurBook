@@ -24,6 +24,7 @@ public class MarketFormController {
     @GetMapping("/OurBook/market")
     public String marketListView(Model model){
         List<SaleBookInfo> marketList = marketService.findMarketList();
+
         model.addAttribute("marketList",marketList);
         return "/market/MarketList";
     }
@@ -32,6 +33,7 @@ public class MarketFormController {
     @GetMapping("/OurBook/market/sale")
     public String marketSaleView(SaleBookInfo saleBookInfo,Model model){
         model.addAttribute("SaleBookInfo",saleBookInfo);
+        log.info("{}",saleBookInfo);
         return "/market/MarketSaleForm";
     }
 }

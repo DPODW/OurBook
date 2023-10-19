@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -26,7 +27,14 @@ public class MarketServiceImpl implements MarketService {
     @Override
     public List<SaleBookInfo> findMarketList() {
         List<SaleBookInfo> marketList = marketMapper.findMarketList();
-        log.info("{}",marketList);
+            marketList.stream()
+                .map(saleBookInfo -> {
+                    String time = saleBookInfo.getSaveTime();
+                    saleBookInfo.setSaveTime(time.substring(5,10));
+                    return saleBookInfo;
+                })
+                    .collect(Collectors.toList());
+            log.info("{}",marketList);
         return marketList;
     }
 }

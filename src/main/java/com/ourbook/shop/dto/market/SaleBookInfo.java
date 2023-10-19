@@ -3,6 +3,7 @@ package com.ourbook.shop.dto.market;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,7 +24,7 @@ public class SaleBookInfo {
     private String uploaderName;
 
     @NotBlank
-    @Length(min=2 , max= 20)
+    @Length(min=2 , max= 50)
     private String saleBookName;
 
     @NotBlank
@@ -39,23 +40,28 @@ public class SaleBookInfo {
     private String saleEtc;
 
     @NotBlank
+    @Pattern(regexp = "^[0-9]*$")
     @Length(max= 5)
     private String saleBookPage;
 
-    @Min(value = 1, message = "Value must be greater than or equal to 0")
-    @Max(value = 50)
+    @Min(value = 1)
+    @Max(value = 99)
     @Nullable
     private int saleBookCount;
 
-
+    @Min(value = 1)
+    @Max(value = 10000000)
     private BigDecimal saleBookPrice;
 
+    @Nullable
+    private String saveTime;
     @Nullable
     private int sequence;
 
 
 
-    public SaleBookInfo(String uploaderEmail, String uploaderName, String saleBookName, String saleBookWriter, String saleBookStory, String saleEtc, String saleBookPage, int saleBookCount, BigDecimal saleBookPrice, int sequence) {
+    public SaleBookInfo(String uploaderEmail, String uploaderName, String saleBookName, String saleBookWriter, String saleBookStory, String saleEtc, String saleBookPage, int saleBookCount, BigDecimal saleBookPrice,
+                        String saveTime,int sequence) {
         this.uploaderEmail = uploaderEmail;
         this.uploaderName = uploaderName;
         this.saleBookName = saleBookName;
@@ -65,6 +71,7 @@ public class SaleBookInfo {
         this.saleBookPage = saleBookPage;
         this.saleBookCount = saleBookCount;
         this.saleBookPrice = saleBookPrice;
+        this.saveTime = saveTime;
         this.sequence = sequence;
     }
 
