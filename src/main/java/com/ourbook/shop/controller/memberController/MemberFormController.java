@@ -64,8 +64,10 @@ public class MemberFormController {
         HttpSession session = request.getSession(false);
        if(session!=null && session.getAttribute("NAVER")!=null){
            SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
+
            viewModelHelper.naverMemberInfo(model,naverMember);
        }else {
+           log.info("{}",userDetail.getAuthorities());
            viewModelHelper.commonMemberInfo(model,userDetail);
        }
         return "member/JoinInfo";

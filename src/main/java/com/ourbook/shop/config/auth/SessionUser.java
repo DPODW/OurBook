@@ -19,13 +19,6 @@ public class SessionUser implements Serializable {
         this.id = naverMember.getBuyerId();
     } /** 네이버 회원 전용 세션 생성자 **/
 
-
-    public SessionUser(CommonMember commonMember) {
-        this.name = commonMember.getCommonName();
-        this.email = commonMember.getCommonEmail();
-        this.commonRole = commonMember.getCommonRole();
-    } /** 일반 회원 전용 세션 생성자 **/
-
     private String name;
 
     private String id;
@@ -34,5 +27,4 @@ public class SessionUser implements Serializable {
 
     private Role role;
 
-    private String commonRole;
 }

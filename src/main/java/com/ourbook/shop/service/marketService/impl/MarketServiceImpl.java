@@ -37,4 +37,9 @@ public class MarketServiceImpl implements MarketService {
             log.info("{}",marketList);
         return marketList;
     }
+
+    @Override
+    public SaleBookInfo findMarketBook(int number) {
+        return marketMapper.findMarketBook(number);
+    }
 }

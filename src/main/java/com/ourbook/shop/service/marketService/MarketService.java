@@ -12,4 +12,6 @@ public interface MarketService {
     void SaleBookInsert(SaleBookInfo saleBookInfo);
 
     List<SaleBookInfo> findMarketList();
+
+    SaleBookInfo findMarketBook(int number);
 }

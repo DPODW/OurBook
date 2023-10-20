@@ -1,9 +1,6 @@
 package com.ourbook.shop.dto.market;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -46,11 +43,12 @@ public class SaleBookInfo {
 
     @Min(value = 1)
     @Max(value = 99)
-    @Nullable
-    private int saleBookCount;
+    @NotNull
+    private Integer saleBookCount;
 
-    @Min(value = 1)
-    @Max(value = 10000000)
+    @DecimalMin("1.0")
+    @DecimalMax("10000000.0")
+    @NotNull
     private BigDecimal saleBookPrice;
 
     @Nullable
@@ -60,7 +58,7 @@ public class SaleBookInfo {
 
 
 
-    public SaleBookInfo(String uploaderEmail, String uploaderName, String saleBookName, String saleBookWriter, String saleBookStory, String saleEtc, String saleBookPage, int saleBookCount, BigDecimal saleBookPrice,
+    public SaleBookInfo(String uploaderEmail, String uploaderName, String saleBookName, String saleBookWriter, String saleBookStory, String saleEtc, String saleBookPage, Integer saleBookCount, BigDecimal saleBookPrice,
                         String saveTime,int sequence) {
         this.uploaderEmail = uploaderEmail;
         this.uploaderName = uploaderName;

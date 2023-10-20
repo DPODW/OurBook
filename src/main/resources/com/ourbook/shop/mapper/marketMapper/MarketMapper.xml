@@ -12,5 +12,9 @@
         SELECT * FROM market_books;
     </select >
 
+    <select id="findMarketBook" resultType="com.ourbook.shop.dto.market.SaleBookInfo">
+        SELECT * FROM market_books WHERE SEQUENCE = #{number}
+    </select >
+
 
 </mapper>

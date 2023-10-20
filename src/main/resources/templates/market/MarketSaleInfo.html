@@ -6,7 +6,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="generator" content="Hugo 0.104.2">
-  <title>Our book : 도서 판매</title>
+  <title>Our book : 도서 구경 중</title>
   <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/product/">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -20,13 +20,6 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="/js/accessCheck/LoginCheck.js"></script>
   <meta name="theme-color" content="#712cf9">
-  <style>
-    .field-error{
-      border-color: red;
-      color: red;
-      font-size: 14px;
-    }
-  </style>
 </head>
 
 <body>
@@ -47,63 +40,58 @@
   <div class="input-form-backgroud row">
     <div class="input-form col-md-12 mx-auto" >
 
-      <h4 class="mb-3">도서 판매</h4>
-      <form th:action="@{/OurBook/market/sale}" th:method="POST" th:object="${SaleBookInfo}">
+      <h4 class="mb-3">개인 도서</h4>
+      <form  th:method="POST" th:object="${saleBookInfo}">
         <div class="row">
           <div class="col-md-6 mb-3">
             <label>도서 제목</label>
-            <input type="text" maxlength="50" name="saleBookName" th:field="*{saleBookName}" class="form-control" style="width: 540px;" >
-            <h4 th:errorclass="field-error" th:errors="*{saleBookName}"></h4>
+            <input type="text" maxlength="50" name="saleBookName" th:field="*{saleBookName}" class="form-control" style="width: 540px;" readonly>
           </div>
 
           <div class="col-md-6 mb-3">
-            <label>이름 <a style="font-size: small; font-weight: normal; color: gray;">(도서 시장에 보여질 이름)</a></label>
-            <input type="text" maxlength="12" name="uploaderName" th:field="*{uploaderName}" class="form-control" style="width: 540px;">
-            <h4 th:errorclass="field-error" th:errors="*{uploaderName}"></h4>
+            <label>이름</label>
+            <input type="text" maxlength="12" name="uploaderName" th:field="*{uploaderName}" class="form-control" style="width: 540px;"readonly>
           </div>
 
           <div class="col-md-6 mb-3">
-            <label>저자 <a style="font-size: small; font-weight: normal; color: gray;">(판매할 도서의 저자, 다수 가능)</a></label>
-            <input type="text" maxlength="25" name="saleBookWriter" th:field="*{saleBookWriter}" class="form-control" style="width: 540px;">
-            <h4 th:errorclass="field-error" th:errors="*{saleBookWriter}"></h4>
+            <label>저자</label>
+            <input type="text" maxlength="25" name="saleBookWriter" th:field="*{saleBookWriter}" class="form-control" style="width: 540px;"readonly>
           </div>
 
         </div>
         <hr>
         <div class="mb-3" style="margin-top: 30px;">
-          <label style="font-weight: bold;">줄거리 <a style="font-size: small; font-weight: normal; color: gray;">(대략적 , 500자 제한)</a></label>
-          <textarea  class="form-control" name="saleBookStory" th:field="*{saleBookStory}" maxlength="500" style="width: 1200px; height: 200px;"></textarea>
-          <h4 th:errorclass="field-error" th:errors="*{saleBookStory}"></h4>
+          <label style="font-weight: bold;">줄거리</label>
+          <textarea  class="form-control" name="saleBookStory" th:field="*{saleBookStory}" maxlength="500" style="width: 1200px; height: 200px;" readonly></textarea>
         </div>
 
         <div class="mb-3" >
-          <label style="font-weight: bold;">기타 <a style="font-size: small; font-weight: normal; color: gray;">(하시고 싶은 말씀을 편하게 적으시면 됩니다. 100자 제한)</a></label>
-          <textarea  class="form-control"name="saleEtc" th:field="*{saleEtc}"  maxlength="100" style="width: 1200px; height: 200px;"></textarea>
-          <h4 th:errorclass="field-error" th:errors="*{saleEtc}"></h4>
+          <label style="font-weight: bold;">기타</label>
+          <textarea  class="form-control"name="saleEtc" th:field="*{saleEtc}"  maxlength="100" style="width: 1200px; height: 200px;" readonly></textarea>
         </div>
 
         <label style="font-weight: bold;">도서 사진 업로드</label><br>
-<!--        <input type="file" id="File" name="saleBookImg" multiple="multiple"/>-->
+        <!--        <input type="file" id="File" name="saleBookImg" multiple="multiple"/>-->
         <hr style="margin-top: 30px; margin-bottom: 30px;">
         <div class="row">
+<!--          input 태그 안에 초기값을 설정하려면 th:text 로는 가능하지 않기 때문에, field 혹은 value 를 사용해야 하는데, 타임리프 출력 뒤에 임의의 문자 (페이지 , 권 . .)-->
+<!--          를 붙히려면 value 의 ${} 안에서만 사용할 수 있음. 추가적으로 value 는 object 를 모르기 때문에 saleBookInfo 로 자세히 명시해줘야 함-->
           <div class="col-md-6 mb-3">
             <label >페이지 분량</label>
-            <input type="text" name="saleBookPage" th:field="*{saleBookPage}" maxlength="5" class="form-control" style="width: 300px;"  >
-            <h4 th:errorclass="field-error" th:errors="*{saleBookPage}"></h4>
+            <input type="text" name="saleBookPage" th:value="${saleBookInfo.saleBookPage} + ' 페이지'" maxlength="5" class="form-control" style="width: 300px;" readonly >
           </div>
           <div class="mb-3">
             <label >책 권수</label>
-            <input type="number" name="saleBookCount" th:field="*{saleBookCount}" class="form-control" style="width: 300px;" >
-            <h4 th:errorclass="field-error" th:errors="*{saleBookCount}">ddd</h4>
+            <input type="text" name="saleBookCount" th:value="${saleBookInfo.saleBookCount} + ' 권'" class="form-control" style="width: 300px;" readonly>
           </div>
           <div class="mb-3">
             <label >희망 가격</label>
-            <input type="number" name="saleBookPrice" th:field="*{saleBookPrice}" class="form-control" style="width: 300px;">
-            <h4 th:errorclass="field-error" th:errors="*{saleBookPrice}"></h4>
+            <input type="text" name="saleBookPrice" th:value="${saleBookInfo.saleBookPrice} + ' 원'" class="form-control" style="width: 300px;" readonly>
           </div>
         </div>
+
         <div class="mb-4"></div>
-        <button class="btn btn-primary btn-lg btn-block" type="submit">판매 글 올리기</button>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">구매 요청하기</button>
         <p class="mt-5 mb-3 text-muted" style="text-align: center;">&copy; Our Book : 2023</p>
       </form>
     </div>

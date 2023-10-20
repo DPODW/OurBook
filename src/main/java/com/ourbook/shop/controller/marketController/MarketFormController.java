@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -36,4 +37,14 @@ public class MarketFormController {
         log.info("{}",saleBookInfo);
         return "/market/MarketSaleForm";
     }
+
+    @GetMapping("/OurBook/market/sale/info/{number}")
+    public String marketSaleInfoView(@PathVariable int number,Model model){
+        SaleBookInfo saleBookInfo = marketService.findMarketBook(number);
+        saleBookInfo.setSaleBookPrice(saleBookInfo.getSaleBookPrice().setScale(0));
+
+        model.addAttribute("saleBookInfo", saleBookInfo);
+        return "market/MarketSaleInfo";
+    }
+
 }

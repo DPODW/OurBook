@@ -19,6 +19,7 @@
   <link rel="stylesheet" type="text/css" href="/css/main.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="/js/accessCheck/LoginCheck.js"></script>
+  <script type="text/javascript" src="/js/accessCheck/SellerRoleCheck.js"></script>
   <meta name="theme-color" content="#712cf9">
 </head>
 <body>
@@ -37,7 +38,7 @@
 <div class="container-fluid px-4">
   <h1 class="mt-4" style="text-align: center; font-size: 24px; margin-top: 20px;" >도서 시장</h1>
   <form th:action="@{/OurBook/market/sale}" th:method="GET">
-  <button class="btn btn-primary btn-block" style=" display: block; margin: 0 auto; margin-bottom: 20px; margin-top: 20px;">판매글 올리기</button>
+  <button class="btn btn-primary btn-block" id="roleCheck"  style=" display: block; margin: 0 auto; margin-bottom: 20px; margin-top: 20px;">판매글 올리기</button>
   </form>
   <div >
     <div class="card-body">
@@ -52,10 +53,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="marketOne : ${marketList}">
+          <tr th:each="marketOne : ${marketList}">
           <td class="text-center" th:text="${marketOne.getSequence()}"></td>
           <td>
-            <a style="text-decoration: none; color: black;" th:text="${marketOne.getSaleBookName()}"></a>
+            <a style="text-decoration: none; color: black;" th:text="${marketOne.getSaleBookName()}" th:href="@{/OurBook/market/sale/info/{number}(number=${marketOne.sequence})}"></a>
           </td>
           <td class="text-center" th:text="${marketOne.getSaleBookWriter()}"></td>
           <td class="text-center" th:text="${marketOne.getSaveTime()}"></td>

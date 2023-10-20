@@ -31,7 +31,7 @@ public class MarketController {
                                  @AuthenticationPrincipal CustomUserDetail userDetail, Model model ){
         HttpSession session = request.getSession(false);
         if (bindingResult.hasErrors()) {
-            model.addAttribute("saleBookInfo", saleBookInfo);
+            model.addAttribute("saleBook", saleBookInfo);
             return "/market/MarketSaleForm";
         }
 

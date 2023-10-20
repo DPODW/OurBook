@@ -15,4 +15,6 @@ public interface MarketMapper {
 
     List<SaleBookInfo> findMarketList();
 
+    SaleBookInfo findMarketBook(int number);
+
 }
