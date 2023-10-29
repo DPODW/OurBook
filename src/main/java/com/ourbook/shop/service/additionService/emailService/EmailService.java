@@ -1,4 +1,4 @@
-package com.ourbook.shop.service.emailService;
+package com.ourbook.shop.service.additionService.emailService;
 
 import com.ourbook.shop.dto.payment.PaymentInfo;
 import jakarta.mail.MessagingException;

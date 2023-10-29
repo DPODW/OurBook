@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.lang.Nullable;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 
@@ -16,7 +17,7 @@ public class SaleBookInfo {
 
 
     private String uploaderEmail;
-    @NotBlank(message = "dd")
+    @NotBlank
     @Length(min=2, max= 12)
     private String uploaderName;
 
@@ -36,10 +37,13 @@ public class SaleBookInfo {
     @Length(min=10 , max= 100)
     private String saleEtc;
 
-    @NotBlank
-    @Pattern(regexp = "^[0-9]*$")
-    @Length(max= 5)
-    private String saleBookPage;
+    @Nullable
+    private String saleImg;
+
+    @Min(value = 1)
+    @Max(value = 50000)
+    @NotNull
+    private Integer saleBookPage;
 
     @Min(value = 1)
     @Max(value = 99)
@@ -56,21 +60,19 @@ public class SaleBookInfo {
     @Nullable
     private int sequence;
 
-
-
-    public SaleBookInfo(String uploaderEmail, String uploaderName, String saleBookName, String saleBookWriter, String saleBookStory, String saleEtc, String saleBookPage, Integer saleBookCount, BigDecimal saleBookPrice,
-                        String saveTime,int sequence) {
+    public SaleBookInfo(String uploaderEmail, String uploaderName, String saleBookName, String saleBookWriter, String saleBookStory, String saleEtc, @Nullable String saleImg,
+                        Integer saleBookPage, Integer saleBookCount, BigDecimal saleBookPrice, @Nullable String saveTime, int sequence) {
         this.uploaderEmail = uploaderEmail;
         this.uploaderName = uploaderName;
         this.saleBookName = saleBookName;
         this.saleBookWriter = saleBookWriter;
         this.saleBookStory = saleBookStory;
         this.saleEtc = saleEtc;
+        this.saleImg = saleImg;
         this.saleBookPage = saleBookPage;
         this.saleBookCount = saleBookCount;
         this.saleBookPrice = saleBookPrice;
         this.saveTime = saveTime;
         this.sequence = sequence;
     }
-
 }

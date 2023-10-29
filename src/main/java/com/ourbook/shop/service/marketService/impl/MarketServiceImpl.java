@@ -2,10 +2,14 @@ package com.ourbook.shop.service.marketService.impl;
 
 import com.ourbook.shop.dto.market.SaleBookInfo;
 import com.ourbook.shop.mapper.marketMapper.MarketMapper;
+import com.ourbook.shop.service.additionService.fileUploadService.FileUploadService;
 import com.ourbook.shop.service.marketService.MarketService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,12 +19,20 @@ public class MarketServiceImpl implements MarketService {
 
     private final MarketMapper marketMapper;
 
-    public MarketServiceImpl(MarketMapper marketMapper) {
+    private final FileUploadService fileUploadService;
+
+    public MarketServiceImpl(MarketMapper marketMapper, FileUploadService fileUploadService) {
         this.marketMapper = marketMapper;
+        this.fileUploadService = fileUploadService;
     }
 
+    @Value("${findFile.dir}")
+    private String findFileDir;
+
     @Override
-    public void SaleBookInsert(SaleBookInfo saleBookInfo) {
+    public void SaleBookInsert(SaleBookInfo saleBookInfo, MultipartFile uploadImg) throws IOException {
+        String saleImgUrl = fileUploadService.uploadFile(uploadImg);
+        saleBookInfo.setSaleImg(findFileDir+saleImgUrl);
         marketMapper.saleBookInsert(saleBookInfo);
     }
 

@@ -1,7 +1,7 @@
 package com.ourbook.shop.controller.paymentController;
 
 import com.ourbook.shop.dto.payment.PaymentInfo;
-import com.ourbook.shop.service.emailService.EmailService;
+import com.ourbook.shop.service.additionService.emailService.EmailService;
 import com.ourbook.shop.service.paymentService.TossPaymentService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

@@ -59,23 +59,3 @@ function checkInput() {
         return true;
     }
 }
-
-
-/** 결제 완료 시간 생성 함수 **/
-function paymentSuccessTime(){
-    const currentDate = new Date();
-
-    // 날짜 및 시간 정보 얻기
-    const year = currentDate.getFullYear(); // 년도
-    const month = currentDate.getMonth() + 1; // 월 (0부터 시작하므로 1을 더함)
-    const day = currentDate.getDate(); // 일
-    const hours = currentDate.getHours(); // 시간
-    const minutes = currentDate.getMinutes(); // 분
-    const seconds = currentDate.getSeconds(); // 초
-
-    // 날짜와 시간을 YYYY-MM-DD HH:mm:ss 형식으로 포맷팅
-    const formattedDate = year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
-
-    return formattedDate;
-}
-

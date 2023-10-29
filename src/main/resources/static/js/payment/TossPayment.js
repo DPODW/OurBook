@@ -18,7 +18,6 @@ function requestPayToss() {
         paymentBookCount : $("#quantity").val(),
         buyerEmail : $("#buyerEmail").val(),
         orderNumber : 'o' + new Date().getTime() + randomOrderNumber(),
-        paymentTime : paymentSuccessTime()
     }
     TossPaymentInfoSave(paymentInfo);
     tossPayments.requestPayment('카드', {

@@ -8,6 +8,7 @@ import com.ourbook.shop.service.marketService.MarketService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Slf4j
 @Controller
@@ -26,22 +31,17 @@ public class MarketController {
         this.marketService = marketService;
     }
 
+
+
     @PostMapping("/OurBook/market/sale")
-    public String SaleBookInsert(@Validated @ModelAttribute SaleBookInfo saleBookInfo, BindingResult bindingResult, HttpServletRequest request,
-                                 @AuthenticationPrincipal CustomUserDetail userDetail, Model model ){
-        HttpSession session = request.getSession(false);
+    public String SaleBookInsert(@Validated @ModelAttribute SaleBookInfo saleBookInfo, BindingResult bindingResult,
+                                 @RequestParam("uploadImg") MultipartFile uploadImg, @AuthenticationPrincipal CustomUserDetail userDetail, Model model) throws IOException {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("saleBook", saleBookInfo);
+            model.addAttribute("saleBookInfo", saleBookInfo);
             return "/market/MarketSaleForm";
         }
-
-        if(session.getAttribute("NAVER")!=null){
-            SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-            saleBookInfo.setUploaderEmail(naverMember.getEmail());
-        }else{
-            saleBookInfo.setUploaderEmail(userDetail.getEmail());
-        }
-        marketService.SaleBookInsert(saleBookInfo);
+        saleBookInfo.setUploaderEmail(userDetail.getEmail());
+        marketService.SaleBookInsert(saleBookInfo,uploadImg);
         return "redirect:/OurBook/market";
     }
 }

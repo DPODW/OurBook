@@ -48,7 +48,7 @@
     <div class="input-form col-md-12 mx-auto" >
 
       <h4 class="mb-3">도서 판매</h4>
-      <form th:action="@{/OurBook/market/sale}" th:method="POST" th:object="${SaleBookInfo}">
+      <form th:action="@{/OurBook/market/sale}" th:method="POST" th:object="${saleBookInfo}" enctype="multipart/form-data">
         <div class="row">
           <div class="col-md-6 mb-3">
             <label>도서 제목</label>
@@ -83,18 +83,18 @@
         </div>
 
         <label style="font-weight: bold;">도서 사진 업로드</label><br>
-<!--        <input type="file" id="File" name="saleBookImg" multiple="multiple"/>-->
+        <input type="file" id="File" name="uploadImg"/>
         <hr style="margin-top: 30px; margin-bottom: 30px;">
         <div class="row">
           <div class="col-md-6 mb-3">
-            <label >페이지 분량</label>
-            <input type="text" name="saleBookPage" th:field="*{saleBookPage}" maxlength="5" class="form-control" style="width: 300px;"  >
+            <label >페이지 분량<a style="font-size: small; font-weight: normal; color: gray;"> (숫자로 입력 부탁드립니다.)</a></label>
+            <input type="text" name="saleBookPage" th:field="*{saleBookPage}" pattern="\d*" maxlength="5" class="form-control" style="width: 300px;"  >
             <h4 th:errorclass="field-error" th:errors="*{saleBookPage}"></h4>
           </div>
           <div class="mb-3">
-            <label >책 권수</label>
-            <input type="number" name="saleBookCount" th:field="*{saleBookCount}" class="form-control" style="width: 300px;" >
-            <h4 th:errorclass="field-error" th:errors="*{saleBookCount}">ddd</h4>
+            <label >책 권수<a style="font-size: small; font-weight: normal; color: gray;"> (숫자로 입력 부탁드립니다.)</a></label>
+            <input type="text" name="saleBookCount" th:field="*{saleBookCount}" pattern="\d*" maxlength="2" class="form-control" style="width: 300px;" >
+            <h4 th:errorclass="field-error" th:errors="*{saleBookCount}"></h4>
           </div>
           <div class="mb-3">
             <label >희망 가격</label>

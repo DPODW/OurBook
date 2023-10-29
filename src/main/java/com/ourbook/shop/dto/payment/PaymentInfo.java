@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.lang.Nullable;
 
 import java.math.BigDecimal;
 
@@ -36,6 +37,9 @@ public class PaymentInfo {
     String receiverPhoneNumber;
 
     String paymentNumber;
+
+
+    @Nullable
     String paymentTime;
 
 

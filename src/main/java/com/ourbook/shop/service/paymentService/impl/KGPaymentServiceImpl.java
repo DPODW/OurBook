@@ -5,7 +5,7 @@ import com.ourbook.shop.dto.payment.KGPaymentCancel;
 import com.ourbook.shop.dto.payment.PaymentInfo;
 import com.ourbook.shop.mapper.paymentMapper.PaymentMapper;
 import com.ourbook.shop.mapper.shopMapper.BookCartMapper;
-import com.ourbook.shop.service.emailService.EmailService;
+import com.ourbook.shop.service.additionService.emailService.EmailService;
 import com.ourbook.shop.service.paymentService.KGPaymentService;
 import com.ourbook.shop.service.paymentService.PaymentService;
 import jakarta.mail.MessagingException;
@@ -40,6 +40,7 @@ public class KGPaymentServiceImpl implements KGPaymentService {
     @Override
     public PaymentInfo paymentInfoSave(PaymentInfo paymentInfo,String imp_key,String imp_secret) {
        try {
+           log.info("{}",paymentInfo);
            validateAndSave(paymentInfo);
            return paymentInfo;
        }catch (Exception ex){

@@ -17,8 +17,7 @@ function requestPayKGincis() {
      bookId : $("#bookId").val(),
      paymentBookCount : $("#quantity").val(),
      buyerEmail : $("#buyerEmail").val(),
-     orderNumber : 'o' + new Date().getTime() + randomOrderNumber(),
-     paymentTime : paymentSuccessTime(),
+     orderNumber : 'o' + new Date().getTime() + randomOrderNumber()
     }
 
     IMP.request_pay({
