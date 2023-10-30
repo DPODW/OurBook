@@ -46,7 +46,7 @@ public class MarketServiceImpl implements MarketService {
                     return saleBookInfo;
                 })
                     .collect(Collectors.toList());
-            log.info("{}",marketList);
+
         return marketList;
     }
 

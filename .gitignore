@@ -18,7 +18,7 @@ bin/
 
 KGPaymentController.java
 TossPaymentServiceImpl.java
-
+resources/static/img/saleImg
 
 ### IntelliJ IDEA ###
 application.properties

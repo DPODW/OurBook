@@ -59,7 +59,7 @@
           </div>
 
         </div>
-        <hr>
+        <hr style="width: 1200px">
         <div class="mb-3" style="margin-top: 30px;">
           <label style="font-weight: bold;">줄거리</label>
           <textarea  class="form-control" name="saleBookStory" th:field="*{saleBookStory}" maxlength="500" style="width: 1200px; height: 200px;" readonly></textarea>
@@ -69,11 +69,9 @@
           <label style="font-weight: bold;">기타</label>
           <textarea  class="form-control"name="saleEtc" th:field="*{saleEtc}"  maxlength="100" style="width: 1200px; height: 200px;" readonly></textarea>
         </div>
-
-        <label style="font-weight: bold;">도서 사진 업로드</label><br>
-        <!--        <input type="file" id="File" name="saleBookImg" multiple="multiple"/>-->
-        <hr style="margin-top: 30px; margin-bottom: 30px;">
+        <hr style="margin-top: 30px; margin-bottom: 30px; width: 1200px;">
         <div class="row">
+
 <!--          input 태그 안에 초기값을 설정하려면 th:text 로는 가능하지 않기 때문에, field 혹은 value 를 사용해야 하는데, 타임리프 출력 뒤에 임의의 문자 (페이지 , 권 . .)-->
 <!--          를 붙히려면 value 의 ${} 안에서만 사용할 수 있음. 추가적으로 value 는 object 를 모르기 때문에 saleBookInfo 로 자세히 명시해줘야 함-->
           <div class="col-md-6 mb-3">
@@ -92,6 +90,12 @@
 
         <div class="mb-4"></div>
         <button class="btn btn-primary btn-lg btn-block" type="submit">구매 요청하기</button>
+        <img style="width: 350px;  height: 400px;margin-left: 850px; margin-top: -300px;   border: 2px solid gray; padding: 10px;" th:src="${saleBookInfo.saleImg}">
+        <p style="position: absolute; margin-top: -405px; margin-left: 770px; font-weight: bold;">도서 표지</p>
+        <p style="margin-left: 610px; margin-top: 20px;   font-size: small; font-weight: normal; color: gray; ">해당 도서표지는 개인 판매자가 등록한 표지입니다. OurBook 은 해당 도서를 소유하고 있지 않으므로,<br> 도서의 실제 상태에 대해 알지 못합니다. 구매를 원할 시,
+          구매 요청을 통하여 판매자와 필요한 정보를<br> 교환하시고, 사기에 각별히 유념하시길 바랍니다.
+        </p>
+
         <p class="mt-5 mb-3 text-muted" style="text-align: center;">&copy; Our Book : 2023</p>
       </form>
     </div>
