@@ -8,9 +8,6 @@ import java.io.IOException;
 @Service
 public interface FileUploadService {
 
-    String uploadFile(MultipartFile uploadImg) throws IOException;
+    String uploadImgFile(MultipartFile uploadImg) throws IOException;
 
-    String createSaleImg(String originalFilename);
-
-    String getExtension(String originalFilename);
 }

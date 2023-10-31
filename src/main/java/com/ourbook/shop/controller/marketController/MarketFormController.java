@@ -40,8 +40,6 @@ public class MarketFormController {
     public String marketSaleInfoView(@PathVariable int number,Model model){
         SaleBookInfo saleBookInfo = marketService.findMarketBook(number);
         saleBookInfo.setSaleBookPrice(saleBookInfo.getSaleBookPrice().setScale(0));
-        log.info("{}",saleBookInfo);
-        log.info("{}",saleBookInfo.getSaleImg());
         model.addAttribute("saleBookInfo", saleBookInfo);
         return "market/MarketSaleInfo";
     }

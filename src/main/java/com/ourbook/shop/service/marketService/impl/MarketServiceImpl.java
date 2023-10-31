@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class MarketServiceImpl implements MarketService {
-
+    /** Todo: AWS S3 로 구현 시, 수정 필요한 코드 위치 **/
     private final MarketMapper marketMapper;
 
     private final FileUploadService fileUploadService;
@@ -25,14 +25,10 @@ public class MarketServiceImpl implements MarketService {
         this.marketMapper = marketMapper;
         this.fileUploadService = fileUploadService;
     }
-
-    @Value("${findFile.dir}")
-    private String findFileDir;
-
     @Override
     public void SaleBookInsert(SaleBookInfo saleBookInfo, MultipartFile uploadImg) throws IOException {
-        String saleImgUrl = fileUploadService.uploadFile(uploadImg);
-        saleBookInfo.setSaleImg(findFileDir+saleImgUrl);
+        String uploadImgUrl = fileUploadService.uploadImgFile(uploadImg);
+        saleBookInfo.setSaleImg(uploadImgUrl); //실제 DB 에 저장되는건 AWS URL 이니까 변수명은 뒤에 URL 이 붙는게 좋다
         marketMapper.saleBookInsert(saleBookInfo);
     }
 
