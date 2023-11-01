@@ -6,7 +6,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="generator" content="Hugo 0.104.2">
-  <title>Our book : 도서 구경 중</title>
+  <title>Our book : 요청 성공</title>
   <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/product/">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -17,8 +17,12 @@
   <link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
   <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
   <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+  <script src="https://js.tosspayments.com/v1/payment"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="/js/accessCheck/LoginCheck.js"></script>
+  <script type="text/javascript" src="/js/bookQuantity/BookTotalCheck.js"></script>
+  <script type="text/javascript" src="/js/payment/IamPortPayment.js"></script>
   <meta name="theme-color" content="#712cf9">
 </head>
 
@@ -27,8 +31,8 @@
 <header class="site-header sticky-top py-1" style="background-color: #f8f9fa;">
   <nav class="container d-flex flex-column flex-md-row justify-content-between">
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
-    <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">내 정보</a>
-    <a class="py-2 d-none d-md-inline-block login-check" th:href="@{/OurBook/book/info/cart}" style="color: black; text-decoration: none;">장바구니</a>
+    <a class="py-2 d-none d-md-inline-block" th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">내 정보</a>
+    <a class="py-2 d-none d-md-inline-block login-check"  th:href="@{/OurBook/book/info/cart}" style="color: black; text-decoration: none;">장바구니</a>
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/market}" style="color: black; text-decoration: none;">도서 시장</a>
     <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책에 관하여</a>
@@ -36,72 +40,28 @@
   </nav>
 </header>
 
-<div class="container" style="margin-top: 40px">
-  <div class="input-form-backgroud row">
-    <div class="input-form col-md-12 mx-auto" >
 
-      <h4 class="mb-3">개인 도서</h4>
-      <form  th:method="POST" th:action="@{/OurBook/market/purchase/request/warning}" th:object="${saleBookInfo}">
-        <input type="hidden" name="uploaderEmail" th:value="${saleBookInfo.uploaderEmail}">
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label>도서 제목</label>
-            <input type="text" maxlength="50" name="saleBookName" th:field="*{saleBookName}" class="form-control" style="width: 540px;" readonly>
-          </div>
+<img src="/img/market/sendMailSuccess.png" alt="전송 사진" class="img-fluid mb-3" style="padding-left: 850px;  padding-top: 2%; width: 1100px;">
 
-          <div class="col-md-6 mb-3">
-            <label>이름</label>
-            <input type="text" maxlength="12" name="uploaderName" th:field="*{uploaderName}" class="form-control" style="width: 540px;"readonly>
-          </div>
 
-          <div class="col-md-6 mb-3">
-            <label>저자</label>
-            <input type="text" maxlength="25" name="saleBookWriter" th:field="*{saleBookWriter}" class="form-control" style="width: 540px;"readonly>
-          </div>
-
-        </div>
-        <hr style="width: 1200px">
-        <div class="mb-3" style="margin-top: 30px;">
-          <label style="font-weight: bold;">줄거리</label>
-          <textarea  class="form-control" name="saleBookStory" th:field="*{saleBookStory}" maxlength="500" style="width: 1200px; height: 200px;" readonly></textarea>
-        </div>
-
-        <div class="mb-3" >
-          <label style="font-weight: bold;">기타</label>
-          <textarea  class="form-control"name="saleEtc" th:field="*{saleEtc}"  maxlength="100" style="width: 1200px; height: 200px;" readonly></textarea>
-        </div>
-        <hr style="margin-top: 30px; margin-bottom: 30px; width: 1200px;">
-        <div class="row">
-
-<!--          input 태그 안에 초기값을 설정하려면 th:text 로는 가능하지 않기 때문에, field 혹은 value 를 사용해야 하는데, 타임리프 출력 뒤에 임의의 문자 (페이지 , 권 . .)-->
-<!--          를 붙히려면 value 의 ${} 안에서만 사용할 수 있음. 추가적으로 value 는 object 를 모르기 때문에 saleBookInfo 로 자세히 명시해줘야 함-->
-          <div class="col-md-6 mb-3">
-            <label >페이지 분량</label>
-            <input type="text" name="saleBookPage" th:value="${saleBookInfo.saleBookPage} + ' 페이지'" maxlength="5" class="form-control" style="width: 300px;" readonly >
-          </div>
-          <div class="mb-3">
-            <label >책 권수</label>
-            <input type="text" name="saleBookCount" th:value="${saleBookInfo.saleBookCount} + ' 권'" class="form-control" style="width: 300px;" readonly>
-          </div>
-          <div class="mb-3">
-            <label >희망 가격</label>
-            <input type="text" name="saleBookPrice" th:value="${saleBookInfo.saleBookPrice} + ' 원'" class="form-control" style="width: 300px;" readonly>
-          </div>
-        </div>
-
-        <div class="mb-4"></div>
-        <button class="btn btn-primary btn-lg btn-block" type="submit">구매 요청하기</button>
-        <img style="width: 350px;  height: 400px;margin-left: 850px; margin-top: -300px;   border: 2px solid gray; padding: 10px;" th:src="${saleBookInfo.saleImg}">
-        <p style="position: absolute; margin-top: -405px; margin-left: 770px; font-weight: bold;">도서 표지</p>
-        <p style="margin-left: 610px; margin-top: 20px;   font-size: small; font-weight: normal; color: gray; ">해당 도서표지는 개인 판매자가 등록한 표지입니다. OurBook 은 해당 도서를 소유하고 있지 않으므로,<br> 도서의 실제 상태에 대해 알지 못합니다. 구매를 원할 시,
-          구매 요청을 통하여 판매자와 필요한 정보를<br> 교환하시고, 사기에 각별히 유념하시길 바랍니다.
-        </p>
-
-        <p class="mt-5 mb-3 text-muted" style="text-align: center;">&copy; Our Book : 2023</p>
-      </form>
+<div style="margin-top: -20px;">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="alert text-center custom-alert" role="alert">
+        <h4 class="alert-heading">판매자에게 요청 메일이 전송되었습니다!</h4>
+        <hr>
+        <p style="font-size: 14px; line-height: 1.4;">개인 판매자에게 정상적으로 구매 요청 메일이 발송되었습니다. 귀하(구매자) 께서는 개인 판매자에게<br>판매 도서에 대한 추가 정보를 물어볼
+          권리가 있으니, 그 점 참고하셔서 만족한 거래를 하시기 바랍니다.</p>
+        <p  style="font-size: 14px; line-height: 1.4; color: red;">일정 기간 회신이 없거나(3일 이상) 판매거부 의사를 밝힐 시, <a href="#" class="alert-link" style="color: red;">고객 지원팀에 문의</a> 해주세요.</p>
+        <hr>
+        <p style="position: absolute; top: 200px; left: 75px;" th:text="'구매 요청 도서 제목 : '+ ${purchaseRequest.saleBookName}"></p>
+        <p style="position: absolute; top: 250px; left: 75px;" th:text="'회신 받을 이메일 주소 : '+${purchaseRequest.receiverEmail}"></p>
+      </div>
     </div>
   </div>
+  <button class="btn btn-success" style="margin-top: 90px; margin-left: 900px; ">메인으로</button>
 </div>
+
 
 <footer class="container py-5">
   <div class="row">

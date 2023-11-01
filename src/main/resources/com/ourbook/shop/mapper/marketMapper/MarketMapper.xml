@@ -9,7 +9,7 @@
 
 
     <select id="findMarketList" resultType="com.ourbook.shop.dto.market.SaleBookInfo">
-        SELECT * FROM market_books;
+        SELECT * FROM market_books ORDER BY SEQUENCE DESC ;
     </select >
 
     <select id="findMarketBook" resultType="com.ourbook.shop.dto.market.SaleBookInfo">
