@@ -37,14 +37,16 @@ public class PaymentInfo {
     String receiverPhoneNumber;
 
     String paymentNumber;
-
-
     @Nullable
     String paymentTime;
 
+    @Nullable
+    int sequence;
+
 
     public PaymentInfo(String orderNumber, String bookName, String bookId, int paymentBookCount, BigDecimal paymentPrice, String buyerEmail,
-                       String buyerName, String receiverName,String receiverPostCode, String receiverAddress, String receiverPhoneNumber, String paymentNumber, String paymentTime) {
+                       String buyerName, String receiverName,String receiverPostCode, String receiverAddress, String receiverPhoneNumber,
+                       String paymentNumber, String paymentTime,int sequence) {
         this.orderNumber = orderNumber;
         this.bookName = bookName;
         this.bookId = bookId;
@@ -58,6 +60,7 @@ public class PaymentInfo {
         this.receiverPhoneNumber = receiverPhoneNumber;
         this.paymentNumber = paymentNumber;
         this.paymentTime = paymentTime;
+        this.sequence=sequence;
     }
 
 }

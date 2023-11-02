@@ -45,7 +45,7 @@ public class MarketController {
             return "/market/MarketSaleForm";
         }
         saleBookInfo.setUploaderEmail(userDetail.getEmail());
-        marketService.SaleBookInsert(saleBookInfo,uploadImg);
+        marketService.saleBookInsert(saleBookInfo,uploadImg);
         return "redirect:/OurBook/market";
     }
 
@@ -70,6 +70,7 @@ public class MarketController {
 
     @PostMapping("/OurBook/market/purchase/request")
     public String BookPurchaseRequest(@ModelAttribute PurchaseRequest purchaseRequest, Model model) throws MessagingException {
+        marketService.purchaseRequestInsert(purchaseRequest);
         emailService.sendPurchaseRequestMessage(purchaseRequest);
         model.addAttribute("purchaseRequest",purchaseRequest);
         return "market/MarketSaleSuccess";

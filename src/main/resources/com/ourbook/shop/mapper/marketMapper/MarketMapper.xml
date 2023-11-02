@@ -7,6 +7,11 @@
         values(#{uploaderEmail},#{uploaderName},#{saleBookName},#{saleBookWriter},#{saleBookStory},#{saleEtc},#{saleImg},#{saleBookPage},#{saleBookCount},#{saleBookPrice},NOW());
     </insert>
 
+    <insert id="purchaseRequestInsert">
+        insert into purchase_request_history(UPLOADER_EMAIL,UPLOADER_NAME,RECEIVER_EMAIL,RECEIVER_NAME,SALE_BOOK_NAME,SAVE_TIME)
+        values(#{uploaderEmail},#{uploaderName},#{receiverEmail},#{receiverName},#{saleBookName},NOW());
+    </insert>
+
 
     <select id="findMarketList" resultType="com.ourbook.shop.dto.market.SaleBookInfo">
         SELECT * FROM market_books ORDER BY SEQUENCE DESC ;
@@ -16,5 +21,8 @@
         SELECT * FROM market_books WHERE SEQUENCE = #{number}
     </select >
 
+    <select id="findPurchaseRequestHistory" resultType="com.ourbook.shop.dto.market.PurchaseRequest">
+        SELECT * FROM purchase_request_history ORDER BY SEQUENCE DESC;
+    </select>
 
 </mapper>

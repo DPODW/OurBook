@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $(".login-check").click(function(event) {
+    $(".payment-cart-login-check").click(function(event) {
         event.preventDefault();
         const buttonId = $(this).attr("id");
         // 폼의 기본 동작인 페이지 이동을 막습니다.

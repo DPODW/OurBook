@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $("#CartCheck").click(function(event) {
+    $("#CartAddLoginCheck").click(function(event) {
         event.preventDefault();
         // 폼의 기본 동작인 페이지 이동을 막습니다.
         $.ajax({

@@ -20,7 +20,7 @@
     </select>
 
     <select id="findPaymentHistory" resultType="com.ourbook.shop.dto.payment.PaymentInfo">
-        select * from payment_info where BUYER_EMAIL = #{email};
+        select * from payment_info where BUYER_EMAIL = #{email} ORDER BY SEQUENCE DESC;
     </select>
 
 </mapper>
