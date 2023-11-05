@@ -13,6 +13,7 @@
             </otherwise>
         </choose>
     </insert>
+
     <insert id="naverInsert">
         insert into buyer_tb(BUYER_NAME,BUYER_ID,BUYER_PWD,BUYER_EMAIL,BUYER_ROLE)
         values(#{buyerName},#{buyerId},#{buyerPwd},#{buyerEmail},#{buyerRole});
@@ -40,7 +41,7 @@
 <!--DELETE 에서의 role 은 userDetail 에서 가져온거라서, "[권한]" 형식으로 받음.userDetail-->
     <delete id="commonDelete" parameterType="String">
         <choose>
-            <when test="role == '[BUYER]'">
+            <when test="role == 'BUYER'">
                 DELETE FROM buyer_tb WHERE BUYER_ID = #{deleteValue}
             </when>
             <otherwise>

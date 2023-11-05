@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ourbook.shop.mapper.inquiryMapper.InquiryMapper">
+
+    <insert id="inquirySave">
+        insert into inquiry_history(INQUIRY_TYPE,INQUIRY_WRITER,INQUIRY_NAME,INQUIRY_CONTENT,SAVE_TIME)
+        values(#{inquiryType},#{inquiryWriter},#{inquiryName},#{inquiryContent},NOW());
+    </insert>
+
+
+    <select id="findInquiryList" resultType="com.ourbook.shop.dto.inquiry.InquiryInfo">
+        SELECT * FROM inquiry_history ORDER BY SEQUENCE DESC ;
+    </select >
+
+</mapper>

@@ -34,8 +34,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(commonMember.getCommonRole()));
-
-
         return CustomUserDetail.builder()
                 .id(commonMember.getCommonId())
                 .password(commonMember.getCommonPwd())

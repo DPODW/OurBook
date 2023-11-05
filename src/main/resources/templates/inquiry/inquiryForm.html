@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>Our book : 도서 시장</title>
+    <title>Our book : 도서 판매</title>
     <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/product/">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -19,10 +19,17 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="/js/accessCheck/PaymentAndCartLoginCheck.js"></script>
-    <script type="text/javascript" src="/js/accessCheck/SellerRoleCheck.js"></script>
-    <meta name="theme-color" content="#712cf9">
+    <meta name="theme-color" content="#712cf9">  <style>
+    .field-error{
+        border-color: red;
+        color: red;
+        font-size: 14px;
+    }
+</style>
+
 </head>
-<body>
+
+<body style="overflow-x: hidden">
 
 <header class="site-header sticky-top py-1" style="background-color: #f8f9fa;">
     <nav class="container d-flex flex-column flex-md-row justify-content-between">
@@ -32,57 +39,66 @@
         <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
         <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/market}" style="color: black; text-decoration: none;">도서 시장</a>
         <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책에 관하여</a>
+        <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">문의</a>
     </nav>
 </header>
 
-<div class="container-fluid px-4">
-    <h1 class="mt-4" style="margin-left: 440px; font-size: 30px; margin-top: 20px;">고객 문의</h1>
-    <p style="margin-left: 440px; font-size: 14px;  white-space:nowrap;">고객의 소중한 소리를 귀기울여 듣는 OurBook이 되겠습니다.</p>
+<div class="container" style="margin-top: 40px; ">
+    <div class="input-form-backgroud row">
+        <div class="input-form col-md-12 mx-auto" >
+
+            <h4 class="mb-3" style="margin-left: 220px;">문의</h4>
+            <form th:action="@{/OurBook/inquiry/form}" th:method="POST">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label style="margin-left: 220px;">문의 종류</label> <br>
+                        <select name="inquiryType" style="width: 350px; margin-left: 220px;">
+                            <option>선택</option>
+                            <option>배송 문의</option>
+                            <option>결제 문의</option>
+                            <option>제품 문의</option>
+                            <option>도서시장 문의</option>
+                            <option>기타 문의</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label style="margin-left: 120px;">문의자 ID (네이버 회원은 이메일 주소)</label>
+                        <input type="text" maxlength="12" name="inquiryWriter" th:value="*{inquiryWriter}"  class="form-control" style="width: 350px; margin-left:120px;" readonly>
+                    </div>
+
+                    <div class="col-md-6 mb-3" style="margin-left: 220px;">
+                        <label >문의 제목</label>
+                        <input type="text" maxlength="25" name="inquiryName" th:field="*{inquiryInfo.inquiryName}" class="form-control" style="width: 350px;">
+                        <h4 th:errorclass="field-error" th:errors="*{inquiryInfo.inquiryName}"></h4>
+                    </div>
+
+                    <p style="margin-top: -54px; margin-left: 780px; font-size: small; color: gray;">폭언 , 욕설 등 부적절한 내용의 문의는 사전통보<br> 없이 삭제될수 있음을 알려드립니다.</p>
+
+                </div>
+                <hr style="width: 910px; margin-left: 220px;">
+                <div class="mb-3" style="margin-top: 30px; margin-left: 220px; position: relative;">
+                    <label style="font-weight: bold;">문의 내용 <a style="font-size: small; font-weight: normal; color: gray;">(50자 제한)</a></label>
+                    <textarea class="form-control" name="inquiryContent" th:field="*{inquiryInfo.inquiryContent}"  maxlength="50" style="width: 470px; height: 200px;"></textarea>
+                    <h4 th:errorclass="field-error" th:errors="*{inquiryInfo.inquiryContent}"></h4>
+                    <img src="/img/inquiry/customer.png" alt="" style="width: 300px; position: absolute; top: -1px; margin-left: 550px;">
+                </div>
+                <div class="mb-4"></div>
+                <button class="btn btn-primary btn-lg btn-block" type="submit"  style="margin-left: 219px;">문의 글 올리기</button>
+                <p class="mt-5 mb-3 text-muted" style="text-align: center;">&copy; Our Book : 2023</p>
+            </form>
+        </div>
+<!--        <div th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" style="margin-left: 220px;">-->
+<!--            <hr style="width: 910px;">-->
+<!--            <h4 class="mb-3">답변 (관리자 전용) </h4>-->
+<!--            <p style="margin-top: -40px; margin-left: 230px;">관리자: 닉네임</p>-->
+<!--            <label style="font-weight: bold;">답변 내용 <a style="font-size: small; font-weight: normal; color: gray;">(50자 제한)</a></label>-->
+<!--            <textarea class="form-control" name="adminContent"  maxlength="50" style="width: 470px; height: 200px;"></textarea>-->
+<!--            <button type="button" class="btn btn-secondary btn-lg" style="margin-top: 20px;">답변 등록</button>-->
+<!--        </div>-->
+
+    </div>
 </div>
-<div class="center-box">
-    <img src="/img/inquiry/admin.png" style="width: 450px; position: absolute;">
-    <h2 style="margin-left: 500px; padding-top: 20px;">전체 문의</h2>
-    <hr style="width: 500px; margin-left: 500px;">
-    <p style="margin-left: 500px;">제품 , 배송 등 궁금한 사항이 있으시면 아래에 있는 문의 게시판을 <br>이용해주시길 바랍니다.</p>
-
-    <h2 style="margin-left: 500px; padding-top: 50px;">상세 문의</h2>
-    <hr style="width: 500px; margin-left: 500px;">
-    <h4 style="margin-left: 500px;">ourbook.servicecenter@gmail.com</h4>
-    <p style="margin-left: 500px;">보다 상세한 문의가 필요한 경우, <span style="color: red;">상단의 이메일 주소</span>로 문의 메일을 <br> 보내주시면 빠른 시일 내 도움을 드리도록 하겠습니다.</p>
-</div>
-
-<hr style="width: 1000px; margin-left: 450px; margin-top: 2.5%; margin-bottom: 1%;">
-
-<div class="card-body" style="width: 1500px; padding-left: 452px; padding-right: 48px;">
-    <h4 style="margin-left: 450px;">전체 문의</h4>
-    <form th:method="GET" th:action="@{/OurBook/inquiry/form}">
-    <button  class="btn btn-secondary" style="margin-left: 90%; margin-top: -70px;">문의하기</button>
-    </form>
-    <table class="table table-hover table-bordered">
-        <thead>
-        <tr>
-            <th class="text-center" style="white-space: nowrap; width: 5%;">문의 번호</th>
-            <th class="text-center" style="width: 30%;">문의</th>
-            <th class="text-center" style="width: 10%;">작성자</th>
-            <th class="text-center" style="white-space: nowrap; width: 10%;">작성일</th>
-            <th class="text-center" style="width: 6%;">답변 여부</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="inquiryOne : ${inquiryList}">
-            <td class="text-center" th:text="${inquiryOne.sequence}"></td>
-            <td>
-                <a style="text-decoration: none; color: black;" th:text="${inquiryOne.inquiryName}"></a>
-            </td>
-            <td class="text-center" th:text="${inquiryOne.inquiryWriter}"></td>
-            <td class="text-center" th:text="${inquiryOne.saveTime}"></td>
-            <td class="text-center">o</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
-
 
 <footer class="container py-5">
     <div class="row">

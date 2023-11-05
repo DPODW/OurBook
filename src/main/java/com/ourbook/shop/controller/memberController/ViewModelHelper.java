@@ -4,10 +4,15 @@ import com.ourbook.shop.config.auth.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.member.CommonMember;
 import com.ourbook.shop.dto.member.Role;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
+import java.util.Collection;
+
+@Slf4j
 @Component
 public class ViewModelHelper {
 
@@ -19,10 +24,17 @@ public class ViewModelHelper {
     }
 
     protected void translateRole(Model model, CustomUserDetail userDetail) {
-        if(userDetail.getAuthorities().toString().equals("[SELLER]")){
-            model.addAttribute("commonRole", Role.SELLER.getValue());
-        }else{
-            model.addAttribute("commonRole",Role.BUYER.getValue());
+        Collection<? extends GrantedAuthority> authorities = userDetail.getAuthorities();
+        switch (authorities.iterator().next().toString()){
+            case "SELLER":
+                model.addAttribute("commonRole", Role.SELLER.getValue());
+                break;
+            case "BUYER":
+                model.addAttribute("commonRole", Role.BUYER.getValue());
+                break;
+            case "ADMIN":
+                model.addAttribute("commonRole", Role.ADMIN.getValue());
+                break;
         }
     }
 

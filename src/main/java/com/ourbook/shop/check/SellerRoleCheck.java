@@ -20,7 +20,7 @@ public class SellerRoleCheck {
 
     @PostMapping("/roleCheck")
     public ResponseEntity<String> checkSellerRole(@AuthenticationPrincipal CustomUserDetail userDetail ){
-        if(userDetail!=null && userDetail.getAuthorities().toString().equals("[SELLER]")){
+        if(userDetail!=null && userDetail.getAuthorities().iterator().next().equals("SELLER")){
             return ResponseEntity.ok().body("판매자 권한 있음");
         }else{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("판매자 권한 없음");

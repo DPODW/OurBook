@@ -56,7 +56,7 @@ public class MarketFormController {
     private boolean checkSellerRole(CustomUserDetail userDetail, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         SessionUser naver = (SessionUser) session.getAttribute("NAVER");
-        if ((userDetail == null || !userDetail.getAuthorities().toString().equals("[SELLER]")) &&
+        if ((userDetail == null || !userDetail.getAuthorities().iterator().next().equals("SELLER")) &&
                 (naver == null || !naver.getRole().equals("SELLER"))) {
             return false;
         }

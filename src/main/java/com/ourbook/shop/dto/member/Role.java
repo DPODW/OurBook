@@ -6,7 +6,9 @@ import lombok.Getter;
 public enum Role {
 
     BUYER("ROLE_BUYER", "구매자"),
-    SELLER("ROLE_SELLER","판매자");
+    SELLER("ROLE_SELLER","판매자"),
+
+    ADMIN("ROLE_ADMIN", "관리자");
 
 
 

@@ -97,7 +97,9 @@ public class MemberController {
             SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
             memberService.delete(naverMember.getEmail(),naverMember.getRole().getValue());
         }else
-            memberService.delete(userDetail.getUsername(),userDetail.getAuthorities().toString());
+            memberService.delete(userDetail.getUsername(),userDetail.getAuthorities().iterator().next().toString());
+            //toString 하여서 넘기는 이유는, naverMember 와 UserDetail 의 role 타입이 다른데, service 를 공유해서 사용해야 함.
+            //그래서 두 객체를 모두 문자로 변환 후, String 으로 넘겨버리는 것. (naver == Role / userDetail == Collection<? extends GrantedAuthority>)
         memberLogout(request);
         return "redirect:/OurBook";
     }
