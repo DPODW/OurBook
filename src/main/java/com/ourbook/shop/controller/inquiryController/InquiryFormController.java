@@ -2,15 +2,18 @@ package com.ourbook.shop.controller.inquiryController;
 
 import com.ourbook.shop.config.auth.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
+import com.ourbook.shop.dto.inquiry.InquiryAnswerInfo;
 import com.ourbook.shop.dto.inquiry.InquiryInfo;
 import com.ourbook.shop.service.inquiryService.InquiryService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -43,6 +46,21 @@ public class InquiryFormController {
         }
         model.addAttribute("inquiryInfo",inquiryInfo);
         return "inquiry/inquiryForm";
+    }
+
+    @GetMapping("/OurBook/inquiry/{number}")
+    public String InquiryContent(@PathVariable int number,Model model,@AuthenticationPrincipal CustomUserDetail userDetail){
+        InquiryInfo inquiryInfo = inquiryService.findInquiryContent(number);
+        model.addAttribute("inquiryInfo",inquiryInfo);
+        InquiryAnswerInfo inquiryAnswer = inquiryService.findInquiryAnswer(inquiryInfo.getSequence(), inquiryInfo.getInquiryWriter());
+
+        if(userDetail!=null && userDetail.getAuthorities().iterator().next().toString().equals("ADMIN")){
+            model.addAttribute("adminId",userDetail.getUsername());
+        }
+        if(inquiryAnswer!=null){
+            model.addAttribute("inquiryAnswer",inquiryAnswer);
+        }
+        return "inquiry/InquiryContent";
     }
 
 

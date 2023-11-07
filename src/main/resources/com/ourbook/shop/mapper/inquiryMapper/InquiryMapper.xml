@@ -12,4 +12,26 @@
         SELECT * FROM inquiry_history ORDER BY SEQUENCE DESC ;
     </select >
 
+
+    <select id="findInquiryContent" resultType="com.ourbook.shop.dto.inquiry.InquiryInfo">
+        SELECT * FROM inquiry_history WHERE SEQUENCE = #{number}
+    </select >
+
+
+    <insert id="inquiryAnswerSave">
+        insert into inquiry_answer_history(INQUIRY_WRITER,INQUIRY_NUMBER,ADMIN_NAME,ADMIN_CONTENT,SAVE_TIME)
+        values(#{inquiryWriter},#{inquiryNumber},#{adminName},#{adminContent},NOW());
+    </insert>
+
+    <update id="inquiryAnswerUpdate" parameterType="com.ourbook.shop.dto.inquiry.InquiryAnswerInfo">
+        update inquiry_answer_history
+        set INQUIRY_WRITER = #{inquiryWriter} , ADMIN_NAME = #{adminName} , ADMIN_CONTENT = #{adminContent} , SAVE_TIME = NOW()
+        where INQUIRY_NUMBER = #{inquiryNumber};
+    </update>
+
+
+    <select id="findInquiryAnswer" resultType="com.ourbook.shop.dto.inquiry.InquiryAnswerInfo">
+        SELECT * FROM inquiry_answer_history WHERE INQUIRY_NUMBER = #{inquiryNumber} AND INQUIRY_WRITER = #{inquiryWriter};
+    </select >
+
 </mapper>

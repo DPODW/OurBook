@@ -2,7 +2,6 @@ package com.ourbook.shop.check;
 
 import com.ourbook.shop.mapper.memberMapper.FindInfoMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,12 +12,12 @@ import java.util.Map;
 
 @Slf4j
 @RestController
-public class DuplicateCheckApi {
+public class DuplicateCheck {
 
     private final FindInfoMapper findInfoMapper;
 
-    @Autowired
-    public DuplicateCheckApi(FindInfoMapper findInfoMapper) {
+
+    public DuplicateCheck(FindInfoMapper findInfoMapper) {
         this.findInfoMapper = findInfoMapper;
     }
 

@@ -1,0 +1,145 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>Our book : 도서 문의</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="/js/accessCheck/CartAndPaymentCheck.js"></script>
+</head>
+
+<body style="overflow-x: hidden">
+
+<header class="site-header sticky-top py-1" style="background-color: #f8f9fa;">
+  <nav class="container d-flex flex-column flex-md-row justify-content-between">
+    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
+    <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">내 정보</a>
+    <a class="py-2 d-none d-md-inline-block payment-cart-login-check" th:href="@{/OurBook/book/info/cart}" style="color: black; text-decoration: none;">장바구니</a>
+    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
+    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/market}" style="color: black; text-decoration: none;">도서 시장</a>
+    <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책에 관하여</a>
+    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/inquiry}" style="color: black; text-decoration: none;">문의</a>
+  </nav>
+</header>
+
+<div class="container" style="margin-top: 40px; ">
+  <div class="input-form-backgroud row">
+    <div class="input-form col-md-12 mx-auto" >
+
+      <h4 class="mb-3" style="margin-left: 220px;">문의</h4>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label style="margin-left: 220px;">문의 종류</label> <br>
+          <input  class="form-control" type="text"style="width: 350px; margin-left: 220px;" th:value="*{inquiryInfo.inquiryType}" readonly>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label style="margin-left: 120px;">문의자 ID (네이버 회원은 이메일 주소)</label>
+          <input type="text" maxlength="12" name="inquiryWriter"  class="form-control" style="width: 350px;  margin-left:120px;"th:value="*{inquiryInfo.inquiryWriter}" readonly>
+        </div>
+
+        <div class="col-md-6 mb-3" style="margin-left: 220px;">
+          <label >문의 제목</label>
+          <input type="text" maxlength="25" name="inquiryName" class="form-control" style="width: 350px;"  th:value="*{inquiryInfo.inquiryName}"readonly>
+        </div>
+
+        <p style="margin-top: -54px; margin-left: 780px; font-size: small; color: gray;">폭언 , 욕설 등 부적절한 내용의 문의는 사전통보<br> 없이 삭제될수 있음을 알려드립니다.</p>
+
+      </div>
+      <hr style="width: 910px; margin-left: 220px;">
+      <div class="mb-3" style="margin-top: 30px; margin-left: 220px; position: relative;">
+        <label style="font-weight: bold;">문의 내용</label>
+        <textarea class="form-control" name="inquiryContent"  maxlength="50" style="width: 470px; height: 200px;" th:text="${inquiryInfo.inquiryContent}" readonly></textarea>
+        <img src="/img/inquiry/customer.png" alt="" style="width: 230px; position: absolute; top: -1px; margin-left: 640px;">
+      </div>
+      <hr style="width: 910px; margin-left: 220px; margin-top: 90px;">
+    </div>
+
+<!-- 답변 대기 상태-->
+    <div th:unless="${inquiryAnswer}">
+      <p style="text-align: center; font-weight: bold;">답변 대기 중 입니다. 빠른 시일 내에 답변해드리겠습니다.</p>
+      <img src="/img/inquiry/inquiryWait.png" style="width: 200px; margin-left: 560px;">
+    </div>
+<!-- 답변 대기 상태-->
+
+
+<!--답변 완료 상태-->
+    <div  th:if="${inquiryAnswer}" style="margin-left: 220px; margin-top: 50px;">
+      <p name="adminName" style="margin-top: -40px; font-weight: bold">OurBook 관리자 작성 </p>
+      <input type="hidden" name="adminName" th:value="*{adminId}">
+      <label style="font-weight: bold;">답변 내용</label>
+      <img src="/img/inquiry/inquiryAnswer.png" alt="" style="width: 250px; position: absolute; margin-top: -25px;  margin-left: 590px;">
+      <textarea class="form-control" name="adminContent" th:text="${inquiryAnswer.adminContent}"  maxlength="50" style="width: 470px; height: 200px;" readonly></textarea>
+    </div>
+<!--답변 완료 상태-->
+
+<!--답변 작성 상태 (ADMIN)-->
+    <div th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" style="margin-left: 220px;">
+      <form th:method="POST" th:action="@{/OurBook/inquiry/admin/answer}">
+        <input type="hidden" name="inquiryWriter" th:value="*{inquiryInfo.inquiryWriter}">
+        <input type="hidden" name="inquiryNumber" th:value="*{inquiryInfo.sequence}">
+      <hr style="width: 910px; margin-top: 50px;">
+      <h4 class="mb-3">답변 (관리자 전용) </h4>
+      <p name="adminName" style="margin-top: -40px; margin-left: 230px;" th:text="'관리자 ID: '+${adminId}"></p>
+        <input type="hidden" name="adminName" th:value="*{adminId}">
+      <label style="font-weight: bold;">답변 내용 <a style="font-size: small; font-weight: normal; color: gray;">(50자 제한)</a></label>
+      <textarea class="form-control" name="adminContent"  maxlength="50" style="width: 470px; height: 200px;"></textarea>
+      <button type="submit" class="btn btn-secondary btn-lg" style="margin-top: 20px;">답변 등록</button>
+      </form>
+    </div>
+<!--답변 작성 상태 (ADMIN)-->
+
+    <p class="mt-5 mb-3 text-muted" style="text-align: center;">&copy; Our Book : 2023</p>
+  </div>
+</div>
+
+<footer class="container py-5">
+  <div class="row">
+    <div class="col-12 col-md">
+      <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
+      <small class="d-block mb-3 text-muted">&copy; Our Book : 2023</small>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Features</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="link-secondary" href="#">Cool stuff</a></li>
+        <li><a class="link-secondary" href="#">Random feature</a></li>
+        <li><a class="link-secondary" href="#">Team feature</a></li>
+        <li><a class="link-secondary" href="#">Stuff for developers</a></li>
+        <li><a class="link-secondary" href="#">Another one</a></li>
+        <li><a class="link-secondary" href="#">Last time</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Resources</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="link-secondary" href="#">Resource name</a></li>
+        <li><a class="link-secondary" href="#">Resource</a></li>
+        <li><a class="link-secondary" href="#">Another resource</a></li>
+        <li><a class="link-secondary" href="#">Final resource</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Resources</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="link-secondary" href="#">Business</a></li>
+        <li><a class="link-secondary" href="#">Education</a></li>
+        <li><a class="link-secondary" href="#">Government</a></li>
+        <li><a class="link-secondary" href="#">Gaming</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>About</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="link-secondary" href="#">Team</a></li>
+        <li><a class="link-secondary" href="#">Locations</a></li>
+        <li><a class="link-secondary" href="#">Privacy</a></li>
+        <li><a class="link-secondary" href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+<script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+</html>

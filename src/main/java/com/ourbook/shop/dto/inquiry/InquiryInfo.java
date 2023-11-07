@@ -30,6 +30,11 @@ public class InquiryInfo {
     @Nullable
     private int sequence;
 
+    private char inquiryState;
+    //inquiryState 는 DB랑 상관 없는 객체 (답변 여부) 라서 생성자에 넣지 않음.
+    //DB에 컬럼도 존재하지 않기 때문에, 생성자에 넣으면 예외 발생 (DB 컬럼 수 보다 초과해서 바인딩 시도)
+
+
     public InquiryInfo(String inquiryType, String inquiryWriter, String inquiryName, String inquiryContent, @Nullable String saveTime, @Nullable int sequence) {
         this.inquiryType = inquiryType;
         this.inquiryWriter = inquiryWriter;

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-public class LoginCheckApi {
+public class LoginCheck {
 
     @PostMapping("/loginCheck")
     public ResponseEntity<String> checkLogin(HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail){
@@ -25,4 +25,5 @@ public class LoginCheckApi {
           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("인증되지 않은 사용자");
       }
     }
+
 }
