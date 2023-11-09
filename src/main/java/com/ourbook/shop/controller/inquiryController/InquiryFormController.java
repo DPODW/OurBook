@@ -48,6 +48,7 @@ public class InquiryFormController {
         return "inquiry/inquiryForm";
     }
 
+
     @GetMapping("/OurBook/inquiry/{number}")
     public String InquiryContent(@PathVariable int number,Model model,@AuthenticationPrincipal CustomUserDetail userDetail){
         InquiryInfo inquiryInfo = inquiryService.findInquiryContent(number);

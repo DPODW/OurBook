@@ -36,26 +36,24 @@ public class MemberFormController {
         }else if (userDetail != null){
             model.addAttribute("commonName",userDetail.getName());
             model.addAttribute("commonEmail",userDetail.getEmail());
-        }else {
-            return "main/Main";
         }
         return "main/Main";
     }
 
     @GetMapping("/OurBook/1")
-    public String loginPage(CommonMember commonMember, Model model){
+    public String memberLoginView(CommonMember commonMember, Model model){
         model.addAttribute("commonMember", commonMember);
         return "member/Login";
     }
 
     @GetMapping("/OurBook/2")
-    public String joinPage(CommonMember commonMember, Model model){
+    public String memberJoinView(CommonMember commonMember, Model model){
         model.addAttribute("commonMember", commonMember);
         return "member/Join";
     }
 
     @GetMapping("/OurBook/myInfo")
-    public String memberPageView(){
+    public String memberInfoList(){
         return "member/MyPage";
     }
 
@@ -81,8 +79,9 @@ public class MemberFormController {
         return "member/Edit";
     }
 
+
     @GetMapping("/OurBook/myInfo/Member1")
-    public String memberDelete(){
+    public String memberDeleteView(){
         return "member/Delete";
     }
 

@@ -28,8 +28,7 @@ public class InquiryServiceImpl implements InquiryService {
         List<InquiryInfo> inquiryList = inquiryMapper.findInquiryList();
         inquiryList.stream()
                 .map(inquiryInfo -> {
-                    String time = inquiryInfo.getSaveTime();
-                    inquiryInfo.setSaveTime(time.substring(0,10));
+                    inquiryInfo.setSaveTime(extractYearAndMonth(inquiryInfo.getSaveTime()));
                     if(inquiryMapper.findInquiryAnswer(inquiryInfo.getSequence(),inquiryInfo.getInquiryWriter())!=null){
                         inquiryInfo.setInquiryState('o');
                     }else{
@@ -44,7 +43,9 @@ public class InquiryServiceImpl implements InquiryService {
 
     @Override
     public InquiryInfo findInquiryContent(int number) {
-        return inquiryMapper.findInquiryContent(number);
+        InquiryInfo inquiryContent = inquiryMapper.findInquiryContent(number);
+        inquiryContent.setSaveTime(extractYearAndMonth(inquiryContent.getSaveTime()));
+        return inquiryContent;
     }
 
     @Override
@@ -57,6 +58,14 @@ public class InquiryServiceImpl implements InquiryService {
 
     @Override
     public InquiryAnswerInfo findInquiryAnswer(int inquiryNumber, String inquiryWriter) {
-       return inquiryMapper.findInquiryAnswer(inquiryNumber,inquiryWriter);
+        InquiryAnswerInfo inquiryAnswer = inquiryMapper.findInquiryAnswer(inquiryNumber, inquiryWriter);
+        if (inquiryAnswer!=null){
+            inquiryAnswer.setSaveTime(extractYearAndMonth(inquiryAnswer.getSaveTime()));
+        }
+        return inquiryAnswer;
+    }
+
+    private static String extractYearAndMonth(String saveTime){
+        return saveTime.substring(0,10);
     }
 }

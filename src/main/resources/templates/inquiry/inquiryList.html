@@ -53,15 +53,14 @@
             <th class="text-center" style="width: 30%;">문의</th>
             <th class="text-center" style="width: 10%;">작성자</th>
             <th class="text-center" style="white-space: nowrap; width: 10%;">작성일</th>
-            <th class="text-center" style="width: 6%;">답변 여부</th>
+            <th class="text-center" style="width: 8%;">답변 여부</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="inquiryOne : ${inquiryList}">
-            <td class="text-center" th:text="${inquiryOne.sequence}"></td>
-            <input type="hidden" id="sequence" th:value="*{inquiryOne.sequence}">
+            <td class="text-center" id="sequence" th:text="${inquiryOne.sequence}"></td>
             <td>
-                <a class="inquiryWriterSameCheck" style="text-decoration: none; color: black;" th:href="@{/OurBook/inquiry/{number}(number=${inquiryOne.sequence})}" th:text="${inquiryOne.inquiryName}"></a>
+                <a class="allowAuthorizedUsersOnly" style="text-decoration: none; color: black;" th:href="@{/OurBook/inquiry/{number}(number=${inquiryOne.sequence})}" th:text="${inquiryOne.inquiryName}"></a>
             </td>
             <td class="text-center" id="inquiryWriter" th:text="${inquiryOne.inquiryWriter}"></td>
             <td class="text-center" th:text="${inquiryOne.saveTime}"></td>

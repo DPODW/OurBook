@@ -17,10 +17,10 @@ public class SaleBookInfo {
 
 
     private String uploaderEmail;
-    @NotBlank
-    @Length(min=2, max= 12)
-    private String uploaderName;
 
+
+    private String uploaderName;
+    /** 업로더 정보는 유지중인 세션에서 가져옴**/
     @NotBlank
     @Length(min=2 , max= 50)
     private String saleBookName;
@@ -30,11 +30,11 @@ public class SaleBookInfo {
     private String saleBookWriter;
 
     @NotBlank
-    @Length(min=10, max= 500)
+    @Length(min=10, max= 1000)
     private String saleBookStory;
 
     @NotBlank
-    @Length(min=10 , max= 100)
+    @Length(min=10 , max= 1000)
     private String saleEtc;
 
     @Nullable

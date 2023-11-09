@@ -28,7 +28,7 @@ public class RoleCheck {
             return ResponseEntity.ok().body("일반 회원 접근 가능");
     }
 
-    @PostMapping("/roleCheck")
+    @PostMapping("/checkRole")
     public ResponseEntity<String> checkSellerRole(@AuthenticationPrincipal CustomUserDetail userDetail ){
         if(userDetail!=null && userDetail.getAuthorities().iterator().next().toString().equals("SELLER")){
             return ResponseEntity.ok().body("판매자 권한 있음");
@@ -37,17 +37,28 @@ public class RoleCheck {
         }
     }
 
-    @PostMapping("/WriterSameCheck/{inquiryWriter}")
-    public ResponseEntity<String> inquiryWriterSameCheck(@PathVariable String inquiryWriter, HttpServletRequest request,
+    @PostMapping("/checkAuthorizedUser/{inquiryWriter}")
+    public ResponseEntity<String> allowAuthorizedUsersOnly(@PathVariable String inquiryWriter, HttpServletRequest request,
                                                          @AuthenticationPrincipal CustomUserDetail userDetail){
         HttpSession session = request.getSession(false);
         SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-        if( (naverMember!=null && naverMember.getEmail().equals(inquiryWriter)) ||
-                (userDetail!=null && userDetail.getUsername().equals(inquiryWriter)) ||
-                (userDetail.getAuthorities().iterator().next().toString().equals("ADMIN"))){
+        if(naverMember==null && userDetail==null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("로그인 되지 않은 사용자");
+        }
+        if(isAccessPermit(inquiryWriter, userDetail, naverMember)){
             return ResponseEntity.ok().body("인증된 사용자");
         }else{
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("인증되지 않은 사용자");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("권한 없는 사용자");
         }
     }
+
+
+    private static boolean isAccessPermit(String inquiryWriter, CustomUserDetail userDetail, SessionUser naverMember) {
+        return  (naverMember != null && naverMember.getEmail() != null && naverMember.getEmail().equals(inquiryWriter)) ||
+                (userDetail != null && userDetail.getUsername() != null && userDetail.getUsername().equals(inquiryWriter)) ||
+                (userDetail != null && userDetail.getAuthorities() != null && !userDetail.getAuthorities().isEmpty() &&
+                 userDetail.getAuthorities().iterator().next().toString().equals("ADMIN"));
+        /** NULL 체크를 하지 않아도 정상 작동은 하나, 과도한 에러 로그 방지 및 확실한 조건 검사를 위해 NULL 체크 로직을 추가함 **/
+    }
 }
+

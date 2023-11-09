@@ -57,10 +57,10 @@
                 </div>
                 <hr style="width: 910px; margin-left: 220px;">
                 <div class="mb-3" style="margin-top: 30px; margin-left: 220px; position: relative;">
-                    <label style="font-weight: bold;">문의 내용 <a style="font-size: small; font-weight: normal; color: gray;">(50자 제한)</a></label>
-                    <textarea class="form-control" name="inquiryContent" th:field="*{inquiryInfo.inquiryContent}"  maxlength="50" style="width: 470px; height: 200px;"></textarea>
+                    <label style="font-weight: bold;">문의 내용 <a style="font-size: small; font-weight: normal; color: gray;">(300자 제한)</a></label>
+                    <textarea class="form-control" name="inquiryContent" th:field="*{inquiryInfo.inquiryContent}" maxlength="300" style="width: 600px; height: 200px;"></textarea>
                     <h4 th:errorclass="field-error" th:errors="*{inquiryInfo.inquiryContent}"></h4>
-                    <img src="/img/inquiry/customer.png" alt="" style="width: 230px; position: absolute; top: -1px; margin-left: 640px;">
+                    <img src="/img/inquiry/customer.png" alt="" style="width: 230px; position: absolute; top: -1px;  margin-left: 690px;">
                 </div>
                 <div class="mb-4"></div>
                 <button class="btn btn-primary btn-lg btn-block" type="submit"  style="margin-left: 219px;">문의 글 올리기</button>

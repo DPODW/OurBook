@@ -68,7 +68,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     /** 11/1 노션 정리 **/
-    public String nameLock(String input) {
+    private static String nameLock(String input) {
         //이름 중간을 '*' 로 치환하는 메소드. (개인정보 보호)
         char firstChar = input.charAt(0);
         char lastChar = input.charAt(input.length() - 1);

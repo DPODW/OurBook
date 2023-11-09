@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginCheck {
 
-    @PostMapping("/loginCheck")
+    @PostMapping("/checkLogin")
     public ResponseEntity<String> checkLogin(HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail){
       HttpSession session = request.getSession(false);
       SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");

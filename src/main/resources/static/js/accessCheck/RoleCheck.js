@@ -18,10 +18,10 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-    $("#roleCheck").click(function(event) {
+    $("#checkRole").click(function(event) {
         event.preventDefault();
         $.ajax({
-            url: "/roleCheck",
+            url: "/checkRole",
             type: "POST",
             async: true,
             success: function(response) {

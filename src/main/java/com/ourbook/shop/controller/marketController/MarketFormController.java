@@ -37,8 +37,16 @@ public class MarketFormController {
 
     @GetMapping("/OurBook/market/sale")
     public String marketSaleView(SaleBookInfo saleBookInfo, Model model, HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail){
-        if (!checkSellerRole(userDetail, request)) {
+        HttpSession session = request.getSession(false);
+        SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
+        if ((userDetail == null || !userDetail.getAuthorities().iterator().next().toString().equals("SELLER")) &&
+                (naverMember == null || !naverMember.getRole().equals("SELLER"))) {
             return "redirect:/OurBook";
+        }
+        if(naverMember!=null){
+            model.addAttribute("uploaderName",naverMember.getName());
+        }else{
+            model.addAttribute("uploaderName",userDetail.getName());
         }
         model.addAttribute("saleBookInfo",saleBookInfo);
         return "/market/MarketSaleForm";

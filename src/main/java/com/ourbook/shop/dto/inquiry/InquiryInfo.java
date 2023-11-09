@@ -21,7 +21,7 @@ public class InquiryInfo {
     private String inquiryName;
 
     @NotBlank
-    @Length(min=10, max= 50)
+    @Length(min=10, max= 300)
     private String inquiryContent;
 
     @Nullable

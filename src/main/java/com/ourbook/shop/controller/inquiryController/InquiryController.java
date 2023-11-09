@@ -40,8 +40,7 @@ public class InquiryController {
     }
 
     @PostMapping("/OurBook/inquiry/admin/answer")
-    public String InquiryAnswer(@ModelAttribute InquiryAnswerInfo inquiryAnswerInfo,Model model){
-        log.info("{}",inquiryAnswerInfo);
+    public String InquiryAnswer(@ModelAttribute InquiryAnswerInfo inquiryAnswerInfo){
         inquiryService.inquiryAnswerSave(inquiryAnswerInfo);
         return "redirect:/OurBook/inquiry";
     }

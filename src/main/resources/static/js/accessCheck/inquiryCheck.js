@@ -3,7 +3,7 @@ $(document).ready(function() {
         event.preventDefault();
         // 폼의 기본 동작인 페이지 이동을 막습니다.
         $.ajax({
-            url: "/loginCheck",
+            url: "/checkLogin",
             type: "POST",
             async: true,
             success: function(response) {
@@ -20,19 +20,20 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-    $(".inquiryWriterSameCheck").click(function(event) {
+    $(".allowAuthorizedUsersOnly").click(function(event) {
         event.preventDefault();
-        const inquiryWriter = document.getElementById("inquiryWriter").textContent;
-        const sequence = document.getElementById("sequence").value;
+        const sequence = $(this).closest("tr").find("#sequence").text();
+        const inquiryWriter = $(this).closest("tr").find("#inquiryWriter").text();
+
         $.ajax({
-            url: "/WriterSameCheck/"+inquiryWriter,
+            url: "/checkAuthorizedUser/"+inquiryWriter,
             type: "POST",
             async: true,
             success: function(response) {
                 window.location.href = "/OurBook/inquiry/"+sequence;
             },
             error: function(error) {
-                alert("본인이 등록한 문의 글만 접근할 수 있습니다");
+                alert("권한이 없습니다.");
                 event.preventDefault();
             }
         });

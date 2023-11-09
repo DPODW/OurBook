@@ -28,38 +28,37 @@
     <div class="input-form col-md-12 mx-auto" >
 
       <h4 class="mb-3">도서 판매</h4>
-      <form th:action="@{/OurBook/market/sale}" th:method="POST" th:object="${saleBookInfo}" enctype="multipart/form-data">
+      <form th:action="@{/OurBook/market/sale}" th:method="POST"  enctype="multipart/form-data">
         <div class="row">
           <div class="col-md-6 mb-3">
             <label>도서 제목</label>
-            <input type="text" maxlength="50" name="saleBookName" th:field="*{saleBookName}" class="form-control" style="width: 540px;" >
-            <h4 th:errorclass="field-error" th:errors="*{saleBookName}"></h4>
+            <input type="text" maxlength="50" name="saleBookName" th:field="*{saleBookInfo.saleBookName}" class="form-control" style="width: 540px;" >
+            <h4 th:errorclass="field-error" th:errors="*{saleBookInfo.saleBookName}"></h4>
           </div>
 
           <div class="col-md-6 mb-3">
-            <label>이름 <a style="font-size: small; font-weight: normal; color: gray;">(도서 시장에 보여질 이름)</a></label>
-            <input type="text" maxlength="12" name="uploaderName" th:field="*{uploaderName}" class="form-control" style="width: 540px;">
-            <h4 th:errorclass="field-error" th:errors="*{uploaderName}"></h4>
+            <label>이름 <a style="font-size: small; font-weight: normal; color: gray;"></a></label>
+            <input type="text" maxlength="12" name="uploaderName" th:value="*{uploaderName}" class="form-control" style="width: 540px;" readonly>
           </div>
 
           <div class="col-md-6 mb-3">
             <label>저자 <a style="font-size: small; font-weight: normal; color: gray;">(판매할 도서의 저자, 다수 가능)</a></label>
-            <input type="text" maxlength="25" name="saleBookWriter" th:field="*{saleBookWriter}" class="form-control" style="width: 540px;">
-            <h4 th:errorclass="field-error" th:errors="*{saleBookWriter}"></h4>
+            <input type="text" maxlength="25" name="saleBookWriter" th:field="*{saleBookInfo.saleBookWriter}" class="form-control" style="width: 540px;">
+            <h4 th:errorclass="field-error" th:errors="*{saleBookInfo.saleBookWriter}"></h4>
           </div>
 
         </div>
         <hr style="width: 1200px">
         <div class="mb-3" style="margin-top: 30px;">
-          <label style="font-weight: bold;">줄거리 <a style="font-size: small; font-weight: normal; color: gray;">(대략적 , 500자 제한)</a></label>
-          <textarea  class="form-control" name="saleBookStory" th:field="*{saleBookStory}" maxlength="500" style="width: 1200px; height: 200px;"></textarea>
-          <h4 th:errorclass="field-error" th:errors="*{saleBookStory}"></h4>
+          <label style="font-weight: bold;">줄거리 <a style="font-size: small; font-weight: normal; color: gray;">(대략적 , 1000자 제한)</a></label>
+          <textarea  class="form-control" name="saleBookStory" th:field="*{saleBookInfo.saleBookStory}" maxlength="1000" style="width: 1200px; height: 200px;"></textarea>
+          <h4 th:errorclass="field-error" th:errors="*{saleBookInfo.saleBookStory}"></h4>
         </div>
 
         <div class="mb-3" >
-          <label style="font-weight: bold;">기타 <a style="font-size: small; font-weight: normal; color: gray;">(하시고 싶은 말씀을 편하게 적으시면 됩니다. 100자 제한)</a></label>
-          <textarea  class="form-control"name="saleEtc" th:field="*{saleEtc}"  maxlength="100" style="width: 1200px; height: 200px;"></textarea>
-          <h4 th:errorclass="field-error" th:errors="*{saleEtc}"></h4>
+          <label style="font-weight: bold;">기타 <a style="font-size: small; font-weight: normal; color: gray;">(하시고 싶은 말씀을 편하게 적으시면 됩니다. 1000자 제한)</a></label>
+          <textarea  class="form-control"name="saleEtc" th:field="*{saleBookInfo.saleEtc}"  maxlength="1000" style="width: 1200px; height: 200px;"></textarea>
+          <h4 th:errorclass="field-error" th:errors="*{saleBookInfo.saleEtc}"></h4>
         </div>
 
         <label style="font-weight: bold;">도서 표지 업로드</label><br>
@@ -68,18 +67,18 @@
         <div class="row">
           <div class="col-md-6 mb-3">
             <label >페이지 분량<a style="font-size: small; font-weight: normal; color: gray;"> (숫자로 입력 부탁드립니다.)</a></label>
-            <input type="text" name="saleBookPage" th:field="*{saleBookPage}" pattern="\d*" maxlength="5" class="form-control" style="width: 300px;"  >
-            <h4 th:errorclass="field-error" th:errors="*{saleBookPage}"></h4>
+            <input type="text" name="saleBookPage" th:field="*{saleBookInfo.saleBookPage}" pattern="\d*" maxlength="5" class="form-control" style="width: 300px;"  >
+            <h4 th:errorclass="field-error" th:errors="*{saleBookInfo.saleBookPage}"></h4>
           </div>
           <div class="mb-3">
             <label >책 권수<a style="font-size: small; font-weight: normal; color: gray;"> (숫자로 입력 부탁드립니다.)</a></label>
-            <input type="text" name="saleBookCount" th:field="*{saleBookCount}" pattern="\d*" maxlength="2" class="form-control" style="width: 300px;" >
-            <h4 th:errorclass="field-error" th:errors="*{saleBookCount}"></h4>
+            <input type="text" name="saleBookCount" th:field="*{saleBookInfo.saleBookCount}" pattern="\d*" maxlength="2" class="form-control" style="width: 300px;" >
+            <h4 th:errorclass="field-error" th:errors="*{saleBookInfo.saleBookCount}"></h4>
           </div>
           <div class="mb-3">
             <label >희망 가격</label>
-            <input type="number" name="saleBookPrice" th:field="*{saleBookPrice}" class="form-control" style="width: 300px;">
-            <h4 th:errorclass="field-error" th:errors="*{saleBookPrice}"></h4>
+            <input type="number" name="saleBookPrice" th:field="*{saleBookInfo.saleBookPrice}" class="form-control" style="width: 300px;">
+            <h4 th:errorclass="field-error" th:errors="*{saleBookInfo.saleBookPrice}"></h4>
           </div>
         </div>
         <div class="mb-4"></div>

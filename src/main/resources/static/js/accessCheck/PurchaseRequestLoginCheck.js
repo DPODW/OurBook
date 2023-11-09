@@ -3,7 +3,7 @@ $(document).ready(function() {
         event.preventDefault();
         // 폼의 기본 동작인 페이지 이동을 막습니다.
         $.ajax({
-            url: "/loginCheck",
+            url: "/checkLogin",
             type: "POST",
             async: true,
             success: function(response) {

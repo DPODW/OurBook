@@ -17,7 +17,6 @@
     <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">내 정보</a>
     <a class="py-2 d-none d-md-inline-block payment-cart-login-check" th:href="@{/OurBook/book/info/cart}" style="color: black; text-decoration: none;">장바구니</a>
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/market}" style="color: black; text-decoration: none;">도서 시장</a>
     <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책에 관하여</a>
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/inquiry}" style="color: black; text-decoration: none;">문의</a>
   </nav>
@@ -26,7 +25,7 @@
 <div class="container-fluid px-4">
   <h1 class="mt-4" style="text-align: center; font-size: 24px; margin-top: 20px;" >도서 시장</h1>
   <form th:action="@{/OurBook/market/sale}" th:method="GET">
-  <button class="btn btn-primary btn-block" id="roleCheck"  style=" display: block; margin: 0 auto; margin-bottom: 20px; margin-top: 20px;">판매글 올리기</button>
+  <button class="btn btn-primary btn-block" id="checkRole"  style=" display: block; margin: 0 auto; margin-bottom: 20px; margin-top: 20px;">판매글 올리기</button>
   </form>
   <div >
     <div class="card-body">
