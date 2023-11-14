@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -62,6 +63,20 @@ public class InquiryFormController {
             model.addAttribute("inquiryAnswer",inquiryAnswer);
         }
         return "inquiry/InquiryContent";
+    }
+
+    @GetMapping("/OurBook/inquiry/history")
+    public String InquiryHistory(HttpServletRequest request,@AuthenticationPrincipal CustomUserDetail userDetail,Model model){
+        HttpSession session = request.getSession(false);
+        if(session.getAttribute("NAVER")!=null){
+            SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
+            List<InquiryInfo> inquiryHistory = inquiryService.findInquiryHistory(naverMember.getEmail());
+            model.addAttribute("inquiryHistorys",inquiryHistory);
+        }else{
+            List<InquiryInfo> inquiryHistory = inquiryService.findInquiryHistory(userDetail.getEmail());
+            model.addAttribute("inquiryHistorys",inquiryHistory);
+        }
+        return "inquiry/inquiryHistory";
     }
 
 

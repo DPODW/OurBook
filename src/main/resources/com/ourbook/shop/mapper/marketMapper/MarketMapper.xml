@@ -8,8 +8,8 @@
     </insert>
 
     <insert id="purchaseRequestInsert">
-        insert into purchase_request_history(UPLOADER_EMAIL,UPLOADER_NAME,RECEIVER_EMAIL,RECEIVER_NAME,SALE_BOOK_NAME,SAVE_TIME)
-        values(#{uploaderEmail},#{uploaderName},#{receiverEmail},#{receiverName},#{saleBookName},NOW());
+        insert into purchase_request_history(UPLOADER_EMAIL,UPLOADER_NAME,RECEIVER_EMAIL,RECEIVER_NAME,SALE_BOOK_NAME,SAVE_TIME,SEQUENCE)
+        values(#{uploaderEmail},#{uploaderName},#{receiverEmail},#{receiverName},#{saleBookName},NOW(),#{sequence});
     </insert>
 
 
@@ -22,7 +22,12 @@
     </select >
 
     <select id="findPurchaseRequestHistory" resultType="com.ourbook.shop.dto.market.PurchaseRequest">
-        SELECT * FROM purchase_request_history ORDER BY SEQUENCE DESC;
+        SELECT * FROM purchase_request_history WHERE RECEIVER_EMAIL = #{receiverEmail} ORDER BY SEQUENCE DESC;
+    </select>
+
+
+    <select id="findPurchaseRequestCount" resultType="int">
+        SELECT COUNT(*) FROM purchase_request_history WHERE SALE_BOOK_NAME = #{saleBookName};
     </select>
 
 </mapper>

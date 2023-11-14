@@ -3,6 +3,8 @@ package com.ourbook.shop.controller.marketController;
 
 import com.ourbook.shop.config.auth.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
+import com.ourbook.shop.dto.inquiry.InquiryInfo;
+import com.ourbook.shop.dto.market.PurchaseRequest;
 import com.ourbook.shop.dto.market.SaleBookInfo;
 import com.ourbook.shop.service.marketService.MarketService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -52,23 +54,29 @@ public class MarketFormController {
         return "/market/MarketSaleForm";
     }
 
+
     @GetMapping("/OurBook/market/sale/info/{number}")
     public String marketSaleInfoView(@PathVariable int number,Model model){
         SaleBookInfo saleBookInfo = marketService.findMarketBook(number);
-        saleBookInfo.setSaleBookPrice(saleBookInfo.getSaleBookPrice().setScale(0));
         model.addAttribute("saleBookInfo", saleBookInfo);
         return "market/MarketSaleInfo";
     }
 
 
-    private boolean checkSellerRole(CustomUserDetail userDetail, HttpServletRequest request) {
+    @GetMapping("/OurBook/market/purchase/request/history")
+    public String PurchaseRequestHistory(HttpServletRequest request,@AuthenticationPrincipal CustomUserDetail userDetail,Model model){
         HttpSession session = request.getSession(false);
-        SessionUser naver = (SessionUser) session.getAttribute("NAVER");
-        if ((userDetail == null || !userDetail.getAuthorities().iterator().next().toString().equals("SELLER")) &&
-                (naver == null || !naver.getRole().equals("SELLER"))) {
-            return false;
+        if(session.getAttribute("NAVER")!=null){
+           SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
+            List<PurchaseRequest> purchaseRequestHistory = marketService.findPurchaseRequestHistory(naverMember.getEmail());
+            model.addAttribute("purchaseRequestHistorys",purchaseRequestHistory);
+        }else{
+            List<PurchaseRequest> purchaseRequestHistory = marketService.findPurchaseRequestHistory(userDetail.getEmail());
+            model.addAttribute("purchaseRequestHistorys",purchaseRequestHistory);
         }
-        return true;
-        //userDetail , naver 객체는 동시에 존재할 수 없어서, null 조건을 달지 않을시 존재하지 않는 객체에서 오류가 발생함. 고로 ==null 조건 필요
+        return "market/PurchaseRequestHistory";
     }
+
+
+
 }

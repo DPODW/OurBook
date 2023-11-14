@@ -34,4 +34,8 @@
         SELECT * FROM inquiry_answer_history WHERE INQUIRY_NUMBER = #{inquiryNumber} AND INQUIRY_WRITER = #{inquiryWriter};
     </select >
 
+    <select id="findInquiryHistory" resultType="com.ourbook.shop.dto.inquiry.InquiryInfo">
+        SELECT * FROM inquiry_history WHERE INQUIRY_WRITER = #{inquiryWriter} ORDER BY SEQUENCE DESC ;
+    </select >
+
 </mapper>

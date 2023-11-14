@@ -45,4 +45,6 @@ public class InquiryController {
         return "redirect:/OurBook/inquiry";
     }
 
+
+
 }

@@ -76,7 +76,8 @@
        <input type="hidden" name="adminName" th:value="*{adminId}">
       <label style="font-weight: bold;">답변 내용 <a style="font-size: small; font-weight: normal; color: gray;">(300자 제한)</a></label>
       <textarea class="form-control" name="adminContent"  maxlength="300" style="width: 470px; height: 200px;"></textarea>
-      <button type="submit" class="btn btn-secondary btn-lg" style="margin-top: 20px;">답변 등록</button>
+        <p style="margin-top: 20px; font-size: small; color: gray;">이미 답변이 등록된 문의에 새롭게 답변을 등록할 시, 기존 답변이 수정됩니다.</p>
+      <button type="submit" class="btn btn-secondary btn-lg" style="margin-top: -5px;">답변 등록</button>
       </form>
     </div>
 <!--답변 작성 상태 (ADMIN)-->

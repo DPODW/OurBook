@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
-  <title>Our book : 도서 구경 중</title>
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <title>Our book : 도서 시장</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="/css/main.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="/js/accessCheck/PurchaseRequestLoginCheck.js"></script>
@@ -29,60 +29,54 @@
 
       <h4 class="mb-3">개인 도서</h4>
       <form ID="PurchaseRequest" th:method="POST" th:action="@{/OurBook/market/purchase/request/warning}" th:object="${saleBookInfo}">
+        <input type="hidden" name="uploaderName" th:value="${saleBookInfo.uploaderName}">
+        <input type="hidden" name="saleBookName" th:value="${saleBookInfo.saleBookName}">
         <input type="hidden" name="uploaderEmail" th:value="${saleBookInfo.uploaderEmail}">
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label>도서 제목</label>
-            <input type="text" maxlength="50" name="saleBookName" th:field="*{saleBookName}" class="form-control" style="width: 540px;" readonly>
-          </div>
+        <input type="hidden" name="sequence" th:value="${saleBookInfo.sequence}">
 
-          <div class="col-md-6 mb-3">
-            <label>이름</label>
-            <input type="text" maxlength="12" name="uploaderName" th:field="*{uploaderName}" class="form-control" style="width: 540px;"readonly>
-          </div>
+        <h4 style="margin-top: 50px;" th:text="${saleBookInfo.saleBookName}"></h4>
+        <p th:text="${saleBookInfo.saleBookWriter} + '(지은이)'"></p>
+        <p style="margin-top: -40px; margin-left: 1040px; float: left;" th:text="'등록 일자: '+${saleBookInfo.saveTime}"></p>
+        <hr style="width: 1200px; margin-top: -15px;">
+        <img style="width: 350px;  height: 400px;  border: 2px solid gray; padding: 10px; margin-top: 30px;" th:src="${saleBookInfo.saleImg}">
 
-          <div class="col-md-6 mb-3">
-            <label>저자</label>
-            <input type="text" maxlength="25" name="saleBookWriter" th:field="*{saleBookWriter}" class="form-control" style="width: 540px;"readonly>
-          </div>
+        <p style="margin-top: -370px; margin-left: 550px;">판매가:</p>
+        <p style="margin-top: -43px; margin-left: 620px; font-size: 20px;" th:text="${saleBookInfo.saleBookPrice}"></p>
+
+        <p style="margin-left: 550px;">배송비:</p>
+        <p style="margin-top: -43px; margin-left: 620px; font-size: 20px;">판매자와 협의 요망</p>
+
+
+        <p style=" margin-left: 550px;">판매자:</p>
+        <p style="margin-top: -43px; margin-left: 620px; font-size: 20px;" th:text="${saleBookInfo.uploaderName}"></p>
+
+
+        <p style=" margin-left: 550px;">살래요!:</p>
+        <p style="margin-top: -43px; margin-left: 620px; font-size: 20px;" th:text="${saleBookInfo.purchaseRequestCount}"></p>
+
+        <div style="margin-top: 40px; margin-left: 550px;">
+          <button class="btn btn-primary btn-lg btn-block" id="PurchaseRequestLoginCheck" type="submit">구매 요청하기</button>
+
+          <form>
+            <button class="btn btn-primary btn-lg btn-block" style="background-color: deeppink; border: deeppink; margin-left: 50px;" type="submit">찜 하기</button>
+          </form>
 
         </div>
-        <hr style="width: 1200px">
+        <p style="margin-left: 550px; margin-top: 70px; font-size: small; font-weight: normal; color: gray; ">해당 도서표지는 개인 판매자가 등록한 표지입니다. OurBook 은 해당 도서를 소유하고 있지 않으므로,<br> 도서의 실제 상태에 대해 알지 못합니다. 구매를 원할 시,
+          구매 요청을 통하여 판매자와 필요한 정보를<br> 교환하시고, 사기에 각별히 유념하시길 바랍니다.
+        </p>
+
+        <hr style="width: 1200px; margin-top: 80px;">
+
         <div class="mb-3" style="margin-top: 30px;">
           <label style="font-weight: bold;">줄거리</label>
-          <textarea  class="form-control" name="saleBookStory" th:field="*{saleBookStory}" maxlength="500" style="width: 1200px; height: 200px;" readonly></textarea>
+          <textarea class="form-control" name="saleBookStory" style="width: 1200px; height: 200px; border: none; background-color: whitesmoke" th:text="${saleBookInfo.saleBookStory}" readonly></textarea>
         </div>
 
         <div class="mb-3" >
-          <label style="font-weight: bold;">기타</label>
-          <textarea  class="form-control"name="saleEtc" th:field="*{saleEtc}"  maxlength="100" style="width: 1200px; height: 200px;" readonly></textarea>
+          <label style="font-weight: bold; margin-top: 100px;">기타</label>
+          <textarea  class="form-control"name="saleEtc" style="width: 1200px; height: 200px; border: none; background-color: whitesmoke" th:text="${saleBookInfo.saleEtc}" readonly></textarea>
         </div>
-        <hr style="margin-top: 30px; margin-bottom: 30px; width: 1200px;">
-        <div class="row">
-
-<!--          input 태그 안에 초기값을 설정하려면 th:text 로는 가능하지 않기 때문에, field 혹은 value 를 사용해야 하는데, 타임리프 출력 뒤에 임의의 문자 (페이지 , 권 . .)-->
-<!--          를 붙히려면 value 의 ${} 안에서만 사용할 수 있음. 추가적으로 value 는 object 를 모르기 때문에 saleBookInfo 로 자세히 명시해줘야 함-->
-          <div class="col-md-6 mb-3">
-            <label >페이지 분량</label>
-            <input type="text" name="saleBookPage" th:value="${saleBookInfo.saleBookPage} + ' 페이지'" maxlength="5" class="form-control" style="width: 300px;" readonly >
-          </div>
-          <div class="mb-3">
-            <label >책 권수</label>
-            <input type="text" name="saleBookCount" th:value="${saleBookInfo.saleBookCount} + ' 권'" class="form-control" style="width: 300px;" readonly>
-          </div>
-          <div class="mb-3">
-            <label >희망 가격</label>
-            <input type="text" name="saleBookPrice" th:value="${saleBookInfo.saleBookPrice} + ' 원'" class="form-control" style="width: 300px;" readonly>
-          </div>
-        </div>
-
-        <div class="mb-4"></div>
-        <button class="btn btn-primary btn-lg btn-block" id="PurchaseRequestLoginCheck" type="submit">구매 요청하기</button>
-        <img style="width: 350px;  height: 400px;margin-left: 850px; margin-top: -300px;   border: 2px solid gray; padding: 10px;" th:src="${saleBookInfo.saleImg}">
-        <p style="position: absolute; margin-top: -405px; margin-left: 770px; font-weight: bold;">도서 표지</p>
-        <p style="margin-left: 610px; margin-top: 20px;   font-size: small; font-weight: normal; color: gray; ">해당 도서표지는 개인 판매자가 등록한 표지입니다. OurBook 은 해당 도서를 소유하고 있지 않으므로,<br> 도서의 실제 상태에 대해 알지 못합니다. 구매를 원할 시,
-          구매 요청을 통하여 판매자와 필요한 정보를<br> 교환하시고, 사기에 각별히 유념하시길 바랍니다.
-        </p>
 
         <p class="mt-5 mb-3 text-muted" style="text-align: center;">&copy; Our Book : 2023</p>
       </form>

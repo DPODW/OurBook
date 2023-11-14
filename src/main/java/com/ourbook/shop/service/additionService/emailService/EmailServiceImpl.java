@@ -51,6 +51,8 @@ public class EmailServiceImpl implements EmailService {
             javaMailSender.send(message);
         } catch (Exception e) {
             e.printStackTrace();
+            throw new IllegalArgumentException("잘못된 이메일 요청 (이메일 발송 안됌)");
+            /** TODO: 실패 시 -> 구매 요청 내역에서 삭제하는 로직 추가 **/
         }
     }
 
@@ -61,10 +63,10 @@ public class EmailServiceImpl implements EmailService {
     }
 
 
-    private String setPurchaseRequestContext(PurchaseRequest purchaseRequest) { // 타임리프 설정하는 코드
+    private String setPurchaseRequestContext(PurchaseRequest purchaseRequest) {
         Context context = new Context();
-        context.setVariable("purchaseRequestMail", purchaseRequest); // Template에 전달할 데이터 설정
-        return templateEngine.process("mail/purchaseRequestMail", context); // mail.html
+        context.setVariable("purchaseRequestMail", purchaseRequest);
+        return templateEngine.process("mail/purchaseRequestMail", context);
     }
 
     /** 11/1 노션 정리 **/

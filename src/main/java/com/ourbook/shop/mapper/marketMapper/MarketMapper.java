@@ -20,6 +20,9 @@ public interface MarketMapper {
 
     SaleBookInfo findMarketBook(int number);
 
-    PurchaseRequest findPurchaseRequestHistory();
+    List<PurchaseRequest> findPurchaseRequestHistory(String receiverEmail);
+
+
+    int findPurchaseRequestCount(String saleBookName);
 
 }

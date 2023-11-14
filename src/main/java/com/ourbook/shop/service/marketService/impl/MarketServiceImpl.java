@@ -42,8 +42,8 @@ public class MarketServiceImpl implements MarketService {
         List<SaleBookInfo> marketList = marketMapper.findMarketList();
             marketList.stream()
                 .map(saleBookInfo -> {
-                    String time = saleBookInfo.getSaveTime();
-                    saleBookInfo.setSaveTime(time.substring(5,10));
+                    saleBookInfo.setSaveTime(extractYearAndMonth(saleBookInfo.getSaveTime()));
+                    saleBookInfo.setPurchaseRequestCount(findPurchaseRequestCount(saleBookInfo.getSaleBookName()));
                     return saleBookInfo;
                 })
                     .collect(Collectors.toList());
@@ -53,11 +53,32 @@ public class MarketServiceImpl implements MarketService {
 
     @Override
     public SaleBookInfo findMarketBook(int number) {
-        return marketMapper.findMarketBook(number);
+        SaleBookInfo marketBook = marketMapper.findMarketBook(number);
+        marketBook.setSaveTime(extractYearAndMonth(marketBook.getSaveTime()));
+        marketBook.setSaleBookPrice(marketBook.getSaleBookPrice().setScale(0));
+        marketBook.setPurchaseRequestCount(findPurchaseRequestCount(marketBook.getSaleBookName()));
+        return marketBook;
+    }
+
+
+    @Override
+    public List<PurchaseRequest> findPurchaseRequestHistory(String receiverEmail) {
+        List<PurchaseRequest> purchaseRequestHistory = marketMapper.findPurchaseRequestHistory(receiverEmail);
+        purchaseRequestHistory.stream()
+                .map(purchaseRequest -> {
+                    purchaseRequest.setSaveTime(extractYearAndMonth(purchaseRequest.getSaveTime()));
+                    return purchaseRequest;
+                })
+                .collect(Collectors.toList());
+        return purchaseRequestHistory;
     }
 
     @Override
-    public PurchaseRequest findPurchaseRequestHistory() {
-        return marketMapper.findPurchaseRequestHistory();
+    public int findPurchaseRequestCount(String saleBookName) {
+       return marketMapper.findPurchaseRequestCount(saleBookName);
+    }
+
+    private static String extractYearAndMonth(String saveTime){
+        return saveTime.substring(0,10);
     }
 }

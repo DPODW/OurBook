@@ -4,6 +4,7 @@ import com.ourbook.shop.dto.inquiry.InquiryAnswerInfo;
 import com.ourbook.shop.dto.inquiry.InquiryInfo;
 import com.ourbook.shop.mapper.inquiryMapper.InquiryMapper;
 import com.ourbook.shop.service.inquiryService.InquiryService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,18 +27,7 @@ public class InquiryServiceImpl implements InquiryService {
     @Override
     public List<InquiryInfo> findInquiryList() {
         List<InquiryInfo> inquiryList = inquiryMapper.findInquiryList();
-        inquiryList.stream()
-                .map(inquiryInfo -> {
-                    inquiryInfo.setSaveTime(extractYearAndMonth(inquiryInfo.getSaveTime()));
-                    if(inquiryMapper.findInquiryAnswer(inquiryInfo.getSequence(),inquiryInfo.getInquiryWriter())!=null){
-                        inquiryInfo.setInquiryState('o');
-                    }else{
-                        inquiryInfo.setInquiryState('x');
-                    }
-                    return inquiryInfo;
-                })
-                .collect(Collectors.toList());
-
+        getInquiryList(inquiryList);
         return inquiryList;
     }
 
@@ -64,6 +54,31 @@ public class InquiryServiceImpl implements InquiryService {
         }
         return inquiryAnswer;
     }
+
+    @Override
+    public List<InquiryInfo> findInquiryHistory(String inquiryWriter) {
+        List<InquiryInfo> inquiryHistory = inquiryMapper.findInquiryHistory(inquiryWriter);
+        getInquiryList(inquiryHistory);
+        return inquiryHistory;
+
+    }
+
+
+    @NotNull
+    private List<InquiryInfo> getInquiryList(List<InquiryInfo> inquiryHistory) {
+        return inquiryHistory.stream()
+                .map(inquiryInfo -> {
+                    inquiryInfo.setSaveTime(extractYearAndMonth(inquiryInfo.getSaveTime()));
+                    if (inquiryMapper.findInquiryAnswer(inquiryInfo.getSequence(), inquiryInfo.getInquiryWriter()) != null) {
+                        inquiryInfo.setInquiryState('o');
+                    } else {
+                        inquiryInfo.setInquiryState('x');
+                    }
+                    return inquiryInfo;
+                })
+                .collect(Collectors.toList());
+    }
+
 
     private static String extractYearAndMonth(String saveTime){
         return saveTime.substring(0,10);

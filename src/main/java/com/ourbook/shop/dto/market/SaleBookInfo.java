@@ -60,6 +60,9 @@ public class SaleBookInfo {
     @Nullable
     private int sequence;
 
+    private int purchaseRequestCount;
+
+
     public SaleBookInfo(String uploaderEmail, String uploaderName, String saleBookName, String saleBookWriter, String saleBookStory, String saleEtc, @Nullable String saleImg,
                         Integer saleBookPage, Integer saleBookCount, BigDecimal saleBookPrice, @Nullable String saveTime, int sequence) {
         this.uploaderEmail = uploaderEmail;

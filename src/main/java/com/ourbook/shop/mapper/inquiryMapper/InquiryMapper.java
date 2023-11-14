@@ -22,5 +22,7 @@ public interface InquiryMapper {
 
     InquiryAnswerInfo findInquiryAnswer(int inquiryNumber, String inquiryWriter);
 
+    List<InquiryInfo> findInquiryHistory(String inquiryWriter);
+
 
 }
