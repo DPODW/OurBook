@@ -20,7 +20,6 @@ public class PurchaseRequest {
     private String saleBookName;
     @Nullable
     private String saveTime;
-
     private int sequence;
     /** sequence 는 DB 에서 AUTO INCREMENT 로 생성되는 경우가 많으나, PurchaseRequest(구매 요청 정보를 저장하는 DTO) 에서는
        도서 시장에 저장되어있는 시퀀스 값으로 저장해야함. -> 고로 해당 시퀀스는 도서 시장의 판매 도서의 번호를 받아오기 때문에 일반 필드와 동일 **/

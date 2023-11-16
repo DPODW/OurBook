@@ -53,6 +53,30 @@ public class RoleCheck {
     }
 
 
+    @PostMapping("/checkAdminUser")
+    public ResponseEntity<String> allowAdminUserOnly(HttpServletRequest request,@AuthenticationPrincipal CustomUserDetail userDetail){
+        HttpSession session = request.getSession(false);
+        SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
+        if(naverMember==null && userDetail.getAuthorities().iterator().next().toString().equals("ADMIN")){
+            return ResponseEntity.ok().body("관리자 접근 가능");
+        }else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("권한 없는 사용자");
+        }
+    }
+
+    @PostMapping("/checkMe/{inquiryWriter}")
+    public ResponseEntity<String> allowMeOnly(@PathVariable String inquiryWriter,HttpServletRequest request,@AuthenticationPrincipal CustomUserDetail userDetail){
+        HttpSession session = request.getSession(false);
+        SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
+        if(naverMember != null && naverMember.getEmail().equals(inquiryWriter) ||
+           userDetail != null && userDetail.getUsername().equals(inquiryWriter)){
+            return ResponseEntity.ok().body("본인 접근 가능");
+        }else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("권한 없는 사용자");
+        }
+    }
+
+
     private static boolean isAccessPermit(String inquiryWriter, CustomUserDetail userDetail, SessionUser naverMember) {
         return  (naverMember != null && naverMember.getEmail() != null && naverMember.getEmail().equals(inquiryWriter)) ||
                 (userDetail != null && userDetail.getUsername() != null && userDetail.getUsername().equals(inquiryWriter)) ||

@@ -4,12 +4,14 @@ import com.ourbook.shop.dto.inquiry.InquiryAnswerInfo;
 import com.ourbook.shop.dto.inquiry.InquiryInfo;
 import com.ourbook.shop.mapper.inquiryMapper.InquiryMapper;
 import com.ourbook.shop.service.inquiryService.InquiryService;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class InquiryServiceImpl implements InquiryService {
 
@@ -22,6 +24,19 @@ public class InquiryServiceImpl implements InquiryService {
     @Override
     public void inquirySave(InquiryInfo inquiryInfo) {
         inquiryMapper.inquirySave(inquiryInfo);
+    }
+
+    @Override
+    public void inquiryEdit(InquiryInfo inquiryInfo) {
+        inquiryMapper.inquiryEdit(inquiryInfo);
+    }
+
+    @Override
+    public void inquiryDelete(int inquiryNumber) {
+        inquiryMapper.inquiryDelete(inquiryNumber);
+        if(inquiryMapper.findInquiryAnswer(inquiryNumber)!=null){
+            inquiryMapper.inquiryAnswerDelete(inquiryNumber);
+        }
     }
 
     @Override
@@ -40,15 +55,20 @@ public class InquiryServiceImpl implements InquiryService {
 
     @Override
     public void inquiryAnswerSave(InquiryAnswerInfo inquiryAnswerInfo) {
-        if(inquiryMapper.findInquiryAnswer(inquiryAnswerInfo.getInquiryNumber(),inquiryAnswerInfo.getInquiryWriter())!=null){
+        if(inquiryMapper.findInquiryAnswer(inquiryAnswerInfo.getInquiryNumber())!=null){
             inquiryMapper.inquiryAnswerUpdate(inquiryAnswerInfo);
         }else
        inquiryMapper.inquiryAnswerSave(inquiryAnswerInfo);
     }
 
     @Override
-    public InquiryAnswerInfo findInquiryAnswer(int inquiryNumber, String inquiryWriter) {
-        InquiryAnswerInfo inquiryAnswer = inquiryMapper.findInquiryAnswer(inquiryNumber, inquiryWriter);
+    public void inquiryAnswerDelete(int inquiryNumber) {
+        inquiryMapper.inquiryAnswerDelete(inquiryNumber);
+    }
+
+    @Override
+    public InquiryAnswerInfo findInquiryAnswer(int inquiryNumber) {
+        InquiryAnswerInfo inquiryAnswer = inquiryMapper.findInquiryAnswer(inquiryNumber);
         if (inquiryAnswer!=null){
             inquiryAnswer.setSaveTime(extractYearAndMonth(inquiryAnswer.getSaveTime()));
         }
@@ -69,7 +89,7 @@ public class InquiryServiceImpl implements InquiryService {
         return inquiryHistory.stream()
                 .map(inquiryInfo -> {
                     inquiryInfo.setSaveTime(extractYearAndMonth(inquiryInfo.getSaveTime()));
-                    if (inquiryMapper.findInquiryAnswer(inquiryInfo.getSequence(), inquiryInfo.getInquiryWriter()) != null) {
+                    if (inquiryMapper.findInquiryAnswer(inquiryInfo.getSequence()) != null) {
                         inquiryInfo.setInquiryState('o');
                     } else {
                         inquiryInfo.setInquiryState('x');

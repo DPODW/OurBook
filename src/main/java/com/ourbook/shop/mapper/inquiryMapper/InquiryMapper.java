@@ -12,6 +12,10 @@ public interface InquiryMapper {
 
     void inquirySave(InquiryInfo inquiryInfo);
 
+    void inquiryEdit(InquiryInfo inquiryInfo);
+
+    void inquiryDelete(int inquiryNumber);
+
     List<InquiryInfo> findInquiryList();
 
     InquiryInfo findInquiryContent(int number);
@@ -20,7 +24,9 @@ public interface InquiryMapper {
 
     void inquiryAnswerUpdate(InquiryAnswerInfo inquiryAnswerInfo);
 
-    InquiryAnswerInfo findInquiryAnswer(int inquiryNumber, String inquiryWriter);
+    void inquiryAnswerDelete(int inquiryNumber);
+
+    InquiryAnswerInfo findInquiryAnswer(int inquiryNumber);
 
     List<InquiryInfo> findInquiryHistory(String inquiryWriter);
 

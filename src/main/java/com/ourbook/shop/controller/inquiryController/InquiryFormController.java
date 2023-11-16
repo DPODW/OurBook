@@ -49,12 +49,20 @@ public class InquiryFormController {
         return "inquiry/inquiryForm";
     }
 
+    @GetMapping("/OurBook/inquiry/edit/{inquiryNumber}")
+    public String InquiryEditView(@PathVariable int inquiryNumber,Model model){
+        InquiryInfo inquiryInfo = inquiryService.findInquiryContent(inquiryNumber);
+        model.addAttribute("inquiryInfo",inquiryInfo);
+        return "inquiry/inquiryEdit";
+    }
+
+
 
     @GetMapping("/OurBook/inquiry/{number}")
     public String InquiryContent(@PathVariable int number,Model model,@AuthenticationPrincipal CustomUserDetail userDetail){
         InquiryInfo inquiryInfo = inquiryService.findInquiryContent(number);
         model.addAttribute("inquiryInfo",inquiryInfo);
-        InquiryAnswerInfo inquiryAnswer = inquiryService.findInquiryAnswer(inquiryInfo.getSequence(), inquiryInfo.getInquiryWriter());
+        InquiryAnswerInfo inquiryAnswer = inquiryService.findInquiryAnswer(inquiryInfo.getSequence());
 
         if(userDetail!=null && userDetail.getAuthorities().iterator().next().toString().equals("ADMIN")){
             model.addAttribute("adminId",userDetail.getUsername());

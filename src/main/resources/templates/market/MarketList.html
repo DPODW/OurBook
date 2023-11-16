@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <title>Our book : 도서 시장</title>
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="/css/main.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="/js/accessCheck/CartAndPaymentCheck.js"></script>
   <script type="text/javascript" src="/js/accessCheck/RoleCheck.js"></script>
   <script type="text/javascript" src="/js/accessCheck/PurchaseRequestLoginCheck.js"></script>
-
 </head>
 <body>
+
 <header class="site-header sticky-top py-1" style="background-color: #f8f9fa;">
   <nav class="container d-flex flex-column flex-md-row justify-content-between">
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
@@ -23,40 +23,54 @@
   </nav>
 </header>
 
-<div class="container-fluid px-4">
-  <h1 class="mt-4" style="text-align: center; font-size: 24px; margin-top: 20px;" >도서 시장</h1>
-  <form th:action="@{/OurBook/market/sale}" th:method="GET">
-  <button class="btn btn-primary btn-block" id="checkRole"  style=" display: block; margin: 0 auto; margin-bottom: 20px; margin-top: 20px;">판매글 올리기</button>
-  </form>
-  <a id="PurchaseRequestListLoginCheck" style="text-decoration: none; color: black" th:href="@{/OurBook/market/purchase/request/history}">▶구매 요청 내역 확인하기</a>
-  <div>
-    <div class="card-body">
-      <table class="table table-hover table-bordered">
-        <thead>
-        <tr>
-          <th class="text-center" style="white-space: nowrap; width: 5%;">글번호</th>
-          <th class="text-center" style="width: 30%;">제목</th>
-          <th class="text-center" style="width: 10%;">판매자(판매처)</th>
-          <th class="text-center" style="white-space: nowrap; width: 5%;">작성일</th>
-          <th class="text-center" style="width: 5%;">살래요!</th>
-        </tr>
-        </thead>
-        <tbody>
-          <tr th:each="marketOne : ${marketList}">
-          <td class="text-center" th:text="${marketOne.getSequence()}"></td>
-          <td>
-            <a style="text-decoration: none; color: black" th:text="${marketOne.getSaleBookName()}" th:href="@{/OurBook/market/sale/info/{number}(number=${marketOne.sequence})}"></a>
-          </td>
-          <td class="text-center" th:text="${marketOne.getUploaderName()}"></td>
-          <td class="text-center" th:text="${marketOne.getSaveTime()}"></td>
-          <td class="text-center" th:text="${marketOne.getPurchaseRequestCount()}"></td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+<div class="container-fluid px-4" style="width: 1900px;">
+  <h1 class="mt-4" style="margin-left: 425px; font-size: 30px; margin-top: 20px;">도서 시장</h1>
+  <p style="margin-left: 425px; font-size: 14px;  white-space:nowrap;">기회의 공간, 도서 시장!</p>
 </div>
-<hr>
+
+<div class="center-img">
+  <img src="/img/market/marketInfo.png">
+  <hr class="mx-auto" style="width: 1000px;">
+  <img src="/img/market/purchaseWave.png" style="margin-top: 10px;">
+</div>
+
+
+<hr class="mx-auto" style="width: 1000px; margin-left: 450px; margin-top: 800px; margin-bottom: 20px;">
+
+<div class="card-body mx-auto" style="width: 1500px; padding-left: 250px; padding-right: 250px;">
+  <h4 style="margin-left: 450px;">도서 시장</h4>
+  <a  id="PurchaseRequestListLoginCheck" style="position: relative; top: -30px;  text-decoration: none; color: black" th:href="@{/OurBook/market/purchase/request/history}">▶구매요청 내역 확인하기</a>
+
+  <form th:action="@{/OurBook/market/sale}" th:method="GET">
+    <button  class="btn btn-primary btn-block" id="checkRole"  style="margin-left: 87%; margin-top: -115px;">판매글 올리기</button>
+  </form>
+  <table class="table table-hover table-bordered" style="margin-top: -20px;">
+    <thead>
+    <tr>
+      <th class="text-center" style="white-space: nowrap; width: 5%;">글 번호</th>
+      <th class="text-center" style="width: 30%;">제목</th>
+      <th class="text-center" style="width: 10%;">판매자(판매처)</th>
+      <th class="text-center" style="white-space: nowrap; width: 10%;">등록일</th>
+      <th class="text-center" style="width: 8%;">살래요!</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="marketOne : ${marketList}">
+      <td class="text-center" th:text="${marketOne.getSequence()}"></td>
+      <td>
+        <a style="text-decoration: none; color: black" th:text="${marketOne.getSaleBookName()}" th:href="@{/OurBook/market/sale/info/{number}(number=${marketOne.sequence})}"></a>
+      </td>
+      <td class="text-center" th:text="${marketOne.getUploaderName()}"></td>
+      <td class="text-center" th:text="${marketOne.getSaveTime()}"></td>
+      <td class="text-center" th:text="${marketOne.getPurchaseRequestCount()}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
 <footer class="container py-5">
   <div class="row">
     <div class="col-12 col-md">

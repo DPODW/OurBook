@@ -15,7 +15,6 @@ public class InquiryAnswerInfo {
     private int inquiryNumber;
     private String adminName;
     private String adminContent;
-
     @Nullable
     private String saveTime;
 

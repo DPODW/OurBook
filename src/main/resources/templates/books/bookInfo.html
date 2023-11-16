@@ -37,33 +37,32 @@
       <p class="lead" style="font-size: 1rem;">가격:<span id="unitPrice" th:text="${bookInfo.bookPrice}+'원'"></span></p>
       <!--      JS 에서 가격 text 값을 가져와야 하는데, 타임리프 외부 태그 선언 방식으로 하면 가져와지지 않음. 내부에서 선언해야 정상적으로 값을 가져올수 있음-->
       <hr>
-      <div class="row" style="margin-top: 60px;">
+      <div class="row" style="margin-top: 30px; margin-left: 15px;">
         <div class="col-md-6">
           <form ID="paymentInfo" th:action="@{/OurBook/book/info/payment/{bookId}(bookId=${bookInfo.bookId})}" th:method="GET">
-          <div class="row">
-            <div class="col-md-6">
-              <button class="btn btn-success btn-lg payment-cart-login-check" id="buyButton" data-th-data="${bookInfo.bookId}">구매</button>
+            <div class="row">
+              <div class="col-md-6">
+                <button class="btn btn-success btn payment-cart-login-check" id="buyButton" data-th-data="${bookInfo.bookId}" style="width: 130px; height: 50px; margin-left: -25px;">구매하기</button>
+              </div>
+              <div class="col-md-6 quantity-input" style="margin-top: -15px;">
+                <label for="quantity2" class="lead" style="font-size: 0.8rem;">구매 수량</label>
+                <input type="number" class="form-control" id="quantity" name="bookCount" value="1" min="1" max="50" oninput="restrictInput(this)">
+              </div>
             </div>
-            <div class="col-md-6 quantity-input" style="margin-top: -15px;">
-              <label for="quantity2" class="lead" style="font-size: 0.8rem;">구매 수량</label>
-              <input type="number" class="form-control" id="quantity" name="bookCount" value="1" min="1" max="50" oninput="restrictInput(this)">
-            </div>
-          </div>
           </form>
         </div>
       </div>
 
 
       <div class="row">
-        <div class="col-md-6" style="margin-top: 40px;">
+        <div class="col-md-6" style="margin-top: 40px; margin-left: 25px;">
           <form ID="addToCartForm" th:action="@{/OurBook/book/info/cart}" th:method="POST">
             <input type="hidden" name="bookId" th:value="*{bookInfo.getBookId()}">
             <div class="row">
-              <hr style="margin-top: -15px;">
               <div class="col-md-6">
-                <button class="btn btn-primary" id="CartAddLoginCheck">장바구니에 추가</button>
+                <button class="btn btn-primary" id="CartAddLoginCheck" style="width: 130px; height: 50px; margin-left: -23px; margin-top: 15px;">장바구니 추가</button>
               </div>
-              <div class="col-md-6 quantity-input">
+              <div class="col-md-6 quantity-input" style="margin-left: -5px;">
                 <label for="quantity2" class="lead" style="font-size: 0.8rem;">담을 수량</label>
                 <input type="number" class="form-control" id="quantity2" name="bookCount" value="1" min="1" max="50" oninput="restrictInput(this)">
               </div>

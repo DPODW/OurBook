@@ -27,7 +27,7 @@ public class SecurityConfig {
 
             "/OurBook/book/info/{bookId}", "/checkLogin", "/iamports/accessToken","/OurBook/market", "/OurBook/market/sale/info/{number}", "/checkRole","/OurBook/inquiry",
 
-            "/checkAuthorizedUser/{inquiryWriter}",
+            "/checkAuthorizedUser/{inquiryWriter}","/checkAlreadyAnswer/{inquiryNumber}",
 
             "/checkId", "/checkEmail","/css/**", "/js/**", "/img/**"};
 

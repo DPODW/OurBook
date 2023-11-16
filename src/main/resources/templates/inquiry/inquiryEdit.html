@@ -27,8 +27,9 @@
     <div class="input-form-backgroud row">
         <div class="input-form col-md-12 mx-auto" >
 
-            <h4 class="mb-3" style="margin-left: 220px;">문의</h4>
-            <form th:action="@{/OurBook/inquiry/form}" th:method="POST">
+            <h4 class="mb-3" style="margin-left: 220px;">문의 - 수정</h4>
+            <form th:action="@{/OurBook/inquiry/edit}" th:method="PUT">
+                <input type="hidden" name="sequence" th:value="*{inquiryInfo.sequence}">
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label style="margin-left: 220px;">문의 종류</label> <br>
@@ -43,7 +44,7 @@
 
                     <div class="col-md-6 mb-3">
                         <label style="margin-left: 120px;">문의자 ID (네이버 회원은 이메일 주소)</label>
-                        <input type="text" maxlength="12" name="inquiryWriter" th:value="*{inquiryWriter}"  class="form-control" style="width: 350px; margin-left:120px;" readonly>
+                        <input type="text" maxlength="12" name="inquiryWriter" th:value="*{inquiryInfo.inquiryWriter}"  class="form-control" style="width: 350px; margin-left:120px;" readonly>
                     </div>
 
                     <div class="col-md-6 mb-3" style="margin-left: 220px;">
@@ -63,7 +64,7 @@
                     <img src="/img/inquiry/customer.png" alt="" style="width: 230px; position: absolute; top: -1px;  margin-left: 690px;">
                 </div>
                 <div class="mb-4"></div>
-                <button class="btn btn-primary btn-lg btn-block" type="submit"  style="margin-left: 219px;">문의 글 올리기</button>
+                <button class="btn btn-primary btn-lg btn-block" type="submit"  style="margin-left: 219px;">문의 글 수정</button>
                 <p class="mt-5 mb-3 text-muted" style="text-align: center;">&copy; Our Book : 2023</p>
             </form>
         </div>

@@ -7,6 +7,16 @@
         values(#{inquiryType},#{inquiryWriter},#{inquiryName},#{inquiryContent},NOW());
     </insert>
 
+    <update id="inquiryEdit" parameterType="com.ourbook.shop.dto.inquiry.InquiryInfo">
+        update inquiry_history
+        set INQUIRY_TYPE = #{inquiryType} , INQUIRY_WRITER = #{inquiryWriter} ,INQUIRY_NAME = #{inquiryName}, INQUIRY_CONTENT = #{inquiryContent} , SAVE_TIME = NOW()
+        where SEQUENCE = #{sequence};
+    </update>
+
+    <delete id="inquiryDelete"  parameterType="int">
+        DELETE FROM inquiry_history WHERE SEQUENCE = #{sequence};
+    </delete>
+
 
     <select id="findInquiryList" resultType="com.ourbook.shop.dto.inquiry.InquiryInfo">
         SELECT * FROM inquiry_history ORDER BY SEQUENCE DESC ;
@@ -23,15 +33,20 @@
         values(#{inquiryWriter},#{inquiryNumber},#{adminName},#{adminContent},NOW());
     </insert>
 
+
     <update id="inquiryAnswerUpdate" parameterType="com.ourbook.shop.dto.inquiry.InquiryAnswerInfo">
         update inquiry_answer_history
         set INQUIRY_WRITER = #{inquiryWriter} , ADMIN_NAME = #{adminName} , ADMIN_CONTENT = #{adminContent} , SAVE_TIME = NOW()
         where INQUIRY_NUMBER = #{inquiryNumber};
     </update>
 
+    <delete id="inquiryAnswerDelete" parameterType="int">
+        DELETE FROM inquiry_answer_history WHERE INQUIRY_NUMBER = #{inquiryNumber};
+    </delete>
+
 
     <select id="findInquiryAnswer" resultType="com.ourbook.shop.dto.inquiry.InquiryAnswerInfo">
-        SELECT * FROM inquiry_answer_history WHERE INQUIRY_NUMBER = #{inquiryNumber} AND INQUIRY_WRITER = #{inquiryWriter};
+        SELECT * FROM inquiry_answer_history WHERE INQUIRY_NUMBER = #{inquiryNumber};
     </select >
 
     <select id="findInquiryHistory" resultType="com.ourbook.shop.dto.inquiry.InquiryInfo">

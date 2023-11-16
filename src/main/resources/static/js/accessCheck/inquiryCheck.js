@@ -37,6 +37,41 @@ $(document).ready(function() {
 });
 
 
+$(document).ready(function() {
+    $("#AlreadyAnswerCheck").click(function(event) {
+        event.preventDefault();
+        const inquiryWriter = document.getElementById("inquiryWriter").textContent.substring(5);
+        const inquiryNumber = $("#inquiryNumber").val();
+        $.ajax({
+            url: "/checkAlreadyAnswer/"+inquiryNumber,
+            type: "POST",
+            async: true,
+            success: function(response) {
+               InquiryMeCheck(inquiryWriter,inquiryNumber);
+            },
+            error: function(error) {
+                alert("답변이 등록된 문의는 수정할 수 없습니다.");
+                event.preventDefault();
+            }
+        });
+    });
+});
+
+function InquiryMeCheck(inquiryWriter,inquiryNumber){
+    $.ajax({
+        url: "/checkMe/"+inquiryWriter,
+        type: "POST",
+        async: true,
+        success: function(response) {
+            window.location.href = "/OurBook/inquiry/edit/"+inquiryNumber;
+        },
+        error: function(error) {
+            alert("권한이 없습니다.");
+            event.preventDefault();
+        }
+    });
+}
+
 
 $(document).ready(function() {
     $(".allowAuthorizedUsersOnly").click(function(event) {
@@ -50,6 +85,25 @@ $(document).ready(function() {
             async: true,
             success: function(response) {
                 window.location.href = "/OurBook/inquiry/"+sequence;
+            },
+            error: function(error) {
+                alert("권한이 없습니다.");
+                event.preventDefault();
+            }
+        });
+    });
+});
+
+
+$(document).ready(function() {
+    $("#allowAdminUserOnly").click(function(event) {
+        event.preventDefault();
+        $.ajax({
+            url: "/checkAdminUser",
+            type: "POST",
+            async: true,
+            success: function(response) {
+                $("#deleteInquiryAnswer").submit();
             },
             error: function(error) {
                 alert("권한이 없습니다.");

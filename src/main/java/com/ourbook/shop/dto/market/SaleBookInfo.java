@@ -18,7 +18,6 @@ public class SaleBookInfo {
 
     private String uploaderEmail;
 
-
     private String uploaderName;
     /** 업로더 정보는 유지중인 세션에서 가져옴**/
     @NotBlank
@@ -61,7 +60,7 @@ public class SaleBookInfo {
     private int sequence;
 
     private int purchaseRequestCount;
-
+    //생성자 추가 x (DB 접근 불필요 필드)
 
     public SaleBookInfo(String uploaderEmail, String uploaderName, String saleBookName, String saleBookWriter, String saleBookStory, String saleEtc, @Nullable String saleImg,
                         Integer saleBookPage, Integer saleBookCount, BigDecimal saleBookPrice, @Nullable String saveTime, int sequence) {
