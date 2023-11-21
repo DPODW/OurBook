@@ -22,24 +22,20 @@
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/inquiry}" style="color: black; text-decoration: none;">문의</a>
   </nav>
 </header>
-
-
-<img src="/img/market/sendMail.png" alt="전송 사진" class="img-fluid mb-3" style="padding-left: 880px;  padding-top: 2%; width: 1150px;">
-
-
 <div style="margin-top: -20px;">
-  <form th:action="@{/OurBook/market/purchase/request}" th:method="POST">
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="alert text-center custom-alert" role="alert">
+        <img src="/img/market/sendMail.png" alt="전송 사진" class="img-fluid mb-3" style="padding-left: 10px;  padding-top: 2%; width: 250px;">
+        <form th:action="@{/OurBook/market/purchase/request}" th:method="POST">
         <h4 class="alert-heading">구매 요청 전 주의사항</h4>
         <hr>
         <p style="font-size: 14px; line-height: 1.4;">도서시장에서 판매되는 도서의 구매 요청은, OurBook 에서 먼저 귀하(구매자) 의 이메일 주소와 구매를 원하는 도서의 정보를<br> 이메일에 담아서 개인 판매자에게 전송합니다.
           개인 판매자는 이메일에 작성되어있는 귀하(구매자)의 이메일로 구매 요청에 &nbsp;&nbsp; <br>대한 회신을 하게 됩니다.</p>
         <p  style="font-size: 14px; line-height: 1.4; color: red;">일정 기간 회신이 없거나(3일 이상) 판매거부 의사를 밝힐 시, <a href="#" class="alert-link" style="color: red;">고객 지원팀에 문의</a> 해주세요.</p>
         <hr>
-        <p style="position: absolute; top: 200px; left: 75px;" th:text="'구매 요청 도서 제목 : '+ ${purchaseRequest.saleBookName}"></p>
-        <p style="position: absolute; top: 250px; left: 75px;" th:text="'회신 받을 이메일 주소 : '+${purchaseRequest.receiverEmail}"></p>
+          <p style="margin-right: 100px;">구매 요청 도서 제목 : <strong style="position: absolute;" th:text="${purchaseRequest.saleBookName}"></strong></p>
+          <p style="margin-right: 115px;">회신 받을 이메일 주소 : <strong style="position: absolute;" th:text="${purchaseRequest.receiverEmail}"></strong></p>
 
         <input type="hidden" name="saleBookName" th:value="*{purchaseRequest.saleBookName}">
 
@@ -50,11 +46,11 @@
         <input type="hidden" name="uploaderName" th:value="*{purchaseRequest.uploaderName}">
 
         <input type="hidden" name="sequence" th:value="*{purchaseRequest.sequence}">
+        <button class="btn btn-primary" style="margin-top: 10px; text-align: center;">구매 요청하기</button>
+      </form>
       </div>
     </div>
   </div>
-  <button class="btn btn-primary" style="margin-top: 90px; margin-left: 900px;">구매 요청하기</button>
-  </form>
 </div>
 
 

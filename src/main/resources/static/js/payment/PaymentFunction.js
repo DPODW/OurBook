@@ -43,18 +43,24 @@ function randomOrderNumber() {
 
 
 /** 구매시 입력해야할 정보가 공백일시 검증하는 함수 **/
-/** TODO:여기에 전화번호 숫자 제한도 걸어야 할듯 **/
 function checkInput() {
     const receiverName = document.getElementById('receiverName');
     const receiverPhoneNumber = document.getElementById('receiverPhoneNumber');
     const receiverPostCode = document.getElementById('receiverPostCode');
     const receiverAddress = document.getElementById('receiverAddress');
-    const detailAddress = document.getElementById("detailAddress");
+    const detailAddress = document.getElementById('detailAddress');
 
-    if (receiverName.value === "" || receiverPhoneNumber.value === "" ||
-        receiverPostCode.value === "" || receiverAddress.value === "" ||
-        detailAddress.value === "") {
-        alert("구매 정보를 전부 입력해주세요!");
+    // 숫자만 포함하는지 정규표현식으로 확인
+    const phoneNumberPattern = /^\d+$/;
+
+    if (
+        receiverName.value === "" ||
+        (receiverPhoneNumber.value !== null && !phoneNumberPattern.test(receiverPhoneNumber.value)) || // null 체크 추가
+        receiverPostCode.value === "" ||
+        receiverAddress.value === "" ||
+        detailAddress.value === ""
+    ) {
+        alert("구매 정보를 다시 한번 확인해주세요!");
         return false;
     } else {
         return true;

@@ -7,19 +7,37 @@
         values(#{uploaderEmail},#{uploaderName},#{saleBookName},#{saleBookWriter},#{saleBookStory},#{saleEtc},#{saleImg},#{saleBookPage},#{saleBookCount},#{saleBookPrice},NOW());
     </insert>
 
+    <delete id="saleBookDelete"  parameterType="int">
+        DELETE FROM market_books WHERE SEQUENCE = #{marketNumber};
+    </delete>
+
     <insert id="purchaseRequestInsert">
         insert into purchase_request_history(UPLOADER_EMAIL,UPLOADER_NAME,RECEIVER_EMAIL,RECEIVER_NAME,SALE_BOOK_NAME,SAVE_TIME,SEQUENCE)
         values(#{uploaderEmail},#{uploaderName},#{receiverEmail},#{receiverName},#{saleBookName},NOW(),#{sequence});
     </insert>
+
+    <delete id="purchaseRequestDelete" parameterType="int">
+        DELETE FROM purchase_request_history WHERE SEQUENCE = #{purchaseRequestNumber};
+    </delete>
+
+
+    <update id="saleBookEdit" parameterType="com.ourbook.shop.dto.market.SaleBookInfo">
+        update market_books
+        set UPLOADER_EMAIL = #{uploaderEmail} , UPLOADER_NAME = #{uploaderName} ,SALE_BOOK_NAME = #{saleBookName}, SALE_BOOK_WRITER = #{saleBookWriter} , SALE_BOOK_STORY = #{saleBookStory},
+            SALE_ETC = #{saleEtc} , SALE_IMG = #{saleImg} ,SALE_BOOK_PAGE = #{saleBookPage}, SALE_BOOK_COUNT = #{saleBookCount} , SALE_BOOK_PRICE = #{saleBookPrice},SAVE_TIME = NOW()
+        where SEQUENCE = #{sequence};
+    </update>
 
 
     <select id="findMarketList" resultType="com.ourbook.shop.dto.market.SaleBookInfo">
         SELECT * FROM market_books ORDER BY SEQUENCE DESC ;
     </select >
 
+
     <select id="findMarketBook" resultType="com.ourbook.shop.dto.market.SaleBookInfo">
         SELECT * FROM market_books WHERE SEQUENCE = #{number}
     </select >
+
 
     <select id="findPurchaseRequestHistory" resultType="com.ourbook.shop.dto.market.PurchaseRequest">
         SELECT * FROM purchase_request_history WHERE RECEIVER_EMAIL = #{receiverEmail} ORDER BY SEQUENCE DESC;
@@ -27,7 +45,11 @@
 
 
     <select id="findPurchaseRequestCount" resultType="int">
-        SELECT COUNT(*) FROM purchase_request_history WHERE SALE_BOOK_NAME = #{saleBookName};
+        SELECT COUNT(*) FROM purchase_request_history WHERE SEQUENCE = #{purchaseRequestNumber};
+    </select>
+
+    <select id="findSaleImgToSequence" resultType="String">
+        SELECT SALE_IMG FROM market_books WHERE SEQUENCE = #{marketNumber};
     </select>
 
 </mapper>

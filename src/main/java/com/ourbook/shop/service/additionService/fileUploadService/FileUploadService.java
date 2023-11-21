@@ -10,4 +10,6 @@ public interface FileUploadService {
 
     String uploadImgFile(MultipartFile uploadImg) throws IOException;
 
+    void deleteImgFile(int marketNumber) throws IOException;
+
 }

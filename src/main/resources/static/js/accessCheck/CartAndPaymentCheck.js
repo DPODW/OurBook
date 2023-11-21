@@ -42,3 +42,23 @@ $(document).ready(function() {
         });
     });
 });
+
+
+$(document).ready(function() {
+    $(".instantBuyLoginCheck").click(function(event) {
+        event.preventDefault();
+        const bookId = $(this).attr("data-bookId");
+        $.ajax({
+            url: "/checkLogin",
+            type: "POST",
+            async: true,
+            success: function(response) {
+                window.location.href = '/OurBook/book/info/payment/' + bookId + '?bookCount=1';
+            },
+            error: function(error) {
+                alert("로그인 후 이용 가능한 서비스 입니다.");
+                event.preventDefault();
+            }
+        });
+    });
+});

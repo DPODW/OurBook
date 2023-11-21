@@ -23,28 +23,25 @@
   </nav>
 </header>
 
-
-<img src="/img/market/sendMailSuccess.png" alt="전송 사진" class="img-fluid mb-3" style="padding-left: 850px;  padding-top: 2%; width: 1100px;">
-
-
 <div style="margin-top: -20px;">
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <div class="alert text-center custom-alert" role="alert">
+      <div class="alert text-center custom-alert">
+        <img src="/img/market/sendMailSuccess.png" alt="전송 사진" class="img-fluid mb-3"  style="padding-left: 10px;  padding-top: 2%; width: 220px;">
         <h4 class="alert-heading">판매자에게 요청 메일이 전송되었습니다!</h4>
         <hr>
         <p style="font-size: 14px; line-height: 1.4;">개인 판매자에게 정상적으로 구매 요청 메일이 발송되었습니다. 귀하(구매자) 께서는 개인 판매자에게<br>판매 도서에 대한 추가 정보를 물어볼
           권리가 있으니, 그 점 참고하셔서 만족한 거래를 하시기 바랍니다.</p>
-        <p  style="font-size: 14px; line-height: 1.4; color: red;">일정 기간 회신이 없거나(3일 이상) 판매거부 의사를 밝힐 시, <a href="#" class="alert-link" style="color: red;">고객 지원팀에 문의</a> 해주세요.</p>
+        <p  style="font-size: 14px; line-height: 1.4; color: red;">일정 기간 회신이 없거나(3일 이상) 판매거부 의사를 밝힐 시, <a th:href="@{/OurBook/inquiry}" class="alert-link" style="color: red;">고객 지원팀에 문의</a> 해주세요.</p>
         <hr>
-        <p style="position: absolute; top: 200px; left: 75px;" th:text="'구매 요청 도서 제목 : '+ ${purchaseRequest.saleBookName}"></p>
-        <p style="position: absolute; top: 250px; left: 75px;" th:text="'회신 받을 이메일 주소 : '+${purchaseRequest.receiverEmail}"></p>
+        <p style="margin-right: 100px;">구매 요청 도서 제목 : <strong style="position: absolute;" th:text="${purchaseRequest.saleBookName}"></strong></p>
+        <p style="margin-right: 115px;">회신 받을 이메일 주소 : <strong style="position: absolute;" th:text="${purchaseRequest.receiverEmail}"></strong></p>
+        <form th:method="GET" th:action="@{/OurBook}">
+          <button class="btn btn-success" style="margin-top: 10px; text-align: center;">메인으로</button>
+        </form>
       </div>
     </div>
   </div>
-  <form th:method="GET" th:action="@{/OurBook}">
-  <button class="btn btn-success" style="margin-top: 90px; margin-left: 900px; ">메인으로</button>
-  </form>
 </div>
 
 

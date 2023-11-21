@@ -20,9 +20,9 @@
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/inquiry}" style="color: black; text-decoration: none;">문의</a>
   </nav>
 </header>
-<img src="/img/ourBookShopList/store.png" style="margin-left: 700px;">
 <main>
   <div class="container">
+    <img src="/img/ourBookShopList/store.png" style="width: 500px; display:block; margin:auto;">
     <div class="row">
       <div class="col-md-4 mb-4" th:each="bookInfo : ${allBook}">
         <div class="card" style="width: 18rem;  margin-left: 110px;">
@@ -35,8 +35,7 @@
             <li class="list-group-item"> <a th:href="@{/OurBook/book/info/{bookId}(bookId=${bookInfo.bookId})}" style="text-decoration-line:none; color: black">상품 보기</a></li>
           </ul>
           <div class="card-body">
-            <a href="#" class="card-link" style="color: black; border: none">리뷰 보기</a>
-            <a href="#" class="card-link">Another link</a>
+            <a class="instantBuyLoginCheck" th:href="@{/OurBook/book/info/payment/{bookId}(bookId=*{bookInfo.bookId})?bookCount=1}"  th:attr="data-bookId=${bookInfo.bookId}" style="color: black; text-decoration: none;">바로 구매하기</a>
           </div>
         </div>
       </div>

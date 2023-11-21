@@ -2,6 +2,7 @@ package com.ourbook.shop.controller.paymentController;
 
 import com.ourbook.shop.dto.payment.PaymentInfo;
 import com.ourbook.shop.service.additionService.emailService.EmailService;
+import com.ourbook.shop.service.paymentService.PaymentService;
 import com.ourbook.shop.service.paymentService.TossPaymentService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -20,16 +21,19 @@ public class TossPaymentController {
 
     private final TossPaymentService tossPaymentService;
 
+    private final PaymentService paymentService;
+
     private final EmailService emailService;
 
-    public TossPaymentController(TossPaymentService tossPaymentService, EmailService emailService) {
+    public TossPaymentController(TossPaymentService tossPaymentService, PaymentService paymentService, EmailService emailService) {
         this.tossPaymentService = tossPaymentService;
+        this.paymentService = paymentService;
 
         this.emailService = emailService;
     }
 
     @GetMapping("/TossPay/validate")
-    public String TossPaymentValidate(@RequestParam String orderId, @RequestParam String paymentKey, @RequestParam String amount, HttpServletRequest request){
+    public String TossPaymentValidateAndSave(@RequestParam String orderId, @RequestParam String paymentKey, @RequestParam String amount, HttpServletRequest request){
         HttpSession session = request.getSession(false);
         if(session.getAttribute("TossPaymentInfo")==null){
             log.error("토스페이 결제 정보 저장 세션이 생성되지 않았습니다.");
@@ -45,10 +49,12 @@ public class TossPaymentController {
 
 
     @PostMapping("/TossPay/payment/1")
-    public ResponseEntity<Void> TossPaymentInfo(@RequestBody PaymentInfo paymentInfo, HttpServletRequest request){
+    public ResponseEntity<Void> TossPaymentInfoSession(@RequestBody PaymentInfo paymentInfo, HttpServletRequest request){
         HttpSession TossPaymentInfo = request.getSession();
         TossPaymentInfo.setAttribute("TossPaymentInfo",paymentInfo);
         return ResponseEntity.ok().build();
     }
+
+
 
 }

@@ -36,3 +36,53 @@ $(document).ready(function() {
         });
     });
 });
+
+
+$(document).ready(function() {
+    $("#MarketMeCheck").click(function(event) {
+        event.preventDefault();
+        const writer = $("#sellerId").val();
+        const marketNumber = $("#Sequence").val();
+
+        if(writer == ""){
+            alert("권한이 없습니다.");
+            return false;
+        }
+        $.ajax({
+            url: "/checkMe/"+writer,
+            type: "POST",
+            async: true,
+            success: function(response) {
+                window.location.href = "/OurBook/market/sale/"+marketNumber;
+            },
+            error: function(error) {
+                alert("권한이 없습니다.");
+                event.preventDefault();
+            }
+        });
+    });
+});
+
+$(document).ready(function() {
+    $("#MarketAuthorizedCheck").click(function(event) {
+        event.preventDefault();
+        const writer = $("#sellerId").val();
+        if(writer == ""){
+            alert("권한이 없습니다.");
+            return false;
+        }
+        $.ajax({
+            url: "/checkAuthorizedUser/"+writer,
+            type: "POST",
+            async: true,
+            success: function(response) {
+                $("#deleteMarketBook").submit();
+            },
+            error: function(error) {
+                alert("권한이 없습니다.");
+                event.preventDefault();
+            }
+        });
+    });
+});
+

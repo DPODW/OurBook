@@ -8,11 +8,14 @@ import java.util.List;
 @Service
 public interface PaymentService {
 
+    void paymentInfoDelete(String orderNumber);
     List<PaymentInfo> findPaymentHistory(String email);
 
     String findPaymentResultImg(String bookId);
 
     List<String> findPaymentHistoryImg(List<PaymentInfo> paymentHistory);
+
+    PaymentInfo findOrderNumber(String orderNumber);
 
     PaymentInfo checkPaymentNull(PaymentInfo paymentInfo);
 

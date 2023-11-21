@@ -40,14 +40,14 @@ $(document).ready(function() {
 $(document).ready(function() {
     $("#AlreadyAnswerCheck").click(function(event) {
         event.preventDefault();
-        const inquiryWriter = document.getElementById("inquiryWriter").textContent.substring(5);
+        const writer = document.getElementById("inquiryWriter").textContent.substring(5);
         const inquiryNumber = $("#inquiryNumber").val();
         $.ajax({
             url: "/checkAlreadyAnswer/"+inquiryNumber,
             type: "POST",
             async: true,
             success: function(response) {
-               InquiryMeCheck(inquiryWriter,inquiryNumber);
+               InquiryMeCheck(writer,inquiryNumber);
             },
             error: function(error) {
                 alert("답변이 등록된 문의는 수정할 수 없습니다.");
@@ -57,9 +57,9 @@ $(document).ready(function() {
     });
 });
 
-function InquiryMeCheck(inquiryWriter,inquiryNumber){
+function InquiryMeCheck(writer,inquiryNumber){
     $.ajax({
-        url: "/checkMe/"+inquiryWriter,
+        url: "/checkMe/"+writer,
         type: "POST",
         async: true,
         success: function(response) {
@@ -77,10 +77,10 @@ $(document).ready(function() {
     $(".allowAuthorizedUsersOnly").click(function(event) {
         event.preventDefault();
         const sequence = $(this).closest("tr").find("#sequence").text();
-        const inquiryWriter = $(this).closest("tr").find("#inquiryWriter").text();
+        const writer = $(this).closest("tr").find("#inquiryWriter").text();
 
         $.ajax({
-            url: "/checkAuthorizedUser/"+inquiryWriter,
+            url: "/checkAuthorizedUser/"+writer,
             type: "POST",
             async: true,
             success: function(response) {

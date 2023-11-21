@@ -14,7 +14,13 @@ public interface MarketMapper {
 
     void saleBookInsert(SaleBookInfo saleBookInfo);
 
+    void saleBookDelete(int marketNumber);
+
+    void saleBookEdit(SaleBookInfo saleBookInfo);
+
     void purchaseRequestInsert(PurchaseRequest purchaseRequest);
+
+    void purchaseRequestDelete(int purchaseRequestNumber);
 
     List<SaleBookInfo> findMarketList();
 
@@ -22,7 +28,8 @@ public interface MarketMapper {
 
     List<PurchaseRequest> findPurchaseRequestHistory(String receiverEmail);
 
+    int findPurchaseRequestCount(int purchaseRequestNumber);
 
-    int findPurchaseRequestCount(String saleBookName);
+    String findSaleImgToSequence(int marketNumber);
 
 }

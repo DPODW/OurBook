@@ -2,6 +2,7 @@ package com.ourbook.shop.service.additionService.emailService;
 
 import com.ourbook.shop.dto.market.PurchaseRequest;
 import com.ourbook.shop.dto.payment.PaymentInfo;
+import com.ourbook.shop.mapper.marketMapper.MarketMapper;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,9 +18,13 @@ public class EmailServiceImpl implements EmailService {
 
     private final SpringTemplateEngine templateEngine;
 
-    public EmailServiceImpl(JavaMailSender javaMailSender, SpringTemplateEngine templateEngine) {
+    private final MarketMapper marketMapper;
+
+
+    public EmailServiceImpl(JavaMailSender javaMailSender, SpringTemplateEngine templateEngine, MarketMapper marketMapper) {
         this.javaMailSender = javaMailSender;
         this.templateEngine = templateEngine;
+        this.marketMapper = marketMapper;
     }
 
     @Override
@@ -52,14 +57,13 @@ public class EmailServiceImpl implements EmailService {
         } catch (Exception e) {
             e.printStackTrace();
             throw new IllegalArgumentException("잘못된 이메일 요청 (이메일 발송 안됌)");
-            /** TODO: 실패 시 -> 구매 요청 내역에서 삭제하는 로직 추가 **/
         }
     }
 
-    private String setPaymentContext(PaymentInfo paymentInfo) { // 타임리프 설정하는 코드
+    private String setPaymentContext(PaymentInfo paymentInfo) {
         Context context = new Context();
-        context.setVariable("paymentInfoMail", paymentInfo); // Template에 전달할 데이터 설정
-        return templateEngine.process("mail/paymentSuccessMail", context); // mail.html
+        context.setVariable("paymentInfoMail", paymentInfo);
+        return templateEngine.process("mail/paymentSuccessMail", context);
     }
 
 

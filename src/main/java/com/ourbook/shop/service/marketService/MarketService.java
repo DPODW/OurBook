@@ -14,6 +14,10 @@ public interface MarketService {
 
     void saleBookInsert(SaleBookInfo saleBookInfo, MultipartFile uploadImg) throws IOException;
 
+    void saleBookDelete(int marketNumber) throws IOException;
+
+    void saleBookEdit(SaleBookInfo saleBookInfo,MultipartFile uploadImg) throws IOException;;
+
     void purchaseRequestInsert(PurchaseRequest purchaseRequest);
 
     List<SaleBookInfo> findMarketList();
@@ -22,5 +26,5 @@ public interface MarketService {
 
     List<PurchaseRequest> findPurchaseRequestHistory(String receiverEmail);
 
-    int findPurchaseRequestCount(String saleBookName);
+    int findPurchaseRequestCount(int purchaseRequestNumber);
 }

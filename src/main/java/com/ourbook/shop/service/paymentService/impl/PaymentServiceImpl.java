@@ -27,6 +27,11 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
+    public void paymentInfoDelete(String orderNumber) {
+        paymentMapper.paymentInfoDelete(orderNumber);
+    }
+
+    @Override
     public List<PaymentInfo> findPaymentHistory(String email) {
         List<PaymentInfo> paymentHistory = paymentMapper.findPaymentHistory(email);
         for (PaymentInfo payment : paymentHistory) {
@@ -57,6 +62,11 @@ public class PaymentServiceImpl implements PaymentService {
             bookImages.add(bookImage);
         }
         return bookImages;
+    }
+
+    @Override
+    public PaymentInfo findOrderNumber(String orderNumber) {
+        return paymentMapper.findOrderNumber(orderNumber);
     }
 
     @Override

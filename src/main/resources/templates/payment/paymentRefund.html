@@ -2,74 +2,52 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>Our book : 문의</title>
+    <title>Our book : 환불 요청</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="/js/accessCheck/CartAndPaymentCheck.js"></script>
 </head>
 
-<body style="overflow-x: hidden">
+<body>
 
 <header class="site-header sticky-top py-1" style="background-color: #f8f9fa;">
     <nav class="container d-flex flex-column flex-md-row justify-content-between">
         <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
-        <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">내 정보</a>
-        <a class="py-2 d-none d-md-inline-block payment-cart-login-check" th:href="@{/OurBook/book/info/cart}" style="color: black; text-decoration: none;">장바구니</a>
+        <a class="py-2 d-none d-md-inline-block" th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">내 정보</a>
+        <a class="py-2 d-none d-md-inline-block payment-cart-login-check"  th:href="@{/OurBook/book/info/cart}" style="color: black; text-decoration: none;">장바구니</a>
         <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
         <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/market}" style="color: black; text-decoration: none;">도서 시장</a>
         <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책에 관하여</a>
         <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/inquiry}" style="color: black; text-decoration: none;">문의</a>
     </nav>
 </header>
-
-<div class="container" style="margin-top: 40px; ">
-    <div class="input-form-backgroud row">
-        <div class="input-form col-md-12 mx-auto" >
-
-            <h4 class="mb-3" style="margin-left: 220px;">문의</h4>
-            <form th:action="@{/OurBook/inquiry/form}" th:method="POST">
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label style="margin-left: 220px;">문의 종류</label> <br>
-                        <select name="inquiryType" style="width: 350px; margin-left: 220px;">
-                            <option>배송 문의</option>
-                            <option>결제 문의</option>
-                            <option>제품 문의</option>
-                            <option>도서시장 문의</option>
-                            <option>신고 문의</option>
-                            <option selected>기타 문의</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label style="margin-left: 120px;">문의자 ID (네이버 회원은 이메일 주소)</label>
-                        <input type="text" maxlength="12" name="inquiryWriter" th:value="*{inquiryWriter}"  class="form-control" style="width: 350px; margin-left:120px;" readonly>
-                    </div>
-
-                    <div class="col-md-6 mb-3" style="margin-left: 220px;">
-                        <label >문의 제목</label>
-                        <input type="text" maxlength="25" name="inquiryName" th:field="*{inquiryInfo.inquiryName}" class="form-control" style="width: 350px;">
-                        <h4 th:errorclass="field-error" th:errors="*{inquiryInfo.inquiryName}"></h4>
-                    </div>
-
-                    <p style="margin-top: -54px; margin-left: 780px; font-size: small; color: gray;">폭언 , 욕설 등 부적절한 내용의 문의는 사전통보<br> 없이 삭제될수 있음을 알려드립니다.</p>
-
+<div style="margin-top: -20px;">
+    <form th:action="@{/payment/refund/request}" th:method="POST">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="alert text-center custom-alert">
+                    <img src="/img/payment/refund.png" alt="환불 사진" class="img-fluid mb-3" style="padding-left: 10px;  padding-top: 2%; width: 250px;">
+                    <h4 class="alert-heading">환불 요청</h4>
+                    <hr>
+                    <p style="font-size: 14px; line-height: 1.4;">제품이 출고 되기 전에 환불 요청을 하시면 즉각적으로 환불이 이루어집니다. 제품이 출고 된 이후에는,<br> OurBook 측으로
+                        환불을 원하는 제품을 반송해주셔야 합니다. OurBook 에서 반송된 제품을 빠르게<br> 검수하고 환불 요청을 도와드립니다.</p>
+                    <p style="font-size: 14px; line-height: 1.4; margin-top: 40px;">환불은, 구매시 사용한 결제 수단 (카드 등) 으로 환불 처리 됩니다. 상세한 설명이 필요하시면,<br><a th:href="@{/OurBook/inquiry}" class="alert-link" style="color: red;">고객 지원팀에 문의</a> 해주세요.
+                    <span style="font-weight: bold">(현재 실제로 제품이 배송되지 않기 때문에, 즉시 환불이 이루어집니다.)</span></p>
+                    <hr>
+                    <h4 class="alert-heading">환불 정보</h4>
+                    <p class="lead" style="margin-top: 40px; margin-left: -150px;">환불 요청 도서:&nbsp; <strong style="position: absolute;" th:text="${refundPaymentInfo.paymentTime}"></strong></p>
+                    <p class="lead" style="margin-top: 40px; margin-left: -150px;">환불 요청 금액:&nbsp; <strong style="position: absolute;"  th:text="${refundPaymentInfo.bookName}"></strong></p>
+                    <p class="lead" style="margin-top: 40px;margin-left: -110px; ">구매 일시:&nbsp; <strong style="position: absolute;"  th:text="${refundPaymentInfo.paymentPrice}"></strong></p>
+                    <p class="lead" style="margin-top: 40px; margin-left: -110px;">주문 번호:&nbsp; <strong style="position: absolute;"  th:text="${refundPaymentInfo.orderNumber}"></strong></p>
+                    <input type="hidden" name="orderNumber" th:value="*{refundPaymentInfo.orderNumber}">
+                    <button type="submit" class="btn btn-primary" style="margin-top: 10px; text-align: center;">환불 요청하기</button>
                 </div>
-                <hr style="width: 910px; margin-left: 220px;">
-                <div class="mb-3" style="margin-top: 30px; margin-left: 220px; position: relative;">
-                    <label style="font-weight: bold;">문의 내용 <a style="font-size: small; font-weight: normal; color: gray;">(300자 제한)</a></label>
-                    <textarea class="form-control" name="inquiryContent" th:field="*{inquiryInfo.inquiryContent}" maxlength="300" style="width: 600px; height: 200px;"></textarea>
-                    <h4 th:errorclass="field-error" th:errors="*{inquiryInfo.inquiryContent}"></h4>
-                    <img src="/img/inquiry/customer.png" alt="" style="width: 230px; position: absolute; top: -1px;  margin-left: 690px;">
-                </div>
-                <div class="mb-4"></div>
-                <button class="btn btn-primary btn-lg btn-block" type="submit"  style="margin-left: 219px;">문의 글 올리기</button>
-                <p class="mt-5 mb-3 text-muted" style="text-align: center;">&copy; Our Book : 2023</p>
-            </form>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
+
 
 <footer class="container py-5">
     <div class="row">

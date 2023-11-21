@@ -37,15 +37,15 @@ public class RoleCheck {
         }
     }
 
-    @PostMapping("/checkAuthorizedUser/{inquiryWriter}")
-    public ResponseEntity<String> allowAuthorizedUsersOnly(@PathVariable String inquiryWriter, HttpServletRequest request,
+    @PostMapping("/checkAuthorizedUser/{writer}")
+    public ResponseEntity<String> allowAuthorizedUsersOnly(@PathVariable String writer, HttpServletRequest request,
                                                          @AuthenticationPrincipal CustomUserDetail userDetail){
         HttpSession session = request.getSession(false);
         SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
         if(naverMember==null && userDetail==null){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("로그인 되지 않은 사용자");
         }
-        if(isAccessPermit(inquiryWriter, userDetail, naverMember)){
+        if(isAccessPermit(writer, userDetail, naverMember)){
             return ResponseEntity.ok().body("인증된 사용자");
         }else{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("권한 없는 사용자");
@@ -64,12 +64,12 @@ public class RoleCheck {
         }
     }
 
-    @PostMapping("/checkMe/{inquiryWriter}")
-    public ResponseEntity<String> allowMeOnly(@PathVariable String inquiryWriter,HttpServletRequest request,@AuthenticationPrincipal CustomUserDetail userDetail){
+    @PostMapping("/checkMe/{writer}")
+    public ResponseEntity<String> allowWriterUserOnly(@PathVariable String writer,HttpServletRequest request,@AuthenticationPrincipal CustomUserDetail userDetail){
         HttpSession session = request.getSession(false);
         SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-        if(naverMember != null && naverMember.getEmail().equals(inquiryWriter) ||
-           userDetail != null && userDetail.getUsername().equals(inquiryWriter)){
+        if(naverMember != null && naverMember.getEmail().equals(writer) ||
+           userDetail != null && userDetail.getUsername().equals(writer)){
             return ResponseEntity.ok().body("본인 접근 가능");
         }else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("권한 없는 사용자");
@@ -77,9 +77,9 @@ public class RoleCheck {
     }
 
 
-    private static boolean isAccessPermit(String inquiryWriter, CustomUserDetail userDetail, SessionUser naverMember) {
-        return  (naverMember != null && naverMember.getEmail() != null && naverMember.getEmail().equals(inquiryWriter)) ||
-                (userDetail != null && userDetail.getUsername() != null && userDetail.getUsername().equals(inquiryWriter)) ||
+    private static boolean isAccessPermit(String writer, CustomUserDetail userDetail, SessionUser naverMember) {
+        return  (naverMember != null && naverMember.getEmail() != null && naverMember.getEmail().equals(writer)) ||
+                (userDetail != null && userDetail.getUsername() != null && userDetail.getUsername().equals(writer)) ||
                 (userDetail != null && userDetail.getAuthorities() != null && !userDetail.getAuthorities().isEmpty() &&
                  userDetail.getAuthorities().iterator().next().toString().equals("ADMIN"));
         /** NULL 체크를 하지 않아도 정상 작동은 하나, 과도한 에러 로그 방지 및 확실한 조건 검사를 위해 NULL 체크 로직을 추가함 **/

@@ -33,6 +33,21 @@ public class MarketServiceImpl implements MarketService {
     }
 
     @Override
+    public void saleBookDelete(int marketNumber) throws IOException {
+        fileUploadService.deleteImgFile(marketNumber);
+        marketMapper.saleBookDelete(marketNumber);
+    }
+
+    @Override
+    public void saleBookEdit(SaleBookInfo saleBookInfo,MultipartFile uploadImg) throws IOException {
+        fileUploadService.deleteImgFile(saleBookInfo.getSequence());
+
+        String uploadImgUrl = fileUploadService.uploadImgFile(uploadImg);
+        saleBookInfo.setSaleImg(uploadImgUrl);
+        marketMapper.saleBookEdit(saleBookInfo);
+    }
+
+    @Override
     public void purchaseRequestInsert(PurchaseRequest purchaseRequest) {
         marketMapper.purchaseRequestInsert(purchaseRequest);
     }
@@ -43,7 +58,7 @@ public class MarketServiceImpl implements MarketService {
             marketList.stream()
                 .map(saleBookInfo -> {
                     saleBookInfo.setSaveTime(extractYearAndMonth(saleBookInfo.getSaveTime()));
-                    saleBookInfo.setPurchaseRequestCount(findPurchaseRequestCount(saleBookInfo.getSaleBookName()));
+                    saleBookInfo.setPurchaseRequestCount(findPurchaseRequestCount(saleBookInfo.getSequence()));
                     return saleBookInfo;
                 })
                     .collect(Collectors.toList());
@@ -56,7 +71,7 @@ public class MarketServiceImpl implements MarketService {
         SaleBookInfo marketBook = marketMapper.findMarketBook(number);
         marketBook.setSaveTime(extractYearAndMonth(marketBook.getSaveTime()));
         marketBook.setSaleBookPrice(marketBook.getSaleBookPrice().setScale(0));
-        marketBook.setPurchaseRequestCount(findPurchaseRequestCount(marketBook.getSaleBookName()));
+        marketBook.setPurchaseRequestCount(findPurchaseRequestCount(marketBook.getSequence()));
         return marketBook;
     }
 
@@ -74,8 +89,8 @@ public class MarketServiceImpl implements MarketService {
     }
 
     @Override
-    public int findPurchaseRequestCount(String saleBookName) {
-       return marketMapper.findPurchaseRequestCount(saleBookName);
+    public int findPurchaseRequestCount(int purchaseRequestNumber) {
+       return marketMapper.findPurchaseRequestCount(purchaseRequestNumber);
     }
 
     private static String extractYearAndMonth(String saveTime){

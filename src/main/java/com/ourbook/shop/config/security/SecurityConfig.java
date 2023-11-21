@@ -27,13 +27,14 @@ public class SecurityConfig {
 
             "/OurBook/book/info/{bookId}", "/checkLogin", "/iamports/accessToken","/OurBook/market", "/OurBook/market/sale/info/{number}", "/checkRole","/OurBook/inquiry",
 
-            "/checkAuthorizedUser/{inquiryWriter}","/checkAlreadyAnswer/{inquiryNumber}",
+            "/checkAuthorizedUser/{writer}","/checkAlreadyAnswer/{inquiryNumber}","/checkMe/{writer}",
 
             "/checkId", "/checkEmail","/css/**", "/js/**", "/img/**"};
 
     private final UserDetailServiceImpl userDetailsService;
 
     private final UserService userService;
+
     private final CustomAuthenticationEntryPoint authenticationEntryPoint;
 
     @Bean

@@ -54,10 +54,21 @@ public class MarketFormController {
         return "/market/MarketSaleForm";
     }
 
+    @GetMapping("/OurBook/market/sale/{marketNumber}")
+    public String marketSaleEditView(@PathVariable int marketNumber,Model model){
+        SaleBookInfo saleBookInfo = marketService.findMarketBook(marketNumber);
+        model.addAttribute("saleBookInfo",saleBookInfo);
+        return "market/MarketSaleEdit";
+    }
+
+
 
     @GetMapping("/OurBook/market/sale/info/{number}")
-    public String marketSaleInfoView(@PathVariable int number,Model model){
+    public String marketSaleInfoView(@PathVariable int number,@AuthenticationPrincipal CustomUserDetail userDetail,Model model){
         SaleBookInfo saleBookInfo = marketService.findMarketBook(number);
+        if(userDetail!=null){
+            model.addAttribute("sellerId",userDetail.getUsername());
+        }
         model.addAttribute("saleBookInfo", saleBookInfo);
         return "market/MarketSaleInfo";
     }

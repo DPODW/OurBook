@@ -16,10 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -50,6 +47,23 @@ public class MarketController {
         return "redirect:/OurBook/market";
     }
 
+    @DeleteMapping("/OurBook/market/sale")
+    public String SaleBookDelete(@RequestParam("sequence") int marketNumber) throws IOException {
+        marketService.saleBookDelete(marketNumber);
+        return "redirect:/OurBook/market";
+    }
+
+    @PutMapping("/OurBook/market/sale")
+    public String SaleBookEdit(@Validated @ModelAttribute SaleBookInfo saleBookInfo,BindingResult bindingResult, @RequestParam("uploadImg") MultipartFile uploadImg,Model model) throws IOException {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("saleBookInfo", saleBookInfo);
+            return "/market/MarketSaleEdit";
+        }
+        marketService.saleBookEdit(saleBookInfo,uploadImg);
+        return "redirect:/OurBook/market";
+    }
+
+
     @PostMapping("/OurBook/market/purchase/request/warning")
     public String BookPurchaseRequestWarn(@ModelAttribute PurchaseRequest purchaseRequest, HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail,
                                           Model model){
@@ -70,8 +84,8 @@ public class MarketController {
 
     @PostMapping("/OurBook/market/purchase/request")
     public String BookPurchaseRequest(@ModelAttribute PurchaseRequest purchaseRequest, Model model) throws MessagingException {
-        marketService.purchaseRequestInsert(purchaseRequest);
         emailService.sendPurchaseRequestMessage(purchaseRequest);
+        marketService.purchaseRequestInsert(purchaseRequest);
         model.addAttribute("purchaseRequest",purchaseRequest);
         return "market/MarketSaleSuccess";
     }
