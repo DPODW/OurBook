@@ -36,7 +36,6 @@ public class RefundPaymentController {
     @PostMapping("/payment/refund")
     public String paymentRefundInfo(@RequestParam String orderNumber, Model model){
         PaymentInfo refundPaymentInfo = paymentService.findOrderNumber(orderNumber);
-        log.info("{}",refundPaymentInfo);
         model.addAttribute("refundPaymentInfo",refundPaymentInfo);
         return "payment/paymentRefund";
     }

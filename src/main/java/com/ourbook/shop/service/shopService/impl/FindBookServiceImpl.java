@@ -1,5 +1,6 @@
 package com.ourbook.shop.service.shopService.impl;
 
+import com.ourbook.shop.dto.book.BookSearchResult;
 import com.ourbook.shop.dto.payment.PaymentInfo;
 import com.ourbook.shop.dto.book.Book;
 import com.ourbook.shop.mapper.paymentMapper.PaymentMapper;
@@ -50,6 +51,11 @@ public class FindBookServiceImpl implements FindBookService {
     @Override
     public BigDecimal findBookPrice(String bookId) {
        return findBookMapper.findBookPrice(bookId);
+    }
+
+    @Override
+    public List<BookSearchResult> userSearchBook(String searchBookName) {
+       return findBookMapper.userSearchBook(searchBookName.replaceAll("\\s",""));
     }
 }
 

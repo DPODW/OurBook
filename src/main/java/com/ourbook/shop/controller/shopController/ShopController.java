@@ -3,17 +3,21 @@ package com.ourbook.shop.controller.shopController;
 import com.ourbook.shop.config.auth.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.book.BookCartSave;
+import com.ourbook.shop.dto.book.BookSearchResult;
 import com.ourbook.shop.service.shopService.BookCartService;
+import com.ourbook.shop.service.shopService.FindBookService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -21,9 +25,12 @@ public class ShopController {
 
     private final BookCartService bookCartService;
 
+    private final FindBookService findBookService;
+
     @Autowired
-    public ShopController(BookCartService bookCartService) {
+    public ShopController(BookCartService bookCartService, FindBookService findBookService) {
         this.bookCartService = bookCartService;
+        this.findBookService = findBookService;
     }
 
     @PostMapping("/OurBook/book/info/cart")
@@ -64,6 +71,18 @@ public class ShopController {
             bookCartService.updateBookCart(bookCount,bookId,userDetail.getEmail());
         }
         return "redirect:/OurBook/book/info/cart";
+    }
+
+
+    @ResponseBody
+    @PostMapping("/OurBook/book/search")
+    public ResponseEntity<String> bookSearch(@RequestParam String searchBookName, Model model){
+        List<BookSearchResult> bookSearchResults = findBookService.userSearchBook(searchBookName);
+       if(bookSearchResults!=null){
+           model.addAttribute("bookSearchResults",bookSearchResults);
+           return ResponseEntity.ok().body("검색 결과 존재");
+       }else
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("검색 결과 없음");
     }
 
 

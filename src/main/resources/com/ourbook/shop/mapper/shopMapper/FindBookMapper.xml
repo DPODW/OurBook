@@ -18,4 +18,25 @@
         SELECT BOOK_PRICE FROM book_info WHERE BOOK_ID = #{bookId}
     </select >
 
+    <select id="userSearchBook" resultType="com.ourbook.shop.dto.book.BookSearchResult">
+        SELECT
+            BOOK_NAME AS SEARCH_RESULT,
+            'book_info' AS CATEGORY,
+            BOOK_ID AS UNIQUE_NUMBER
+        FROM
+            book_info
+        WHERE
+            REPLACE(TRIM(LOWER(BOOK_NAME)), ' ', '') = #{searchBookName}
+        UNION
+        SELECT
+            SALE_BOOK_NAME AS SEARCH_RESULT,
+            'market_books' AS CATEGORY,
+            SEQUENCE AS UNIQUE_NUMBER
+        FROM
+            market_books
+        WHERE
+            REPLACE(TRIM(LOWER(SALE_BOOK_NAME)), ' ', '') =  #{searchBookName}
+
+    </select>
+
 </mapper>

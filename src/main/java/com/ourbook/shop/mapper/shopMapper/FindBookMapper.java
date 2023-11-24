@@ -1,6 +1,7 @@
 package com.ourbook.shop.mapper.shopMapper;
 
 import com.ourbook.shop.dto.book.Book;
+import com.ourbook.shop.dto.book.BookSearchResult;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -18,4 +19,6 @@ public interface FindBookMapper {
     String findBookImg(String bookId);
 
     BigDecimal findBookPrice(String bookId);
+
+    List<BookSearchResult> userSearchBook(String searchBookName);
 }

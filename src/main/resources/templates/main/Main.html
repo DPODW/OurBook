@@ -1,12 +1,13 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="utf-8">
-    <title>Our book : 우리의 책!</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="/css/main.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="/js/accessCheck/CartAndPaymentCheck.js"></script>
+<head>
+  <meta charset="utf-8">
+  <title>Our book : 우리의 책!</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/css/HomeStyle.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="/js/accessCheck/CartAndPaymentCheck.js"></script>
 </head>
 <body>
 
@@ -21,95 +22,89 @@
 </header>
 
 <main>
-  <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light custom-bg"  style="width: 80%;">
-    <div class="col-md-5 p-lg-5 mx-auto my-5">
-      <h1 class="display-4 fw-normal">내 곁에 한 권의 책</h1>
-      <p class="lead fw-normal">2023년 동안 단 한 권의 책 만을 읽을 수 있다면, 당신은 무슨 책을 고르 실 건가요?</p>
-      <a class="btn btn-outline-secondary" th:href="@{/OurBook/book}">책 둘러보기</a>
+  <div style="width: 200px; height: 200px;  margin: auto;">
+    <img src="/img/home/OurBook.PNG" style="margin-left: -100px;">
+  </div>
+
+  <div style="width: 200px; height: 600px;  margin: auto;">
+    <div id="slideShow">
+      <ul class="slides">
+        <li><img src="/img/home/bookPromotion1.PNG"><a class="slideA" th:href="@{/OurBook/book/info/{bookId}(bookId=${'A8'})}">보러가기</a></li>
+        <li><img src="/img/home/bookPromotion2.PNG"><a class="slideA" th:href="@{/OurBook/book/info/{bookId}(bookId=${'A6'})}">보러가기</a></li>
+        <li><img src="/img/home/bookPromotion3.PNG"><a class="slideA" th:href="@{/OurBook/book/info/{bookId}(bookId=${'A9'})}">보러가기</a></li>
+        <li><img src="/img/home/bookPromotion4.PNG"><a class="slideA" th:href="@{/OurBook/book/info/{bookId}(bookId=${'A1'})}">보러가기</a></li>
+        <li><img src="/img/home/bookPromotion5.PNG"><a class="slideA" th:href="@{/OurBook/book/info/{bookId}(bookId=${'A5'})}">보러가기</a></li>
+      </ul>
+      <p class="controller">
+        <span class="prev">&lang;</span>
+        <span class="next">&rang;</span>
+      </p>
+      <script type="text/javascript" src="/js/slideShow.js"></script>
     </div>
   </div>
 
-  <div class="card" style="float: right; width: 19%; margin-top: -493px;">
-    <div class="card-body">
-      <h5 class="card-title"><strong>OurBook!</strong> 에 오신걸 환영합니다!</h5>
-      <p class="card-text">여러분과 함께 걷는 도서의 숲. OurBook</p>
-      <hr>
-      <div th:unless="${#authorization.expression('isAuthenticated()')}">
-        <a th:href="@{/OurBook/1}" class="btn btn-primary" style="width: 100px;">로그인</a>
-        <a th:href="@{/OurBook/2}" class="btn btn-success" style="margin-left: 100px; width: 100px;">회원 가입</a>
+  <div  style=" width: 500px; height: 200px; margin: auto;">
+    <div class="card text-center" style="position: absolute; margin-top: -600px; margin-left: 580px;">
+      <div class="card-header" style="margin-top: 10px; background-color: white;">
+        <img src="/img/home/loginMain.PNG" >
       </div>
 
+      <!-- 권한 체크가 필요한 부분(로그인 후) -->
       <div th:if="${#authorization.expression('isAuthenticated()')}">
-      <div style="display: flex; align-items: center;">
-        <p th:unless="${session.NAVER}"  th:text="*{commonName + ' 님'}"></p>
-        <p th:if="${session.NAVER}"  th:text="*{naverMemberName + ' 님'}"></p>
-        <span style="border: none; color: gainsboro;  margin-right: 10px; margin-left: 10px; margin-bottom: 15px;">|</span>
-        <p th:unless="${session.NAVER}"  th:text="*{commonEmail}"></p>
-        <p  th:if="${session.NAVER}" th:text="*{naverMemberEmail}"></p>
-      </div>
+        <img src="/img/home/memberProfile.png" style="position: absolute; width: 70px; margin-top: 35px; margin-left: 160px;">
+        <a style="position: absolute; margin-left: -250px; margin-top: 12px; font-weight: bolder;"  th:unless="${session.NAVER}"  th:text="*{commonName + ' 님'}"></a>
+        <a style="position: absolute; margin-left: -250px; margin-top: 12px; font-weight: bolder;" th:if="${session.NAVER}"  th:text="*{naverMemberName + ' 님'}"></a>
 
-      <div style="display: flex; align-items: center;">
-        <form th:action="@{/OurBook/3}" method="post">
-          <button style="color: gray; border: none; margin-right: 4px; background-color: white;">로그아웃</button>
-        </form>
-        <span style="color: gainsboro;">|</span>
-        <a th:href="@{/OurBook/myInfo}" style="color: gray; text-decoration: none; margin-left: 5px; margin-right: 5px;">내 정보</a>
-        <span style="color: gainsboro;">|</span>
-        <a  th:href="@{/OurBook/book/info/cart}" style="color: gray; text-decoration: none;  margin-left: 5px; margin-right: 5px;">장바구니</a>
-        <span style="color: gainsboro;">|</span>
-        <a th:href="@{/OurBook/book/info/payment/history}" style="color: gray; text-decoration: none;  margin-left: 5px; margin-right: 5px;">구매 내역</a>
-       </div>
+        <a style="position: absolute;  margin-left: -250px; margin-top: 60px;" th:unless="${session.NAVER}"  th:text="*{commonEmail}"></a>
+        <a style="position: absolute;  margin-left: -250px; margin-top: 60px;" th:if="${session.NAVER}" th:text="*{naverMemberEmail}"></a>
+        <div class="btn-toolbar"   style="margin-bottom: 15px; width: 570px;">
+          <div class="btn-group me-2" style="margin-top: 100px; margin-left: 30px; ">
+            <form th:action="@{/OurBook/3}" th:method="POST">
+            <button type="submit" class="btn btn-outline-secondary">로그아웃</button>
+            </form>
+            <a th:href="@{/OurBook/myInfo}"  type="button" class="btn btn-outline-secondary">내 정보</a>
+            <a th:href="@{/OurBook/book/info/cart}" type="button" class="btn btn-outline-secondary">장바구니</a>
+            <a th:href="@{/OurBook/book/info/payment/history}" type="button" class="btn btn-outline-secondary">구매내역</a>
+          </div>
+        </div>
+      </div>
+      <!-- 권한 체크가 필요한 부분(로그인 후) -->
+
+      <!-- 권한 체크가 필요한 부분(로그인 전) -->
+      <div th:unless="${#authorization.expression('isAuthenticated()')}">
+          <a style="position: absolute; margin-top: 10px; margin-left: -120px; font-weight: bolder;">OurBook 에 오신걸 환영합니다 !</a>
+        <div class="card-body" style="width: 570px; height: 155px;">
+          <a th:href="@{/OurBook/1}" class="btn btn-primary" style="padding-left: 45px; padding-right: 45px; padding-top: 20px; padding-bottom: 20px; margin-top: 25px; margin-right: 150px; font-size: larger;" >로그인</a>
+          <a th:href="@{/OurBook/2}" class="btn btn-success" style="padding-left: 40px; padding-right: 40px; padding-top: 20px; padding-bottom: 20px;  margin-top: 25px;  font-size: larger;">회원 가입</a>
+        </div>
+      </div>
+      <!-- 권한 체크가 필요한 부분(로그인 전) -->
+
+
+    </div>
+  </div>
+
+  <div style=" width: 500px; height: 200px; margin: auto;">
+    <div class="card text-center" style="position: absolute; margin-top: -570px; margin-left: 580px;">
+      <div class="card-header" style="font-weight: bolder;">
+        <img src="/img/home/search.png" style="width: 30px;">
+        도서 검색
+      </div>
+      <div class="card-body"  style="width: 570px; height: 170px;">
+
+        <p class="card-text">OurBook 이 소장하고 있는 도서와, OurBook 도서 시장에서 <br>도서를 검색합니다.</p>
+        <div style="margin-top: 40px;margin-right: 20px;">
+          <form th:action="@{/OurBook/book/search}" th:method="POST">
+            <input type="text" name="searchBookName" style="width: 300px;">
+            <button type="submit" style=" border: none; width: 102px; height: 30px; background-color: lightgrey;">도서 검색</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
 
-  <img src="/img/home/OurBookLogo.png" alt="OurBookLogo" style="float: right; width: 370px; height: auto; margin-top: -300px;">
-
-  <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3 justify-content-center">
-  <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-    <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-      <div class="my-3 p-3">
-        <h2 class="display-5" style="font-size: 30px; white-space: nowrap; overflow: hidden; font-weight:bold;">무라카미 하루키</h2>
-        <p class="lead">"너가 날 기억한다면, 다른 모든 사람이 날 잊어도 상관없어. <br>-해변의 카프카-"
-          <img src="/img/home/haruki.png" alt="haruki">
-          <a class="btn btn-outline-secondary" th:href="@{/OurBook/book/info/{bookId}(bookId=${'A3'})}">해변의 카프카</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-    <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-      <div class="my-3 p-3">
-        <h2 class="display-5" style="font-size: 23px; white-space: nowrap; overflow: hidden; font-weight:bold; ">이상</h2>
-        <p class="lead">"박제가 되어버린 천재를 아시오? <br> -날개-"</p>
-        <img src="/img/home/이상.png" alt="이상">
-        <a class="btn btn-outline-secondary" th:href="@{/OurBook/book/info/{bookId}(bookId=${'A2'})}">날개</a>
-      </div>
-      
-    </div>
-    <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-      <div class="my-3 py-3">
-        <h2 class="display-5" style="font-size: 23px;  overflow: hidden; font-weight:bold; ">조지 오웰</h2>
-        <p class="lead">"빅 브라더가 우리를 지켜보고 있어 <br>-1984-"</p>
-        <img src="/img/home/조지 오웰.png" alt="조지 오웰">
-        <a class="btn btn-outline-secondary" th:href="@{/OurBook/book/info/{bookId}(bookId=${'A4'})}">1984</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-    <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-      <div class="my-3 p-3">
-        <h2 class="display-5" style="font-size: 30px; white-space: nowrap; overflow: hidden; font-weight:bold;">밀란 쿤데라</h2>
-        <p class="lead">"한 번은 중요치 않다. 한 번 뿐인 것은 전혀 없었던 것과 같다. <br> -참을수 없는 존재의 가벼움-"</p>
-          </p>
-          <img src="/img/home/쿤데라.png" alt="쿤데라">
-           <a class="btn btn-outline-secondary" th:href="@{/OurBook/book/info/{bookId}(bookId=${'A5'})}">참을수 없는 존재의 가벼움</a>
-      </div>
-    </div>
-  </div>
-</div>
 </main>
+
 
 <footer class="container py-5">
   <div class="row">
@@ -156,6 +151,6 @@
     </div>
   </div>
 </footer>
-    <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-  </body>
+<script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
 </html>

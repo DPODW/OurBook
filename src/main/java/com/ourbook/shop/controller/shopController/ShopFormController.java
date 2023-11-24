@@ -45,7 +45,6 @@ public class ShopFormController {
     @GetMapping("/OurBook/book/info/{bookId}")
     public String bookInfoView(@PathVariable String bookId, Model model){
         Book book = findBookService.findBook(bookId);
-        log.info("{}",book);
         model.addAttribute("bookInfo",book);
         return "books/bookInfo";
     }
