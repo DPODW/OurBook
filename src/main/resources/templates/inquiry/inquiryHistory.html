@@ -15,6 +15,7 @@
 <header class="site-header sticky-top py-1" style="background-color: #f8f9fa;">
     <nav class="container d-flex flex-column flex-md-row justify-content-between">
         <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
+        <a class="py-2 d-none d-md-inline-block"  th:unless="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/1}" style="color: black; text-decoration: none;">로그인</a>
         <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">내 정보</a>
         <a class="py-2 d-none d-md-inline-block payment-cart-login-check" th:href="@{/OurBook/book/info/cart}" style="color: black; text-decoration: none;">장바구니</a>
         <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
@@ -23,15 +24,15 @@
     </nav>
 </header>
 
-<div class="container-fluid px-4">
+<div class="container-fluid px-4" style="width: 1900px;">
     <h1 class="mt-4" style="margin-left: 440px; font-size: 30px; margin-top: 20px;">고객 문의</h1>
     <p style="margin-left: 440px; font-size: 14px;  white-space:nowrap;">고객의 소중한 소리를 귀기울여 듣는 OurBook이 되겠습니다.</p>
 </div>
 <div class="center-box">
     <img src="/img/inquiry/admin.png" style="width: 450px; position: absolute;">
-    <h2 style="margin-left: 500px; padding-top: 20px;">문의 내역</h2>
+    <h2 style="margin-left: 500px; padding-top: 20px;">전체 문의</h2>
     <hr style="width: 500px; margin-left: 500px;">
-    <p style="margin-left: 500px;">회원님이 OurBook 에 등록해주신 문의 내역입니다.</p>
+    <p style="margin-left: 500px;">제품 , 배송 등 궁금한 사항이 있으시면 아래에 있는 문의 게시판을 <br>이용해주시길 바랍니다.</p>
 
     <h2 style="margin-left: 500px; padding-top: 50px;">상세 문의</h2>
     <hr style="width: 500px; margin-left: 500px;">
@@ -39,11 +40,14 @@
     <p style="margin-left: 500px;">보다 상세한 문의가 필요한 경우, <span style="color: red;">상단의 이메일 주소</span>로 문의 메일을 <br> 보내주시면 빠른 시일 내 도움을 드리도록 하겠습니다.</p>
 </div>
 
-<hr style="width: 1000px; margin-left: 450px; margin-top: 2.5%; margin-bottom: 1%;">
+<hr class="mx-auto" style="width: 1000px; margin-left: 450px; margin-top: 50px; margin-bottom: 20px;">
 
-<div class="card-body" style="width: 1500px; padding-left: 452px; padding-right: 48px;">
-    <h4 style="margin-left: 450px;">나의 문의 내역</h4>
-    <table class="table table-hover table-bordered">
+<div class="card-body mx-auto" style="width: 1500px; padding-left: 250px; padding-right: 250px;">
+    <h4 style="margin-left: 450px; ">문의 내역</h4>
+    <form th:method="GET" th:action="@{/OurBook/inquiry/form}">
+        <button  class="btn btn-secondary" id="InquiryLoginCheck" style="margin-left: 90%; margin-top: -80px;">문의하기</button>
+    </form>
+    <table th:unless="${inquiryHistorys.isEmpty()}" class="table table-hover table-bordered" style="margin-top: -20px;">
         <thead>
         <tr>
             <th class="text-center" style="white-space: nowrap; width: 5%;">문의 번호</th>
@@ -68,6 +72,11 @@
 </div>
 
 
+<div th:if="${inquiryHistorys.isEmpty()}" style="width: 200px; height: 400px; margin: auto;">
+    <hr style="position: absolute; width: 1000px; margin-left: -399px; margin-top: -20px;">
+    <img src="/img/inquiry/inquiryNothing.png" style="margin-left: -20px; width: 250px; margin-top: 30px;">
+    <h3 style="position: absolute; margin-top:40px; margin-left: -20px;">작성한 문의가 없습니다.</h3>
+</div>
 
 <footer class="container py-5">
     <div class="row">

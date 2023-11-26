@@ -21,10 +21,10 @@
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/inquiry}" style="color: black; text-decoration: none;">문의</a>
   </nav>
 </header>
-<h1 style="text-align: center; font-size: 36px; color: #333; margin-top: 20px;">장바구니</h1>
+<h1 style="text-align: center; font-size: 36px; color: #333; margin-top: 20px; text-align: center;"><img img src="/img/ourBookShopList/cart.png" style="width: 50px; margin-top: -10px; margin-right: 25px;">장바구니</h1>
 
 
-<div class="card mb-3" th:each="MyCartBook, cartItemStatus : ${MyCartBooks}">
+<div class="card mb-3" th:unless="${MyCartBooks.isEmpty()}" th:each="MyCartBook, cartItemStatus : ${MyCartBooks}" style="margin: auto; width: 850px; margin-top: 50px;">
   <div class="card-body" style="display: flex; align-items: center;">
     <img th:src="${MyCartBook.bookImgUrl}" class="card-img-top" style="max-width: 170px; height: auto;">
     <div style="flex: 1; padding-left: 20px;">
@@ -44,68 +44,71 @@
         <span  th:id="'total-price-' + ${cartItemStatus.index}" style="font-weight: bold; font-size: 16px;"></span>
       </div>
     </div>
-    <div class="button-container">
-
+    <div class="button-container" style="margin-right: -15px;">
       <form th:action="@{/OurBook/book/info/payment/{bookId}(bookId=${MyCartBook.bookId})}" th:method="GET">
-      <input type="hidden" name="bookCount" th:value="*{MyCartBook.bookCount}">
-      <button class="btn btn-success purchase-button" style="width: 150px; margin-bottom: 10px;">구매</button>
+        <input type="hidden" name="bookCount" th:value="*{MyCartBook.bookCount}">
+        <button class="btn btn-success purchase-button" style="width: 120px; margin-bottom: 10px;">구매</button>
       </form>
-
       <form th:action="@{/OurBook/book/info/cart/{bookId}(bookId=${MyCartBook.bookId})}" th:method="DELETE">
-        <button class="btn btn-danger delete-button" style="width: 150px;">삭제</button>
+        <button class="btn btn-danger delete-button" style="width: 120px;">삭제</button>
       </form>
-
     </div>
   </div>
 </div>
 
-  <hr>
-  <footer class="container py-5">
-    <div class="row">
-      <div class="col-12 col-md">
-        <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
-        <small class="d-block mb-3 text-muted">&copy; Our Book : 2023</small>
-      </div>
-      <div class="col-6 col-md">
-        <h5>Features</h5>
-        <ul class="list-unstyled text-small">
-          <li><a class="link-secondary" href="#">Cool stuff</a></li>
-          <li><a class="link-secondary" href="#">Random feature</a></li>
-          <li><a class="link-secondary" href="#">Team feature</a></li>
-          <li><a class="link-secondary" href="#">Stuff for developers</a></li>
-          <li><a class="link-secondary" href="#">Another one</a></li>
-          <li><a class="link-secondary" href="#">Last time</a></li>
-        </ul>
-      </div>
-      <div class="col-6 col-md">
-        <h5>Resources</h5>
-        <ul class="list-unstyled text-small">
-          <li><a class="link-secondary" href="#">Resource name</a></li>
-          <li><a class="link-secondary" href="#">Resource</a></li>
-          <li><a class="link-secondary" href="#">Another resource</a></li>
-          <li><a class="link-secondary" href="#">Final resource</a></li>
-        </ul>
-      </div>
-      <div class="col-6 col-md">
-        <h5>Resources</h5>
-        <ul class="list-unstyled text-small">
-          <li><a class="link-secondary" href="#">Business</a></li>
-          <li><a class="link-secondary" href="#">Education</a></li>
-          <li><a class="link-secondary" href="#">Government</a></li>
-          <li><a class="link-secondary" href="#">Gaming</a></li>
-        </ul>
-      </div>
-      <div class="col-6 col-md">
-        <h5>About</h5>
-        <ul class="list-unstyled text-small">
-          <li><a class="link-secondary" href="#">Team</a></li>
-          <li><a class="link-secondary" href="#">Locations</a></li>
-          <li><a class="link-secondary" href="#">Privacy</a></li>
-          <li><a class="link-secondary" href="#">Terms</a></li>
-        </ul>
-      </div>
+
+<div th:if="${MyCartBooks.isEmpty()}" style="width: 200px; height: 400px; margin: auto;">
+  <img src="/img/ourBookShopList/noCart.png" style="position: absolute; width: 200px; height: 200px; margin-top: 100px;">
+  <h3 style="position: absolute; margin-top: 340px; margin-left: -95px; ">장바구니에 담긴 상품이 없습니다.</h3>
+</div>
+
+<hr>
+<footer class="container py-5">
+  <div class="row">
+    <div class="col-12 col-md">
+      <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
+      <small class="d-block mb-3 text-muted">&copy; Our Book : 2023</small>
     </div>
-  </footer>
-      <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    </body>
-  </html>
+    <div class="col-6 col-md">
+      <h5>Features</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="link-secondary" href="#">Cool stuff</a></li>
+        <li><a class="link-secondary" href="#">Random feature</a></li>
+        <li><a class="link-secondary" href="#">Team feature</a></li>
+        <li><a class="link-secondary" href="#">Stuff for developers</a></li>
+        <li><a class="link-secondary" href="#">Another one</a></li>
+        <li><a class="link-secondary" href="#">Last time</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Resources</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="link-secondary" href="#">Resource name</a></li>
+        <li><a class="link-secondary" href="#">Resource</a></li>
+        <li><a class="link-secondary" href="#">Another resource</a></li>
+        <li><a class="link-secondary" href="#">Final resource</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Resources</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="link-secondary" href="#">Business</a></li>
+        <li><a class="link-secondary" href="#">Education</a></li>
+        <li><a class="link-secondary" href="#">Government</a></li>
+        <li><a class="link-secondary" href="#">Gaming</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>About</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="link-secondary" href="#">Team</a></li>
+        <li><a class="link-secondary" href="#">Locations</a></li>
+        <li><a class="link-secondary" href="#">Privacy</a></li>
+        <li><a class="link-secondary" href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+<script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+</html>

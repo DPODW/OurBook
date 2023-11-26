@@ -90,7 +90,6 @@ public class PaymentFormController {
         }else{
             List<PaymentInfo>  paymentHistory =paymentService.findPaymentHistory(userDetail.getEmail());
             List<String> paymentImg = paymentService.findPaymentHistoryImg(paymentHistory);
-
             paymentHistoryModel(model, paymentHistory, paymentImg);
         }
         return "payment/paymentHistory";
