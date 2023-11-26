@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -55,7 +56,18 @@ public class FindBookServiceImpl implements FindBookService {
 
     @Override
     public List<BookSearchResult> userSearchBook(String searchBookName) {
-       return findBookMapper.userSearchBook(searchBookName.replaceAll("\\s",""));
+        List<BookSearchResult> bookSearchResults = findBookMapper.userSearchBook(searchBookName.replaceAll("\\s", ""));
+        bookSearchResults.stream()
+                .map(bookSearchResult -> {
+                    if(bookSearchResult.getCategory().equals("market_books")){
+                        bookSearchResult.setCategory("OurBook 도서 시장");
+                    }else{
+                        bookSearchResult.setCategory("OurBook 도서 스토어");
+                    }
+                    return bookSearchResult;
+                }).collect(Collectors.toList());
+
+        return bookSearchResults;
     }
 }
 

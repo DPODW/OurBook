@@ -74,15 +74,13 @@ public class ShopController {
     }
 
 
-    @ResponseBody
+
     @PostMapping("/OurBook/book/search")
-    public ResponseEntity<String> bookSearch(@RequestParam String searchBookName, Model model){
+    public String bookSearch(@RequestParam String searchBookName, Model model){
         List<BookSearchResult> bookSearchResults = findBookService.userSearchBook(searchBookName);
-       if(bookSearchResults!=null){
-           model.addAttribute("bookSearchResults",bookSearchResults);
-           return ResponseEntity.ok().body("검색 결과 존재");
-       }else
-           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("검색 결과 없음");
+        log.info("검색 결과 => {}",bookSearchResults);
+        model.addAttribute("bookSearchResults",bookSearchResults);
+        return "books/bookSearch";
     }
 
 

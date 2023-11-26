@@ -22,7 +22,9 @@
         SELECT
             BOOK_NAME AS SEARCH_RESULT,
             'book_info' AS CATEGORY,
-            BOOK_ID AS UNIQUE_NUMBER
+            BOOK_ID AS UNIQUE_NUMBER,
+            BOOK_IMG_URL AS SEARCH_BOOK_IMG,
+            BOOK_WRITER AS BOOK_WRITER
         FROM
             book_info
         WHERE
@@ -31,7 +33,9 @@
         SELECT
             SALE_BOOK_NAME AS SEARCH_RESULT,
             'market_books' AS CATEGORY,
-            SEQUENCE AS UNIQUE_NUMBER
+            SEQUENCE AS UNIQUE_NUMBER,
+            SALE_IMG AS SEARCH_BOOK_IMG,
+            SALE_BOOK_WRITER AS BOOK_WRITER
         FROM
             market_books
         WHERE
