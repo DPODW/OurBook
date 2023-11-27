@@ -66,7 +66,9 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public PaymentInfo findOrderNumber(String orderNumber) {
-        return paymentMapper.findOrderNumber(orderNumber);
+        PaymentInfo paymentInfo = paymentMapper.findOrderNumber(orderNumber);
+        paymentInfo.setPaymentPrice(paymentInfo.getPaymentPrice().setScale(0));
+        return paymentInfo;
     }
 
     @Override
