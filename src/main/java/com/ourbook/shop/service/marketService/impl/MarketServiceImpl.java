@@ -82,6 +82,7 @@ public class MarketServiceImpl implements MarketService {
         purchaseRequestHistory.stream()
                 .map(purchaseRequest -> {
                     purchaseRequest.setSaveTime(extractYearAndMonth(purchaseRequest.getSaveTime()));
+                    purchaseRequest.setPurchaseRequestCount(findPurchaseRequestCount(purchaseRequest.getSequence()));
                     return purchaseRequest;
                 })
                 .collect(Collectors.toList());

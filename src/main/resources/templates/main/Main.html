@@ -16,7 +16,7 @@
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/market}" style="color: black; text-decoration: none;">도서 시장</a>
-    <a class="py-2 d-none d-md-inline-block" href="#" style="color: black; text-decoration: none;">책에 관하여</a>
+    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/findNearestLibrary}" style="color: black; text-decoration: none;">책에 관하여</a>
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/inquiry}" style="color: black; text-decoration: none;">문의</a>
   </nav>
 </header>
@@ -72,10 +72,10 @@
 
       <!-- 권한 체크가 필요한 부분(로그인 전) -->
       <div th:unless="${#authorization.expression('isAuthenticated()')}">
-          <a style="position: absolute; margin-top: 10px; margin-left: -120px; font-weight: bolder;">OurBook 에 오신걸 환영합니다 !</a>
-        <div class="card-body" style="width: 570px; height: 155px;">
-          <a th:href="@{/OurBook/1}" class="btn btn-primary" style="padding-left: 45px; padding-right: 45px; padding-top: 20px; padding-bottom: 20px; margin-top: 25px; margin-right: 150px; font-size: larger;" >로그인</a>
-          <a th:href="@{/OurBook/2}" class="btn btn-success" style="padding-left: 40px; padding-right: 40px; padding-top: 20px; padding-bottom: 20px;  margin-top: 25px;  font-size: larger;">회원 가입</a>
+        <a style="position: absolute; margin-top: 10px; margin-left: -120px; font-weight: bolder;">OurBook 에 오신걸 환영합니다 !</a>
+        <div class="card-body" style="width: 570px; height: 150px; ">
+          <a th:href="@{/OurBook/1}" class="btn btn-primary" style="padding-left: 45px; padding-right: 45px; padding-top: 20px; padding-bottom: 20px; margin-top: 40px; margin-right: 150px; font-size: larger;" >로그인</a>
+          <a th:href="@{/OurBook/2}" class="btn btn-success" style="padding-left: 40px; padding-right: 40px; padding-top: 20px; padding-bottom: 20px;  margin-top: 45px;  font-size: larger;">회원 가입</a>
         </div>
       </div>
       <!-- 권한 체크가 필요한 부분(로그인 전) -->
@@ -121,7 +121,7 @@
       <small class="d-block mb-3 text-muted">Developer: 문태진</small>
       <small class="d-block mb-3 text-muted">Contact Email: ourbook.servicecenter@gmail.com</small>
       <small class="d-block mb-3 text-muted">Copyright 2023. 문태진. All Rights Reserved.</small>
-      <small ><a style="text-decoration: underline;">GitHub Link</a></small>
+      <small ><a style="text-decoration: underline; color: black" href="https://github.com/DPODW/OurBook">GitHub Link</a></small>
     </div>
   </div>
 </footer>
