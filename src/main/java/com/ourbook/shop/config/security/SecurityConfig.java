@@ -29,7 +29,6 @@ public class SecurityConfig {
 
             "/checkAuthorizedUser/{writer}","/checkAlreadyAnswer/{inquiryNumber}","/checkMe/{writer}", "/OurBook/book/search", "/OurBook/findNearestLibrary", "/OurBook/findNearestLibrary/myLocation",
 
-            "/OurBook/test",
 
             "/checkId", "/checkEmail","/css/**", "/js/**", "/img/**"};
 
