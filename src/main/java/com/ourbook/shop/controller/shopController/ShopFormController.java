@@ -64,5 +64,10 @@ public class ShopFormController {
             return "books/bookCart";
     }
 
+    @GetMapping("/test")
+    public String mapSearchLocationTest(){
+        return "mapTest";
+    }
+
 
 }

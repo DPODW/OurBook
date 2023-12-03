@@ -1,6 +1,7 @@
 package com.ourbook.shop.service.shopService.impl;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
 import com.ourbook.shop.dto.library.LibraryInfo;
 import com.ourbook.shop.service.shopService.FindLibraryService;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,7 @@ import java.net.URI;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -30,7 +32,7 @@ public class FindLibraryServiceImpl implements FindLibraryService {
     @Value("${Naver.ClientSecret}")
     private String NaverClientSecret;
     @Override
-    public ResponseEntity<String> findLibraryToNaverApi(String myLocation) {
+    public List<LibraryInfo> findLibraryToNaverApi(String myLocation) {
         ByteBuffer buffer = StandardCharsets.UTF_8.encode(myLocation);
         String encode = StandardCharsets.UTF_8.decode(buffer).toString();
 
@@ -53,24 +55,33 @@ public class FindLibraryServiceImpl implements FindLibraryService {
                 .build();
 
         ResponseEntity<String> result = restTemplate.exchange(req,String.class);
-        String jsonResult = result.getBody();
-        log.info("지역 검색 결과 -> {}",jsonResult);
+        return jsonToDto(result.getBody());
+    }
 
+    private static List<LibraryInfo> jsonToDto(String locationJson) {
         JSONParser parser = new JSONParser();
+        Gson gson = new Gson();
 
         try {
-            JSONObject jsonObject = (JSONObject) parser.parse(jsonResult);
-            JSONArray itemObject = (JSONArray) jsonObject.get("items");
-            String oneItem = itemObject.get(0).toString();
+            JSONObject jsonObject = (JSONObject) parser.parse(locationJson);
+            JSONArray locationItem = (JSONArray) jsonObject.get("items");
 
-            Gson gson = new Gson();
-            LibraryInfo libraryInfo = gson.fromJson(oneItem, LibraryInfo.class);
-
+            List<LibraryInfo> libraryInfoList = (List<LibraryInfo>) locationItem.stream()
+                    .map(locationOneItem -> {
+                        LibraryInfo libraryOneTime = gson.fromJson(locationOneItem.toString(), LibraryInfo.class);
+                        libraryOneTime.setTitle(libraryOneTime.getTitle().replaceAll("[<b></b>]",""));
+                        if(libraryOneTime.getLink().equals("")||libraryOneTime.getRoadAddress().equals("")){
+                            libraryOneTime.setRoadAddress("정보가 없습니다.");
+                            libraryOneTime.setLink("정보가 없습니다.");
+                        }
+                        return libraryOneTime;
+                    })
+                    .collect(Collectors.toList());
+            return libraryInfoList;
 
         } catch (ParseException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            throw new JsonParseException(e);
         }
-
-        return result;
     }
 }
