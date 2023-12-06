@@ -70,7 +70,7 @@ public class BookCartServiceImpl implements BookCartService {
                             book.getBookName(),
                             book.getBookPrice(),
                             book.getBookImgUrl(),
-                            book.getBookExplan(),
+                            book.getBookExplain(),
                             bookCount
                     );
                 })

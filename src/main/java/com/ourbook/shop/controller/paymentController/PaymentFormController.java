@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
+@RequestMapping("/OurBook/book/info")
 @Controller
 public class PaymentFormController {
 
@@ -36,7 +38,7 @@ public class PaymentFormController {
     }
 
 
-    @GetMapping("/OurBook/book/info/payment/{bookId}")
+    @GetMapping("/payment/{bookId}")
     public String paymentInfoView(@PathVariable("bookId")String bookId, @RequestParam("bookCount") BigDecimal bookCount, HttpServletRequest request,
                                   @AuthenticationPrincipal CustomUserDetail userDetail, Model model){
         HttpSession session = request.getSession(false);
@@ -54,7 +56,7 @@ public class PaymentFormController {
     }
 
 
-    @GetMapping("/OurBook/book/info/payment/result/{orderNumber}")
+    @GetMapping("/payment/result/{orderNumber}")
     public String paymentSuccessView(@PathVariable String orderNumber, Model model){
         PaymentInfo paymentInfo = findBookService.orderNumberToBook(orderNumber);
         String paymentResultImg = paymentService.findPaymentResultImg(paymentInfo.getBookId());
@@ -70,13 +72,13 @@ public class PaymentFormController {
     }
 
 
-    @GetMapping("/OurBook/book/info/payment/fail")
+    @GetMapping("/payment/fail")
     public String paymentFailView(){
         return "payment/paymentfail";
     }
 
 
-    @GetMapping("/OurBook/book/info/payment/history")
+    @GetMapping("/payment/history")
     public String paymentHistoryView(@AuthenticationPrincipal CustomUserDetail userDetail,HttpServletRequest request, Model model){
         HttpSession session = request.getSession(false);
         if(session.getAttribute("NAVER")!=null){

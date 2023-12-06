@@ -22,6 +22,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
+@RequestMapping("/OurBook")
 @Controller
 public class MemberController {
 
@@ -37,7 +38,7 @@ public class MemberController {
         this.authenticationManager = authenticationManager;
     }
 
-    @PostMapping("/OurBook/1")
+    @PostMapping("/1")
     public String memberLogin(@ModelAttribute CommonMember commonMember, BindingResult bindingResult,HttpSession session){
         Authentication authentication = new UsernamePasswordAuthenticationToken(commonMember.getCommonId(), commonMember.getCommonPwd());
         try{
@@ -54,7 +55,7 @@ public class MemberController {
 
 
 
-    @PostMapping("/OurBook/2")
+    @PostMapping("/2")
     public String memberJoin(@Validated @ModelAttribute CommonMember commonMember, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("commonMember", commonMember);
@@ -64,19 +65,18 @@ public class MemberController {
         return "redirect:/OurBook";
     }
 
-    @PostMapping("/OurBook/3")
+    @PostMapping("/3")
     public String memberLogout(HttpServletRequest request){
         HttpSession session = request.getSession(false);
         if (session != null){
             session.invalidate();
-            log.info("session delete");
         }else
             log.info("session is already empty");
         return "redirect:/OurBook";
     }
 
 
-    @PutMapping("/OurBook/4")
+    @PutMapping("/4")
     public String memberUpdate(@Validated @ModelAttribute CommonMember commonMember, BindingResult bindingResult, Model model,
                              HttpServletRequest request){
         if(bindingResult.hasErrors()){
@@ -90,7 +90,7 @@ public class MemberController {
     }
 
 
-    @DeleteMapping("/OurBook/5")
+    @DeleteMapping("/5")
     public String memberDelete(HttpServletRequest request,@AuthenticationPrincipal CustomUserDetail userDetail){
         HttpSession session = request.getSession(false);
         if(session.getAttribute("NAVER")!=null){

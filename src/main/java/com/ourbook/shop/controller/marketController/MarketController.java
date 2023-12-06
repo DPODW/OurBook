@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @Slf4j
+@RequestMapping("/OurBook")
 @Controller
 public class MarketController {
 
@@ -35,7 +36,7 @@ public class MarketController {
     }
 
 
-    @PostMapping("/OurBook/market/sale")
+    @PostMapping("/market/sale")
     public String SaleBookInsert(@Validated @ModelAttribute SaleBookInfo saleBookInfo, BindingResult bindingResult,
                                  @RequestParam("uploadImg") MultipartFile uploadImg, @AuthenticationPrincipal CustomUserDetail userDetail, Model model) throws IOException {
         if (bindingResult.hasErrors()) {
@@ -47,13 +48,13 @@ public class MarketController {
         return "redirect:/OurBook/market";
     }
 
-    @DeleteMapping("/OurBook/market/sale")
+    @DeleteMapping("/market/sale")
     public String SaleBookDelete(@RequestParam("sequence") int marketNumber) throws IOException {
         marketService.saleBookDelete(marketNumber);
         return "redirect:/OurBook/market";
     }
 
-    @PutMapping("/OurBook/market/sale")
+    @PutMapping("/market/sale")
     public String SaleBookEdit(@Validated @ModelAttribute SaleBookInfo saleBookInfo,BindingResult bindingResult, @RequestParam("uploadImg") MultipartFile uploadImg,Model model) throws IOException {
         if (bindingResult.hasErrors()) {
             model.addAttribute("saleBookInfo", saleBookInfo);
@@ -64,7 +65,7 @@ public class MarketController {
     }
 
 
-    @PostMapping("/OurBook/market/purchase/request/warning")
+    @PostMapping("/market/purchase/request/warning")
     public String BookPurchaseRequestWarn(@ModelAttribute PurchaseRequest purchaseRequest, HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail,
                                           Model model){
         HttpSession session = request.getSession(false);
@@ -82,7 +83,7 @@ public class MarketController {
 
 
 
-    @PostMapping("/OurBook/market/purchase/request")
+    @PostMapping("/market/purchase/request")
     public String BookPurchaseRequest(@ModelAttribute PurchaseRequest purchaseRequest, Model model) throws MessagingException {
         emailService.sendPurchaseRequestMessage(purchaseRequest);
         marketService.purchaseRequestInsert(purchaseRequest);

@@ -20,8 +20,6 @@ public interface MarketMapper {
 
     void purchaseRequestInsert(PurchaseRequest purchaseRequest);
 
-    void purchaseRequestDelete(int purchaseRequestNumber);
-
     List<SaleBookInfo> findMarketList();
 
     SaleBookInfo findMarketBook(int number);

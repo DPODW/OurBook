@@ -16,11 +16,6 @@
         values(#{uploaderEmail},#{uploaderName},#{receiverEmail},#{receiverName},#{saleBookName},NOW(),#{sequence});
     </insert>
 
-    <delete id="purchaseRequestDelete" parameterType="int">
-        DELETE FROM purchase_request_history WHERE SEQUENCE = #{purchaseRequestNumber};
-    </delete>
-
-
     <update id="saleBookEdit" parameterType="com.ourbook.shop.dto.market.SaleBookInfo">
         update market_books
         set UPLOADER_EMAIL = #{uploaderEmail} , UPLOADER_NAME = #{uploaderName} ,SALE_BOOK_NAME = #{saleBookName}, SALE_BOOK_WRITER = #{saleBookWriter} , SALE_BOOK_STORY = #{saleBookStory},

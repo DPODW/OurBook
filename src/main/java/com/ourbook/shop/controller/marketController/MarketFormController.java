@@ -15,10 +15,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Slf4j
+@RequestMapping("/OurBook")
 @Controller
 public class MarketFormController {
 
@@ -29,7 +31,7 @@ public class MarketFormController {
     }
 
 
-    @GetMapping("/OurBook/market")
+    @GetMapping("/market")
     public String marketListView(Model model){
         List<SaleBookInfo> marketList = marketService.findMarketList();
         model.addAttribute("marketList",marketList);
@@ -37,7 +39,7 @@ public class MarketFormController {
     }
 
 
-    @GetMapping("/OurBook/market/sale")
+    @GetMapping("/market/sale")
     public String marketSaleView(SaleBookInfo saleBookInfo, Model model, HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail){
         HttpSession session = request.getSession(false);
         SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
@@ -54,7 +56,7 @@ public class MarketFormController {
         return "/market/MarketSaleForm";
     }
 
-    @GetMapping("/OurBook/market/sale/{marketNumber}")
+    @GetMapping("/market/sale/{marketNumber}")
     public String marketSaleEditView(@PathVariable int marketNumber,Model model){
         SaleBookInfo saleBookInfo = marketService.findMarketBook(marketNumber);
         model.addAttribute("saleBookInfo",saleBookInfo);
@@ -63,7 +65,7 @@ public class MarketFormController {
 
 
 
-    @GetMapping("/OurBook/market/sale/info/{number}")
+    @GetMapping("/market/sale/info/{number}")
     public String marketSaleInfoView(@PathVariable int number,@AuthenticationPrincipal CustomUserDetail userDetail,Model model){
         SaleBookInfo saleBookInfo = marketService.findMarketBook(number);
         if(userDetail!=null){
@@ -74,7 +76,7 @@ public class MarketFormController {
     }
 
 
-    @GetMapping("/OurBook/market/purchase/request/history")
+    @GetMapping("/market/purchase/request/history")
     public String PurchaseRequestHistory(HttpServletRequest request,@AuthenticationPrincipal CustomUserDetail userDetail,Model model){
         HttpSession session = request.getSession(false);
         if(session.getAttribute("NAVER")!=null){

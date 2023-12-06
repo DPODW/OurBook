@@ -6,11 +6,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 @Slf4j
+@RequestMapping("/OurBook")
 @Controller
 public class FindLibraryController {
 
@@ -21,16 +23,15 @@ public class FindLibraryController {
     }
 
 
-    @GetMapping("/OurBook/findNearestLibrary")
+    @GetMapping("/findNearestLibrary")
     public String findNearestLibraryView(){
         return "main/librarySearch";
     }
 
-    @GetMapping("/OurBook/findNearestLibrary/myLocation")
+    @GetMapping("/findNearestLibrary/myLocation")
     public String findNearestLibraryToMyLocation(@RequestParam String firstDistrict, @RequestParam String secondDistrict, Model model){
         String myLocation = firstDistrict+secondDistrict+" 도서관";
         List<LibraryInfo> nearestLibraryInfo = findLibraryService.findLibraryToNaverApi(myLocation);
-        log.info("{}",nearestLibraryInfo);
         model.addAttribute("nearestLibraryInfo",nearestLibraryInfo);
         return "main/librarySearch";
     }

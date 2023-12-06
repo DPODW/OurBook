@@ -14,8 +14,10 @@ import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
+@RequestMapping("/OurBook")
 @Controller
 public class MemberFormController {
 
@@ -26,7 +28,7 @@ public class MemberFormController {
         this.viewModelHelper = viewModelHelper;
     }
 
-    @GetMapping("/OurBook")
+    @GetMapping("")
     public String mainPage(Model model,@AuthenticationPrincipal CustomUserDetail userDetail, HttpServletRequest request){
         HttpSession session = request.getSession(false);
         if(session!=null && session.getAttribute("NAVER")!=null){
@@ -40,24 +42,24 @@ public class MemberFormController {
         return "main/Main";
     }
 
-    @GetMapping("/OurBook/1")
+    @GetMapping("/1")
     public String memberLoginView(CommonMember commonMember, Model model){
         model.addAttribute("commonMember", commonMember);
         return "member/Login";
     }
 
-    @GetMapping("/OurBook/2")
+    @GetMapping("/2")
     public String memberJoinView(CommonMember commonMember, Model model){
         model.addAttribute("commonMember", commonMember);
         return "member/Join";
     }
 
-    @GetMapping("/OurBook/myInfo")
+    @GetMapping("/myInfo")
     public String memberInfoList(){
         return "member/MyPage";
     }
 
-    @GetMapping("/OurBook/joinInfo")
+    @GetMapping("/joinInfo")
     public String memberInfoView(Model model,@AuthenticationPrincipal CustomUserDetail userDetail, HttpServletRequest request){
         HttpSession session = request.getSession(false);
        if(session!=null && session.getAttribute("NAVER")!=null){
@@ -71,7 +73,7 @@ public class MemberFormController {
     }
 
 
-    @GetMapping("/OurBook/myInfo/Member")
+    @GetMapping("/myInfo/Member")
     public String memberUpdateView(Model model,@AuthenticationPrincipal CustomUserDetail userDetail,CommonMember commonMember){
         viewModelHelper.editMemberInfo(userDetail,commonMember);
         viewModelHelper.translateRole(model,userDetail);
@@ -80,7 +82,7 @@ public class MemberFormController {
     }
 
 
-    @GetMapping("/OurBook/myInfo/Member1")
+    @GetMapping("/myInfo/Member1")
     public String memberDeleteView(){
         return "member/Delete";
     }

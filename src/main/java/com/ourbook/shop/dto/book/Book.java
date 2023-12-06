@@ -20,14 +20,14 @@ public class Book {
 
     private String bookImgUrl;
 
-    private String bookExplan;
+    private String bookExplain;
 
 
-    public Book(String bookId, String bookName, BigDecimal bookPrice,String bookImgUrl, String bookExplan) {
+    public Book(String bookId, String bookName, BigDecimal bookPrice,String bookImgUrl, String bookExplain) {
         this.bookId = bookId;
         this.bookName = bookName;
         this.bookPrice = bookPrice;
         this.bookImgUrl=bookImgUrl;
-        this.bookExplan=bookExplan;
+        this.bookExplain=bookExplain;
     }
 }

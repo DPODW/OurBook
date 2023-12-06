@@ -18,13 +18,10 @@ public class EmailServiceImpl implements EmailService {
 
     private final SpringTemplateEngine templateEngine;
 
-    private final MarketMapper marketMapper;
 
-
-    public EmailServiceImpl(JavaMailSender javaMailSender, SpringTemplateEngine templateEngine, MarketMapper marketMapper) {
+    public EmailServiceImpl(JavaMailSender javaMailSender, SpringTemplateEngine templateEngine) {
         this.javaMailSender = javaMailSender;
         this.templateEngine = templateEngine;
-        this.marketMapper = marketMapper;
     }
 
     @Override
@@ -35,7 +32,7 @@ public class EmailServiceImpl implements EmailService {
             helper.setTo(paymentInfo.getBuyerEmail());
             helper.setSubject("OurBook에서 결제 확정 메일 보내드립니다!");
             String htmlContent = setPaymentContext(paymentInfo);
-            helper.setText(htmlContent, true); // 두 번째 매개변수를 true로 설정하여 HTML을 파싱
+            helper.setText(htmlContent, true);
             javaMailSender.send(message);
         } catch (Exception e) {
             e.printStackTrace();
@@ -52,7 +49,7 @@ public class EmailServiceImpl implements EmailService {
             helper.setTo(purchaseRequest.getUploaderEmail());
             helper.setSubject("OurBook에서 구매 요청 메일을 보내드립니다!");
             String htmlContent = setPurchaseRequestContext(purchaseRequest);
-            helper.setText(htmlContent, true); // 두 번째 매개변수를 true로 설정하여 HTML을 파싱
+            helper.setText(htmlContent, true);
             javaMailSender.send(message);
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,9 +70,9 @@ public class EmailServiceImpl implements EmailService {
         return templateEngine.process("mail/purchaseRequestMail", context);
     }
 
-    /** 11/1 노션 정리 **/
+
+    /** 이름 중간을 '*' 로 치환하는 메소드. (개인정보 보호) **/
     private static String nameLock(String input) {
-        //이름 중간을 '*' 로 치환하는 메소드. (개인정보 보호)
         char firstChar = input.charAt(0);
         char lastChar = input.charAt(input.length() - 1);
         String middleMasked = "*".repeat(input.length() - 2);

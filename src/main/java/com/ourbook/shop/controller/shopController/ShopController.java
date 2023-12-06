@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j
+@RequestMapping("/OurBook/book")
 @Controller
 public class ShopController {
 
@@ -33,7 +34,7 @@ public class ShopController {
         this.findBookService = findBookService;
     }
 
-    @PostMapping("/OurBook/book/info/cart")
+    @PostMapping("/info/cart")
     public String bookCartInsert(@ModelAttribute BookCartSave bookCartSave, HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail){
         HttpSession session = request.getSession(false);
         if(session.getAttribute("NAVER")!=null){
@@ -48,7 +49,7 @@ public class ShopController {
     }
 
 
-    @DeleteMapping("/OurBook/book/info/cart/{bookId}")
+    @DeleteMapping("/info/cart/{bookId}")
     public String bookCartDelete(@PathVariable("bookId")String bookId, HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail){
         HttpSession session = request.getSession(false);
         if(session.getAttribute("NAVER")!=null){
@@ -60,7 +61,7 @@ public class ShopController {
         return "redirect:/OurBook/book/info/cart";
     }
 
-    @PutMapping("/OurBook/book/info/cart/{bookId}")
+    @PutMapping("/info/cart/{bookId}")
     public String bookCartUpdate(@PathVariable("bookId")String bookId,@RequestParam("buyCount")Integer bookCount,  HttpServletRequest request,
                                  @AuthenticationPrincipal CustomUserDetail userDetail){
         HttpSession session = request.getSession(false);
@@ -75,10 +76,9 @@ public class ShopController {
 
 
 
-    @PostMapping("/OurBook/book/search")
+    @PostMapping("/search")
     public String bookSearch(@RequestParam String searchBookName, Model model){
         List<BookSearchResult> bookSearchResults = findBookService.userSearchBook(searchBookName);
-        log.info("검색 결과 => {}",bookSearchResults);
         model.addAttribute("bookSearchResults",bookSearchResults);
         return "books/bookSearch";
     }

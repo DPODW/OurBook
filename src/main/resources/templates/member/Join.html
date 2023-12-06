@@ -63,6 +63,8 @@
               <label class="form-check-label" for="option1">구매자</label>
               <input type="radio" id="option2" name="commonRole"th:field="*{commonRole}" value="판매자" required>
               <label class="form-check-label" for="option2">판매자</label>
+              <input type="radio" id="option3" name="commonRole"th:field="*{commonRole}" value="관리자" required>
+              <label class="form-check-label" for="option2">관리자</label>
             <h4 th:errorclass="field-error" th:errors="*{commonRole}"></h4>
           </div>
         

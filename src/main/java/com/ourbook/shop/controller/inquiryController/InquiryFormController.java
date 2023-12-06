@@ -15,10 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Slf4j
+@RequestMapping("/OurBook")
 @Controller
 public class InquiryFormController {
 
@@ -29,14 +31,14 @@ public class InquiryFormController {
     }
 
 
-    @GetMapping("/OurBook/inquiry")
+    @GetMapping("/inquiry")
     public String InquiryListView(Model model){
         List<InquiryInfo> inquiryList = inquiryService.findInquiryList();
         model.addAttribute("inquiryList",inquiryList);
         return "inquiry/inquiryList";
     }
 
-    @GetMapping("/OurBook/inquiry/form")
+    @GetMapping("/inquiry/form")
     public String InquiryView(HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail, Model model, InquiryInfo inquiryInfo){
         HttpSession session = request.getSession(false);
         if(session!=null && session.getAttribute("NAVER")!=null){
@@ -49,7 +51,7 @@ public class InquiryFormController {
         return "inquiry/inquiryForm";
     }
 
-    @GetMapping("/OurBook/inquiry/edit/{inquiryNumber}")
+    @GetMapping("/inquiry/edit/{inquiryNumber}")
     public String InquiryEditView(@PathVariable int inquiryNumber,Model model){
         InquiryInfo inquiryInfo = inquiryService.findInquiryContent(inquiryNumber);
         model.addAttribute("inquiryInfo",inquiryInfo);
@@ -58,12 +60,11 @@ public class InquiryFormController {
 
 
 
-    @GetMapping("/OurBook/inquiry/{number}")
+    @GetMapping("/inquiry/{number}")
     public String InquiryContent(@PathVariable int number,Model model,@AuthenticationPrincipal CustomUserDetail userDetail){
         InquiryInfo inquiryInfo = inquiryService.findInquiryContent(number);
         model.addAttribute("inquiryInfo",inquiryInfo);
         InquiryAnswerInfo inquiryAnswer = inquiryService.findInquiryAnswer(inquiryInfo.getSequence());
-
         if(userDetail!=null && userDetail.getAuthorities().iterator().next().toString().equals("ADMIN")){
             model.addAttribute("adminId",userDetail.getUsername());
         }
@@ -73,7 +74,7 @@ public class InquiryFormController {
         return "inquiry/InquiryContent";
     }
 
-    @GetMapping("/OurBook/inquiry/history")
+    @GetMapping("/inquiry/history")
     public String InquiryHistory(HttpServletRequest request,@AuthenticationPrincipal CustomUserDetail userDetail,Model model){
         HttpSession session = request.getSession(false);
         if(session.getAttribute("NAVER")!=null){

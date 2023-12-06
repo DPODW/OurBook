@@ -38,8 +38,8 @@ public class OAuthAttributes {
         return OAuthAttributes.builder()
                 .name((String) response.get("name"))
                 .email((String) response.get("email"))
-                .attributes(response) //사용자 전체 정보
-                .nameAttributeKey(userNameAttributeName) //사용자 이름 속성 키
+                .attributes(response)
+                .nameAttributeKey(userNameAttributeName)
                 .build();
     }
 

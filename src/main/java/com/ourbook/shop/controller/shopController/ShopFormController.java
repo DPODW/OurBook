@@ -19,6 +19,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Slf4j
+@RequestMapping("/OurBook")
 @Controller
 public class ShopFormController {
 
@@ -34,7 +35,7 @@ public class ShopFormController {
     }
 
 
-    @GetMapping("/OurBook/book")
+    @GetMapping("/book")
     public String bookListView(Model model){
         List<Book> allBook = findBookService.findAllBook();
         model.addAttribute("allBook",allBook);
@@ -42,7 +43,7 @@ public class ShopFormController {
     }
 
 
-    @GetMapping("/OurBook/book/info/{bookId}")
+    @GetMapping("/book/info/{bookId}")
     public String bookInfoView(@PathVariable String bookId, Model model){
         Book book = findBookService.findBook(bookId);
         model.addAttribute("bookInfo",book);
@@ -50,7 +51,7 @@ public class ShopFormController {
     }
 
 
-    @GetMapping("/OurBook/book/info/cart")
+    @GetMapping("/book/info/cart")
     public String bookCartView(HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail,Model model){
         HttpSession session = request.getSession(false);
         if(session.getAttribute("NAVER")!=null){
@@ -63,11 +64,5 @@ public class ShopFormController {
         }
             return "books/bookCart";
     }
-
-    @GetMapping("/test")
-    public String mapSearchLocationTest(){
-        return "mapTest";
-    }
-
 
 }
