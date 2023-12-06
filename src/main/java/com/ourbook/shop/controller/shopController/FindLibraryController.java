@@ -30,6 +30,7 @@ public class FindLibraryController {
     public String findNearestLibraryToMyLocation(@RequestParam String firstDistrict, @RequestParam String secondDistrict, Model model){
         String myLocation = firstDistrict+secondDistrict+" 도서관";
         List<LibraryInfo> nearestLibraryInfo = findLibraryService.findLibraryToNaverApi(myLocation);
+        log.info("{}",nearestLibraryInfo);
         model.addAttribute("nearestLibraryInfo",nearestLibraryInfo);
         return "main/librarySearch";
     }

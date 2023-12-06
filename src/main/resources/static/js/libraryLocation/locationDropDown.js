@@ -1,12 +1,43 @@
+window.onload = function () {
+    // 페이지 로드 시 저장된 값을 읽어와서 선택 상태를 복원
+    let firstDistrict = document.getElementById("FirstDistrict");
+    let secondDistrict = document.getElementById("SecondDistrict");
+
+    let storedFirstDistrictValue = localStorage.getItem("firstDistrict");
+    let storedSecondDistrictValue = localStorage.getItem("secondDistrict");
+
+    if (storedFirstDistrictValue) {
+        firstDistrict.value = storedFirstDistrictValue;
+        updateLocation(); // 두 번째 드롭다운도 업데이트
+        if (storedSecondDistrictValue) {
+            secondDistrict.value = storedSecondDistrictValue;
+        }
+    }
+
+    // 첫 번째 드롭다운 변경 시 로컬 스토리지에 저장
+    firstDistrict.addEventListener("change", function () {
+        localStorage.setItem("firstDistrict", firstDistrict.value);
+        updateLocation();
+
+        //두번째 드롭아웃을 미리보기로 전송할 시 -> 클릭되지 않은것으로 간주되고(변경이 일어나지 않은것으로 간주) 새로고침시 공백이 유지됌. 고로
+        //첫번째 드롭아웃이 변경 -> 두번째 드롭아웃도 같이 저장해주어야 함. (상태 저장)
+        localStorage.setItem("secondDistrict", secondDistrict.value);
+    });
+
+    // 두 번째 드롭다운 변경 시 로컬 스토리지에 저장
+    secondDistrict.addEventListener("change", function () {
+        localStorage.setItem("secondDistrict", secondDistrict.value);
+    });
+};
 function updateLocation() {
     // 첫 번째 드롭다운의 선택된 값을 가져옴
-    var FirstDistrict = document.getElementById("FirstDistrict");
-    var selectedValue = FirstDistrict.options[FirstDistrict.selectedIndex].value;
+    let FirstDistrict = document.getElementById("FirstDistrict");
+    let selectedValue = FirstDistrict.options[FirstDistrict.selectedIndex].value;
 
+    localStorage.setItem("selectedFirstDistrict", selectedValue);
     // 두 번째 드롭다운의 옵션을 초기화
-    var SecondDistrict = document.getElementById("SecondDistrict");
+    let SecondDistrict = document.getElementById("SecondDistrict");
     SecondDistrict.innerHTML = ""; // 기존 옵션 제거
-
     // 선택된 값에 따라 두 번째 드롭다운에 옵션을 추가
     switch (selectedValue) {
         case "서울특별시":
@@ -58,14 +89,15 @@ function updateLocation() {
             addOptions(SecondDistrict,  ["창원시", "마산시", "진주시", "진해시", "통영시", "사천시", "김해시", "밀양시", "거제시", "양산시", "의령군", "함안군", "창녕군", "고성군", "남해군", "하동군", "산청군", "함양군", "거창군", "합천군"]);
             break;
         case "제주특별자치도":
-            addOptions(SecondDistrict,  ["제주시", "서귀포시", "북제주군", "남제주군"]);
+            addOptions(SecondDistrict,  ["제주시", "서귀포시"]);
             break;
+
     }
 }
 
 function addOptions(select, options) {
-    for (var i = 0; i < options.length; i++) {
-        var option = document.createElement("option");
+    for (let i = 0; i < options.length; i++) {
+        let option = document.createElement("option");
         option.value = options[i];
         option.text = options[i];
         select.add(option);
