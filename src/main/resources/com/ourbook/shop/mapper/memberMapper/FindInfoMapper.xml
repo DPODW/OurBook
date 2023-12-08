@@ -5,19 +5,25 @@
     <select id="searchMember" resultType="com.ourbook.shop.dto.member.CommonMember">
         select * from seller_tb where SELLER_ID= #{id}
         UNION
-        select * from buyer_tb where BUYER_ID= #{id};
+        select * from buyer_tb where BUYER_ID= #{id}
+        UNION
+        select * from admin_tb where ADMIN_ID= #{id};
     </select >
 
     <select id="searchId">
         select SELLER_ID from seller_tb where SELLER_ID= #{id}
                                  UNION
-                                 select BUYER_ID from buyer_tb where BUYER_ID= #{id};
+                                 select BUYER_ID from buyer_tb where BUYER_ID= #{id}
+                                 UNION
+                                 select ADMIN_ID from admin_tb where ADMIN_ID= #{id};
     </select >
 
     <select id="searchEmail">
         select SELLER_EMAIL from seller_tb where SELLER_EMAIL= #{email}
                                     UNION
                                     select BUYER_EMAIL from buyer_tb where BUYER_EMAIL= #{email}
+                                    UNION
+                                    select ADMIN_EMAIL from admin_tb where ADMIN_EMAIL= #{email};
     </select >
 
     <select id="searchMemberToEmail" resultType="com.ourbook.shop.dto.member.NaverMember">

@@ -38,7 +38,7 @@ public class MemberController {
         this.authenticationManager = authenticationManager;
     }
 
-    @PostMapping("/1")
+    @PostMapping("/login")
     public String memberLogin(@ModelAttribute CommonMember commonMember, BindingResult bindingResult,HttpSession session){
         Authentication authentication = new UsernamePasswordAuthenticationToken(commonMember.getCommonId(), commonMember.getCommonPwd());
         try{
@@ -49,40 +49,40 @@ public class MemberController {
             return "redirect:/OurBook";
         }catch (Exception ex) {
             bindingResult.reject("loginFail");
-            return "member/Login";
+            return "member/memberLogin";
         }
     }
 
 
 
-    @PostMapping("/2")
+    @PostMapping("/join")
     public String memberJoin(@Validated @ModelAttribute CommonMember commonMember, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("commonMember", commonMember);
-            return "member/Join";
+            return "member/memberJoin";
         }
+        log.info("{}",commonMember);
         memberService.save(commonMember);
         return "redirect:/OurBook";
     }
 
-    @PostMapping("/3")
+    @PostMapping("/logout")
     public String memberLogout(HttpServletRequest request){
         HttpSession session = request.getSession(false);
         if (session != null){
             session.invalidate();
-        }else
-            log.info("session is already empty");
+        }
         return "redirect:/OurBook";
     }
 
 
-    @PutMapping("/4")
+    @PutMapping("/member/update")
     public String memberUpdate(@Validated @ModelAttribute CommonMember commonMember, BindingResult bindingResult, Model model,
                              HttpServletRequest request){
         if(bindingResult.hasErrors()){
             model.addAttribute("commonMember",commonMember);
             model.addAttribute("commonRole",commonMember.getCommonRole());
-            return "member/Edit";
+            return "member/memberUpdate";
         }
         memberService.edit(commonMember);
         memberLogout(request);
@@ -90,7 +90,7 @@ public class MemberController {
     }
 
 
-    @DeleteMapping("/5")
+    @DeleteMapping("/member/delete")
     public String memberDelete(HttpServletRequest request,@AuthenticationPrincipal CustomUserDetail userDetail){
         HttpSession session = request.getSession(false);
         if(session.getAttribute("NAVER")!=null){

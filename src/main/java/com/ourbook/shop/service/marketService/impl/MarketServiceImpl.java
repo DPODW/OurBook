@@ -28,7 +28,7 @@ public class MarketServiceImpl implements MarketService {
     @Override
     public void saleBookInsert(SaleBookInfo saleBookInfo, MultipartFile uploadImg) throws IOException {
         String uploadImgUrl = fileUploadService.uploadImgFile(uploadImg);
-        saleBookInfo.setSaleImg(uploadImgUrl); //실제 DB 에 저장되는건 AWS URL 이니까 변수명은 뒤에 URL 이 붙는게 좋다
+        saleBookInfo.setSaleImg(uploadImgUrl);
         marketMapper.saleBookInsert(saleBookInfo);
     }
 

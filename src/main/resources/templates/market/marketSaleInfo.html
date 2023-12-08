@@ -14,7 +14,7 @@
 <header class="site-header sticky-top py-1" style="background-color: #f8f9fa;">
   <nav class="container d-flex flex-column flex-md-row justify-content-between">
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
-    <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">내 정보</a>
+    <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/joinList}" style="color: black; text-decoration: none;">내 정보</a>
     <a class="py-2 d-none d-md-inline-block payment-cart-login-check" th:href="@{/OurBook/book/info/cart}" style="color: black; text-decoration: none;">장바구니</a>
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/market}" style="color: black; text-decoration: none;">도서 시장</a>
@@ -36,15 +36,14 @@
       <form ID="PurchaseRequest" th:method="POST" th:action="@{/OurBook/market/purchase/request/warning}" th:object="${saleBookInfo}">
         <input type="hidden" id="UploaderName" name="uploaderName" th:value="${saleBookInfo.uploaderName}">
         <input type="hidden"  name="saleBookName" th:value="${saleBookInfo.saleBookName}">
-        <input type="hidden" name="uploaderEmail" th:value="${saleBookInfo.uploaderEmail}">
+        <input type="hidden" id="UploaderEmail" name="uploaderEmail" th:value="${saleBookInfo.uploaderEmail}">
         <input type="hidden"id="Sequence" name="sequence" th:value="${saleBookInfo.sequence}">
-        <input type="hidden"id="sellerId" th:value="${sellerId}">
 
         <h4 style="margin-top: 50px;" th:text="${saleBookInfo.saleBookName}"></h4>
         <p th:text="${saleBookInfo.saleBookWriter} + '(지은이)'"></p>
         <p style="margin-top: -40px; margin-left: 1040px; float: left;" th:text="'등록 일자: '+${saleBookInfo.saveTime}"></p>
         <hr style="width: 1200px; margin-top: -15px;">
-        <a id="MarketMeCheck" style="color: black; text-decoration: none; position: absolute; margin-left: 1100px; margin-top: -15px;" th:href="@{/OurBook/market/sale/{marketNumber}(marketNumber=${saleBookInfo.sequence})}">수정</a>
+        <a id="MarketMeCheck" style="color: black; text-decoration: none; position: absolute; margin-left: 1100px; margin-top: -15px;" th:href="@{/OurBook/market/sale/edit/{marketNumber}(marketNumber=${saleBookInfo.sequence})}">수정</a>
 
 
         <img style="width: 350px;  height: 400px;  border: 2px solid gray; padding: 10px; margin-top: 30px;" th:src="${saleBookInfo.saleImg}">

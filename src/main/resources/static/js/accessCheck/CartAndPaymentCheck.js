@@ -1,7 +1,6 @@
 $(document).ready(function() {
     $("#CartAddLoginCheck").click(function(event) {
         event.preventDefault();
-        // 폼의 기본 동작인 페이지 이동을 막습니다.
         $.ajax({
             url: "/checkLogin",
             type: "POST",
@@ -24,7 +23,6 @@ $(document).ready(function() {
     $(".payment-cart-login-check").click(function(event) {
         event.preventDefault();
         const buttonId = $(this).attr("id");
-        // 폼의 기본 동작인 페이지 이동을 막습니다.
         $.ajax({
             url: "/checkLogin",
             type: "POST",

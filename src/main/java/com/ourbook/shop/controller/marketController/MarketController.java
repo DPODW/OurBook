@@ -38,10 +38,11 @@ public class MarketController {
 
     @PostMapping("/market/sale")
     public String SaleBookInsert(@Validated @ModelAttribute SaleBookInfo saleBookInfo, BindingResult bindingResult,
-                                 @RequestParam("uploadImg") MultipartFile uploadImg, @AuthenticationPrincipal CustomUserDetail userDetail, Model model) throws IOException {
+                                 @RequestParam("uploadImg") MultipartFile uploadImg,@RequestParam("uploaderName") String uploaderName, @AuthenticationPrincipal CustomUserDetail userDetail, Model model) throws IOException {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("uploaderName",uploaderName);
             model.addAttribute("saleBookInfo", saleBookInfo);
-            return "/market/MarketSaleForm";
+            return "market/marketSaleForm";
         }
         saleBookInfo.setUploaderEmail(userDetail.getEmail());
         marketService.saleBookInsert(saleBookInfo,uploadImg);
@@ -55,10 +56,12 @@ public class MarketController {
     }
 
     @PutMapping("/market/sale")
-    public String SaleBookEdit(@Validated @ModelAttribute SaleBookInfo saleBookInfo,BindingResult bindingResult, @RequestParam("uploadImg") MultipartFile uploadImg,Model model) throws IOException {
+    public String SaleBookEdit(@Validated @ModelAttribute SaleBookInfo saleBookInfo,BindingResult bindingResult, @RequestParam("uploadImg") MultipartFile uploadImg,
+                               @RequestParam("uploaderName") String uploaderName,Model model) throws IOException {
         if (bindingResult.hasErrors()) {
+            saleBookInfo.setUploaderName(uploaderName);
             model.addAttribute("saleBookInfo", saleBookInfo);
-            return "/market/MarketSaleEdit";
+            return "market/marketSaleEdit";
         }
         marketService.saleBookEdit(saleBookInfo,uploadImg);
         return "redirect:/OurBook/market";
@@ -78,7 +81,7 @@ public class MarketController {
           purchaseRequest.setReceiverName(userDetail.getName());
         }
         model.addAttribute("purchaseRequest",purchaseRequest);
-        return "market/MarketSaleWarning";
+        return "market/marketSaleWarning";
     }
 
 
@@ -88,7 +91,7 @@ public class MarketController {
         emailService.sendPurchaseRequestMessage(purchaseRequest);
         marketService.purchaseRequestInsert(purchaseRequest);
         model.addAttribute("purchaseRequest",purchaseRequest);
-        return "market/MarketSaleSuccess";
+        return "market/marketSaleSuccess";
     }
 
 }

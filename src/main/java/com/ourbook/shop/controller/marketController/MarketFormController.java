@@ -3,7 +3,6 @@ package com.ourbook.shop.controller.marketController;
 
 import com.ourbook.shop.config.auth.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
-import com.ourbook.shop.dto.inquiry.InquiryInfo;
 import com.ourbook.shop.dto.market.PurchaseRequest;
 import com.ourbook.shop.dto.market.SaleBookInfo;
 import com.ourbook.shop.service.marketService.MarketService;
@@ -34,8 +33,9 @@ public class MarketFormController {
     @GetMapping("/market")
     public String marketListView(Model model){
         List<SaleBookInfo> marketList = marketService.findMarketList();
+
         model.addAttribute("marketList",marketList);
-        return "/market/MarketList";
+        return "market/marketList";
     }
 
 
@@ -53,14 +53,14 @@ public class MarketFormController {
             model.addAttribute("uploaderName",userDetail.getName());
         }
         model.addAttribute("saleBookInfo",saleBookInfo);
-        return "/market/MarketSaleForm";
+        return "market/marketSaleForm";
     }
 
-    @GetMapping("/market/sale/{marketNumber}")
+    @GetMapping("/market/sale/edit/{marketNumber}")
     public String marketSaleEditView(@PathVariable int marketNumber,Model model){
         SaleBookInfo saleBookInfo = marketService.findMarketBook(marketNumber);
         model.addAttribute("saleBookInfo",saleBookInfo);
-        return "market/MarketSaleEdit";
+        return "market/marketSaleEdit";
     }
 
 
@@ -68,11 +68,8 @@ public class MarketFormController {
     @GetMapping("/market/sale/info/{number}")
     public String marketSaleInfoView(@PathVariable int number,@AuthenticationPrincipal CustomUserDetail userDetail,Model model){
         SaleBookInfo saleBookInfo = marketService.findMarketBook(number);
-        if(userDetail!=null){
-            model.addAttribute("sellerId",userDetail.getUsername());
-        }
         model.addAttribute("saleBookInfo", saleBookInfo);
-        return "market/MarketSaleInfo";
+        return "market/marketSaleInfo";
     }
 
 
@@ -87,7 +84,7 @@ public class MarketFormController {
             List<PurchaseRequest> purchaseRequestHistory = marketService.findPurchaseRequestHistory(userDetail.getEmail());
             model.addAttribute("purchaseRequestHistorys",purchaseRequestHistory);
         }
-        return "market/PurchaseRequestHistory";
+        return "market/purchaseRequestHistory";
     }
 
 

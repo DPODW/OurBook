@@ -37,7 +37,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         if(!encoder.matches(password,user.getPassword())){
             throw new UsernameNotFoundException("Provider Authentication Exception");
         }
-        log.info("{}",user.getAuthorities());
         return new UsernamePasswordAuthenticationToken(username,password,user.getAuthorities());
     }
 

@@ -17,7 +17,7 @@
         <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: #007bff; font-size: 20px; text-decoration: none;"><strong>Our Book!</strong></a>
         <h4 class="mb-3">회원가입</h4>
 
-        <form class="validation-form" th:action="@{/OurBook/2}" method="post" th:object="${commonMember}" novalidate>
+        <form class="validation-form" th:action="@{/OurBook/join}" th:method="POST" th:object="${commonMember}" novalidate>
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="name">이름</label>
@@ -64,7 +64,7 @@
               <input type="radio" id="option2" name="commonRole"th:field="*{commonRole}" value="판매자" required>
               <label class="form-check-label" for="option2">판매자</label>
               <input type="radio" id="option3" name="commonRole"th:field="*{commonRole}" value="관리자" required>
-              <label class="form-check-label" for="option2">관리자</label>
+              <label class="form-check-label" for="option3">관리자</label>
             <h4 th:errorclass="field-error" th:errors="*{commonRole}"></h4>
           </div>
         

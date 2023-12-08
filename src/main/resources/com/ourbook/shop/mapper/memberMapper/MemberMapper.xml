@@ -7,10 +7,14 @@
                 insert into buyer_tb(BUYER_NAME,BUYER_ID,BUYER_PWD,BUYER_EMAIL,BUYER_ROLE)
                 values(#{commonName},#{commonId},#{commonPwd},#{commonEmail},#{commonRole});
             </when>
-            <otherwise>
+            <when test="commonRole == 'SELLER'">
                 insert into seller_tb(SELLER_NAME,SELLER_ID,SELLER_PWD,SELLER_EMAIL,SELLER_ROLE)
                 values(#{commonName},#{commonId},#{commonPwd},#{commonEmail},#{commonRole});
-            </otherwise>
+            </when>
+            <when test="commonRole == 'ADMIN'">
+                insert into admin_tb(ADMIN_NAME,ADMIN_ID,ADMIN_PWD,ADMIN_EMAIL,ADMIN_ROLE)
+                values(#{commonName},#{commonId},#{commonPwd},#{commonEmail},#{commonRole});
+            </when>
         </choose>
     </insert>
 
@@ -28,25 +32,32 @@
                 set BUYER_NAME = #{commonName} , BUYER_PWD = #{commonPwd} , BUYER_EMAIL = #{commonEmail} , BUYER_ROLE = #{commonRole}
                 where BUYER_ID = #{commonId};
             </when>
-            <otherwise>
+            <when test="commonRole == 'SELLER'">
                 update seller_tb
                 set SELLER_NAME = #{commonName} , SELLER_PWD = #{commonPwd} , SELLER_EMAIL = #{commonEmail} , SELLER_ROLE = #{commonRole}
                 where SELLER_ID = #{commonId};
-            </otherwise>
+            </when>
+            <when test="commonRole == 'ADMIN'">
+                update admin_tb
+                set ADMIN_NAME = #{commonName} , ADMIN_PWD = #{commonPwd} , ADMIN_EMAIL = #{commonEmail} , ADMIN_ROLE = #{commonRole}
+                where ADMIN_ID = #{commonId};
+            </when>
         </choose>
     </update>
 
 
 
-<!--DELETE 에서의 role 은 userDetail 에서 가져온거라서, "[권한]" 형식으로 받음.userDetail-->
     <delete id="commonDelete" parameterType="String">
         <choose>
             <when test="role == 'BUYER'">
                 DELETE FROM buyer_tb WHERE BUYER_ID = #{deleteValue}
             </when>
-            <otherwise>
+            <when test="role == 'SELLER'">
                 DELETE FROM seller_tb WHERE SELLER_ID = #{deleteValue}
-            </otherwise>
+            </when>
+            <when test="role == 'ADMIN'">
+                DELETE FROM admin_tb WHERE ADMIN_ID = #{deleteValue}
+            </when>
         </choose>
     </delete>
     <delete id="naverDelete" parameterType="String">

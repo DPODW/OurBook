@@ -14,7 +14,7 @@
 <header class="site-header sticky-top py-1" style="background-color: #f8f9fa;">
   <nav class="container d-flex flex-column flex-md-row justify-content-between">
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
-    <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/myInfo}" style="color: black; text-decoration: none;">내 정보</a>
+    <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/joinList}" style="color: black; text-decoration: none;">내 정보</a>
     <a class="py-2 d-none d-md-inline-block payment-cart-login-check" th:href="@{/OurBook/book/info/cart}" style="color: black; text-decoration: none;">장바구니</a>
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/market}" style="color: black; text-decoration: none;">도서 시장</a>
@@ -40,7 +40,7 @@
 
           <div class="col-md-6 mb-3">
             <label>이름 <a style="font-size: small; font-weight: normal; color: gray;"></a></label>
-            <input type="text" maxlength="12" name="uploaderName" th:value="*{saleBookInfo.uploaderName}" class="form-control" style="width: 540px;" readonly>
+            <input type="text" maxlength="12" name="uploaderName" th:field="*{saleBookInfo.uploaderName}" class="form-control" style="width: 540px;" readonly>
           </div>
 
           <div class="col-md-6 mb-3">

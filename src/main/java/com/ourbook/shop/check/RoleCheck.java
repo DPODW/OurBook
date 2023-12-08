@@ -64,12 +64,12 @@ public class RoleCheck {
         }
     }
 
-    @PostMapping("/checkMe/{writer}")
-    public ResponseEntity<String> allowWriterUserOnly(@PathVariable String writer,HttpServletRequest request,@AuthenticationPrincipal CustomUserDetail userDetail){
+    @PostMapping("/checkMe/{writerEmail}")
+    public ResponseEntity<String> allowWriterUserOnly(@PathVariable String writerEmail,HttpServletRequest request,@AuthenticationPrincipal CustomUserDetail userDetail){
         HttpSession session = request.getSession(false);
         SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-        if(naverMember != null && naverMember.getEmail().equals(writer) ||
-           userDetail != null && userDetail.getUsername().equals(writer)){
+        if(naverMember != null && naverMember.getEmail().equals(writerEmail) ||
+           userDetail != null && userDetail.getEmail().equals(writerEmail)){
             return ResponseEntity.ok().body("본인 접근 가능");
         }else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("권한 없는 사용자");
@@ -82,7 +82,7 @@ public class RoleCheck {
                 (userDetail != null && userDetail.getUsername() != null && userDetail.getUsername().equals(writer)) ||
                 (userDetail != null && userDetail.getAuthorities() != null && !userDetail.getAuthorities().isEmpty() &&
                  userDetail.getAuthorities().iterator().next().toString().equals("ADMIN"));
-        /** NULL 체크를 하지 않아도 정상 작동은 하나, 과도한 에러 로그 방지 및 확실한 조건 검사를 위해 NULL 체크 로직을 추가함 **/
+        /** NULL 체크를 하지 않아도 정상 작동은 하나,확실한 조건 검사를 위해 NULL 체크 로직을 추가함 **/
     }
 }
 

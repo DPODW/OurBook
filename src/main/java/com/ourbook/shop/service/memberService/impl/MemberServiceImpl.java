@@ -45,13 +45,16 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void edit(CommonMember commonMember) {
-        if (commonMember.getCommonRole().equals(Role.BUYER.getValue())) {
-            restoreBuyerRole(commonMember);
-            memberMapper.commonUpdate(CommonMember.saveBuilder(commonMember, encoder));
-
-        } else if (commonMember.getCommonRole().equals(Role.SELLER.getValue())) {
-            restoreSellerRole(commonMember);
-            memberMapper.commonUpdate(CommonMember.saveBuilder(commonMember, encoder));
+        switch (commonMember.getCommonRole()){
+            case "구매자": restoreBuyerRole(commonMember);
+                memberMapper.commonUpdate(CommonMember.saveBuilder(commonMember, encoder));
+                break;
+            case "판매자": restoreSellerRole(commonMember);
+                memberMapper.commonUpdate(CommonMember.saveBuilder(commonMember, encoder));
+                break;
+            case "관리자": restoreAdminRole(commonMember);
+                memberMapper.commonUpdate(CommonMember.saveBuilder(commonMember, encoder));
+                break;
         }
     }
 

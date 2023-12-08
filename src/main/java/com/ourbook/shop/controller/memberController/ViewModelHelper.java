@@ -15,6 +15,10 @@ import java.util.Collection;
 @Slf4j
 @Component
 public class ViewModelHelper {
+    /**
+     * DTO.setter 와 Model 에 데이터를 넣어주는 클래스
+     * 회원 관리 기능에 종속적 클래스임.
+     * **/
 
     protected void editMemberInfo(CustomUserDetail userDetail, CommonMember commonMember) {
         commonMember.setCommonName(userDetail.getName());

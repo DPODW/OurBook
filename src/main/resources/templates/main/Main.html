@@ -59,10 +59,10 @@
         <a style="position: absolute;  margin-left: -250px; margin-top: 60px;" th:if="${session.NAVER}" th:text="*{naverMemberEmail}"></a>
         <div class="btn-toolbar"   style="margin-bottom: 15px; width: 570px;">
           <div class="btn-group me-2" style="margin-top: 100px; margin-left: 30px; ">
-            <form th:action="@{/OurBook/3}" th:method="POST">
+            <form th:action="@{/OurBook/logout}" th:method="POST">
             <button type="submit" class="btn btn-outline-secondary">로그아웃</button>
             </form>
-            <a th:href="@{/OurBook/myInfo}"  type="button" class="btn btn-outline-secondary">내 정보</a>
+            <a th:href="@{/OurBook/joinList}"  type="button" class="btn btn-outline-secondary">내 정보</a>
             <a th:href="@{/OurBook/book/info/cart}" type="button" class="btn btn-outline-secondary">장바구니</a>
             <a th:href="@{/OurBook/book/info/payment/history}" type="button" class="btn btn-outline-secondary">구매내역</a>
           </div>
@@ -74,8 +74,8 @@
       <div th:unless="${#authorization.expression('isAuthenticated()')}">
         <a style="position: absolute; margin-top: 10px; margin-left: -120px; font-weight: bolder;">OurBook 에 오신걸 환영합니다 !</a>
         <div class="card-body" style="width: 570px; height: 150px; ">
-          <a th:href="@{/OurBook/1}" class="btn btn-primary" style="padding-left: 45px; padding-right: 45px; padding-top: 20px; padding-bottom: 20px; margin-top: 40px; margin-right: 150px; font-size: larger;" >로그인</a>
-          <a th:href="@{/OurBook/2}" class="btn btn-success" style="padding-left: 40px; padding-right: 40px; padding-top: 20px; padding-bottom: 20px;  margin-top: 45px;  font-size: larger;">회원 가입</a>
+          <a th:href="@{/OurBook/login}" class="btn btn-primary" style="padding-left: 45px; padding-right: 45px; padding-top: 20px; padding-bottom: 20px; margin-top: 40px; margin-right: 150px; font-size: larger;" >로그인</a>
+          <a th:href="@{/OurBook/join}" class="btn btn-success" style="padding-left: 40px; padding-right: 40px; padding-top: 20px; padding-bottom: 20px;  margin-top: 45px;  font-size: larger;">회원 가입</a>
         </div>
       </div>
       <!-- 권한 체크가 필요한 부분(로그인 전) -->

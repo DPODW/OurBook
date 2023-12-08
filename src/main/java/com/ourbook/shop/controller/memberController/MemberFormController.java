@@ -1,16 +1,13 @@
 package com.ourbook.shop.controller.memberController;
 
 import com.ourbook.shop.config.auth.SessionUser;
-import com.ourbook.shop.config.exception.PaymentFailException;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.member.CommonMember;
-import com.ourbook.shop.dto.member.NaverMember;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,21 +39,21 @@ public class MemberFormController {
         return "main/Main";
     }
 
-    @GetMapping("/1")
+    @GetMapping("/login")
     public String memberLoginView(CommonMember commonMember, Model model){
         model.addAttribute("commonMember", commonMember);
-        return "member/Login";
+        return "member/memberLogin";
     }
 
-    @GetMapping("/2")
+    @GetMapping("/join")
     public String memberJoinView(CommonMember commonMember, Model model){
         model.addAttribute("commonMember", commonMember);
-        return "member/Join";
+        return "member/memberJoin";
     }
 
-    @GetMapping("/myInfo")
+    @GetMapping("/joinList")
     public String memberInfoList(){
-        return "member/MyPage";
+        return "member/memberPage";
     }
 
     @GetMapping("/joinInfo")
@@ -66,25 +63,24 @@ public class MemberFormController {
            SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
            viewModelHelper.naverMemberInfo(model,naverMember);
        }else {
-           log.info("{}",userDetail.getAuthorities());
            viewModelHelper.commonMemberInfo(model,userDetail);
        }
-        return "member/JoinInfo";
+        return "member/memberJoinInfo";
     }
 
 
-    @GetMapping("/myInfo/Member")
+    @GetMapping("/joinInfo/member/update")
     public String memberUpdateView(Model model,@AuthenticationPrincipal CustomUserDetail userDetail,CommonMember commonMember){
         viewModelHelper.editMemberInfo(userDetail,commonMember);
         viewModelHelper.translateRole(model,userDetail);
         model.addAttribute("commonMember",commonMember);
-        return "member/Edit";
+        return "/member/memberUpdate";
     }
 
 
-    @GetMapping("/myInfo/Member1")
+    @GetMapping("/joinInfo/member/delete")
     public String memberDeleteView(){
-        return "member/Delete";
+        return "member/memberDelete";
     }
 
 }

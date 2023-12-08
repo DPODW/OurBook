@@ -1,7 +1,6 @@
 $(document).ready(function() {
     $("#PurchaseRequestLoginCheck").click(function(event) {
         event.preventDefault();
-        // 폼의 기본 동작인 페이지 이동을 막습니다.
         $.ajax({
             url: "/checkLogin",
             type: "POST",
@@ -21,7 +20,6 @@ $(document).ready(function() {
 $(document).ready(function() {
     $("#PurchaseRequestListLoginCheck").click(function(event) {
         event.preventDefault();
-        // 폼의 기본 동작인 페이지 이동을 막습니다.
         $.ajax({
             url: "/checkLogin",
             type: "POST",
@@ -41,19 +39,19 @@ $(document).ready(function() {
 $(document).ready(function() {
     $("#MarketMeCheck").click(function(event) {
         event.preventDefault();
-        const writer = $("#sellerId").val();
+        const writerEmail = $("#UploaderEmail").val();
         const marketNumber = $("#Sequence").val();
 
-        if(writer == ""){
+        if(writerEmail == ""){
             alert("권한이 없습니다.");
             return false;
         }
         $.ajax({
-            url: "/checkMe/"+writer,
+            url: "/checkMe/"+writerEmail,
             type: "POST",
             async: true,
             success: function(response) {
-                window.location.href = "/OurBook/market/sale/"+marketNumber;
+                window.location.href = "/OurBook/market/sale/edit/"+marketNumber;
             },
             error: function(error) {
                 alert("권한이 없습니다.");
