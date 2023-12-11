@@ -40,8 +40,9 @@ $(document).ready(function() {
 $(document).ready(function() {
     $("#AlreadyAnswerCheck").click(function(event) {
         event.preventDefault();
-        const writer = document.getElementById("inquiryWriter").textContent.substring(5);
+        const writer = $("#inquiryEmail").val();
         const inquiryNumber = $("#inquiryNumber").val();
+        console.log(writer);
         $.ajax({
             url: "/checkAlreadyAnswer/"+inquiryNumber,
             type: "POST",
@@ -77,7 +78,8 @@ $(document).ready(function() {
     $(".allowAuthorizedUsersOnly").click(function(event) {
         event.preventDefault();
         const sequence = $(this).closest("tr").find("#sequence").text();
-        const writer = $(this).closest("tr").find("#inquiryWriter").text();
+        const writer =$(this).closest("tr").find("#inquiryEmail").val();
+        console.log(writer)
 
         $.ajax({
             url: "/checkAuthorizedUser/"+writer,

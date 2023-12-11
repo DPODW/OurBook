@@ -47,7 +47,6 @@ public class TossPaymentController {
         }
     }
 
-
     @PostMapping("/TossPay/payment/1")
     public ResponseEntity<Void> TossPaymentInfoSession(@RequestBody PaymentInfo paymentInfo, HttpServletRequest request){
         HttpSession TossPaymentInfo = request.getSession();

@@ -30,6 +30,7 @@
             <h4 class="mb-3" style="margin-left: 220px;">문의 - 수정</h4>
             <form th:action="@{/OurBook/inquiry/edit}" th:method="PUT">
                 <input type="hidden" name="sequence" th:value="*{inquiryInfo.sequence}">
+                <input type="hidden" name="inquiryEmail" th:value="*{inquiryInfo.inquiryEmail}">
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label style="margin-left: 220px;">문의 종류</label> <br>

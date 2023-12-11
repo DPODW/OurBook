@@ -65,6 +65,7 @@
             <td>
                 <a class="allowAuthorizedUsersOnly" style="text-decoration: none; color: black;" th:href="@{/OurBook/inquiry/{number}(number=${inquiryOne.sequence})}" th:text="${inquiryOne.inquiryName}"></a>
             </td>
+            <input type="hidden" id="inquiryEmail" th:value="*{inquiryOne.getInquiryEmail()}">
             <td class="text-center" id="inquiryWriter" th:text="${inquiryOne.inquiryWriter}"></td>
             <td class="text-center" th:text="${inquiryOne.saveTime}"></td>
             <td class="text-center" th:text="${inquiryOne.getInquiryState()}"></td>

@@ -1,10 +1,13 @@
 package com.ourbook.shop.controller.inquiryController;
 
 
+import com.ourbook.shop.config.auth.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.inquiry.InquiryAnswerInfo;
 import com.ourbook.shop.dto.inquiry.InquiryInfo;
 import com.ourbook.shop.service.inquiryService.InquiryService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +29,9 @@ public class InquiryController {
     }
 
     @PostMapping("/OurBook/inquiry/form")
-    public String InquirySave(@Validated @ModelAttribute InquiryInfo inquiryInfo, BindingResult bindingResult, @RequestParam("inquiryWriter")String inquiryWriter,
+    public String InquirySave(
+            HttpServletRequest request,@AuthenticationPrincipal CustomUserDetail userDetail,
+            @Validated @ModelAttribute InquiryInfo inquiryInfo, BindingResult bindingResult, @RequestParam("inquiryWriter")String inquiryWriter,
                               Model model){
         if (bindingResult.hasErrors()) {
             model.addAttribute("inquiryWriter",inquiryWriter);
@@ -34,6 +39,14 @@ public class InquiryController {
            * @RequestParam 을 통해 값을 미리 받아오고, 다시 뿌려줘야한다.*/
             model.addAttribute("inquiryInfo", inquiryInfo);
             return "inquiry/inquiryForm";
+        }
+
+        HttpSession session = request.getSession(false);
+        if(session!=null && session.getAttribute("NAVER")!= null){
+            SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
+            inquiryInfo.setInquiryEmail(naverMember.getEmail());
+        }else{
+            inquiryInfo.setInquiryEmail(userDetail.getEmail());
         }
         inquiryService.inquirySave(inquiryInfo);
         return "redirect:/OurBook/inquiry";

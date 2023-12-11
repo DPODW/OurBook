@@ -15,6 +15,7 @@ public class InquiryInfo {
     private String inquiryType;
 
     private String inquiryWriter;
+    private String inquiryEmail;
 
     @NotBlank
     @Length(min=2, max= 15)
@@ -35,9 +36,10 @@ public class InquiryInfo {
     //DB에 컬럼도 존재하지 않기 때문에, 생성자에 넣으면 예외 발생 (DB 컬럼 수 보다 초과해서 바인딩 시도)
 
 
-    public InquiryInfo(String inquiryType, String inquiryWriter, String inquiryName, String inquiryContent, @Nullable String saveTime, @Nullable int sequence) {
+    public InquiryInfo(String inquiryType, String inquiryWriter,String inquiryEmail, String inquiryName, String inquiryContent, @Nullable String saveTime, @Nullable int sequence) {
         this.inquiryType = inquiryType;
         this.inquiryWriter = inquiryWriter;
+        this.inquiryEmail = inquiryEmail;
         this.inquiryName = inquiryName;
         this.inquiryContent = inquiryContent;
         this.saveTime = saveTime;

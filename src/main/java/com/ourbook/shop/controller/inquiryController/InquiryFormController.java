@@ -80,7 +80,7 @@ public class InquiryFormController {
             List<InquiryInfo> inquiryHistory = inquiryService.findInquiryHistory(naverMember.getEmail());
             model.addAttribute("inquiryHistorys",inquiryHistory);
         }else{
-            List<InquiryInfo> inquiryHistory = inquiryService.findInquiryHistory(userDetail.getEmail());
+            List<InquiryInfo> inquiryHistory = inquiryService.findInquiryHistory(userDetail.getUsername());
             model.addAttribute("inquiryHistorys",inquiryHistory);
         }
         return "inquiry/inquiryHistory";

@@ -79,7 +79,7 @@ public class RoleCheck {
 
     private static boolean isAccessPermit(String writer, CustomUserDetail userDetail, SessionUser naverMember) {
         return  (naverMember != null && naverMember.getEmail() != null && naverMember.getEmail().equals(writer)) ||
-                (userDetail != null && userDetail.getUsername() != null && userDetail.getUsername().equals(writer)) ||
+                (userDetail != null && userDetail.getEmail() != null && userDetail.getEmail().equals(writer)) ||
                 (userDetail != null && userDetail.getAuthorities() != null && !userDetail.getAuthorities().isEmpty() &&
                  userDetail.getAuthorities().iterator().next().toString().equals("ADMIN"));
         /** NULL 체크를 하지 않아도 정상 작동은 하나,확실한 조건 검사를 위해 NULL 체크 로직을 추가함 **/

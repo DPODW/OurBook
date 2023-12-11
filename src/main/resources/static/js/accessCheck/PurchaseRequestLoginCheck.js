@@ -64,9 +64,10 @@ $(document).ready(function() {
 $(document).ready(function() {
     $("#MarketAuthorizedCheck").click(function(event) {
         event.preventDefault();
-        const writer = $("#sellerId").val();
+        const writer = $("#UploaderEmail").val();
+        console.log(writer)
         if(writer == ""){
-            alert("권한이 없습니다.");
+            alert("권한이 없습니다(1).");
             return false;
         }
         $.ajax({

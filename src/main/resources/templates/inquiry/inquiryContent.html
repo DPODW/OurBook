@@ -37,6 +37,7 @@
       <p id="inquiryWriter"  style="margin-left: 220px;" th:text="'작성자: '+${inquiryInfo.inquiryWriter}"></p>
 
       <input type="hidden" id="inquiryNumber" th:value="*{inquiryInfo.sequence}">
+      <input type="hidden" id="inquiryEmail" th:value="*{inquiryInfo.inquiryEmail}">
       <a id="AlreadyAnswerCheck" style="position: absolute; margin-left: 1050px; margin-top: -55px; color: black; text-decoration: none" th:href="@{/OurBook/inquiry/edit/{inquiryNumber}(inquiryNumber=${inquiryInfo.sequence})}">수정</a>
 
       <form th:action="@{/OurBook/inquiry/delete/{inquiryNumber}(inquiryNumber=${inquiryInfo.sequence})}" th:method="DELETE">

@@ -3,13 +3,13 @@
 <mapper namespace="com.ourbook.shop.mapper.inquiryMapper.InquiryMapper">
 
     <insert id="inquirySave">
-        insert into inquiry_history(INQUIRY_TYPE,INQUIRY_WRITER,INQUIRY_NAME,INQUIRY_CONTENT,SAVE_TIME)
-        values(#{inquiryType},#{inquiryWriter},#{inquiryName},#{inquiryContent},NOW());
+        insert into inquiry_history(INQUIRY_TYPE,INQUIRY_WRITER,INQUIRY_EMAIL,INQUIRY_NAME,INQUIRY_CONTENT,SAVE_TIME)
+        values(#{inquiryType},#{inquiryWriter},#{inquiryEmail},#{inquiryName},#{inquiryContent},NOW());
     </insert>
 
     <update id="inquiryEdit" parameterType="com.ourbook.shop.dto.inquiry.InquiryInfo">
         update inquiry_history
-        set INQUIRY_TYPE = #{inquiryType} , INQUIRY_WRITER = #{inquiryWriter} ,INQUIRY_NAME = #{inquiryName}, INQUIRY_CONTENT = #{inquiryContent} , SAVE_TIME = NOW()
+        set INQUIRY_TYPE = #{inquiryType} , INQUIRY_WRITER = #{inquiryWriter} , INQUIRY_EMAIL = #{inquiryEmail},INQUIRY_NAME = #{inquiryName}, INQUIRY_CONTENT = #{inquiryContent} , SAVE_TIME = NOW()
         where SEQUENCE = #{sequence};
     </update>
 
