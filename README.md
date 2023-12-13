@@ -1,7 +1,6 @@
-### 📖 도서 판매 웹 쇼핑몰 OurBook 📖
+# 📖 도서 판매 웹 쇼핑몰 OurBook 📖
 
-![OurBook](https://github.com/DPODW/readmeTest/assets/110981825/7a8491a6-711a-45dc-a355-40bbd0a83618)
-
+![main](https://github.com/DPODW/OurBook/assets/110981825/ff22531e-ff4d-40d6-8a33-219df0edaf68)
 
 
 
@@ -343,6 +342,14 @@ https://github.com/DPODW/OurBook/assets/110981825/bd3526c8-15a3-43bb-8884-0df0a8
 <br></br>
 ![NH 환불 성공](https://github.com/DPODW/OurBook/assets/110981825/3c90a334-15b7-452f-8191-764b9061f9bd)
 <hr>
+
+**5. 구매 내역**
+- 결제 완료된 상품들은 구매내역에서 확인할 수 있습니다.
+<br></br>
+![구매 내역](https://github.com/DPODW/OurBook/assets/110981825/684a9a5d-632c-4335-a2cd-87fa1c980610)
+
+
+
 
 <br></br>
 <br></br>
