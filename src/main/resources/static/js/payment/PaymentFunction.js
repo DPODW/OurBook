@@ -60,7 +60,7 @@ function checkInput() {
         receiverAddress.value === "" ||
         detailAddress.value === ""
     ) {
-        alert("구매 정보를 다시 한번 확인해주세요!");
+        alert("   구매 정보를 다시 한번 확인해주세요!");
         return false;
     } else {
         return true;

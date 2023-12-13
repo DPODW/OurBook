@@ -7,6 +7,8 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="/css/join.css">
   <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="/js/accessCheck/DuplicateCheck.js"></script>
 </head>
 <body>
   <div class="container">
@@ -15,7 +17,7 @@
         <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: #007bff; font-size: 20px; text-decoration: none;"><strong>Our Book!</strong></a>
         <h4 class="mb-3">회원 수정</h4>
 
-        <form class="validation-form" th:action="@{/OurBook/member/update}"  th:method="PUT"  novalidate>
+        <form class="validation-form" id="updateEmailCheck" th:action="@{/OurBook/member/update}"  th:method="PUT"  novalidate>
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="name">이름</label>
@@ -58,7 +60,7 @@
 
           <hr class="mb-4">
           <div class="mb-4"></div>
-          <button class="btn btn-primary btn-lg btn-block" type="submit">수정 완료</button>
+          <button type="submit" id="checkEditEmail" class="btn btn-primary btn-lg btn-block">수정 완료</button>
           <p class="mt-5 mb-3 text-muted" style="text-align: center;">&copy; Our Book : 2023</p>
         </form>
       </div>

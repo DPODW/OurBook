@@ -21,15 +21,8 @@ public class TossPaymentController {
 
     private final TossPaymentService tossPaymentService;
 
-    private final PaymentService paymentService;
-
-    private final EmailService emailService;
-
-    public TossPaymentController(TossPaymentService tossPaymentService, PaymentService paymentService, EmailService emailService) {
+    public TossPaymentController(TossPaymentService tossPaymentService) {
         this.tossPaymentService = tossPaymentService;
-        this.paymentService = paymentService;
-
-        this.emailService = emailService;
     }
 
     @GetMapping("/TossPay/validate")

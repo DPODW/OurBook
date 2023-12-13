@@ -21,6 +21,7 @@ public class CommonMember {
 
     @NotBlank
     @Pattern(regexp = "^[^.@]+$")
+    @Pattern(regexp = "^(?:(?!NaverMember).)*$")
     @Length(min=7, max= 20)
     private String commonId;
 

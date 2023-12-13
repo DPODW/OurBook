@@ -26,6 +26,14 @@
                                     select ADMIN_EMAIL from admin_tb where ADMIN_EMAIL= #{email};
     </select >
 
+    <select id="searchEmailToId">
+        select SELLER_EMAIL from seller_tb where SELLER_ID=  #{id}
+                                    UNION
+                                    select BUYER_EMAIL from buyer_tb where BUYER_ID=  #{id}
+                                    UNION
+                                    select ADMIN_EMAIL from admin_tb where ADMIN_ID=  #{id};
+    </select >
+
     <select id="searchMemberToEmail" resultType="com.ourbook.shop.dto.member.NaverMember">
         select * from buyer_tb where BUYER_EMAIL= #{email};
     </select>

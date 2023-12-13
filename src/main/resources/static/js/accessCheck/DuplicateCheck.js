@@ -3,13 +3,13 @@ $(document).ready(function() {
         event.preventDefault();
 
         const idData = {
-            sellerId: $("#ID").val()
+            memberId: $("#ID").val()
         };
 
         const EmailData = {
-            sellerEmail: $("#EMAIL").val()
+            memberEmail: $("#EMAIL").val()
         };
-
+        console.log(EmailData)
         $.ajax({
             url: "/checkId",
             type: "POST",
@@ -28,14 +28,44 @@ $(document).ready(function() {
                         $("form.validation-form").attr("action", "/OurBook/join");
                         $("form.validation-form").submit();
                     },
-                    error: function(jqXHR, textStatus, errorThrown) {
+                    error: function() {
                         alert("이미 존재하는 이메일 입니다.");
                         event.preventDefault();
                     }
                 });
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function() {
                 alert("이미 존재하는 아이디 입니다.");
+                event.preventDefault();
+            }
+        });
+    });
+});
+
+
+
+
+$(document).ready(function() {
+    $("#checkEditEmail").click(function(event) {
+        event.preventDefault();
+        const EmailData = {
+            memberEditId: $("#ID").val(),
+            memberEditEmail: $("#EMAIL").val()
+        };
+        console.log(EmailData)
+        $.ajax({
+            url: "/checkEditEmail",
+            type: "POST",
+            async: true,
+            data: JSON.stringify(EmailData),
+            contentType: 'application/json',
+            success: function(response) {
+                console.log("dd")
+                $("#updateEmailCheck").submit();
+
+            },
+            error: function(error) {
+                alert("이미 존재하는 이메일 입니다.");
                 event.preventDefault();
             }
         });

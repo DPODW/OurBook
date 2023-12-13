@@ -23,7 +23,7 @@ public class DuplicateCheck {
 
     @PostMapping("/checkId")
     public ResponseEntity<String> checkId(@RequestBody Map<String,String> requestBody){
-        String id = requestBody.get("sellerId");
+        String id = requestBody.get("memberId");
         String searchId = findInfoMapper.searchId(id);
         if(searchId==null) {
             return ResponseEntity.ok().body("사용 가능 아이디");
@@ -33,9 +33,22 @@ public class DuplicateCheck {
 
     @PostMapping("/checkEmail")
     public ResponseEntity<String> checkEmail(@RequestBody Map<String,String> requestBody){
-        String email = requestBody.get("sellerEmail");
+        String email = requestBody.get("memberEmail");
         String searchEmail = findInfoMapper.searchEmail(email);
         if(searchEmail==null) {
+            return ResponseEntity.ok().body("사용 가능 이메일");
+        }else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이미 사용중인 이메일");
+    }
+
+    @PostMapping("/checkEditEmail")
+    public ResponseEntity<String> checkEditEmail(@RequestBody Map<String,String> requestBody){
+        String id = requestBody.get("memberEditId");
+        String email = requestBody.get("memberEditEmail");
+        String searchEmail = findInfoMapper.searchEmail(email);
+        String checkNowEmail = findInfoMapper.searchEmailToId(id);
+
+        if(searchEmail==null || checkNowEmail.equals(email)) {
             return ResponseEntity.ok().body("사용 가능 이메일");
         }else
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이미 사용중인 이메일");

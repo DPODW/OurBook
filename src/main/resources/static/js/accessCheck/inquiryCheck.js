@@ -1,7 +1,6 @@
 $(document).ready(function() {
     $("#InquiryLoginCheck").click(function(event) {
         event.preventDefault();
-        // 폼의 기본 동작인 페이지 이동을 막습니다.
         $.ajax({
             url: "/checkLogin",
             type: "POST",
@@ -20,7 +19,6 @@ $(document).ready(function() {
 $(document).ready(function() {
     $("#InquiryListLoginCheck").click(function(event) {
         event.preventDefault();
-        // 폼의 기본 동작인 페이지 이동을 막습니다.
         $.ajax({
             url: "/checkLogin",
             type: "POST",

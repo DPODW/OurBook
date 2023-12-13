@@ -40,7 +40,6 @@ public class KGPaymentServiceImpl implements KGPaymentService {
     @Override
     public PaymentInfo paymentInfoSave(PaymentInfo paymentInfo,String imp_key,String imp_secret) {
        try {
-           log.info("{}",paymentInfo);
            validateAndSave(paymentInfo);
            return paymentInfo;
        }catch (Exception ex){
