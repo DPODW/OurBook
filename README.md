@@ -525,9 +525,9 @@ https://github.com/DPODW/OurBook/assets/110981825/919b5d2e-d16e-4fbb-abd6-ff4d02
 
 
 <br></br>
-## 4. 트러블 슈팅 👾
+## 4. 많이 고민했던 부분 👾
 
-개발 중, 중요한 문제점에 대해 정리하였습니다.
+개발 중, 많이 고민했던 이유에 대해서 정리하였습니다
 
 - [결제 실패 AJAX 동작 이슈](https://github.com/DPODW/OurBook/wiki/결제-실패-AJAX-동작-이슈)
   
