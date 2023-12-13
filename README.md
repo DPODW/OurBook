@@ -1,4 +1,4 @@
-# 📖 도서 판매 웹 쇼핑몰 OurBook 📖
+### 📖 도서 판매 웹 쇼핑몰 OurBook 📖
 
 ![OurBook](https://github.com/DPODW/readmeTest/assets/110981825/7a8491a6-711a-45dc-a355-40bbd0a83618)
 
@@ -180,22 +180,26 @@
 ### 📷[동작 영상 및 사진]📷
 **1. 일반 회원가입 영상입니다.**
 - 회원가입 -> 로그인 -> 회원 정보 확인 -> 회원 수정 -> 회원 탈퇴 순으로 진행됩니다.
-  
-https://github.com/DPODW/readmeTest/assets/110981825/b97081bb-da97-4b31-9b78-a8fc469a58fa
+
+
+https://github.com/DPODW/OurBook/assets/110981825/67ec02b1-e013-459c-a5a2-2d71c21226af
+
 
 <br></br>
 <br></br>
 **2.네이버 회원 동작 영상입니다.**
 - 로그인(네이버 회원 별도의 회원가입 X) -> 회원 정보 확인 -> 회원 수정 -> 회원 탈퇴 순으로 진행됩니다.
 
-https://github.com/DPODW/readmeTest/assets/110981825/37ae52cf-11b9-4b96-ab2f-27f95c4d0a9d
+
+https://github.com/DPODW/OurBook/assets/110981825/0bdd6452-43cb-4c0b-bd43-851f7f4d85cb
+
 
 <br></br>
 <br></br>
 **3.회원 정보 저장 형식**
 - 비밀번호는 아래의 사진과 같이 암호화 되어서 저장됩니다.
 - 네이버 로그인 회원은, 아이디와 비밀번호가 NaverMember 로 저장됩니다.
-![회원 저장 형식](https://github.com/DPODW/readmeTest/assets/110981825/f70d586a-f811-41af-84f0-faf915a05e6e)
+![회원 저장 형식](https://github.com/DPODW/OurBook/assets/110981825/2273d3c5-5f68-4c32-807b-34caebd696a4)
 
 
 
@@ -229,7 +233,9 @@ https://github.com/DPODW/readmeTest/assets/110981825/37ae52cf-11b9-4b96-ab2f-27f
 - 장바구니에 상품 담기 -> 구매 정보 입력 -> 결제 초기 화면 순으로 진행됩니다.
 - 결제 진행 영상은 아래의 **결제** 부분에 업로드되어 있습니다.
 
-https://github.com/DPODW/readmeTest/assets/110981825/fb8038a2-b635-487a-8c6c-f0e69f301e6d
+
+https://github.com/DPODW/OurBook/assets/110981825/ba8a789c-f44b-44b1-bf6c-f86e12bc4e8d
+
 
 <br></br>
 <br></br>
@@ -275,12 +281,14 @@ https://github.com/DPODW/readmeTest/assets/110981825/fb8038a2-b635-487a-8c6c-f0e
 - 결제시 전화번호와 생년월일이 필요하며, 개인정보 보호 차원에서 편집으로 가려두었습니다.
 - 결제 완료시 결제 성공 화면과, 결제 성공 메일이 발송됩니다.
 
-https://github.com/DPODW/readmeTest/assets/110981825/204cd610-2a76-4771-80c4-81bb295116cf
+
+https://github.com/DPODW/OurBook/assets/110981825/03cabc02-d123-4904-a825-b134b25c372d
+
 
 <br></br>
 - 결제가 최종적으로 이루어지면, Toss 어플 에서 성공 알람을 보냅니다.
 <br></br>
- ![토스 결제 성공 ](https://github.com/DPODW/readmeTest/assets/110981825/2f4197ea-8950-4477-a5b3-fbfbde4a9c7b)
+![토스 결제 성공 ](https://github.com/DPODW/OurBook/assets/110981825/80206f50-4071-4acd-997b-04fdbfc59815)
 <hr>
 <br></br>
 <br></br>
@@ -290,12 +298,14 @@ https://github.com/DPODW/readmeTest/assets/110981825/204cd610-2a76-4771-80c4-81b
 - 결제시 실제 농협 카드 정보가 필요하며, 개인정보 보호 차원에서 편집하였습니다.
 - 결제 성공 이후의 동작은 Toss API 와 동일합니다.
 
-https://github.com/DPODW/readmeTest/assets/110981825/8a95b0b9-288f-428a-808c-5c7bf71b71fc
+
+https://github.com/DPODW/OurBook/assets/110981825/b9766144-0099-4626-a105-a71e1a17e6bc
+
 
 <br></br>
 - 결제가 최종적으로 이루어지면, 농협 어플에서 출금 알람을 보냅니다.
 <br></br>
-![NH 결제 성공](https://github.com/DPODW/readmeTest/assets/110981825/49205e74-8d1f-44a9-85e5-520309d59906)
+![NH 결제 성공](https://github.com/DPODW/OurBook/assets/110981825/e02d7a0a-b0ee-4f9f-ade9-cbfabec9eb3f)
 <hr>
 
 <br></br>
@@ -303,31 +313,35 @@ https://github.com/DPODW/readmeTest/assets/110981825/8a95b0b9-288f-428a-808c-5c7
 **3. 결제 확정 메일**
 - 결제에 성공하면, 가입시 기입한 이메일 주소로 결제 확정 메일을 전송합니다.
 <br></br>
-![결제 확정 메일](https://github.com/DPODW/readmeTest/assets/110981825/4eaed274-2638-4fc2-a9bb-1adfef7b2208)
+![결제 확정 메일](https://github.com/DPODW/OurBook/assets/110981825/278cdb48-a5e0-4ec9-9a65-f0e631e53df4)
 <hr>
 
 
 **4. Toss API 를 이용한 환불**
 - 즉각 환불이 이루어집니다.
 
-https://github.com/DPODW/readmeTest/assets/110981825/27a97a48-a3dc-45e8-8f2d-d6718b8c6c82
+
+https://github.com/DPODW/OurBook/assets/110981825/0421bdb4-21d7-42af-8f00-f8cfaff69017
+
 
 <br></br>
 - 환불에 성공하면, 토스 어플에서 결제 취소 알람을 보냅니다.
 <br></br>
-![토스 환불 성공](https://github.com/DPODW/readmeTest/assets/110981825/39afa491-ed97-4e05-ae52-a1b97dd616e4)
+![토스 환불 성공](https://github.com/DPODW/OurBook/assets/110981825/0b35e645-283e-4308-8088-8020797d9251)
 <hr>
 
 
 **5. IamPort API 를 이용한 환불**
 - 즉각 환불이 이루어집니다.
 
-https://github.com/DPODW/readmeTest/assets/110981825/2e15f7f4-7962-4157-9e66-ed5fab40b6ef
+
+https://github.com/DPODW/OurBook/assets/110981825/bd3526c8-15a3-43bb-8884-0df0a883d1b9
+
 
 <br></br>
 - 환불에 성공하면, 농협 어플에서 결제 정정 알람을 보냅니다.
 <br></br>
-![NH 환불 성공](https://github.com/DPODW/readmeTest/assets/110981825/e2119af1-db93-4eef-949e-1002daa17c42)
+![NH 환불 성공](https://github.com/DPODW/OurBook/assets/110981825/3c90a334-15b7-452f-8191-764b9061f9bd)
 <hr>
 
 <br></br>
@@ -375,7 +389,9 @@ https://github.com/DPODW/readmeTest/assets/110981825/2e15f7f4-7962-4157-9e66-ed5
 **1. 도서시장 판매글 업로드**
 - 판매글을 업로드 -> 판매글 수정 -> 판매글 삭제 순으로 진행됩니다.
 
-https://github.com/DPODW/readmeTest/assets/110981825/a7e3483f-eec6-4158-81da-d1e1befb0f5f
+
+https://github.com/DPODW/OurBook/assets/110981825/5cbc8f38-4542-4b6b-9523-4a63fc01ae1d
+
 
 <br></br>
 <br></br>
@@ -383,21 +399,22 @@ https://github.com/DPODW/readmeTest/assets/110981825/a7e3483f-eec6-4158-81da-d1e
 - 판매글 구매 요청 -> 구매 요청 내역 확인 순으로 진행됩니다.
 - '살래요!' 가 늘어난 것을 확인할 수 있습니다.
 
-https://github.com/DPODW/readmeTest/assets/110981825/e2c5979f-77ce-42de-8847-6926334a5337
+
+https://github.com/DPODW/OurBook/assets/110981825/118010bf-8ac4-45ad-8256-9cf6f54a7a01
+
 
 <br></br>
 <br></br>
 **3. 구매 요청 메일**
 - 구매 요청 메일 형식입니다.
-<br></br>
-![구매 요청 메일](https://github.com/DPODW/readmeTest/assets/110981825/e2f7bc9f-eec7-4b72-b05d-c134774e6d19)
-<br></br>
+![구매 요청 메일](https://github.com/DPODW/OurBook/assets/110981825/67940eac-8095-44ca-90fb-cce656b9fc0a)
+<br><br>
 <br></br>
 
 **4. AWS S3 저장 형식**
 - AWS S3 버킷에 저장될때, UUID 와 함께 저장됩니다.
 <br></br>
-![AWS S3](https://github.com/DPODW/readmeTest/assets/110981825/d27b0c01-3a7b-48e3-b494-a83e5d0a5936)
+![AWS S3](https://github.com/DPODW/OurBook/assets/110981825/f5691105-fd94-47a2-9016-2e9612755a36)
 <hr>
 <br></br>
 <br></br>
@@ -434,14 +451,18 @@ https://github.com/DPODW/readmeTest/assets/110981825/e2c5979f-77ce-42de-8847-692
 **1. 문의글 게시**
 - 문의글 작성 -> 문의글 수정 -> 문의 내역 조회 순으로 진행됩니다.
 
-https://github.com/DPODW/readmeTest/assets/110981825/42541cfc-9e83-44b0-9069-5fa9b359dd63
+
+https://github.com/DPODW/OurBook/assets/110981825/dba3bca7-d8fe-475a-893b-bfdc2987f81b
+
 
 <br></br>
 <br></br>
 **2. 문의글 답변**
 - 문의글 답변 등록 -> 답변 확인 -> 답변 삭제 -> 문의글 삭제 (관리자 권한) 순으로 진행됩니다.
 
-https://github.com/DPODW/readmeTest/assets/110981825/af5c4007-d136-4005-9dc5-78d8a702e74e
+
+https://github.com/DPODW/OurBook/assets/110981825/329130c8-87d1-43ff-8886-fb01aa92ae05
+
 
 <br></br>
 <br></br>
@@ -449,7 +470,7 @@ https://github.com/DPODW/readmeTest/assets/110981825/af5c4007-d136-4005-9dc5-78d
 - 관리자가 아닌 문의자가 답변 완료 문의글을 보는 시점입니다.
 - 문의자는 답변창을 볼수 없습니다.
 <br></br>
-![문의 완료](https://github.com/DPODW/readmeTest/assets/110981825/83718cb7-caf2-4560-ba08-19da24d8d9d2)
+![문의 완료](https://github.com/DPODW/OurBook/assets/110981825/dfb80d1c-2720-413f-bb42-e05d84dcbfe2)
 <br></br>
 <hr>
 <br></br>
@@ -480,7 +501,9 @@ https://github.com/DPODW/readmeTest/assets/110981825/af5c4007-d136-4005-9dc5-78d
 **1. 도서 검색**
 - 도서를 검색하고, 검색된 도서를 바로 조회합니다.
 
-https://github.com/DPODW/readmeTest/assets/110981825/f4121917-d69e-4fd1-aa89-0432a7fbf632
+
+https://github.com/DPODW/OurBook/assets/110981825/5a551d33-d9a4-4cf1-b768-6a82a45852a7
+
 
 <br></br>
 <br></br>
@@ -489,7 +512,8 @@ https://github.com/DPODW/readmeTest/assets/110981825/f4121917-d69e-4fd1-aa89-043
 - 지도로 도서관 위치를 확인할 수 있습니다.
 
 
-https://github.com/DPODW/readmeTest/assets/110981825/baf190ed-06f7-4dcc-9d99-42f623dd3aa8
+
+https://github.com/DPODW/OurBook/assets/110981825/919b5d2e-d16e-4fbb-abd6-ff4d02b2be14
 
 
 
