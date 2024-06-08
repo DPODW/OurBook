@@ -9,68 +9,70 @@
 
 <body>
 
-<header class="site-header sticky-top py-1" style="background-color: #f8f9fa;">
+<header class="site-header sticky-top py-1 headerColor">
   <nav class="container d-flex flex-column flex-md-row justify-content-between">
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
-    <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/joinList}" style="color: black; text-decoration: none;">내 정보</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/market}" style="color: black; text-decoration: none;">도서 시장</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/findNearestLibrary}" style="color: black; text-decoration: none;">도서관 검색</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/inquiry}" style="color: black; text-decoration: none;">문의</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook}"><strong>Our Book!</strong></a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/joinList}" >내 정보</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/book}" >책 둘러보기</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/market}" >도서 시장</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/findNearestLibrary}" >도서관 검색</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/inquiry}" >문의</a>
   </nav>
 </header>
-<h1 style="text-align: center; font-size: 36px; color: #333; margin-top: 20px;"><img img src="/img/payment/paymentHistory.png" style="width: 50px; margin-top: -10px; margin-right: 25px;">구매 내역</h1>
+<h1 class="paymentHistoryText"><img img src="/img/payment/paymentHistory.png" class="paymentHistoryImg">구매 내역</h1>
 
-<div class="card mb-3" th:unless="${paymentHistorys.isEmpty()}" th:each="paymentHistory, i : ${paymentHistorys}"  style="margin: auto; width: 850px; margin-top: 50px;">
-  <div class="card-body" style="display: flex; align-items: center;">
+<div class="card mb-3 paymentHistoryCard" th:unless="${paymentHistorys.isEmpty()}" th:each="paymentHistory, i : ${paymentHistorys}">
+  <div class="card-body paymentHistoryCardBody">
     <div th:each="bookImage : ${bookImages[i.index]}">
-      <img th:src="${bookImage}" class="card-img-top" style="max-width: 170px; height: auto;">
+      <img th:src="${bookImage}" class="card-img-top paymentHistoryImg2">
     </div>
-    <div style="flex: 1; padding-left: 20px;">
-      <h5 class="lead" style="color:gray;">구매 도서:  <span th:text="${paymentHistory.bookName}" style="color: black;"></span></h5>
-      <p class="lead" style="color:gray; font-size: 1rem; ">주문 번호:  <span th:text="${paymentHistory.orderNumber}" style="font-size: 1rem; color: black;"></span></p>
-      <p class="lead" style="color:gray; font-size: 1rem; ">구매 일시:  <span th:text="${paymentHistory.paymentTime}" style="font-size: 1rem; color: black;"></span></p>
-      <p class="lead" style="color:gray; font-size: 1rem; ">구매자 성함:  <span th:text="${paymentHistory.buyerName}" style="font-size: 1rem; color: black;"></span></p>
-      <p class="lead" style="color:gray; font-size: 1rem; ">구매 수량:  <span th:text="${paymentHistory.paymentBookCount}" style="font-size: 1rem; color: black;"></span></p>
+
+    <div class="paymentHistoryTable">
+      <h5 class="lead paymentHistoryTableColor">구매 도서:  <span th:text="${paymentHistory.bookName}" class="paymentHistoryTableColor2"></span></h5>
+      <p class="lead paymentHistoryTableP">주문 번호:  <span th:text="${paymentHistory.orderNumber}" class="paymentHistoryTableSpan"></span></p>
+      <p class="lead paymentHistoryTableP">구매 일시:  <span th:text="${paymentHistory.paymentTime}" class="paymentHistoryTableSpan"></span></p>
+      <p class="lead paymentHistoryTableP">구매자 성함:  <span th:text="${paymentHistory.buyerName}" class="paymentHistoryTableSpan"></span></p>
+      <p class="lead paymentHistoryTableP">구매 수량:  <span th:text="${paymentHistory.paymentBookCount}" class="paymentHistoryTableSpan"></span></p>
 
       <hr>
-      <a class="lead" style="color:blue; font-size: 1rem;" th:href="@{/OurBook/book/info/payment/result/{orderNumber}(orderNumber=${paymentHistory.orderNumber})}">
+
+      <a class="lead paymentHistoryDetailText" th:href="@{/OurBook/book/info/payment/result/{orderNumber}(orderNumber=${paymentHistory.orderNumber})}">
         상세 구매내역 확인하기
       </a>
-      <div style="flex: 1; margin-right: 20px;">
-        <label style="margin-top: 20px; font-weight: bold; font-size: 16px;">최종 구매 가격:</label>
-        <span th:text="${paymentHistory.paymentPrice} + '원'" style="font-weight: bold; font-size: 16px;"></span>
+      <div class="paymentHistoryFinalPrice">
+        <label class="paymentHistoryFinalPriceText">최종 구매 가격:</label>
+        <span th:text="${paymentHistory.paymentPrice} + '원'" class="paymentHistoryFinalPriceSpan"></span>
       </div>
     </div>
-    <div class="button-container" style="display: flex; flex-direction: column; align-items: center;">
+    <div class="button-container paymentHistoryBtnLayout">
 
       <form th:action="@{/OurBook/book/info/payment/{bookId}(bookId=${paymentHistory.bookId})}" th:method="GET">
         <input type="hidden" name="bookCount" th:value="*{paymentHistory.paymentBookCount}">
-        <button class="btn btn-success purchase-button" style="width: 120px; margin-bottom: 10px;">재 구매</button>
+        <button class="btn btn-success purchase-button reBuyBtn">재 구매</button>
       </form>
 
       <form th:action="@{/payment/refund}" th:method="POST">
         <input type="hidden" name="orderNumber" th:value="*{paymentHistory.orderNumber}">
-        <button class="btn btn-danger delete-button" style="width: 120px;">환불 요청</button>
+        <button class="btn btn-danger delete-button refundBtn">환불 요청</button>
       </form>
     </div>
   </div>
 </div>
 
-<div th:if="${paymentHistorys.isEmpty()}" style="width: 200px; height: 400px; margin: auto;">
-  <img src="/img/payment/emptyPaymentHistory.png" style="position: absolute; width: 200px; height: 200px; margin-top: 100px;">
-  <h3 style="position: absolute; margin-top: 340px; margin-left: -80px; ">구매 내역이 존재하지 않습니다.</h3>
+<div th:if="${paymentHistorys.isEmpty()}" class="paymentHistoryEmptyLayout">
+  <img src="/img/payment/emptyPaymentHistory.png" class="paymentHistoryEmptyImg">
+  <h3 class="paymentHistoryEmptyText">구매 내역이 존재하지 않습니다.</h3>
 </div>
 
-<footer class="container py-5" style="margin-top: 130px;">
-  <hr style="width: 1800px; margin-left: -250px;" >
+<footer class="container py-5 paymentHistoryFooter">
+  <hr class="footerHr">
   <div class="row">
-   <div class="col-12 col-md" style=" margin-left: -250px;">
-      <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
+   <div class="col-12 col-md footerCol2">
+      <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook}"><strong>Our Book!</strong></a>
       <small class="d-block mb-3 text-muted">Developer: 문태진</small>
       <small class="d-block mb-3 text-muted">Contact Email: ourbook.servicecenter@gmail.com</small>
       <small class="d-block mb-3 text-muted">Copyright 2023. 문태진. All Rights Reserved.</small>
-      <small ><a style="text-decoration: underline; color: black" href="https://github.com/DPODW/OurBook" target='_blank'>GitHub Link</a></small>
+      <small ><a class="FooterGitHubLink" href="https://github.com/DPODW/OurBook" target='_blank'>GitHub Link</a></small>
     </div>
   </div>
 </footer>

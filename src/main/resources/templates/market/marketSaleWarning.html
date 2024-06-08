@@ -11,31 +11,31 @@
 
 <body>
 
-<header class="site-header sticky-top py-1" style="background-color: #f8f9fa;">
+<header class="site-header sticky-top py-1 headerColor">
   <nav class="container d-flex flex-column flex-md-row justify-content-between">
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
-    <a class="py-2 d-none d-md-inline-block" th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/joinList}" style="color: black; text-decoration: none;">내 정보</a>
-    <a class="py-2 d-none d-md-inline-block payment-cart-login-check"  th:href="@{/OurBook/book/info/cart}" style="color: black; text-decoration: none;">장바구니</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/market}" style="color: black; text-decoration: none;">도서 시장</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/findNearestLibrary}" style="color: black; text-decoration: none;">도서관 검색</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/inquiry}" style="color: black; text-decoration: none;">문의</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook}"><strong>Our Book!</strong></a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/joinList}" >내 정보</a>
+    <a class="py-2 d-none d-md-inline-block payment-cart-login-check LOGOtext"  th:href="@{/OurBook/book/info/cart}" >장바구니</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/book}" >책 둘러보기</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/market}" >도서 시장</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/findNearestLibrary}" >도서관 검색</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/inquiry}" >문의</a>
   </nav>
 </header>
-<div style="margin-top: -20px;">
+<div class="sellWarnDiv">
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="alert text-center custom-alert" role="alert">
-        <img src="/img/market/sendMail.png" alt="전송 사진" class="img-fluid mb-3" style="padding-left: 10px;  padding-top: 2%; width: 250px;">
+        <img src="/img/market/sendMail.png" alt="전송 사진" class="img-fluid mb-3 sellWarnImg">
         <form th:action="@{/OurBook/market/purchase/request}" th:method="POST">
         <h4 class="alert-heading">구매 요청 전 주의사항</h4>
         <hr>
-        <p style="font-size: 14px; line-height: 1.4;">도서시장에서 판매되는 도서의 구매 요청은, OurBook 에서 먼저 귀하(구매자) 의 이메일 주소와 구매를 원하는 도서의 정보를<br> 이메일에 담아서 개인 판매자에게 전송합니다.
+        <p class="sellWarnInfo">도서시장에서 판매되는 도서의 구매 요청은, OurBook 에서 먼저 귀하(구매자) 의 이메일 주소와 구매를 원하는 도서의 정보를<br> 이메일에 담아서 개인 판매자에게 전송합니다.
           개인 판매자는 이메일에 작성되어있는 귀하(구매자)의 이메일로 구매 요청에 &nbsp;&nbsp; <br>대한 회신을 하게 됩니다.</p>
-        <p  style="font-size: 14px; line-height: 1.4; color: red;">일정 기간 회신이 없거나(3일 이상) 판매거부 의사를 밝힐 시, <a href="#" class="alert-link" style="color: red;">고객 지원팀에 문의</a> 해주세요.</p>
+        <p  class="sellWarnInfoText1">일정 기간 회신이 없거나(3일 이상) 판매거부 의사를 밝힐 시, <a href="#" class="alert-link sellSuccessColorHref">고객 지원팀에 문의</a> 해주세요.</p>
         <hr>
-          <p style="margin-right: 100px;">구매 요청 도서 제목 : <strong style="position: absolute;" th:text="${purchaseRequest.saleBookName}"></strong></p>
-          <p style="margin-right: 115px;">회신 받을 이메일 주소 : <strong style="position: absolute;" th:text="${purchaseRequest.receiverEmail}"></strong></p>
+          <p class="sellSuccessText3">구매 요청 도서 제목 : <strong class="sellSuccessTextPos" th:text="${purchaseRequest.saleBookName}"></strong></p>
+          <p class="sellSuccessText4">회신 받을 이메일 주소 : <strong class="sellSuccessTextPos" th:text="${purchaseRequest.receiverEmail}"></strong></p>
 
         <input type="hidden" name="saleBookName" th:value="*{purchaseRequest.saleBookName}">
 
@@ -46,7 +46,7 @@
         <input type="hidden" name="uploaderName" th:value="*{purchaseRequest.uploaderName}">
 
         <input type="hidden" name="sequence" th:value="*{purchaseRequest.sequence}">
-        <button class="btn btn-primary" style="margin-top: 10px; text-align: center;">구매 요청하기</button>
+        <button class="btn btn-primary requestSell">구매 요청하기</button>
       </form>
       </div>
     </div>
@@ -55,14 +55,14 @@
 
 
 <footer class="container py-5" >
-  <hr style="width: 1800px; margin-left: -250px;" >
+  <hr class="footerHr">
   <div class="row">
-   <div class="col-12 col-md" style=" margin-left: -250px;">
-      <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
+   <div class="col-12 col-md footerCol2">
+      <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook}"><strong>Our Book!</strong></a>
       <small class="d-block mb-3 text-muted">Developer: 문태진</small>
       <small class="d-block mb-3 text-muted">Contact Email: ourbook.servicecenter@gmail.com</small>
       <small class="d-block mb-3 text-muted">Copyright 2023. 문태진. All Rights Reserved.</small>
-      <small ><a style="text-decoration: underline; color: black" href="https://github.com/DPODW/OurBook" target='_blank'>GitHub Link</a></small>
+      <small ><a class="FooterGitHubLink" href="https://github.com/DPODW/OurBook" target='_blank'>GitHub Link</a></small>
     </div>
   </div>
 </footer>

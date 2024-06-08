@@ -14,7 +14,7 @@
   <div class="container">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
-        <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: #007bff; font-size: 20px; text-decoration: none;"><strong>Our Book!</strong></a>
+        <a class="py-2 d-none d-md-inline-block LOGOtext memberInfoBanner" th:href="@{/OurBook}"><strong>Our Book!</strong></a>
         <h4 class="mb-3">회원 수정</h4>
 
         <form class="validation-form" id="updateEmailCheck" th:action="@{/OurBook/member/update}"  th:method="PUT"  novalidate>
@@ -61,7 +61,7 @@
           <hr class="mb-4">
           <div class="mb-4"></div>
           <button type="submit" id="checkEditEmail" class="btn btn-primary btn-lg btn-block">수정 완료</button>
-          <p class="mt-5 mb-3 text-muted" style="text-align: center;">&copy; Our Book : 2023</p>
+          <p class="mt-5 mb-3 text-muted memberInfoFooterMt">&copy; Our Book : 2023</p>
         </form>
       </div>
     </div>

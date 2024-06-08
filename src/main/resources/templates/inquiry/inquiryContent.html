@@ -12,101 +12,101 @@
 
 <body style="overflow-x: hidden">
 
-<header class="site-header sticky-top py-1" style="background-color: #f8f9fa;">
+<header class="site-header sticky-top py-1 headerColor">
   <nav class="container d-flex flex-column flex-md-row justify-content-between">
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
-    <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/joinList}" style="color: black; text-decoration: none;">내 정보</a>
-    <a class="py-2 d-none d-md-inline-block payment-cart-login-check" th:href="@{/OurBook/book/info/cart}" style="color: black; text-decoration: none;">장바구니</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/market}" style="color: black; text-decoration: none;">도서 시장</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/findNearestLibrary}" style="color: black; text-decoration: none;">도서관 검색</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/inquiry}" style="color: black; text-decoration: none;">문의</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook}"><strong>Our Book!</strong></a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/joinList}" >내 정보</a>
+    <a class="py-2 d-none d-md-inline-block payment-cart-login-check LOGOtext" th:href="@{/OurBook/book/info/cart}" >장바구니</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/book}" >책 둘러보기</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/market}" >도서 시장</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/findNearestLibrary}" >도서관 검색</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/inquiry}" >문의</a>
   </nav>
 </header>
 
-<div class="container"  style="margin-top: 40px;">
+<div class="container inquiryContainer">
   <div class="input-form-backgroud row">
     <div class="input-form col-md-12 mx-auto" >
-      <h4 class="mb-3" style="margin-left: 220px;">문의</h4>
+      <h4 class="mb-3 inquiryH">문의</h4>
       <div class="row">
-        <h4 style="margin-left: 220px; margin-bottom: -40px;" th:text="'[ '+${inquiryInfo.inquiryType}+' ]'"></h4>
-        <h4 style="margin-left: 400px;" th:text="${inquiryInfo.inquiryName}"></h4>
-        <p style="margin-top: -30px; margin-left: 990px;" th:text="'작성일: '+${inquiryInfo.saveTime}"></p>
+        <h4 class="inquiryType" th:text="'[ '+${inquiryInfo.inquiryType}+' ]'"></h4>
+        <h4 class="inquiryName" th:text="${inquiryInfo.inquiryName}"></h4>
+        <p class="inquiryDate" th:text="'작성일: '+${inquiryInfo.saveTime}"></p>
       </div>
-      <hr style="width: 910px; margin-left: 220px; margin-top: -8px; ">
-      <p id="inquiryWriter"  style="margin-left: 220px;" th:text="'작성자: '+${inquiryInfo.inquiryWriter}"></p>
+      <hr class="inquiryHr1">
+      <p id="inquiryWriter" class="inquiryWriter" th:text="'작성자: '+${inquiryInfo.inquiryWriter}"></p>
 
       <input type="hidden" id="inquiryNumber" th:value="*{inquiryInfo.sequence}">
       <input type="hidden" id="inquiryEmail" th:value="*{inquiryInfo.inquiryEmail}">
-      <a id="AlreadyAnswerCheck" style="position: absolute; margin-left: 1050px; margin-top: -55px; color: black; text-decoration: none" th:href="@{/OurBook/inquiry/edit/{inquiryNumber}(inquiryNumber=${inquiryInfo.sequence})}">수정</a>
+      <a id="AlreadyAnswerCheck" class="inquiryEdit" th:href="@{/OurBook/inquiry/edit/{inquiryNumber}(inquiryNumber=${inquiryInfo.sequence})}">수정</a>
 
       <form th:action="@{/OurBook/inquiry/delete/{inquiryNumber}(inquiryNumber=${inquiryInfo.sequence})}" th:method="DELETE">
-        <button style="position: absolute; margin-left: 1089px; border: none; background-color: white; margin-top: -56px;">삭제</button>
+        <button class="inquiryDelete">삭제</button>
       </form>
-      <div class="mb-3" style="margin-top: 30px; margin-left: 220px; position: relative;">
-        <label style="font-weight: bold;">문의 내용</label>
-        <textarea class="form-control" name="inquiryContent" style="width: 600px; height: 200px; border: none; background-color: #cccaca" th:text="${inquiryInfo.inquiryContent}" readonly></textarea>
-        <p style="margin-top: 20px; font-size: small; color: gray;">폭언 , 욕설 등 부적절한 내용의 문의는 사전통보<br> 없이 삭제될수 있음을 알려드립니다.</p>
-        <img src="/img/inquiry/customer.png" alt="" style="width: 230px; position: absolute; top: -1px; margin-left: 690px;">
+      <div class="mb-3 inquiryLayout">
+        <label class="inquiryContent">문의 내용</label>
+        <textarea class="form-control inquiryContentText" name="inquiryContent" th:text="${inquiryInfo.inquiryContent}" readonly></textarea>
+        <p class="inquiryWarn">폭언 , 욕설 등 부적절한 내용의 문의는 사전통보<br> 없이 삭제될수 있음을 알려드립니다.</p>
+        <img src="/img/inquiry/customer.png" alt="" class="inquiryImg">
       </div>
-      <hr style="width: 910px; margin-left: 220px; margin-top: -15px; margin-bottom: 100px;">
+      <hr class="inquiryHr">
     </div>
 
 
 <!-- 답변 대기 상태-->
     <div th:unless="${inquiryAnswer}">
-      <p style="text-align: center; font-weight: bold;">답변 대기 중 입니다. 빠른 시일 내에 답변해드리겠습니다.</p>
-      <img src="/img/inquiry/inquiryWait.png" style="width: 200px; margin-left: 560px;">
+      <p class="inquiryTime">답변 대기 중 입니다. 빠른 시일 내에 답변해드리겠습니다.</p>
+      <img src="/img/inquiry/inquiryWait.png" class="inquiryTimeImg">
     </div>
 <!-- 답변 대기 상태-->
 
 
 <!--답변 완료 상태-->
-    <div  th:if="${inquiryAnswer}" class="row" style="margin-left: 220px; margin-top: 50px;">
-      <h4 style="margin-left: -10px;  margin-bottom: -40px; color: blue;">[ 답변 완료 ]</h4>
-      <h4 style="margin-left: 157px;">OurBook 고객센터 입니다.</h4>
-      <p style="margin-top: -30px; margin-left: 759px;" th:text="'작성일: '+${inquiryAnswer.saveTime}"></p>
-      <hr style="width: 910px; margin-top: -8px;">
+    <div  th:if="${inquiryAnswer}" class="row inquirySuccess">
+      <h4 class="inquirySuccessText">[ 답변 완료 ]</h4>
+      <h4 class="inquiryAnswerWriter">OurBook 고객센터 입니다.</h4>
+      <p class="inquiryAnswerDate" th:text="'작성일: '+${inquiryAnswer.saveTime}"></p>
+      <hr class="inquiryAnswerHr">
       <form ID="deleteInquiryAnswer" th:action="@{/OurBook/inquiry/admin/answer/{inquiryNumber}(inquiryNumber=${inquiryAnswer.inquiryNumber})}" th:method="DELETE">
-        <button id="allowAdminUserOnly" style="position: absolute; margin-left: 850px; border: none; background-color: white; margin-top: -14px;">삭제</button>
+        <button id="allowAdminUserOnly" class="inquiryAnswerDelete">삭제</button>
       </form>
-      <p style="margin-left: -10px; margin-bottom: 32px;" th:text="'관리자: '+${inquiryAnswer.adminName}"></p>
-      <img src="/img/inquiry/inquiryAnswer.png" alt="" style="width: 250px; position: absolute; margin-top: 113px;  margin-left: 677px;">
-      <label style="font-weight: bold; margin-left: -10px">문의 내용</label>
-      <textarea class="form-control" name="adminContent" th:text="${inquiryAnswer.adminContent}"  maxlength="50" style="width: 600px; height: 200px; border: none; background-color: #cccaca" readonly></textarea>
+      <p class="inquiryAnswerWriterText" th:text="'관리자: '+${inquiryAnswer.adminName}"></p>
+      <img src="/img/inquiry/inquiryAnswer.png" class="inquiryAnswerImg">
+      <label class="inquiryContentLabel">문의 내용</label>
+      <textarea class="form-control inquiryTextArea" name="adminContent" th:text="${inquiryAnswer.adminContent}"  maxlength="50" readonly></textarea>
     </div>
 <!--답변 완료 상태-->
 
 <!--답변 작성 상태 (ADMIN)-->
-    <div th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" style="margin-left: 220px;">
+    <div th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" class="inquiryAdminDiv">
       <form th:method="POST" th:action="@{/OurBook/inquiry/admin/answer}">
         <input type="hidden" name="inquiryWriter" th:value="*{inquiryInfo.inquiryWriter}">
         <input type="hidden" name="inquiryNumber" th:value="*{inquiryInfo.sequence}">
-      <hr style="width: 910px; margin-top: 50px;">
+      <hr class="inquiryAdminHr">
       <h4 class="mb-3">답변 (관리자 전용) </h4>
-      <p name="adminName" style="margin-top: -40px; margin-left: 230px;" th:text="'관리자 ID: '+${adminId}"></p>
+      <p name="adminName" class="inquiryAdminId" th:text="'관리자 ID: '+${adminId}"></p>
        <input type="hidden" name="adminName" th:value="*{adminId}">
-      <label style="font-weight: bold;">답변 내용 <a style="font-size: small; font-weight: normal; color: gray;">(300자 제한)</a></label>
-      <textarea class="form-control" name="adminContent"  maxlength="300" style="width: 470px; height: 200px;"></textarea>
-        <p style="margin-top: 20px; font-size: small; color: gray;">이미 답변이 등록된 문의에 새롭게 답변을 등록할 시, 기존 답변이 수정됩니다.</p>
-      <button type="submit" class="btn btn-secondary btn-lg" style="margin-top: -5px;">답변 등록</button>
+      <label style="font-weight: bold;">답변 내용 <a class="marketSellTextA">(300자 제한)</a></label>
+      <textarea class="form-control inquiryAdminTextArea" name="adminContent"  maxlength="300"></textarea>
+        <p class="inquiryAdminWarn">이미 답변이 등록된 문의에 새롭게 답변을 등록할 시, 기존 답변이 수정됩니다.</p>
+      <button type="submit" class="btn btn-secondary btn-lg inquiryAdminBtn">답변 등록</button>
       </form>
     </div>
 <!--답변 작성 상태 (ADMIN)-->
 
-    <p class="mt-5 mb-3 text-muted" style="text-align: center;">&copy; Our Book : 2023</p>
+    <p class="mt-5 mb-3 text-muted memberInfoFooterMt">&copy; Our Book : 2023</p>
   </div>
 </div>
 
 <footer class="container py-5" >
-  <hr style="width: 1800px; margin-left: -250px;" >
+  <hr class="footerHr">
   <div class="row">
-   <div class="col-12 col-md" style=" margin-left: -250px;">
-      <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
+   <div class="col-12 col-md footerCol2">
+      <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook}"><strong>Our Book!</strong></a>
       <small class="d-block mb-3 text-muted">Developer: 문태진</small>
       <small class="d-block mb-3 text-muted">Contact Email: ourbook.servicecenter@gmail.com</small>
       <small class="d-block mb-3 text-muted">Copyright 2023. 문태진. All Rights Reserved.</small>
-      <small ><a style="text-decoration: underline; color: black" href="https://github.com/DPODW/OurBook" target='_blank'>GitHub Link</a></small>
+      <small ><a class="FooterGitHubLink" href="https://github.com/DPODW/OurBook" target='_blank'>GitHub Link</a></small>
     </div>
   </div>
 </footer>

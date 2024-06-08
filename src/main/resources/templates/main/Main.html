@@ -11,22 +11,22 @@
 </head>
 <body>
 
-<header class="site-header sticky-top py-1" style="background-color: #f8f9fa;">
+<header class="site-header sticky-top py-1 headerColor">
   <nav class="container d-flex flex-column flex-md-row justify-content-between">
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/market}" style="color: black; text-decoration: none;">도서 시장</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/findNearestLibrary}" style="color: black; text-decoration: none;">도서관 검색</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/inquiry}" style="color: black; text-decoration: none;">문의</a>
+    <a class="py-2 d-none d-md-inline-block navText" th:href="@{/OurBook}" ><strong>Our Book!</strong></a>
+    <a class="py-2 d-none d-md-inline-block navText" th:href="@{/OurBook/book}">책 둘러보기</a>
+    <a class="py-2 d-none d-md-inline-block navText" th:href="@{/OurBook/market}">도서 시장</a>
+    <a class="py-2 d-none d-md-inline-block navText" th:href="@{/OurBook/findNearestLibrary}">도서관 검색</a>
+    <a class="py-2 d-none d-md-inline-block navText" th:href="@{/OurBook/inquiry}">문의</a>
   </nav>
 </header>
 
 <main>
-  <div style="width: 200px; height: 200px;  margin: auto;">
-    <img src="/img/home/OurBook.PNG" style="margin-left: -100px;">
+  <div class="mainImage">
+    <img class="mainImageDetail" src="/img/home/OurBook.PNG">
   </div>
 
-  <div style="width: 200px; height: 600px;  margin: auto;">
+  <div class="slideSize">
     <div id="slideShow">
       <ul class="slides">
         <li><img src="/img/home/bookPromotion1.PNG"><a class="slideA" th:href="@{/OurBook/book/info/{bookId}(bookId=${'A8'})}">보러가기</a></li>
@@ -43,22 +43,22 @@
     </div>
   </div>
 
-  <div  style=" width: 500px; height: 200px; margin: auto;">
-    <div class="card text-center" style="position: absolute; margin-top: -600px; margin-left: 580px;">
-      <div class="card-header" style="margin-top: 10px; background-color: white;">
+  <div class="loginImage">
+    <div class="card text-center loginImageDetail" >
+      <div class="card-header loginImageHeader">
         <img src="/img/home/loginMain.PNG" >
       </div>
 
       <!-- 권한 체크가 필요한 부분(로그인 후) -->
       <div th:if="${#authorization.expression('isAuthenticated()')}">
-        <img src="/img/home/memberProfile.png" style="position: absolute; width: 70px; margin-top: 35px; margin-left: 160px;">
-        <a style="position: absolute; margin-left: -250px; margin-top: 12px; font-weight: bolder;"  th:unless="${session.NAVER}"  th:text="*{commonName + ' 님'}"></a>
-        <a style="position: absolute; margin-left: -250px; margin-top: 12px; font-weight: bolder;" th:if="${session.NAVER}"  th:text="*{naverMemberName + ' 님'}"></a>
+        <img class="profileLayout" src="/img/home/memberProfile.png">
+        <a class="profileNameText"  th:unless="${session.NAVER}"  th:text="*{commonName + ' 님'}"></a>
+        <a  class="profileNameText" th:if="${session.NAVER}"  th:text="*{naverMemberName + ' 님'}"></a>
 
-        <a style="position: absolute;  margin-left: -250px; margin-top: 60px;" th:unless="${session.NAVER}"  th:text="*{commonEmail}"></a>
-        <a style="position: absolute;  margin-left: -250px; margin-top: 60px;" th:if="${session.NAVER}" th:text="*{naverMemberEmail}"></a>
-        <div class="btn-toolbar"   style="margin-bottom: 15px; width: 570px;">
-          <div class="btn-group me-2" style="margin-top: 100px; margin-left: 30px; ">
+        <a class="profileEmails" th:unless="${session.NAVER}"  th:text="*{commonEmail}"></a>
+        <a class="profileEmails" th:if="${session.NAVER}" th:text="*{naverMemberEmail}"></a>
+        <div class="btn-toolbar profileToolBar">
+          <div class="btn-group me-2 LoginBtnGroup">
             <form th:action="@{/OurBook/logout}" th:method="POST">
             <button type="submit" class="btn btn-outline-secondary">로그아웃</button>
             </form>
@@ -72,55 +72,55 @@
 
       <!-- 권한 체크가 필요한 부분(로그인 전) -->
       <div th:unless="${#authorization.expression('isAuthenticated()')}">
-        <a style="position: absolute; margin-top: 10px; margin-left: -120px; font-weight: bolder;">OurBook 에 오신걸 환영합니다 !</a>
-        <div class="card-body" style="width: 570px; height: 150px; ">
-          <a th:href="@{/OurBook/login}" class="btn btn-primary" style="padding-left: 45px; padding-right: 45px; padding-top: 20px; padding-bottom: 20px; margin-top: 40px; margin-right: 150px; font-size: larger;" >로그인</a>
-          <a th:href="@{/OurBook/join}" class="btn btn-success" style="padding-left: 40px; padding-right: 40px; padding-top: 20px; padding-bottom: 20px;  margin-top: 45px;  font-size: larger;">회원 가입</a>
+        <a class="bannerText">OurBook 에 오신걸 환영합니다 !</a>
+        <div class="card-body cardLayout">
+          <a th:href="@{/OurBook/login}" class="btn btn-primary loginBtnSize">로그인</a>
+          <a th:href="@{/OurBook/join}" class="btn btn-success joinBtnSize">회원 가입</a>
         </div>
       </div>
       <!-- 권한 체크가 필요한 부분(로그인 전) -->
     </div>
   </div>
 
-  <div style=" width: 500px; height: 200px; margin: auto;">
-    <div class="card text-center" style="position: absolute; margin-top: -570px; margin-left: 580px;">
-      <div class="card-header" style="font-weight: bolder;">
-        <img src="/img/home/search.png" style="width: 30px;">
+  <div class="searchBookLayout">
+    <div class="card text-center searchBookCard">
+      <div class="card-header searchBookText">
+        <img class="searchBookImage" src="/img/home/search.png">
         도서 검색
       </div>
-      <div class="card-body"  style="width: 570px; height: 170px;">
+      <div class="card-body searchBookCardBody" >
 
         <p class="card-text">OurBook 이 소장하고 있는 도서와, OurBook 도서 시장에서 <br>도서를 검색합니다.</p>
-        <div style="margin-top: 40px;margin-right: 20px;">
+        <div class="searchBookLayout2">
           <form th:action="@{/OurBook/book/search}" th:method="POST">
-            <input type="text" name="searchBookName" style="width: 300px;">
-            <button type="submit" style=" border: none; width: 102px; height: 30px; background-color: lightgrey;">도서 검색</button>
+            <input type="text" class="searchBookInput" name="searchBookName">
+            <button type="submit" class="searchBookBtn">도서 검색</button>
           </form>
         </div>
       </div>
     </div>
   </div>
-  <div style="width: 200px; height: 200px;  margin: auto;">
-    <img src="/img/home/womanRead.png" style="width: 600px; margin-left: -600px; margin-top: -550px;">
+  <div class="mainImage1Layout">
+    <img src="/img/home/womanRead.png" class="mainImage1">
   </div>
 
-  <div style="width: 200px; height: 100px;  margin: auto;">
-    <img src="/img/home/catRead.png" style="width: 300px; margin-left: -50px; margin-top: -950px;">
-    <h3 style="margin-top: -550px; margin-left: 250px; position: absolute;">OurBook 에서 상상의 나래를 펼쳐보세요!</h3>
+  <div class="mainImage2Layout">
+    <img src="/img/home/catRead.png" class="mainImage2">
+    <h3 class="mainText">OurBook 에서 상상의 나래를 펼쳐보세요!</h3>
   </div>
 </main>
 
 
-<footer class="container py-5" style="margin-top: -350px; text-align: center;">
-  <hr style="width: 1800px; margin-left: -250px;" >
+<footer class="container py-5 footerLayout">
+  <hr class="footerHr" >
   <div class="row">
-   <div class="col-12 col-md" style=" margin-left: 200px;">
+   <div class="col-12 col-md footerCol">
 
-     <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
+     <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook}"><strong>Our Book!</strong></a>
       <small class="d-block mb-3 text-muted">Developer: 문태진</small>
       <small class="d-block mb-3 text-muted">Contact Email: ourbook.servicecenter@gmail.com</small>
       <small class="d-block mb-3 text-muted">Copyright 2023. 문태진. All Rights Reserved.</small>
-      <small ><a style="text-decoration: underline; color: black" href="https://github.com/DPODW/OurBook" target='_blank'>GitHub Link</a></small>
+      <small ><a class="FooterGitHubLink" href="https://github.com/DPODW/OurBook" target='_blank'>GitHub Link</a></small>
     </div>
   </div>
 </footer>

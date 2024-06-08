@@ -9,49 +9,49 @@
 
 <body>
 
-<header class="site-header sticky-top py-1" style="background-color: #f8f9fa;">
+<header class="site-header sticky-top py-1 headerColor">
     <nav class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
-        <a class="py-2 d-none d-md-inline-block"  th:unless="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/login}" style="color: black; text-decoration: none;">로그인</a>
-        <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/joinList}" style="color: black; text-decoration: none;">내 정보</a>
-        <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
-        <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/market}" style="color: black; text-decoration: none;">도서 시장</a>
-        <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/findNearestLibrary}" style="color: black; text-decoration: none;">도서관 검색</a>
-        <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/inquiry}" style="color: black; text-decoration: none;">문의</a>
+        <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook}"><strong>Our Book!</strong></a>
+        <a class="py-2 d-none d-md-inline-block LOGOtext"  th:unless="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/login}">로그인</a>
+        <a class="py-2 d-none d-md-inline-block LOGOtext"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/joinList}" >내 정보</a>
+        <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/book}" >책 둘러보기</a>
+        <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/market}" >도서 시장</a>
+        <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/findNearestLibrary}" >도서관 검색</a>
+        <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/inquiry}" >문의</a>
     </nav>
 </header>
-<h1 style="text-align: center; font-size: 36px; color: #333; margin-top: 20px;"><img src="/img/home/searchResult.png" style="width: 50px; margin-top: -10px;">검색 결과</h1>
+<h1 class="BookSearchH1"><img src="/img/home/searchResult.png" class="BookSearchImg">검색 결과</h1>
 
-<div class="card mb-3" th:unless="${bookSearchResults.isEmpty()}" th:each="bookSearchResult : ${bookSearchResults}" style="margin: auto; width: 850px; margin-top: 50px;">
-    <div class="card-body" style="display: flex; align-items: center;">
-        <img th:src="${bookSearchResult.searchBookImg}" class="card-img-top" style="width: 170px; height: 170px; margin: auto;">
-        <div style="flex: 1; padding-left: 20px;">
-            <h5 class="lead" style="color:gray;">도서 이름:  <span th:text="${bookSearchResult.searchResult}" style="color: black;"></span></h5>
-            <p class="lead" style="color:gray; font-size: 1rem; ">저자:  <span th:text="${bookSearchResult.bookWriter}" style="font-size: 1rem; color: black;"></span></p>
-            <p class="lead" style="color:gray; font-size: 1rem; ">분류:  <span th:text="${bookSearchResult.category}" style="font-size: 1rem; color: black;"></span></p>
+<div class="card mb-3 BookSearchCard" th:unless="${bookSearchResults.isEmpty()}" th:each="bookSearchResult : ${bookSearchResults}">
+    <div class="card-body BookSearchCardBody">
+        <img th:src="${bookSearchResult.searchBookImg}" class="card-img-top BookSearchCardImg">
+        <div class="paymentHistoryTable">
+            <h5 class="lead paymentHistoryTableColor">도서 이름:  <span th:text="${bookSearchResult.searchResult}" class="BookSearchTitleColor"></span></h5>
+            <p class="lead paymentHistoryTableP">저자:  <span th:text="${bookSearchResult.bookWriter}" class="paymentHistoryTableP2"></span></p>
+            <p class="lead paymentHistoryTableP">분류:  <span th:text="${bookSearchResult.category}" class="paymentHistoryTableP2"></span></p>
             <hr>
-            <a class="lead" style="color:blue; font-size: 1rem;" th:if="${bookSearchResult.uniqueNumber.contains('A')}" th:href="@{/OurBook/book/info/{bookId}(bookId=${bookSearchResult.uniqueNumber})}">보러가기</a>
-            <a class="lead" style="color:blue; font-size: 1rem;"th:unless="${bookSearchResult.uniqueNumber.contains('A')}" th:href="@{/OurBook/market/sale/info/{number}(number=${bookSearchResult.uniqueNumber})}">보러가기</a>
+            <a class="lead paymentHistoryTableP" th:if="${bookSearchResult.uniqueNumber.contains('A')}" th:href="@{/OurBook/book/info/{bookId}(bookId=${bookSearchResult.uniqueNumber})}">보러가기</a>
+            <a class="lead paymentHistoryTableP"th:unless="${bookSearchResult.uniqueNumber.contains('A')}" th:href="@{/OurBook/market/sale/info/{number}(number=${bookSearchResult.uniqueNumber})}">보러가기</a>
         </div>
     </div>
 </div>
 
-<div th:if="${bookSearchResults.isEmpty()}" style="width: 200px; height: 270px; margin: auto;">
-    <img src="/img/home/searchNoting.png" style="position: absolute; width: 200px; height: 200px; margin-top: 100px;">
-    <h3 style="position: absolute; margin-top: 340px; margin-left: -80px;">검색 결과가 존재하지 않습니다.</h3>
-    <p style="position: absolute; margin-top: 400px; margin-left: -20px;">검색 도서를 다시 한번 확인해주세요.</p>
+<div th:if="${bookSearchResults.isEmpty()}" class="BookSearchEmpty">
+    <img src="/img/home/searchNoting.png" class="BookSearchEmptyImg">
+    <h3 class="BookSearchEmptyText">검색 결과가 존재하지 않습니다.</h3>
+    <p class="BookSearchEmptyDetail">검색 도서를 다시 한번 확인해주세요.</p>
 </div>
 
 
-<footer class="container py-5" style="margin-top: 250px;" >
-    <hr style="width: 1800px; margin-left: -250px;" >
+<footer class="container py-5 BookSearchFooter1" >
+    <hr class="footerHr">
     <div class="row">
-       <div class="col-12 col-md" style=" margin-left: -250px;">
-            <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
+       <div class="col-12 col-md footerCol2">
+            <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook}"><strong>Our Book!</strong></a>
             <small class="d-block mb-3 text-muted">Developer: 문태진</small>
             <small class="d-block mb-3 text-muted">Contact Email: ourbook.servicecenter@gmail.com</small>
             <small class="d-block mb-3 text-muted">Copyright 2023. 문태진. All Rights Reserved.</small>
-            <small ><a style="text-decoration: underline; color: black" href="https://github.com/DPODW/OurBook" target='_blank'>GitHub Link</a></small>
+            <small ><a class="FooterGitHubLink" href="https://github.com/DPODW/OurBook" target='_blank'>GitHub Link</a></small>
         </div>
     </div>
 </footer>

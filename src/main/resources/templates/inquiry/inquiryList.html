@@ -12,58 +12,58 @@
 </head>
 <body>
 
-<header class="site-header sticky-top py-1" style="background-color: #f8f9fa;">
+<header class="site-header sticky-top py-1 headerColor">
     <nav class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
-        <a class="py-2 d-none d-md-inline-block"  th:unless="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/login}" style="color: black; text-decoration: none;">로그인</a>
-        <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/joinList}" style="color: black; text-decoration: none;">내 정보</a>
-        <a class="py-2 d-none d-md-inline-block payment-cart-login-check" th:href="@{/OurBook/book/info/cart}" style="color: black; text-decoration: none;">장바구니</a>
-        <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
-        <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/market}" style="color: black; text-decoration: none;">도서 시장</a>
-        <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/findNearestLibrary}" style="color: black; text-decoration: none;">도서관 검색</a>
+        <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook}"><strong>Our Book!</strong></a>
+        <a class="py-2 d-none d-md-inline-block LOGOtext"  th:unless="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/login}">로그인</a>
+        <a class="py-2 d-none d-md-inline-block LOGOtext"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/joinList}" >내 정보</a>
+        <a class="py-2 d-none d-md-inline-block payment-cart-login-check LOGOtext" th:href="@{/OurBook/book/info/cart}" >장바구니</a>
+        <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/book}" >책 둘러보기</a>
+        <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/market}" >도서 시장</a>
+        <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/findNearestLibrary}" >도서관 검색</a>
     </nav>
 </header>
 
-<div class="container-fluid px-4" style="width: 1900px;">
-    <h1 class="mt-4" style="margin-left: 440px; font-size: 30px; margin-top: 20px;">고객 문의</h1>
-    <p style="margin-left: 440px; font-size: 14px;  white-space:nowrap;">고객의 소중한 소리를 귀기울여 듣는 OurBook이 되겠습니다.</p>
+<div class="container-fluid px-4 containerWidth" >
+    <h1 class="mt-4 inquiryMt4">고객 문의</h1>
+    <p class="inquiryIntroduce">고객의 소중한 소리를 귀기울여 듣는 OurBook이 되겠습니다.</p>
 </div>
 <div class="center-box">
-    <img src="/img/inquiry/admin.png" style="width: 450px; position: absolute;">
-    <h2 style="margin-left: 500px; padding-top: 20px;">전체 문의</h2>
-    <hr style="width: 500px; margin-left: 500px;">
-    <p style="margin-left: 500px;">제품 , 배송 등 궁금한 사항이 있으시면 아래에 있는 문의 게시판을 <br>이용해주시길 바랍니다.</p>
+    <img src="/img/inquiry/admin.png" class="inquiryAdminImg">
+    <h2 class="inquiryAll">전체 문의</h2>
+    <hr class="inquiryAllHr">
+    <p class="inquiryAllP">제품 , 배송 등 궁금한 사항이 있으시면 아래에 있는 문의 게시판을 <br>이용해주시길 바랍니다.</p>
 
-    <h2 style="margin-left: 500px; padding-top: 50px;">상세 문의</h2>
-    <hr style="width: 500px; margin-left: 500px;">
-    <h4 style="margin-left: 500px;">ourbook.servicecenter@gmail.com</h4>
-    <p style="margin-left: 500px;">보다 상세한 문의가 필요한 경우, <span style="color: red;">상단의 이메일 주소</span>로 문의 메일을 <br> 보내주시면 빠른 시일 내 도움을 드리도록 하겠습니다.</p>
+    <h2 class="inquiryAllPDetail">상세 문의</h2>
+    <hr class="inquiryAllHr">
+    <h4 class="inquiryAllP">ourbook.servicecenter@gmail.com</h4>
+    <p class="inquiryAllP">보다 상세한 문의가 필요한 경우, <span class="sellSuccessColorHref">상단의 이메일 주소</span>로 문의 메일을 <br> 보내주시면 빠른 시일 내 도움을 드리도록 하겠습니다.</p>
 </div>
 
-<hr class="mx-auto" style="width: 1000px; margin-left: 450px; margin-top: 50px; margin-bottom: 20px;">
+<hr class="mx-auto inquiryMxAuto">
 
-<div class="card-body mx-auto" style="width: 1500px; padding-left: 250px; padding-right: 250px;">
-    <h4 style="margin-left: 450px;">전체 문의</h4>
-    <a  id="InquiryListLoginCheck" style="position: relative; top: -30px;  text-decoration: none; color: black" th:href="@{/OurBook/inquiry/history}">▶문의 내역 확인하기</a>
+<div class="card-body mx-auto inquiryCardMxAuto">
+    <h4 class="inquiryHistoryList">전체 문의</h4>
+    <a  id="InquiryListLoginCheck" class="marketbuyrequeset" th:href="@{/OurBook/inquiry/history}">▶문의 내역 확인하기</a>
 
     <form th:method="GET" th:action="@{/OurBook/inquiry/form}">
-        <button  class="btn btn-secondary" id="InquiryLoginCheck" style="margin-left: 90%; margin-top: -115px;">문의하기</button>
+        <button class="btn btn-secondary inquiryBtn2" id="InquiryLoginCheck">문의하기</button>
     </form>
-    <table th:unless="${inquiryList.isEmpty()}" class="table table-hover table-bordered" style="margin-top: -20px;">
+    <table th:unless="${inquiryList.isEmpty()}" class="table table-hover table-bordered marketTableMargin">
         <thead>
         <tr>
-            <th class="text-center" style="white-space: nowrap; width: 5%;">문의 번호</th>
-            <th class="text-center" style="width: 30%;">문의</th>
-            <th class="text-center" style="width: 10%;">작성자</th>
-            <th class="text-center" style="white-space: nowrap; width: 10%;">작성일</th>
-            <th class="text-center" style="width: 8%;">답변 여부</th>
+            <th class="text-center sellRequestHistoryTH1">문의 번호</th>
+            <th class="text-center sellRequestHistoryTH2">문의</th>
+            <th class="text-center sellRequestHistoryTH3">작성자</th>
+            <th class="text-center inquiryHistoryTh3">작성일</th>
+            <th class="text-center inquiryHistoryTh4">답변 여부</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="inquiryOne : ${inquiryList}">
             <td class="text-center" id="sequence" th:text="${inquiryOne.sequence}"></td>
             <td>
-                <a class="allowAuthorizedUsersOnly" style="text-decoration: none; color: black;" th:href="@{/OurBook/inquiry/{number}(number=${inquiryOne.sequence})}" th:text="${inquiryOne.inquiryName}"></a>
+                <a class="allowAuthorizedUsersOnly inquiryUserCheck" th:href="@{/OurBook/inquiry/{number}(number=${inquiryOne.sequence})}" th:text="${inquiryOne.inquiryName}"></a>
             </td>
             <input type="hidden" id="inquiryEmail" th:value="*{inquiryOne.getInquiryEmail()}">
             <td class="text-center" id="inquiryWriter" th:text="${inquiryOne.inquiryWriter}"></td>
@@ -74,21 +74,21 @@
     </table>
 </div>
 
-    <div th:if="${inquiryList.isEmpty()}" style="width: 200px; height: 400px; margin: auto;">
-        <hr style="position: absolute; width: 1000px; margin-left: -399px; margin-top: -30px;">
-        <img src="/img/inquiry/inquiryNothing.png" style="margin-left: -20px; width: 250px; margin-top: 30px;">
-        <h3 style="position: absolute; margin-top:40px; margin-left: -20px;">등록된 문의가 없습니다.</h3>
+    <div th:if="${inquiryList.isEmpty()}" class="inquiryHistoryEmpty">
+        <hr class="marketListHr">
+        <img src="/img/inquiry/inquiryNothing.png" class="inquiryHistoryEmptyImg">
+        <h3 class="inquiryHistoryEmptyH3">등록된 문의가 없습니다.</h3>
     </div>
 
 <footer class="container py-5" >
-    <hr style="width: 1800px; margin-left: -250px;" >
+    <hr class="footerHr">
     <div class="row">
-       <div class="col-12 col-md" style=" margin-left: -250px;">
-            <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
+       <div class="col-12 col-md footerCol2">
+            <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook}"><strong>Our Book!</strong></a>
             <small class="d-block mb-3 text-muted">Developer: 문태진</small>
             <small class="d-block mb-3 text-muted">Contact Email: ourbook.servicecenter@gmail.com</small>
             <small class="d-block mb-3 text-muted">Copyright 2023. 문태진. All Rights Reserved.</small>
-            <small ><a style="text-decoration: underline; color: black" href="https://github.com/DPODW/OurBook" target='_blank'>GitHub Link</a></small>
+            <small ><a class="FooterGitHubLink" href="https://github.com/DPODW/OurBook" target='_blank'>GitHub Link</a></small>
         </div>
     </div>
 </footer>

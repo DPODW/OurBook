@@ -9,15 +9,15 @@
     <script type="text/javascript" src="/js/accessCheck/CartAndPaymentCheck.js"></script>
 </head>
 <body>
-<header class="site-header sticky-top py-1" style="background-color: #f8f9fa;">
+<header class="site-header sticky-top py-1 headerColor">
     <nav class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
-        <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/joinList}" style="color: black; text-decoration: none;">내 정보</a>
-        <a class="py-2 d-none d-md-inline-block payment-cart-login-check"  th:href="@{/OurBook/book/info/cart}" style="color: black; text-decoration: none;">장바구니</a>
-        <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
-        <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/market}" style="color: black; text-decoration: none;">도서 시장</a>
-        <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/findNearestLibrary}" style="color: black; text-decoration: none;">도서관 검색</a>
-        <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/inquiry}" style="color: black; text-decoration: none;">문의</a>
+        <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook}"><strong>Our Book!</strong></a>
+        <a class="py-2 d-none d-md-inline-block LOGOtext"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/joinList}" >내 정보</a>
+        <a class="py-2 d-none d-md-inline-block payment-cart-login-check LOGOtext"  th:href="@{/OurBook/book/info/cart}" >장바구니</a>
+        <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/book}" >책 둘러보기</a>
+        <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/market}" >도서 시장</a>
+        <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/findNearestLibrary}" >도서관 검색</a>
+        <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/inquiry}" >문의</a>
     </nav>
 </header>
 
@@ -29,16 +29,16 @@
     <div class="success-message">
         주문이 성공적으로 완료되었습니다!
     </div>
-    <div class="order-details" style="width: 700px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+    <div class="order-details" >
         <h2>주문 상세 정보</h2>
         <hr>
-       <div class="image-and-info" style="  display: flex; justify-content: space-between; align-items: center;">
-        <img th:src="${paymentResultImg}" style="width: 250px; margin-right: 100px;">
+       <div class="image-and-info orderDetailLayout">
+        <img th:src="${paymentResultImg}" class="orderDetailImg">
         <div class="order-info">
-        <p class="lead" style="margin-top: 20px;">주문 일자:&nbsp; <strong th:text="${paymentInfo.paymentTime}"></strong></p>
-        <p class="lead" style="margin-top: 50px;">주문 번호:&nbsp;<strong th:text="${paymentInfo.orderNumber}"></strong></p>
-        <p class="lead" style="margin-top: 50px;">도서 이름:&nbsp; <strong th:text="${paymentInfo.bookName}"></strong></p>
-        <p class="lead" style="margin-top: 50px;">구매 수량:&nbsp; <strong th:text="${paymentInfo.paymentBookCount} + '권'"></strong></p>
+        <p class="lead orderDetailP1">주문 일자:&nbsp; <strong th:text="${paymentInfo.paymentTime}"></strong></p>
+        <p class="lead orderDetailP2">주문 번호:&nbsp;<strong th:text="${paymentInfo.orderNumber}"></strong></p>
+        <p class="lead orderDetailP2">도서 이름:&nbsp; <strong th:text="${paymentInfo.bookName}"></strong></p>
+        <p class="lead orderDetailP2">구매 수량:&nbsp; <strong th:text="${paymentInfo.paymentBookCount} + '권'"></strong></p>
         </div>
        </div>
 
@@ -49,20 +49,20 @@
         <hr>
 
         <p th:text="${bookPrice}+ '원 (권당 가격) x ' + ${paymentInfo.paymentBookCount} + '개 (구매 수량)'"></p>
-        <p style="font-size: 20px;"><strong style="color: blue; font-size: 20px;">최종 결제 가격:&nbsp;</strong><strong th:text="${paymentPrice} + '원'"></strong></p>
+        <p class="orderFinalPrice"><strong class="orderFinalPriceColor">최종 결제 가격:&nbsp;</strong><strong th:text="${paymentPrice} + '원'"></strong></p>
         <a th:href="@{/OurBook}" class="btn btn-primary" >홈 으로</a>
     </div>
 </div>
 
 <footer class="container py-5" >
-    <hr style="width: 1800px; margin-left: -250px;" >
+    <hr class="footerHr">
     <div class="row">
-       <div class="col-12 col-md" style=" margin-left: -250px;">
-            <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
+       <div class="col-12 col-md footerCol2">
+            <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook}"><strong>Our Book!</strong></a>
             <small class="d-block mb-3 text-muted">Developer: 문태진</small>
             <small class="d-block mb-3 text-muted">Contact Email: ourbook.servicecenter@gmail.com</small>
             <small class="d-block mb-3 text-muted">Copyright 2023. 문태진. All Rights Reserved.</small>
-            <small ><a style="text-decoration: underline; color: black" href="https://github.com/DPODW/OurBook" target='_blank'>GitHub Link</a></small>
+            <small ><a class="FooterGitHubLink" href="https://github.com/DPODW/OurBook" target='_blank'>GitHub Link</a></small>
         </div>
     </div>
 </footer>

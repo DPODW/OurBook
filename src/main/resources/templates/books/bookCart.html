@@ -11,67 +11,73 @@
 
 <body>
 
-<header class="site-header sticky-top py-1" style="background-color: #f8f9fa;">
+<header class="site-header sticky-top py-1 headerColor">
   <nav class="container d-flex flex-column flex-md-row justify-content-between">
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
-    <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/joinList}" style="color: black; text-decoration: none;">내 정보</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/market}" style="color: black; text-decoration: none;">도서 시장</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/findNearestLibrary}" style="color: black; text-decoration: none;">도서관 검색</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/inquiry}" style="color: black; text-decoration: none;">문의</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook}"><strong>Our Book!</strong></a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/joinList}" >내 정보</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/book}" >책 둘러보기</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/market}" >도서 시장</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/findNearestLibrary}" >도서관 검색</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/inquiry}" >문의</a>
   </nav>
 </header>
-<h1 style="text-align: center; font-size: 36px; color: #333; margin-top: 20px; text-align: center;"><img img src="/img/ourBookShopList/cart.png" style="width: 50px; margin-top: -10px; margin-right: 25px;">장바구니</h1>
+<h1 class="bookCartText"><img img src="/img/ourBookShopList/cart.png" class="bookCartImg">장바구니</h1>
 
 
-<div class="card mb-3" th:unless="${MyCartBooks.isEmpty()}" th:each="MyCartBook, cartItemStatus : ${MyCartBooks}" style="margin: auto; width: 850px; margin-top: 50px;">
-  <div class="card-body" style="display: flex; align-items: center;">
-    <img th:src="${MyCartBook.bookImgUrl}" class="card-img-top" style="max-width: 170px; height: auto;">
-    <div style="flex: 1; padding-left: 20px;">
-      <h5 class="lead" th:text="${MyCartBook.bookName}" style="color: #007bff"></h5>
-      <p class="lead" th:id="'book-price-' + ${cartItemStatus.index}" th:text="${MyCartBook.bookPrice}+'원 (1권 당 가격)'" style="font-size: 1rem;"></p>
-      <p class="card-text"><small class="lead" th:text="${MyCartBook.bookExplain}" style="font-size: 0.9rem;"></small></p>
-      <div style="display: flex; align-items: center;"> <!-- 변경된 부분 -->
-        <p class="lead" style="font-size: 1rem;">담은 수량 &nbsp;</p>
+<div class="card mb-3 bookCardList" th:unless="${MyCartBooks.isEmpty()}" th:each="MyCartBook, cartItemStatus : ${MyCartBooks}">
+  <div class="card-body bookCardBody1">
+    <img th:src="${MyCartBook.bookImgUrl}" class="card-img-top bookCardImg">
+    <div class="bookCardDiv">
+      <h5 class="lead paymentInfoPriceColor" th:text="${MyCartBook.bookName}"></h5>
+      <p class="lead storeBookPrice" th:id="'book-price-' + ${cartItemStatus.index}" th:text="${MyCartBook.bookPrice}+'원 (1권 당 가격)'"></p>
+      <p class="card-text"><small class="lead storeBookExplain" th:text="${MyCartBook.bookExplain}"></small></p>
+
+      <div class="storeBookDiv"> <!-- 변경된 부분 -->
+        <p class="lead storeCartContent">담은 수량 &nbsp;</p>
+
         <form th:action="@{/OurBook/book/info/cart/{bookId}(bookId=${MyCartBook.bookId})}" th:method="PUT">
           <input type="number" class="quantity-input" name="buyCount"
                  th:value="${MyCartBook.bookCount}" min="1" max="50" th:data-index="${cartItemStatus.index}" oninput="restrictInput(this)">
-          <button class="lead" type="submit" style="border-color: gray; margin-bottom: 16px; font-size: 0.9rem;">수량 저장</button>
+          <button class="lead storeBookCartSave" type="submit">수량 저장</button>
         </form>
+
       </div>
-      <div style="flex: 1; margin-right: 20px;">
-        <label th:for="'total-price-' + ${cartItemStatus.index}" style="margin-top: 20px; font-weight: bold; font-size: 16px;">최종 구매 가격:</label>
-        <span  th:id="'total-price-' + ${cartItemStatus.index}" style="font-weight: bold; font-size: 16px;"></span>
+      <div class="storeFinalPrice">
+        <label th:for="'total-price-' + ${cartItemStatus.index}" class="storeFinalPriceText">최종 구매 가격:</label>
+        <span  th:id="'total-price-' + ${cartItemStatus.index}" class="storeFinalPriceSpan"></span>
       </div>
     </div>
-    <div class="button-container" style="margin-right: -15px;">
+    <div class="button-container storeBuyBtnLayout">
+
       <form th:action="@{/OurBook/book/info/payment/{bookId}(bookId=${MyCartBook.bookId})}" th:method="GET">
         <input type="hidden" name="bookCount" th:value="*{MyCartBook.bookCount}">
-        <button class="btn btn-success purchase-button" style="width: 120px; margin-bottom: 10px;">구매</button>
+        <button class="btn btn-success purchase-button storeBuyBtn">구매</button>
       </form>
+
       <form th:action="@{/OurBook/book/info/cart/{bookId}(bookId=${MyCartBook.bookId})}" th:method="DELETE">
-        <button class="btn btn-danger delete-button" style="width: 120px;">삭제</button>
+        <button class="btn btn-danger delete-button storeDelete">삭제</button>
       </form>
+
     </div>
   </div>
 </div>
 
 
-<div th:if="${MyCartBooks.isEmpty()}" style="width: 200px; height: 400px; margin: auto;">
-  <img src="/img/ourBookShopList/noCart.png" style="position: absolute; width: 200px; height: 200px; margin-top: 100px;">
-  <h3 style="position: absolute; margin-top: 340px; margin-left: -95px; ">장바구니에 담긴 상품이 없습니다.</h3>
-</div>
+  <div th:if="${MyCartBooks.isEmpty()}" class="CartEmpty">
+    <img src="/img/ourBookShopList/noCart.png" class="CartEmptyImg">
+    <h3 class="CartEmptyText">장바구니에 담긴 상품이 없습니다.</h3>
+  </div>
 
 
-<footer class="container py-5" style="margin-top: 130px;">
-  <hr style="width: 1800px; margin-left: -250px;" >
+<footer class="container py-5 CartFooter">
+  <hr class="footerHr">
   <div class="row">
-    <div class="col-12 col-md" style=" margin-left: -250px;">
-      <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
+    <div class="col-12 col-md footerCol2">
+      <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook}"><strong>Our Book!</strong></a>
       <small class="d-block mb-3 text-muted">Developer: 문태진</small>
       <small class="d-block mb-3 text-muted">Contact Email: ourbook.servicecenter@gmail.com</small>
       <small class="d-block mb-3 text-muted">Copyright 2023. 문태진. All Rights Reserved.</small>
-      <small ><a style="text-decoration: underline; color: black" href="https://github.com/DPODW/OurBook" target='_blank'>GitHub Link</a></small>
+      <small ><a class="FooterGitHubLink" href="https://github.com/DPODW/OurBook" target='_blank'>GitHub Link</a></small>
     </div>
   </div>
 </footer>

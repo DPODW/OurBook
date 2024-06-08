@@ -12,54 +12,54 @@
 </head>
 <body>
 
-<header class="site-header sticky-top py-1" style="background-color: #f8f9fa;">
+<header class="site-header sticky-top py-1 headerColor">
   <nav class="container d-flex flex-column flex-md-row justify-content-between">
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
-    <a class="py-2 d-none d-md-inline-block"  th:unless="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/login}" style="color: black; text-decoration: none;">로그인</a>
-    <a class="py-2 d-none d-md-inline-block"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/joinList}" style="color: black; text-decoration: none;">내 정보</a>
-    <a class="py-2 d-none d-md-inline-block payment-cart-login-check" th:href="@{/OurBook/book/info/cart}" style="color: black; text-decoration: none;">장바구니</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/book}" style="color: black; text-decoration: none;">책 둘러보기</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/findNearestLibrary}" style="color: black; text-decoration: none;">도서관 검색</a>
-    <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook/inquiry}" style="color: black; text-decoration: none;">문의</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook}"><strong>Our Book!</strong></a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext"  th:unless="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/login}">로그인</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext"  th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/OurBook/joinList}" >내 정보</a>
+    <a class="py-2 d-none d-md-inline-block payment-cart-login-check LOGOtext" th:href="@{/OurBook/book/info/cart}" >장바구니</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/book}" >책 둘러보기</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/findNearestLibrary}" >도서관 검색</a>
+    <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook/inquiry}" >문의</a>
   </nav>
 </header>
 
-<div class="container-fluid px-4" style="width: 1900px;">
-  <h1 class="mt-4" style="margin-left: 425px; font-size: 30px; margin-top: 20px;">도서 시장</h1>
-  <p style="margin-left: 425px; font-size: 14px;  white-space:nowrap;">기회의 공간, 도서 시장!</p>
+<div class="container-fluid px-4 containerWidth" >
+  <h1 class="mt-4 containerMT-4">도서 시장</h1>
+  <p class="marketText">기회의 공간, 도서 시장!</p>
 </div>
 
 <div class="center-img">
   <img src="/img/market/marketInfo.png">
-  <hr class="mx-auto" style="width: 1000px;">
-  <img src="/img/market/purchaseWave.png" style="margin-top: 10px;">
+  <hr class="mx-auto marketMxAuto">
+  <img src="/img/market/purchaseWave.png" class="marketImage1">
 </div>
 
 
-<hr class="mx-auto" style="width: 1000px; margin-left: 450px; margin-top: 800px; margin-bottom: 20px;">
+<hr class="mx-auto marketMxAuto1">
 
-<div class="card-body mx-auto" style="width: 1500px; padding-left: 250px; padding-right: 250px;">
-  <h4 style="margin-left: 450px;">도서 시장</h4>
-  <a  id="PurchaseRequestListLoginCheck" style="position: relative; top: -30px;  text-decoration: none; color: black" th:href="@{/OurBook/market/purchase/request/history}">▶구매요청 내역 확인하기</a>
+<div class="card-body mx-auto marketCardMxAuto">
+  <h4 class="marketTextFont">도서 시장</h4>
+  <a id="PurchaseRequestListLoginCheck" class="marketbuyrequeset" th:href="@{/OurBook/market/purchase/request/history}">▶구매요청 내역 확인하기</a>
 
   <form th:action="@{/OurBook/market/sale}" th:method="GET">
-    <button  class="btn btn-primary btn-block" id="checkRole"  style="margin-left: 87%; margin-top: -115px;">판매글 올리기</button>
+    <button  class="btn btn-primary btn-block pushSellText" id="checkRole" >판매글 올리기</button>
   </form>
-  <table th:unless="${marketList.isEmpty()}" class="table table-hover table-bordered" style="margin-top: -20px;">
+  <table th:unless="${marketList.isEmpty()}" class="table table-hover table-bordered marketTableMargin">
     <thead>
     <tr>
-      <th class="text-center" style="white-space: nowrap; width: 5%;">글 번호</th>
-      <th class="text-center" style="width: 30%;">제목</th>
-      <th class="text-center" style="width: 10%;">판매자(판매처)</th>
-      <th class="text-center" style="white-space: nowrap; width: 10%;">등록일</th>
-      <th class="text-center" style="width: 8%;">살래요!</th>
+      <th class="text-center marketTable1">글 번호</th>
+      <th class="text-center marketTable2">제목</th>
+      <th class="text-center marketTable3">판매자(판매처)</th>
+      <th class="text-center marketTable4">등록일</th>
+      <th class="text-center marketTable5">살래요!</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="marketOne : ${marketList}">
       <td class="text-center" th:text="${marketOne.getSequence()}"></td>
       <td>
-        <a style="text-decoration: none; color: black" th:text="${marketOne.getSaleBookName()}" th:href="@{/OurBook/market/sale/info/{number}(number=${marketOne.sequence})}"></a>
+        <a class="LOGOtext" th:text="${marketOne.getSaleBookName()}" th:href="@{/OurBook/market/sale/info/{number}(number=${marketOne.sequence})}"></a>
       </td>
       <td class="text-center" th:text="${marketOne.getUploaderName()}"></td>
       <td class="text-center" th:text="${marketOne.getSaveTime()}"></td>
@@ -69,22 +69,22 @@
   </table>
 </div>
 
-<div th:if="${marketList.isEmpty()}" style="width: 200px; height: 200px; margin: auto; margin-bottom: 200px;">
-  <hr style="position: absolute; width: 1000px; margin-left: -399px; margin-top: -30px;">
-  <img src="/img/market/saleBookNothing.png" style="width: 200px; height: 200px; margin-top: 60px;">
-  <h4 style="position: absolute; margin-left: -60px; margin-top: 10px;">현재 판매중인 도서가 없습니다.</h4>
+<div th:if="${marketList.isEmpty()}" class="marketList">
+  <hr class="marketListHr">
+  <img src="/img/market/saleBookNothing.png" class="marketListImg">
+  <h4 class="marketNoSellBook">현재 판매중인 도서가 없습니다.</h4>
 </div>
 
 
 <footer class="container py-5" >
-  <hr style="width: 1800px; margin-left: -250px;" >
+  <hr class="footerHr">
   <div class="row">
-   <div class="col-12 col-md" style=" margin-left: -250px;">
-      <a class="py-2 d-none d-md-inline-block" th:href="@{/OurBook}" style="color: black; text-decoration: none;"><strong>Our Book!</strong></a>
+   <div class="col-12 col-md footerCol2">
+      <a class="py-2 d-none d-md-inline-block LOGOtext" th:href="@{/OurBook}"><strong>Our Book!</strong></a>
       <small class="d-block mb-3 text-muted">Developer: 문태진</small>
       <small class="d-block mb-3 text-muted">Contact Email: ourbook.servicecenter@gmail.com</small>
       <small class="d-block mb-3 text-muted">Copyright 2023. 문태진. All Rights Reserved.</small>
-      <small ><a style="text-decoration: underline; color: black" href="https://github.com/DPODW/OurBook" target='_blank'>GitHub Link</a></small>
+      <small ><a class="FooterGitHubLink" href="https://github.com/DPODW/OurBook" target='_blank'>GitHub Link</a></small>
     </div>
   </div>
 </footer>
