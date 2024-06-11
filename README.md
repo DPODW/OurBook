@@ -34,7 +34,6 @@
 - Language : JAVA 
 - Front-End : HTML/CSS , ThymeLeaf , AJAX , jQuery , JavaScript , BootStrap
 - Back-End : SpringBoot
-- Back-End Detail : MVC Model , Spring Security , Spring Validation ,LomBok
 - ORM : MyBatis
 - DB : Maria DB
 - IDE : Intelli J 
