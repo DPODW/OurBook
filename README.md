@@ -1,7 +1,6 @@
 # 📖 도서 판매 웹 쇼핑몰 OurBook 📖
 
-![main](https://github.com/DPODW/OurBook/assets/110981825/ff22531e-ff4d-40d6-8a33-219df0edaf68)
-
+![OurBook111](https://github.com/DPODW/OurBook/assets/110981825/4bed72c0-7351-4da1-93cf-c7285d82a1bc)
 
 
 <br>
@@ -33,16 +32,10 @@
 ### 개발 환경
 - Language : JAVA 
 - Front-End : HTML/CSS , ThymeLeaf , AJAX , jQuery , JavaScript , BootStrap
-- Back-End : SpringBoot
-- ORM : MyBatis
+- Back-End : SpringBoot , MyBatis
 - DB : Maria DB
 - IDE : Intelli J 
 <br>
-
-### 개발 기간     
- - 전체 개발 기간: 2023 07 28 ~ 2023 12 06
-<br>
-
 
 
 ## 2. 프로젝트 구조 🔨
@@ -498,10 +491,8 @@ https://github.com/DPODW/OurBook/assets/110981825/329130c8-87d1-43ff-8886-fb01aa
   
 - 지역 검색 API 를 통해 얻은 주소 정보를 이용하여 지도 위치를 이동시킵니다.
   
-- LocalStorage 기능을 이용하여서 선택된 드롭다운 값을 새로고침 이후에도 유지합니다.
+- LocalStorage에 드롭다운 값을 저장하여 새로고침시에도 드롭다운 값이 유지되도록 합니다.
 
-- LocalStorage 에 저장된 드롭다운 값은, 사용자가 선택한 위치 정보이기 때문에 중요도가 떨어집니다.
-  그렇기 때문에 브라우저 상에 데이터를 저장하는 LocalStorage 기능은 효율적이라고 할 수 있습니다.
 
 ### 📷[동작 영상 및 사진]📷
 **1. 도서 검색**
@@ -531,26 +522,5 @@ https://github.com/DPODW/OurBook/assets/110981825/919b5d2e-d16e-4fbb-abd6-ff4d02
 - [결제 실패 AJAX 동작 이슈](https://github.com/DPODW/OurBook/wiki/결제-실패-AJAX-동작-이슈)
   
 - [application.properties 값 @Value Null 이슈](https://github.com/DPODW/OurBook/wiki/application.properties-값-끌어오기-Null-이슈)
-
-
-
-<br></br>
-## 5. 프로젝트 후기 🏆
-
-- 이번 개인 프로젝트를 통해서 제가 지금까지 배운 지식들을 더 깊게 이해할수 있었습니다.
-특히 이번 프로젝트에서는 ORM 으로 MyBatis 를 사용하였는데, MyBatis 는 SQL 쿼리를 직접
-작성해서 구현하는 만큼, SQL 쿼리에 더 익숙해질수 있어서 좋았습니다. 그리고 개인 프로젝트다 보니,
-백엔드 개발자를 지향하는 학생임에도 불구하고 프론트엔드(디자인 포함) 부분도 홀로 구현하여야 했습니다.
-그러다보니 때때론 하루종일 CSS 만 붙잡고 있거나, 조금은 어색한 JS 코드를 계속 붙잡고 있곤 했습니다.
-<br></br>
-
-- 하지만 프로젝트를 끝 마친 지금, CSS 와 JS 를 붙잡고 고민하던 그 날을 되돌아보면 꽤나 유익한 시간이었다고 생각됩니다.
-백엔드 개발을 지향하더라도, 어느정도의 프론트엔드 지식은 겸비하고 있어야, 더 원할하게 프론트엔드 개발자와 소통하고
-양질의 결과를 만들어낼수 있을것 같습니다!
-<br></br>
-
-- ReadMe 를 최종적으로 작성하면서, 프로젝트를 정리하고 있지만 여전히 개선할 곳 투성이인 프로젝트 입니다.
-새로운 기술을 배우거나 더 나은 방법이 생각날때면 언제든지 리팩토링 할 계획입니다. 🏆
-<br></br> 
 
 
