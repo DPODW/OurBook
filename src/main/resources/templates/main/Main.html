@@ -59,7 +59,7 @@
         <a class="profileEmails" th:if="${session.NAVER}" th:text="*{naverMemberEmail}"></a>
         <div class="btn-toolbar profileToolBar">
           <div class="btn-group me-2 LoginBtnGroup">
-            <form th:action="@{/OurBook/logout}" th:method="POST">
+            <form th:action="@{/logout}" th:method="GET">
             <button type="submit" class="btn btn-outline-secondary">로그아웃</button>
             </form>
             <a th:href="@{/OurBook/joinList}"  type="button" class="btn btn-outline-secondary">내 정보</a>
