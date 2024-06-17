@@ -1,6 +1,6 @@
 package com.ourbook.shop.check;
 
-import com.ourbook.shop.config.auth.SessionUser;
+import com.ourbook.shop.config.auth.session.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

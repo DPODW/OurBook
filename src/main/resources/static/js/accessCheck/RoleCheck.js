@@ -6,7 +6,7 @@ $(document).ready(function() {
             type: "POST",
             async: true,
             success: function(response) {
-                window.location.href = "/OurBook/joinInfo/member/update";
+                window.location.href = "/OurBook/joinInfo/member/edit";
             },
             error: function(error) {
                 alert("네이버 회원은 가입 정보 수정이 불가능 합니다. 일반 회원으로 가입 부탁 드립니다.");

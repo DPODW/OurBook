@@ -1,6 +1,6 @@
 package com.ourbook.shop.controller.memberController;
 
-import com.ourbook.shop.config.auth.SessionUser;
+import com.ourbook.shop.config.auth.session.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.member.CommonMember;
 import com.ourbook.shop.service.memberService.MemberService;
@@ -76,7 +76,7 @@ public class MemberController {
     }
 
 
-    @PutMapping("/member/update")
+    @PutMapping("/member")
     public String memberUpdate(@Validated @ModelAttribute CommonMember commonMember, BindingResult bindingResult, Model model,
                              HttpServletRequest request){
         if(bindingResult.hasErrors()){
@@ -90,7 +90,7 @@ public class MemberController {
     }
 
 
-    @DeleteMapping("/member/delete")
+    @DeleteMapping("/member")
     public String memberDelete(HttpServletRequest request,@AuthenticationPrincipal CustomUserDetail userDetail){
         HttpSession session = request.getSession(false);
         if(session.getAttribute("NAVER")!=null){

@@ -1,12 +1,11 @@
 package com.ourbook.shop.controller.memberController;
 
-import com.ourbook.shop.config.auth.SessionUser;
+import com.ourbook.shop.config.auth.session.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.member.CommonMember;
 import com.ourbook.shop.dto.member.Role;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 

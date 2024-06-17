@@ -1,7 +1,6 @@
 package com.ourbook.shop.controller.shopController;
-import com.ourbook.shop.config.auth.SessionUser;
+import com.ourbook.shop.config.auth.session.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
-import com.ourbook.shop.dto.payment.PaymentInfo;
 import com.ourbook.shop.dto.book.Book;
 import com.ourbook.shop.dto.book.BookCartView;
 import com.ourbook.shop.service.shopService.BookCartService;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Slf4j

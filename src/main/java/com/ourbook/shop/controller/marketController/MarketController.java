@@ -1,7 +1,7 @@
 package com.ourbook.shop.controller.marketController;
 
 
-import com.ourbook.shop.config.auth.SessionUser;
+import com.ourbook.shop.config.auth.session.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.market.PurchaseRequest;
 import com.ourbook.shop.dto.market.SaleBookInfo;

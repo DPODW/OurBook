@@ -1,4 +1,4 @@
-package com.ourbook.shop.config.auth;
+package com.ourbook.shop.config.auth.session;
 
 import com.ourbook.shop.dto.member.CommonMember;
 import com.ourbook.shop.dto.member.NaverMember;
@@ -8,7 +8,7 @@ import lombok.ToString;
 
 import java.io.Serializable;
 
-
+@ToString
 @Getter
 public class SessionUser implements Serializable {
 

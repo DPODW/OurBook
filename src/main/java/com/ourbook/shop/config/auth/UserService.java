@@ -1,5 +1,6 @@
 package com.ourbook.shop.config.auth;
 
+import com.ourbook.shop.config.auth.session.SessionUser;
 import com.ourbook.shop.mapper.memberMapper.FindInfoMapper;
 import com.ourbook.shop.mapper.memberMapper.MemberMapper;
 import com.ourbook.shop.dto.member.NaverMember;

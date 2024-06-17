@@ -1,6 +1,7 @@
 package com.ourbook.shop.controller.memberController;
 
-import com.ourbook.shop.config.auth.SessionUser;
+import com.ourbook.shop.config.auth.session.NaverMember;
+import com.ourbook.shop.config.auth.session.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.member.CommonMember;
 import jakarta.servlet.http.HttpServletRequest;
@@ -56,12 +57,11 @@ public class MemberFormController {
         return "member/memberPage";
     }
 
+    //첫번째 수정
     @GetMapping("/joinInfo")
-    public String memberInfoView(Model model,@AuthenticationPrincipal CustomUserDetail userDetail, HttpServletRequest request){
-        HttpSession session = request.getSession(false);
-       if(session!=null && session.getAttribute("NAVER")!=null){
-           SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-           viewModelHelper.naverMemberInfo(model,naverMember);
+    public String memberInfoView(@NaverMember SessionUser sessionUser, @AuthenticationPrincipal CustomUserDetail userDetail , Model model){
+       if(sessionUser != null){
+           viewModelHelper.naverMemberInfo(model,sessionUser);
        }else {
            viewModelHelper.commonMemberInfo(model,userDetail);
        }
@@ -69,7 +69,7 @@ public class MemberFormController {
     }
 
 
-    @GetMapping("/joinInfo/member/update")
+    @GetMapping("/joinInfo/member/edit")
     public String memberUpdateView(Model model,@AuthenticationPrincipal CustomUserDetail userDetail,CommonMember commonMember){
         viewModelHelper.editMemberInfo(userDetail,commonMember);
         viewModelHelper.translateRole(model,userDetail);
@@ -78,7 +78,7 @@ public class MemberFormController {
     }
 
 
-    @GetMapping("/joinInfo/member/delete")
+    @GetMapping("/joinInfo/member/remove")
     public String memberDeleteView(){
         return "member/memberDelete";
     }
