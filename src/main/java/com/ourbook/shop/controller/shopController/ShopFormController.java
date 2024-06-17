@@ -1,4 +1,5 @@
 package com.ourbook.shop.controller.shopController;
+import com.ourbook.shop.config.auth.session.NaverMember;
 import com.ourbook.shop.config.auth.session.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.book.Book;
@@ -50,11 +51,9 @@ public class ShopFormController {
 
 
     @GetMapping("/book/info/cart")
-    public String bookCartView(HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail,Model model){
-        HttpSession session = request.getSession(false);
-        if(session.getAttribute("NAVER")!=null){
-            SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-            List<BookCartView> cartToNaverEmail = bookCartService.findCartToEmail(naverMember.getEmail());
+    public String bookCartView(@NaverMember SessionUser sessionUser, @AuthenticationPrincipal CustomUserDetail userDetail, Model model){
+        if(sessionUser!=null){
+            List<BookCartView> cartToNaverEmail = bookCartService.findCartToEmail(sessionUser.getEmail());
             model.addAttribute("MyCartBooks",cartToNaverEmail);
         }else{
             List<BookCartView> cartToCommonEmail = bookCartService.findCartToEmail(userDetail.getEmail());

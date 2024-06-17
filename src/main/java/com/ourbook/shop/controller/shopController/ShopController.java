@@ -1,5 +1,6 @@
 package com.ourbook.shop.controller.shopController;
 
+import com.ourbook.shop.config.auth.session.NaverMember;
 import com.ourbook.shop.config.auth.session.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.book.BookCartSave;
@@ -60,12 +61,10 @@ public class ShopController {
     }
 
     @PutMapping("/info/cart/{bookId}")
-    public String bookCartUpdate(@PathVariable("bookId")String bookId,@RequestParam("buyCount")Integer bookCount,  HttpServletRequest request,
+    public String bookCartUpdate(@PathVariable("bookId")String bookId,@RequestParam("buyCount")Integer bookCount,@NaverMember SessionUser sessionUser,
                                  @AuthenticationPrincipal CustomUserDetail userDetail){
-        HttpSession session = request.getSession(false);
-        if(session.getAttribute("NAVER")!=null){
-            SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-            bookCartService.updateBookCart(bookCount,bookId,naverMember.getEmail());
+        if(sessionUser!=null){
+            bookCartService.updateBookCart(bookCount,bookId,sessionUser.getEmail());
         }else{
             bookCartService.updateBookCart(bookCount,bookId,userDetail.getEmail());
         }

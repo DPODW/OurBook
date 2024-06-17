@@ -27,12 +27,10 @@ public class MemberFormController {
     }
 
     @GetMapping("")
-    public String mainPage(Model model,@AuthenticationPrincipal CustomUserDetail userDetail, HttpServletRequest request){
-        HttpSession session = request.getSession(false);
-        if(session!=null && session.getAttribute("NAVER")!=null){
-            SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-            model.addAttribute("naverMemberName",naverMember.getName());
-            model.addAttribute("naverMemberEmail",naverMember.getEmail());
+    public String mainPage(@NaverMember SessionUser sessionUser,@AuthenticationPrincipal CustomUserDetail userDetail,Model model){
+        if(sessionUser!=null){
+            model.addAttribute("naverMemberName",sessionUser.getName());
+            model.addAttribute("naverMemberEmail",sessionUser.getEmail());
         }else if (userDetail != null){
             model.addAttribute("commonName",userDetail.getName());
             model.addAttribute("commonEmail",userDetail.getEmail());
@@ -57,9 +55,9 @@ public class MemberFormController {
         return "member/memberPage";
     }
 
-    //첫번째 수정
+
     @GetMapping("/joinInfo")
-    public String memberInfoView(@NaverMember SessionUser sessionUser, @AuthenticationPrincipal CustomUserDetail userDetail , Model model){
+    public String memberInfoView(@NaverMember SessionUser sessionUser,@AuthenticationPrincipal CustomUserDetail userDetail , Model model){
        if(sessionUser != null){
            viewModelHelper.naverMemberInfo(model,sessionUser);
        }else {

@@ -23,6 +23,7 @@ public class InquiryServiceImpl implements InquiryService {
 
     @Override
     public void inquirySave(InquiryInfo inquiryInfo) {
+        log.info("{}",inquiryInfo);
         inquiryMapper.inquirySave(inquiryInfo);
     }
 

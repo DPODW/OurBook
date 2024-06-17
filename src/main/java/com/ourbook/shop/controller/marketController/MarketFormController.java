@@ -1,6 +1,7 @@
 package com.ourbook.shop.controller.marketController;
 
 
+import com.ourbook.shop.config.auth.session.NaverMember;
 import com.ourbook.shop.config.auth.session.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.market.PurchaseRequest;
@@ -40,15 +41,13 @@ public class MarketFormController {
 
 
     @GetMapping("/market/sale")
-    public String marketSaleView(SaleBookInfo saleBookInfo, Model model, HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail){
-        HttpSession session = request.getSession(false);
-        SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
+    public String marketSaleView(SaleBookInfo saleBookInfo, @NaverMember SessionUser sessionUser, @AuthenticationPrincipal CustomUserDetail userDetail, Model model){
         if ((userDetail == null || !userDetail.getAuthorities().iterator().next().toString().equals("SELLER")) &&
-                (naverMember == null || !naverMember.getRole().equals("SELLER"))) {
+                (sessionUser == null || !sessionUser.getRole().equals("SELLER"))) {
             return "redirect:/OurBook";
         }
-        if(naverMember!=null){
-            model.addAttribute("uploaderName",naverMember.getName());
+        if(sessionUser!=null){
+            model.addAttribute("uploaderName",sessionUser.getName());
         }else{
             model.addAttribute("uploaderName",userDetail.getName());
         }
@@ -74,11 +73,9 @@ public class MarketFormController {
 
 
     @GetMapping("/market/purchase/request/history")
-    public String PurchaseRequestHistory(HttpServletRequest request,@AuthenticationPrincipal CustomUserDetail userDetail,Model model){
-        HttpSession session = request.getSession(false);
-        if(session.getAttribute("NAVER")!=null){
-           SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-            List<PurchaseRequest> purchaseRequestHistory = marketService.findPurchaseRequestHistory(naverMember.getEmail());
+    public String PurchaseRequestHistory(@NaverMember SessionUser sessionUser,@AuthenticationPrincipal CustomUserDetail userDetail,Model model){
+        if(sessionUser!=null){
+            List<PurchaseRequest> purchaseRequestHistory = marketService.findPurchaseRequestHistory(sessionUser.getEmail());
             model.addAttribute("purchaseRequestHistorys",purchaseRequestHistory);
         }else{
             List<PurchaseRequest> purchaseRequestHistory = marketService.findPurchaseRequestHistory(userDetail.getEmail());

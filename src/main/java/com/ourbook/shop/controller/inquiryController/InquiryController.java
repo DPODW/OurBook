@@ -1,6 +1,7 @@
 package com.ourbook.shop.controller.inquiryController;
 
 
+import com.ourbook.shop.config.auth.session.NaverMember;
 import com.ourbook.shop.config.auth.session.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.inquiry.InquiryAnswerInfo;
@@ -30,9 +31,9 @@ public class InquiryController {
 
     @PostMapping("/OurBook/inquiry/form")
     public String InquirySave(
-            HttpServletRequest request,@AuthenticationPrincipal CustomUserDetail userDetail,
+            @NaverMember SessionUser sessionUser, @AuthenticationPrincipal CustomUserDetail userDetail,
             @Validated @ModelAttribute InquiryInfo inquiryInfo, BindingResult bindingResult, @RequestParam("inquiryWriter")String inquiryWriter,
-                              Model model){
+            Model model){
         if (bindingResult.hasErrors()) {
             model.addAttribute("inquiryWriter",inquiryWriter);
            /* 최초 조회시 GetMapping 에서 제공해주는 inquiryWriter 파라미터는,bindingResult 로 인한 view 재요청에서 값이 유지되지 않기 때문에,
@@ -41,10 +42,9 @@ public class InquiryController {
             return "inquiry/inquiryForm";
         }
 
-        HttpSession session = request.getSession(false);
-        if(session!=null && session.getAttribute("NAVER")!= null){
-            SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-            inquiryInfo.setInquiryEmail(naverMember.getEmail());
+        //TODO: 세션 존재 여부 검사 로직있었음2
+        if(sessionUser!=null){
+            inquiryInfo.setInquiryEmail(sessionUser.getEmail());
         }else{
             inquiryInfo.setInquiryEmail(userDetail.getEmail());
         }

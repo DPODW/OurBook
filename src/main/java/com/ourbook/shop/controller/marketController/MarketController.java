@@ -1,6 +1,7 @@
 package com.ourbook.shop.controller.marketController;
 
 
+import com.ourbook.shop.config.auth.session.NaverMember;
 import com.ourbook.shop.config.auth.session.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.market.PurchaseRequest;
@@ -69,13 +70,11 @@ public class MarketController {
 
 
     @PostMapping("/market/purchase/request/warning")
-    public String BookPurchaseRequestWarn(@ModelAttribute PurchaseRequest purchaseRequest, HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail,
+    public String BookPurchaseRequestWarn(@ModelAttribute PurchaseRequest purchaseRequest,@NaverMember SessionUser sessionUser, @AuthenticationPrincipal CustomUserDetail userDetail,
                                           Model model){
-        HttpSession session = request.getSession(false);
-        if(session.getAttribute("NAVER")!=null){
-          SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-          purchaseRequest.setReceiverEmail(naverMember.getEmail());
-          purchaseRequest.setReceiverName(naverMember.getName());
+        if(sessionUser!=null){
+          purchaseRequest.setReceiverEmail(sessionUser.getEmail());
+          purchaseRequest.setReceiverName(sessionUser.getName());
         }else{
           purchaseRequest.setReceiverEmail(userDetail.getEmail());
           purchaseRequest.setReceiverName(userDetail.getName());

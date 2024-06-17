@@ -1,5 +1,6 @@
 package com.ourbook.shop.controller.inquiryController;
 
+import com.ourbook.shop.config.auth.session.NaverMember;
 import com.ourbook.shop.config.auth.session.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.inquiry.InquiryAnswerInfo;
@@ -37,11 +38,9 @@ public class InquiryFormController {
     }
 
     @GetMapping("/inquiry/form")
-    public String InquiryView(HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail, Model model, InquiryInfo inquiryInfo){
-        HttpSession session = request.getSession(false);
-        if(session!=null && session.getAttribute("NAVER")!=null){
-            SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-            model.addAttribute("inquiryWriter",naverMember.getEmail());
+    public String InquiryView(@NaverMember SessionUser sessionUser, @AuthenticationPrincipal CustomUserDetail userDetail, Model model, InquiryInfo inquiryInfo){
+        if(sessionUser!=null){
+            model.addAttribute("inquiryWriter",sessionUser.getEmail());
         }else {
             model.addAttribute("inquiryWriter",userDetail.getUsername());
         }
@@ -57,7 +56,7 @@ public class InquiryFormController {
     }
 
 
-
+//TODO: 세션 존재 여부 검사 로직있었음
     @GetMapping("/inquiry/{number}")
     public String InquiryContent(@PathVariable int number,Model model,@AuthenticationPrincipal CustomUserDetail userDetail){
         InquiryInfo inquiryInfo = inquiryService.findInquiryContent(number);
@@ -73,11 +72,9 @@ public class InquiryFormController {
     }
 
     @GetMapping("/inquiry/history")
-    public String InquiryHistory(HttpServletRequest request,@AuthenticationPrincipal CustomUserDetail userDetail,Model model){
-        HttpSession session = request.getSession(false);
-        if(session.getAttribute("NAVER")!=null){
-            SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-            List<InquiryInfo> inquiryHistory = inquiryService.findInquiryHistory(naverMember.getEmail());
+    public String InquiryHistory(@NaverMember SessionUser sessionUser,@AuthenticationPrincipal CustomUserDetail userDetail,Model model){
+        if(sessionUser!=null){
+            List<InquiryInfo> inquiryHistory = inquiryService.findInquiryHistory(sessionUser.getEmail());
             model.addAttribute("inquiryHistorys",inquiryHistory);
         }else{
             List<InquiryInfo> inquiryHistory = inquiryService.findInquiryHistory(userDetail.getUsername());

@@ -1,5 +1,6 @@
 package com.ourbook.shop.controller.paymentController;
 
+import com.ourbook.shop.config.auth.session.NaverMember;
 import com.ourbook.shop.config.auth.session.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import com.ourbook.shop.dto.book.Book;
@@ -36,14 +37,12 @@ public class PaymentFormController {
 
 
     @GetMapping("/payment/{bookId}")
-    public String paymentInfoView(@PathVariable("bookId")String bookId, @RequestParam("bookCount") BigDecimal bookCount, HttpServletRequest request,
+    public String paymentInfoView(@PathVariable("bookId")String bookId, @RequestParam("bookCount") BigDecimal bookCount,@NaverMember SessionUser sessionUser,
                                   @AuthenticationPrincipal CustomUserDetail userDetail, Model model){
-        HttpSession session = request.getSession(false);
-        if(session.getAttribute("NAVER")!=null){
-            SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
+        if(sessionUser!=null){
             purchaseBookInfo(bookId,bookCount,model);
-            model.addAttribute("name",naverMember.getName());
-            model.addAttribute("email",naverMember.getEmail());
+            model.addAttribute("name",sessionUser.getName());
+            model.addAttribute("email",sessionUser.getEmail());
         }else{
             purchaseBookInfo(bookId, bookCount,model);
             model.addAttribute("name",userDetail.getName());
@@ -76,13 +75,10 @@ public class PaymentFormController {
 
 
     @GetMapping("/payment/history")
-    public String paymentHistoryView(@AuthenticationPrincipal CustomUserDetail userDetail,HttpServletRequest request, Model model){
-        HttpSession session = request.getSession(false);
-        if(session.getAttribute("NAVER")!=null){
-            SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-
+    public String paymentHistoryView(@NaverMember SessionUser sessionUser, @AuthenticationPrincipal CustomUserDetail userDetail, Model model){
+        if(sessionUser!=null){
             //구매 내역과, 구매한 책의 사진을 가져오기 위한 요청
-            List<PaymentInfo> paymentHistory = paymentService.findPaymentHistory(naverMember.getEmail());
+            List<PaymentInfo> paymentHistory = paymentService.findPaymentHistory(sessionUser.getEmail());
             List<String> paymentImg = paymentService.findPaymentHistoryImg(paymentHistory);
 
             paymentHistoryModel(model, paymentHistory, paymentImg);

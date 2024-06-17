@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 
 @Slf4j
@@ -53,7 +54,9 @@ public class SecurityConfig {
                 .exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint(authenticationEntryPoint))
                 .oauth2Login(httpSecurityOAuth2LoginConfigurer -> httpSecurityOAuth2LoginConfigurer
                         .successHandler(successHandler())
-                        .userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig.userService(userService)));
+                        .userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig.userService(userService)))
+                .logout(logoutConfig -> logoutConfig.logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler()));
+        ;
         return http.build();
     }
 
@@ -73,6 +76,10 @@ public class SecurityConfig {
     public AuthenticationProvider authenticationProvider() {
         return new CustomAuthenticationProvider(userDetailsService, passwordEncoder());
     }
-   
 
+    private LogoutSuccessHandler logoutSuccessHandler() {
+        return (request, response, authentication) -> {
+            response.sendRedirect("/OurBook");
+        };
+    }
 }
