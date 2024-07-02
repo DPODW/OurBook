@@ -130,7 +130,7 @@
 
 ## 3. 기능 설명 📄
 - 기능 설명 전 추가 정보
-  - 정보를 입력해야 하는 기능에는 모두 Spring Validation 검증이 기본적으로 적용되어있습니다.
+  - 정보를 입력해야 하는 기능에는 모두 Java Bean Validation 검증이 기본적으로 적용되어있습니다.
   - 검증 실패시 출력되는 에러 텍스트는 error.properties 에 정의되어있습니다.
   - application.properties 는 보안상 문제로 공개되어있지 않습니다.
 
@@ -248,8 +248,6 @@ https://github.com/DPODW/OurBook/assets/110981825/ba8a789c-f44b-44b1-bf6c-f86e12
 - API 에서 제공하는 주문번호와 별개로, OurBook 고유의 주문번호를 추가로 만들어서 결제 정보를 관리하였습니다.
   
 - 결제 도중 에러가 발생하였는데 출금이 이루어졌다면 -> 즉각 환불이 되도록 구현하였습니다.
-
-- CORS 를 회피하기 위해, 서버에서 RestTemplate 를 사용하여서 API 와 교신하였습니다.
   
 - 회원의 선택에 의한 환불 또한 가능합니다.
 <br></br>
