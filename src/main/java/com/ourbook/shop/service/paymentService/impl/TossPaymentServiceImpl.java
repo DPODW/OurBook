@@ -15,6 +15,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
@@ -59,9 +60,11 @@ public class TossPaymentServiceImpl implements TossPaymentService {
 
     private void validateAndSave(PaymentInfo paymentInfo, String paymentKey) throws MessagingException {
         //결제 검증 -> 저장 -> 구매한 책 장바구니에서 제거 -> 구매 확정 메일 전송
+        paymentService.paymentPriceValidate(paymentInfo.getBookId(),paymentInfo.getPaymentPrice());
         paymentService.orderNumberValidate(paymentInfo.getOrderNumber());
         paymentService.checkPaymentNull(paymentInfo);
         paymentInfo.setPaymentNumber(paymentKey);
+
         paymentMapper.paymentInfoSave(paymentInfo);
         bookCartMapper.deleteBookCart(paymentInfo.getBookId(), paymentInfo.getBuyerEmail());
         emailService.sendPaymentMessage(paymentInfo);

@@ -3,6 +3,7 @@ package com.ourbook.shop.service.paymentService;
 import com.ourbook.shop.dto.payment.PaymentInfo;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -20,4 +21,6 @@ public interface PaymentService {
     PaymentInfo checkPaymentNull(PaymentInfo paymentInfo);
 
     void orderNumberValidate(String orderNumber);
+
+    void paymentPriceValidate(String bookId,BigDecimal paymentPrice);
 }

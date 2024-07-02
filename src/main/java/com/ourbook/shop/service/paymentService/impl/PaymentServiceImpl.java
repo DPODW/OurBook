@@ -2,6 +2,7 @@ package com.ourbook.shop.service.paymentService.impl;
 
 import com.ourbook.shop.dto.payment.PaymentInfo;
 import com.ourbook.shop.mapper.paymentMapper.PaymentMapper;
+import com.ourbook.shop.mapper.shopMapper.FindBookMapper;
 import com.ourbook.shop.service.paymentService.PaymentService;
 import com.ourbook.shop.service.shopService.FindBookService;
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +22,12 @@ public class PaymentServiceImpl implements PaymentService {
 
     private final FindBookService findBookService;
 
-    public PaymentServiceImpl(PaymentMapper paymentMapper, FindBookService findBookService) {
+    private final FindBookMapper findBookMapper;
+
+    public PaymentServiceImpl(PaymentMapper paymentMapper, FindBookService findBookService, FindBookMapper findBookMapper) {
         this.paymentMapper = paymentMapper;
         this.findBookService = findBookService;
+        this.findBookMapper = findBookMapper;
     }
 
     @Override
@@ -87,6 +91,15 @@ public class PaymentServiceImpl implements PaymentService {
         if(paymentHistory != null){
             log.error("중복된 주문 번호가 존재합니다.");
             throw new DuplicateKeyException("중복된 주문 번호.");
+        }
+    }
+
+    @Override
+    public void paymentPriceValidate(String bookId,BigDecimal paymentPrice) {
+        BigDecimal bookPrice = findBookMapper.findBookPrice(bookId);
+        if(!paymentPrice.equals(bookPrice.setScale(0))){
+            log.error("요청 금액과 실제 도서 금액이 다릅니다.");
+            throw new IllegalStateException("요청 금액 다름");
         }
     }
 }

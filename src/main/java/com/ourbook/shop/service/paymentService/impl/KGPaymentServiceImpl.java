@@ -57,8 +57,10 @@ public class KGPaymentServiceImpl implements KGPaymentService {
 
     private void validateAndSave(PaymentInfo paymentInfo) throws MessagingException {
         //결제 검증 -> 저장 -> 구매한 책 장바구니에서 제거 -> 구매 확정 메일 전송
+        paymentService.paymentPriceValidate(paymentInfo.getBookId(),paymentInfo.getPaymentPrice());
         paymentService.orderNumberValidate(paymentInfo.getOrderNumber());
         paymentService.checkPaymentNull(paymentInfo);
+
         paymentMapper.paymentInfoSave(paymentInfo);
         bookCartMapper.deleteBookCart(paymentInfo.getBookId(), paymentInfo.getBuyerEmail());
         emailService.sendPaymentMessage(paymentInfo);
