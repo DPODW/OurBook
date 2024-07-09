@@ -56,7 +56,7 @@ public class InquiryFormController {
     }
 
 
-//TODO: 세션 존재 여부 검사 로직있었음
+
     @GetMapping("/inquiry/{number}")
     public String InquiryContent(@PathVariable int number,Model model,@AuthenticationPrincipal CustomUserDetail userDetail){
         InquiryInfo inquiryInfo = inquiryService.findInquiryContent(number);
@@ -70,6 +70,7 @@ public class InquiryFormController {
         }
         return "inquiry/inquiryContent";
     }
+
 
     @GetMapping("/inquiry/history")
     public String InquiryHistory(@NaverMember SessionUser sessionUser,@AuthenticationPrincipal CustomUserDetail userDetail,Model model){

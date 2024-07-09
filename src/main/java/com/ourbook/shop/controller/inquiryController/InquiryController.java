@@ -41,8 +41,6 @@ public class InquiryController {
             model.addAttribute("inquiryInfo", inquiryInfo);
             return "inquiry/inquiryForm";
         }
-
-        //TODO: 세션 존재 여부 검사 로직있었음2
         if(sessionUser!=null){
             inquiryInfo.setInquiryEmail(sessionUser.getEmail());
         }else{

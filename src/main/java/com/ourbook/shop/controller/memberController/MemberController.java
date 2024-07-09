@@ -62,12 +62,10 @@ public class MemberController {
             model.addAttribute("commonMember", commonMember);
             return "member/memberJoin";
         }
-        log.info("{}",commonMember);
         memberService.save(commonMember);
         return "redirect:/OurBook";
     }
 
-    //TODO: 시큐리티 로그아웃으로 처리가능
 
     @PutMapping("/member")
     public String memberUpdate(@Validated @ModelAttribute CommonMember commonMember, BindingResult bindingResult, Model model){
