@@ -1,6 +1,7 @@
 package com.ourbook.shop.check;
 
 
+import com.ourbook.shop.config.auth.session.NaverMember;
 import com.ourbook.shop.config.auth.session.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,12 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RoleCheck {
 
-
     @PostMapping("/checkNaver")
-    public ResponseEntity<String> checkNaver(HttpServletRequest request){
-        HttpSession session = request.getSession(false);
-        Object naverMember = session.getAttribute("NAVER");
-        if(naverMember!=null) {
+    public ResponseEntity<String> checkNaver(@NaverMember SessionUser sessionUser){
+        if(sessionUser!=null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("네이버 회원은 회원 수정 불가");
         }else
             return ResponseEntity.ok().body("일반 회원 접근 가능");
@@ -38,14 +36,12 @@ public class RoleCheck {
     }
 
     @PostMapping("/checkAuthorizedUser/{writer}")
-    public ResponseEntity<String> allowAuthorizedUsersOnly(@PathVariable String writer, HttpServletRequest request,
+    public ResponseEntity<String> allowAuthorizedUsersOnly(@PathVariable String writer, @NaverMember SessionUser sessionUser,
                                                          @AuthenticationPrincipal CustomUserDetail userDetail){
-        HttpSession session = request.getSession(false);
-        SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-        if(naverMember==null && userDetail==null){
+        if(sessionUser==null && userDetail==null){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("로그인 되지 않은 사용자");
         }
-        if(isAccessPermit(writer, userDetail, naverMember)){
+        if(isAccessPermit(writer, userDetail, sessionUser)){
             return ResponseEntity.ok().body("인증된 사용자");
         }else{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("권한 없는 사용자");
@@ -54,10 +50,8 @@ public class RoleCheck {
 
 
     @PostMapping("/checkAdminUser")
-    public ResponseEntity<String> allowAdminUserOnly(HttpServletRequest request,@AuthenticationPrincipal CustomUserDetail userDetail){
-        HttpSession session = request.getSession(false);
-        SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-        if(naverMember==null && userDetail.getAuthorities().iterator().next().toString().equals("ADMIN")){
+    public ResponseEntity<String> allowAdminUserOnly(@AuthenticationPrincipal CustomUserDetail userDetail){
+        if(userDetail.getAuthorities().iterator().next().toString().equals("ADMIN")){
             return ResponseEntity.ok().body("관리자 접근 가능");
         }else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("권한 없는 사용자");
@@ -65,10 +59,8 @@ public class RoleCheck {
     }
 
     @PostMapping("/checkMe/{writerEmail}")
-    public ResponseEntity<String> allowWriterUserOnly(@PathVariable String writerEmail,HttpServletRequest request,@AuthenticationPrincipal CustomUserDetail userDetail){
-        HttpSession session = request.getSession(false);
-        SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-        if(naverMember != null && naverMember.getEmail().equals(writerEmail) ||
+    public ResponseEntity<String> allowWriterUserOnly(@PathVariable String writerEmail,@NaverMember SessionUser sessionUser,@AuthenticationPrincipal CustomUserDetail userDetail){
+        if(sessionUser != null && sessionUser.getEmail().equals(writerEmail) ||
            userDetail != null && userDetail.getEmail().equals(writerEmail)){
             return ResponseEntity.ok().body("본인 접근 가능");
         }else {
@@ -78,11 +70,21 @@ public class RoleCheck {
 
 
     private static boolean isAccessPermit(String writer, CustomUserDetail userDetail, SessionUser naverMember) {
-        return  (naverMember != null && naverMember.getEmail() != null && naverMember.getEmail().equals(writer)) ||
-                (userDetail != null && userDetail.getEmail() != null && userDetail.getEmail().equals(writer)) ||
-                (userDetail != null && userDetail.getAuthorities() != null && !userDetail.getAuthorities().isEmpty() &&
-                 userDetail.getAuthorities().iterator().next().toString().equals("ADMIN"));
-        /** NULL 체크를 하지 않아도 정상 작동은 하나,확실한 조건 검사를 위해 NULL 체크 로직을 추가함 **/
+        if (naverMember != null && naverMember.getEmail() != null && naverMember.getEmail().equals(writer)) {
+            return true;
+        }
+
+        if (userDetail != null && userDetail.getEmail() != null && userDetail.getEmail().equals(writer)) {
+            return true;
+        }
+
+        if (userDetail != null && userDetail.getAuthorities() != null &&
+                !userDetail.getAuthorities().isEmpty() &&
+                userDetail.getAuthorities().iterator().next().toString().equals("ADMIN")) {
+            return true;
+        }
+
+        return false;
     }
 }
 

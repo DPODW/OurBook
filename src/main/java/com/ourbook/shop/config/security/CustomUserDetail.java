@@ -1,6 +1,7 @@
 package com.ourbook.shop.config.security;
 
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -3,7 +3,7 @@ package com.ourbook.shop.dto.member;
 import lombok.*;
 
 @ToString
-
+@NoArgsConstructor
 @Getter
 public class NaverMember {
 

@@ -2,6 +2,7 @@ package com.ourbook.shop.dto.payment;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.lang.Nullable;
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
 @ToString
 @Getter
 @Setter
+@NoArgsConstructor
 public class PaymentInfo {
     String orderNumber;
 

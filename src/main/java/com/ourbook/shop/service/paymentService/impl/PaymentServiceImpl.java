@@ -75,6 +75,7 @@ public class PaymentServiceImpl implements PaymentService {
         return paymentInfo;
     }
 
+
     @Override
     public PaymentInfo checkPaymentNull(PaymentInfo paymentInfo){
             if(paymentInfo.getReceiverName().isEmpty() || paymentInfo.getReceiverPhoneNumber().isEmpty()

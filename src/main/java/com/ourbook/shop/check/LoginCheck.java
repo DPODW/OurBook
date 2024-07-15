@@ -1,5 +1,6 @@
 package com.ourbook.shop.check;
 
+import com.ourbook.shop.config.auth.session.NaverMember;
 import com.ourbook.shop.config.auth.session.SessionUser;
 import com.ourbook.shop.config.security.CustomUserDetail;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,10 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginCheck {
 
     @PostMapping("/checkLogin")
-    public ResponseEntity<String> checkLogin(HttpServletRequest request, @AuthenticationPrincipal CustomUserDetail userDetail){
-      HttpSession session = request.getSession(false);
-      SessionUser naverMember = (SessionUser) session.getAttribute("NAVER");
-      if(naverMember!=null || userDetail!=null){
+    public ResponseEntity<String> checkLogin(@NaverMember SessionUser sessionUser, @AuthenticationPrincipal CustomUserDetail userDetail){
+      if(sessionUser!=null || userDetail!=null){
           return ResponseEntity.ok().body("인증된 사용자");
       }else{
           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("인증되지 않은 사용자");

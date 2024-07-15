@@ -24,6 +24,7 @@ public class EmailServiceImpl implements EmailService {
         this.templateEngine = templateEngine;
     }
 
+
     @Override
     public void sendPaymentMessage(PaymentInfo paymentInfo) throws MessagingException {
         MimeMessage message = javaMailSender.createMimeMessage();
@@ -38,6 +39,7 @@ public class EmailServiceImpl implements EmailService {
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void sendPurchaseRequestMessage(PurchaseRequest purchaseRequest) throws MessagingException {

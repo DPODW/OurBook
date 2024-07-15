@@ -2,6 +2,7 @@ package com.ourbook.shop.dto.market;
 
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.lang.Nullable;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 
 @ToString
+@NoArgsConstructor
 @Setter
 @Getter
 public class PurchaseRequest {

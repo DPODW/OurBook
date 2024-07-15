@@ -81,6 +81,7 @@ public class InquiryController {
     }
 
 
+
     @ResponseBody
     @PostMapping("/checkAlreadyAnswer/{inquiryNumber}")
     public ResponseEntity<String> checkAlreadyAnswer(@PathVariable int inquiryNumber){
