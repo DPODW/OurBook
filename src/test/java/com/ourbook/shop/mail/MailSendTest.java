@@ -39,7 +39,7 @@ public class MailSendTest {
     void sendPaymentMessage() throws MessagingException {
         /* given */
         PaymentInfo paymentInfo = new PaymentInfo();
-        paymentInfo.setBuyerEmail("tj001024@naver.com");
+        paymentInfo.setBuyerEmail("test@naver.com");
 
         /* when ~ then */
         emailService.sendPaymentMessage(paymentInfo);
@@ -54,7 +54,7 @@ public class MailSendTest {
 
         purchaseRequest.setReceiverName("김리시버님");
         purchaseRequest.setUploaderName("문업로드님");
-        purchaseRequest.setUploaderEmail("tj001024@naver.com");
+        purchaseRequest.setUploaderEmail("test@naver.com");
 
         /* when ~ then */
         emailService.sendPurchaseRequestMessage(purchaseRequest);
